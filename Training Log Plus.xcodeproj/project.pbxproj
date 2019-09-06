@@ -14,6 +14,7 @@
 		03477EDF231DD7A200E967DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03477EDD231DD7A200E967DE /* Main.storyboard */; };
 		03477EE1231DD7A400E967DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03477EE0231DD7A400E967DE /* Assets.xcassets */; };
 		03477EE4231DD7A400E967DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03477EE2231DD7A400E967DE /* LaunchScreen.storyboard */; };
+		03FB9EAB2322FA4E00F9D410 /* TemplateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		03477EE0231DD7A400E967DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03477EE3231DD7A400E967DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03477EE5231DD7A400E967DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +60,49 @@
 		03477ED8231DD7A200E967DE /* Training Log Plus */ = {
 			isa = PBXGroup;
 			children = (
-				03477ED9231DD7A200E967DE /* AppDelegate.swift */,
-				03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */,
 				03477EDD231DD7A200E967DE /* Main.storyboard */,
 				030DABD52322D10C00FDC505 /* ViewController.swift */,
-				030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */,
+				03477ED9231DD7A200E967DE /* AppDelegate.swift */,
 				03477EE0231DD7A400E967DE /* Assets.xcassets */,
 				03477EE2231DD7A400E967DE /* LaunchScreen.storyboard */,
 				03477EE5231DD7A400E967DE /* Info.plist */,
+				03FB9EB12322FC8900F9D410 /* Settings */,
+				03FB9EB02322FC8300F9D410 /* Progress */,
+				03FB9EAF2322FC7E00F9D410 /* Workouts */,
+				03FB9EAE2322FC7300F9D410 /* Templates */,
 			);
 			path = "Training Log Plus";
+			sourceTree = "<group>";
+		};
+		03FB9EAE2322FC7300F9D410 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */,
+				03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		03FB9EAF2322FC7E00F9D410 /* Workouts */ = {
+			isa = PBXGroup;
+			children = (
+				03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */,
+			);
+			path = Workouts;
+			sourceTree = "<group>";
+		};
+		03FB9EB02322FC8300F9D410 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		03FB9EB12322FC8900F9D410 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */,
+				03FB9EAB2322FA4E00F9D410 /* TemplateItem.swift in Sources */,
 				03477EDC231DD7A200E967DE /* WorkoutsViewController.swift in Sources */,
 				030DABD62322D10C00FDC505 /* ViewController.swift in Sources */,
 				03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */,
