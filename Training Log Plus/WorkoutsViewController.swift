@@ -18,10 +18,6 @@ class WorkoutsViewController: UIViewController {
         
     }
     
-    @IBAction func doSomething() {
-        
-    }
-    
     
     
 //    @IBAction func showAlert() {
