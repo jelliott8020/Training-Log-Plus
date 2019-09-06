@@ -1,0 +1,16 @@
+//
+//  TemplateItem.swift
+//  Training Log Plus
+//
+//  Created by Josh Elliott on 9/6/19.
+//  Copyright © 2019 JoshElliott. All rights reserved.
+//
+
+import Foundation
+
+class TemplateItem {
+    
+    var text = ""
+    var checked = false
+    
+}
