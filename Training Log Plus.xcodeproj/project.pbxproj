@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */; };
+		030DABD62322D10C00FDC505 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DABD52322D10C00FDC505 /* ViewController.swift */; };
 		03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03477ED9231DD7A200E967DE /* AppDelegate.swift */; };
 		03477EDC231DD7A200E967DE /* WorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */; };
 		03477EDF231DD7A200E967DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03477EDD231DD7A200E967DE /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesTableViewController.swift; sourceTree = "<group>"; };
+		030DABD52322D10C00FDC505 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		03477ED6231DD7A200E967DE /* Training Log Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Log Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03477ED9231DD7A200E967DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 				03477ED9231DD7A200E967DE /* AppDelegate.swift */,
 				03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */,
 				03477EDD231DD7A200E967DE /* Main.storyboard */,
+				030DABD52322D10C00FDC505 /* ViewController.swift */,
+				030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */,
 				03477EE0231DD7A400E967DE /* Assets.xcassets */,
 				03477EE2231DD7A400E967DE /* LaunchScreen.storyboard */,
 				03477EE5231DD7A400E967DE /* Info.plist */,
@@ -135,7 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */,
 				03477EDC231DD7A200E967DE /* WorkoutsViewController.swift in Sources */,
+				030DABD62322D10C00FDC505 /* ViewController.swift in Sources */,
 				03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
