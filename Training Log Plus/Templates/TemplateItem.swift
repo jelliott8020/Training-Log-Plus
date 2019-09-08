@@ -8,9 +8,19 @@
 
 import Foundation
 
+
+/*
+ *  Template item.
+ */
+
 class TemplateItem {
     
     var text = ""
     var checked = false
+    
+    
+    func toggleChecked() {
+        checked = !checked
+    }
     
 }

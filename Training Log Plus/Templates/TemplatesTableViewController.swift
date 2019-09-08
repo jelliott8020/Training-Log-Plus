@@ -8,123 +8,145 @@
 
 import UIKit
 
-class TemplatesTableViewController: UIViewController {
+class TemplatesTableViewController: UITableViewController {
     
-    var row0Item: TemplateItem
-    var row1Item: TemplateItem
-    var row2Item: TemplateItem
-    var row3Item: TemplateItem
-    var row4Item: TemplateItem
+    // List of template items
+    var templateList: TemplateList
     
+    // Add item button
+    @IBAction func addItem(_ sender: Any) {
+        let newRowIndex = templateList.templates.count
+        
+        // This increases the size but we dont need
+        // to use it, so assign it to _
+        _ = templateList.newTemplate()
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        
+        // insertRows requires an array, so just put
+        // the one item into an array
+        let indexPaths = [indexPath]
+        
+        tableView.insertRows(at: indexPaths, with: .automatic)
+    }
+    
+    // Constructor
     required init?(coder aDecoder: NSCoder) {
-        row0Item = TemplateItem()
-        row1Item = TemplateItem()
-        row2Item = TemplateItem()
-        row3Item = TemplateItem()
-        row4Item = TemplateItem()
-        
-        row0Item.text = "row0"
-        row1Item.text = "row1"
-        row2Item.text = "row2"
-        row3Item.text = "row3"
-        row4Item.text = "row4"
-        
+        templateList = TemplateList()
         super.init(coder: aDecoder)
     }
     
+    // View loader
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    func configureCheckmark(for cell: UITableViewCell, at indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            if row0Item.checked {
-                cell.accessoryType = .none
-            } else {
-                cell.accessoryType = .checkmark
-            }
-            row0Item.checked = !row0Item.checked
-        } else if indexPath.row == 1 {
-            if row1Item.checked {
-                cell.accessoryType = .none
-            } else {
-                cell.accessoryType = .checkmark
-            }
-            row1Item.checked = !row1Item.checked
-        } else if indexPath.row == 2 {
-            if row2Item.checked {
-                cell.accessoryType = .none
-            } else {
-                cell.accessoryType = .checkmark
-            }
-            row2Item.checked = !row2Item.checked
-        } else if indexPath.row == 3 {
-            if row3Item.checked {
-                cell.accessoryType = .none
-            } else {
-                cell.accessoryType = .checkmark
-            }
-            row3Item.checked = !row3Item.checked
-        } else if indexPath.row == 4 {
-            if row4Item.checked {
-                cell.accessoryType = .none
-            } else {
-                cell.accessoryType = .checkmark
-            }
-            row4Item.checked = !row4Item.checked
+    // Toggles check mark on item
+    func configureCheckmark(for cell: UITableViewCell, with item: TemplateItem) {
+        if item.checked {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        item.toggleChecked()
+    }
+    
+    // Configures the text for each row item
+    func configureText(for cell: UITableViewCell, with item: TemplateItem) {
+        if let label = cell.viewWithTag(1000) as? UILabel {
+            label.text = item.text
         }
     }
-}
-
-// ********* Table Delegate *********** //
-// Controls when user interacts with the table
-extension TemplatesTableViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // When user interacts with the cell
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // Removes or adds checkmarks to each cell
         if let cell = tableView.cellForRow(at: indexPath) {
-            configureCheckmark(for: cell, at: indexPath)
+            let item = templateList.templates[indexPath.row]
+            configureCheckmark(for: cell, with: item)
             
             // Makes the highlighting of cell when tapping go away
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-}
-
-// ********* Table Data Source ********* //
-// Gives the table its data
-extension TemplatesTableViewController: UITableViewDataSource {
+    
+    // Swipe to delete
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        templateList.templates.remove(at: indexPath.row)
+        let indexPaths = [indexPath]
+        tableView.deleteRows(at: indexPaths, with: .automatic)
+    }
+    
     // Tell table how many cells to display
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return templateList.templates.count
     }
     
     
     // Called everytime a table needs a cell, in this method we configure cell to show
     // certain kinds of data
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TemplateCell", for: indexPath)
         
         // Manipulating the data on the label in the cell
-        if let label = cell.viewWithTag(1000) as? UILabel {
-            if indexPath.row ==  0 {
-                label.text = row0Item.text
-            } else if indexPath.row ==  1 {
-                label.text = row1Item.text
-            } else if indexPath.row ==  2 {
-                label.text = row2Item.text
-            } else if indexPath.row ==  3 {
-                label.text = row3Item.text
-            } else if indexPath.row ==  4 {
-                label.text = row4Item.text
-            }
-        }
+        let item = templateList.templates[indexPath.row]
+        configureText(for: cell, with: item)
         
-        configureCheckmark(for: cell, at: indexPath)
+        configureCheckmark(for: cell, with: item)
         
         return cell
     }
-    
 }
+
+
+// ********************************************* //
+// You can do this below in order to encapsulate //
+// certain elements of a table view controller.  //
+// ********************************************* //
+
+
+//// ********* Table Delegate *********** //
+//// Controls when user interacts with the table
+//extension TemplatesTableViewController: UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        // Removes or adds checkmarks to each cell
+//        if let cell = tableView.cellForRow(at: indexPath) {
+//            let item = templateList.templates[indexPath.row]
+//            configureCheckmark(for: cell, with: item)
+//
+//            // Makes the highlighting of cell when tapping go away
+//            tableView.deselectRow(at: indexPath, animated: true)
+//        }
+//    }
+//}
+
+//// ********* Table Data Source ********* //
+//// Gives the table its data
+//extension TemplatesTableViewController: UITableViewDataSource {
+//
+//    // Tell table how many cells to display
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return templateList.templates.count
+//    }
+//
+//
+//    // Called everytime a table needs a cell, in this method we configure cell to show
+//    // certain kinds of data
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "TemplateCell", for: indexPath)
+//
+//        // Manipulating the data on the label in the cell
+//        let item = templateList.templates[indexPath.row]
+//        configureText(for: cell, with: item)
+//
+//        configureCheckmark(for: cell, with: item)
+//
+//        return cell
+//    }
+//
+//}
