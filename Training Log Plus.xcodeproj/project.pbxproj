@@ -14,6 +14,8 @@
 		03477EDF231DD7A200E967DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03477EDD231DD7A200E967DE /* Main.storyboard */; };
 		03477EE1231DD7A400E967DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03477EE0231DD7A400E967DE /* Assets.xcassets */; };
 		03477EE4231DD7A400E967DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03477EE2231DD7A400E967DE /* LaunchScreen.storyboard */; };
+		03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32C92325903300C712D1 /* TemplateList.swift */; };
+		03BB32CC2325A52F00C712D1 /* AddItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32CB2325A52F00C712D1 /* AddItemTableViewController.swift */; };
 		03FB9EAB2322FA4E00F9D410 /* TemplateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		03477EE0231DD7A400E967DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03477EE3231DD7A400E967DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03477EE5231DD7A400E967DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03BB32C92325903300C712D1 /* TemplateList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateList.swift; sourceTree = "<group>"; };
+		03BB32CB2325A52F00C712D1 /* AddItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTableViewController.swift; sourceTree = "<group>"; };
 		03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,6 +83,8 @@
 			children = (
 				030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */,
 				03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */,
+				03BB32C92325903300C712D1 /* TemplateList.swift */,
+				03BB32CB2325A52F00C712D1 /* AddItemTableViewController.swift */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -176,7 +182,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03BB32CC2325A52F00C712D1 /* AddItemTableViewController.swift in Sources */,
 				030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */,
+				03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */,
 				03FB9EAB2322FA4E00F9D410 /* TemplateItem.swift in Sources */,
 				03477EDC231DD7A200E967DE /* WorkoutsViewController.swift in Sources */,
 				030DABD62322D10C00FDC505 /* ViewController.swift in Sources */,
@@ -257,7 +265,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -312,7 +320,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -327,6 +335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MH2B6B39D;
 				INFOPLIST_FILE = "Training Log Plus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -344,6 +353,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MH2B6B39D;
 				INFOPLIST_FILE = "Training Log Plus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
