@@ -16,6 +16,8 @@ class WorkoutsViewController: UIViewController {
         super.viewDidLoad()
         
         
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     

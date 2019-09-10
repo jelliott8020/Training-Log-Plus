@@ -16,7 +16,6 @@ class TemplateList {
     var templates: [TemplateItem] = []
     
     init() {
-        
         for _ in 0...20 {
             _ = newTemplate()
         }
@@ -33,7 +32,7 @@ class TemplateList {
     
     // Creates a random title for a template item
     private func randTitle() -> String {
-        var titles = ["New todo 1", "New todo 2", "New todo 3", "New todo 4", "New todo 5"]
+        var titles = ["Upper Lower", "3 Day Full Body", "2 Day Full Body w/ Running", "Wendler 531", "5 Day Bodybuilding"]
         let ranNum = Int.random(in: 0 ... titles.count-1)
         return titles[ranNum]
     }

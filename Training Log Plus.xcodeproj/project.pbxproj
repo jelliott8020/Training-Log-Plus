@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */; };
 		030DABD62322D10C00FDC505 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DABD52322D10C00FDC505 /* ViewController.swift */; };
+		03188E08232803E6007302F7 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03188E07232803E6007302F7 /* ProgressViewController.swift */; };
+		03188E0A232803F2007302F7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03188E09232803F2007302F7 /* SettingsViewController.swift */; };
 		03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03477ED9231DD7A200E967DE /* AppDelegate.swift */; };
 		03477EDC231DD7A200E967DE /* WorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */; };
 		03477EDF231DD7A200E967DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03477EDD231DD7A200E967DE /* Main.storyboard */; };
@@ -22,6 +24,8 @@
 /* Begin PBXFileReference section */
 		030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesTableViewController.swift; sourceTree = "<group>"; };
 		030DABD52322D10C00FDC505 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		03188E07232803E6007302F7 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		03188E09232803F2007302F7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		03477ED6231DD7A200E967DE /* Training Log Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Log Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03477ED9231DD7A200E967DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 		03FB9EB02322FC8300F9D410 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
+				03188E07232803E6007302F7 /* ProgressViewController.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 		03FB9EB12322FC8900F9D410 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				03188E09232803F2007302F7 /* SettingsViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -185,10 +191,12 @@
 				03BB32CC2325A52F00C712D1 /* AddItemTableViewController.swift in Sources */,
 				030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */,
 				03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */,
+				03188E08232803E6007302F7 /* ProgressViewController.swift in Sources */,
 				03FB9EAB2322FA4E00F9D410 /* TemplateItem.swift in Sources */,
 				03477EDC231DD7A200E967DE /* WorkoutsViewController.swift in Sources */,
 				030DABD62322D10C00FDC505 /* ViewController.swift in Sources */,
 				03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */,
+				03188E0A232803F2007302F7 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

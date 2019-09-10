@@ -39,6 +39,7 @@ class TemplatesTableViewController: UITableViewController {
     // View loader
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set large title bar
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
