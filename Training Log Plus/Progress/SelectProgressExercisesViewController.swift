@@ -1,26 +1,28 @@
 //
-//  SettingsViewController.swift
+//  SelectProgressExercisesViewController.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 9/10/19.
+//  Created by Josh Elliott on 9/11/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SelectProgressExercisesViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //navigationController?.navigationBar.prefersLargeTitles = true
-
-        // Do any additional setup after loading the view.
+    @IBAction func cancelButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     
-    // Changes top bar to white
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    @IBAction func doneButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
+
+        // Do any additional setup after loading the view.
     }
     
 

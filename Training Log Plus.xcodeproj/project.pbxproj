@@ -18,6 +18,7 @@
 		03477EE4231DD7A400E967DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03477EE2231DD7A400E967DE /* LaunchScreen.storyboard */; };
 		03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32C92325903300C712D1 /* TemplateList.swift */; };
 		03BB32CC2325A52F00C712D1 /* AddItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32CB2325A52F00C712D1 /* AddItemTableViewController.swift */; };
+		03F1D0772329701700B63042 /* SelectProgressExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1D0762329701700B63042 /* SelectProgressExercisesViewController.swift */; };
 		03FB9EAB2322FA4E00F9D410 /* TemplateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		03477EE5231DD7A400E967DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03BB32C92325903300C712D1 /* TemplateList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateList.swift; sourceTree = "<group>"; };
 		03BB32CB2325A52F00C712D1 /* AddItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTableViewController.swift; sourceTree = "<group>"; };
+		03F1D0762329701700B63042 /* SelectProgressExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProgressExercisesViewController.swift; sourceTree = "<group>"; };
 		03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				03188E07232803E6007302F7 /* ProgressViewController.swift */,
+				03F1D0762329701700B63042 /* SelectProgressExercisesViewController.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03BB32CC2325A52F00C712D1 /* AddItemTableViewController.swift in Sources */,
+				03F1D0772329701700B63042 /* SelectProgressExercisesViewController.swift in Sources */,
 				030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */,
 				03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */,
 				03188E08232803E6007302F7 /* ProgressViewController.swift in Sources */,

@@ -22,9 +22,9 @@ class AddItemTableViewController: UITableViewController {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         
-        let font = UIFont.boldSystemFont(ofSize: 18)
-        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue): font], for: .normal)
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue): font], for: .normal)
+//        let font = UIFont.boldSystemFont(ofSize: 18)
+//        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue): font], for: .normal)
+//        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue): font], for: .normal)
     }
 
 }

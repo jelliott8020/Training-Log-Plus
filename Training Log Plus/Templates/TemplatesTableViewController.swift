@@ -40,7 +40,7 @@ class TemplatesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set large title bar
-        navigationController?.navigationBar.prefersLargeTitles = true
+        //navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     // Toggles check mark on item
@@ -71,6 +71,11 @@ class TemplatesTableViewController: UITableViewController {
             // Makes the highlighting of cell when tapping go away
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+    
+    // Changes top bar to white
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     // Swipe to delete
