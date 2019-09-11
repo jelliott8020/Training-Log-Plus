@@ -21,6 +21,13 @@ class TemplateList {
         }
     }
     
+    func addTemplate(temp: String) {
+        let item = TemplateItem()
+        item.text = temp
+        item.checked = true
+        templates.append(item)
+    }
+    
     // Creates a new template item
     func newTemplate() -> TemplateItem {
         let item = TemplateItem()

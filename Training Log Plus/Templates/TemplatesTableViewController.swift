@@ -30,6 +30,10 @@ class TemplatesTableViewController: UITableViewController {
         tableView.insertRows(at: indexPaths, with: .automatic)
     }
     
+    func addNewTemplate(temp: String) {
+        templateList.addTemplate(temp: temp)
+    }
+    
     // Constructor
     required init?(coder aDecoder: NSCoder) {
         templateList = TemplateList()

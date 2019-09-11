@@ -179,7 +179,7 @@
         <!--Title-->
         <scene sceneID="wHj-tR-B0r">
             <objects>
-                <tableViewController title="Title" id="iGM-s4-UM7" customClass="AddItemTableViewController" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Title" hidesBottomBarWhenPushed="YES" id="iGM-s4-UM7" customClass="AddItemTableViewController" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ZKw-2q-OQL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -193,6 +193,19 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b1J-KM-MPJ" id="eAH-wZ-YlD">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SeB-zD-hUx">
+                                                    <rect key="frame" x="16" y="6" width="288" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="done:" destination="iGM-s4-UM7" eventType="editingDidEndOnExit" id="ezJ-ZD-SZg"/>
+                                                        <outlet property="delegate" destination="iGM-s4-UM7" id="rHk-aY-eo9"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -210,17 +223,22 @@
                                 <action selector="cancel:" destination="iGM-s4-UM7" id="rMV-oZ-EKc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="gMd-oJ-OY6">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Add" id="gMd-oJ-OY6">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="done:" destination="iGM-s4-UM7" id="nst-yR-uBL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addBarButton" destination="gMd-oJ-OY6" id="Ww5-Xh-eHB"/>
+                        <outlet property="cancelBarButton" destination="UQi-B8-gQK" id="J9S-8X-Ba2"/>
+                        <outlet property="textField" destination="SeB-zD-hUx" id="YJL-17-wH0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ve-FI-AUp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1258" y="-392"/>
+            <point key="canvasLocation" x="1256.25" y="-392.95774647887322"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="P7z-dq-WoN">
@@ -458,7 +476,7 @@
         <!--Exercise Selector-->
         <scene sceneID="gQF-Gt-Ep9">
             <objects>
-                <viewController title="Exercise Selector" id="Zji-em-fBa" customClass="SelectProgressExercisesViewController" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Exercise Selector" hidesBottomBarWhenPushed="YES" id="Zji-em-fBa" customClass="SelectProgressExercisesViewController" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7gL-SN-nuB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
