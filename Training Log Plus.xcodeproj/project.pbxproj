@@ -18,6 +18,9 @@
 		03477EE4231DD7A400E967DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03477EE2231DD7A400E967DE /* LaunchScreen.storyboard */; };
 		03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32C92325903300C712D1 /* TemplateList.swift */; };
 		03BB32CC2325A52F00C712D1 /* AddItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32CB2325A52F00C712D1 /* AddItemTableViewController.swift */; };
+		03D265BE2334193700577E73 /* DailyWorkoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D265BD2334193700577E73 /* DailyWorkoutTableViewController.swift */; };
+		03D265C02334197600577E73 /* ChangeTemplateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D265BF2334197600577E73 /* ChangeTemplateTableViewController.swift */; };
+		03D265C223341DC800577E73 /* AddItem2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D265C123341DC800577E73 /* AddItem2ViewController.swift */; };
 		03F1D0772329701700B63042 /* SelectProgressExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1D0762329701700B63042 /* SelectProgressExercisesViewController.swift */; };
 		03FB9EAB2322FA4E00F9D410 /* TemplateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +39,9 @@
 		03477EE5231DD7A400E967DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03BB32C92325903300C712D1 /* TemplateList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateList.swift; sourceTree = "<group>"; };
 		03BB32CB2325A52F00C712D1 /* AddItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTableViewController.swift; sourceTree = "<group>"; };
+		03D265BD2334193700577E73 /* DailyWorkoutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWorkoutTableViewController.swift; sourceTree = "<group>"; };
+		03D265BF2334197600577E73 /* ChangeTemplateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTemplateTableViewController.swift; sourceTree = "<group>"; };
+		03D265C123341DC800577E73 /* AddItem2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItem2ViewController.swift; sourceTree = "<group>"; };
 		03F1D0762329701700B63042 /* SelectProgressExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProgressExercisesViewController.swift; sourceTree = "<group>"; };
 		03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +97,7 @@
 				03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */,
 				03BB32C92325903300C712D1 /* TemplateList.swift */,
 				03BB32CB2325A52F00C712D1 /* AddItemTableViewController.swift */,
+				03D265C123341DC800577E73 /* AddItem2ViewController.swift */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -98,7 +105,9 @@
 		03FB9EAF2322FC7E00F9D410 /* Workouts */ = {
 			isa = PBXGroup;
 			children = (
+				03D265BF2334197600577E73 /* ChangeTemplateTableViewController.swift */,
 				03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */,
+				03D265BD2334193700577E73 /* DailyWorkoutTableViewController.swift */,
 			);
 			path = Workouts;
 			sourceTree = "<group>";
@@ -196,11 +205,14 @@
 				030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */,
 				03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */,
 				03188E08232803E6007302F7 /* ProgressViewController.swift in Sources */,
+				03D265C223341DC800577E73 /* AddItem2ViewController.swift in Sources */,
 				03FB9EAB2322FA4E00F9D410 /* TemplateItem.swift in Sources */,
+				03D265BE2334193700577E73 /* DailyWorkoutTableViewController.swift in Sources */,
 				03477EDC231DD7A200E967DE /* WorkoutsViewController.swift in Sources */,
 				030DABD62322D10C00FDC505 /* ViewController.swift in Sources */,
 				03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */,
 				03188E0A232803F2007302F7 /* SettingsViewController.swift in Sources */,
+				03D265C02334197600577E73 /* ChangeTemplateTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

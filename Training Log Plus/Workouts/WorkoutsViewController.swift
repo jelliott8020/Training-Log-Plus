@@ -25,6 +25,16 @@ class WorkoutsViewController: UIViewController {
         //navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    
+    @IBAction func beingWorkoutButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func changeTemplateButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func skipDayButton(_ sender: UIButton) {
+    }
+    
     // Changes top bar to white
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
