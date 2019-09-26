@@ -13,27 +13,33 @@ import Foundation
  */
 class TemplateList {
     
-    var templates: [TemplateItem] = []
+    var templates: [TemplateItemObject] = []
     
     init() {
-        
-        for _ in 0...20 {
+        for _ in 0...5 {
             _ = newTemplate()
         }
     }
     
+    func addTemplate(temp: String) {
+        let item = TemplateItemObject()
+        item.text = temp
+        //item.checked = true
+        templates.append(item)
+    }
+    
     // Creates a new template item
-    func newTemplate() -> TemplateItem {
-        let item = TemplateItem()
+    func newTemplate() -> TemplateItemObject {
+        let item = TemplateItemObject()
         item.text = randTitle()
-        item.checked = true
+        //item.checked = true
         templates.append(item)
         return item
     }
     
     // Creates a random title for a template item
     private func randTitle() -> String {
-        var titles = ["New todo 1", "New todo 2", "New todo 3", "New todo 4", "New todo 5"]
+        let titles = ["Upper Lower", "3 Day Full Body", "2 Day Full Body w/ Running", "Wendler 531", "5 Day Bodybuilding"]
         let ranNum = Int.random(in: 0 ... titles.count-1)
         return titles[ranNum]
     }

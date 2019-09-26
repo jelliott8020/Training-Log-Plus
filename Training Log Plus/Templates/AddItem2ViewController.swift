@@ -1,26 +1,19 @@
 //
-//  ViewController.swift
+//  AddItem2ViewController.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 9/6/19.
+//  Created by Josh Elliott on 9/19/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class AddItem2ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //navigationController?.navigationBar.prefersLargeTitles = true
-        
         // Do any additional setup after loading the view.
-    }
-    
-    // Changes top bar to white
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
     
 
