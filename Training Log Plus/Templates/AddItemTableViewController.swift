@@ -8,22 +8,59 @@
 
 import UIKit
 
+
+protocol AddItemViewControllerDelegate: class {
+    // User hit cancel
+    func addItemViewControllerDidCancel(_ controller: AddItemTableViewController)
+    // User added item, pass in Template Item
+    func addItemViewController(_ controller: AddItemTableViewController, didFinishAdding item: TemplateItem)
+    
+    func addItemViewController(_ controller: AddItemTableViewController, didFinishEditing item: TemplateItem)
+}
+
 class AddItemTableViewController: UITableViewController {
 
+    // In order to use the protocol above, need a delegate
+    // Any viewController that implements this protocol can be a delegate of the AddItemTableViewController
+    weak var delegate: AddItemViewControllerDelegate?
+    
+    weak var templateList: TemplateList?
+    weak var itemToEdit: TemplateItem?
+    
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     @IBOutlet weak var addBarButton: UIBarButtonItem!
     @IBOutlet weak var textField: UITextField!
     
+    // Add item 'cancel' button
     @IBAction func cancel(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        delegate?.addItemViewControllerDidCancel(self)
     }
     
+    // Add item 'done' button
     @IBAction func done(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        // Account for editing
+        if let item = itemToEdit {
+            
+        } else {
+            
+        }
+        
+        
+        let item = TemplateItem()
+        if let textFieldText = textField.text {
+            item.text = textFieldText
+        }
+        item.checked = false
+        delegate?.addItemViewController(self, didFinishAdding: item)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let item = itemToEdit {
+            title = "Edit Item"
+            textField.text = item.text
+            addBarButton.isEnabled = true
+        }
         navigationItem.largeTitleDisplayMode = .never
         
 //        let font = UIFont.boldSystemFont(ofSize: 18)

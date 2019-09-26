@@ -49,10 +49,14 @@ class TemplatesTableViewController: UITableViewController {
     
     // Toggles check mark on item
     func configureCheckmark(for cell: UITableViewCell, with item: TemplateItem) {
+        guard let checkmark = cell.viewWithTag(1001) as? UILabel else {
+            return
+        }
+        
         if item.checked {
-            cell.accessoryType = .checkmark
+            checkmark.text = "√"
         } else {
-            cell.accessoryType = .none
+            checkmark.text = ""
         }
         item.toggleChecked()
     }
@@ -109,6 +113,40 @@ class TemplatesTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddItemSegue" {
+            if let addItemViewController = segue.destination as? AddItemTableViewController {
+                addItemViewController.delegate = self
+                addItemViewController.templateList = templateList
+            }
+        } else if segue.identifier == "EditItemSegue" {
+            if let addItemViewController = segue.destination as? AddItemTableViewController {
+                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                    let item = templateList.templates[indexPath.row]
+                    addItemViewController.itemToEdit = item
+                    addItemViewController.delegate = self
+                }
+            }
+        }
+    }
+}
+
+extension TemplatesTableViewController: AddItemViewControllerDelegate {
+    func addItemViewControllerDidCancel(_ controller: AddItemTableViewController) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func addItemViewController(_ controller: AddItemTableViewController, didFinishAdding item: TemplateItem) {
+        navigationController?.popViewController(animated: true)
+        let rowIndex = templateList.templates.count
+        templateList.templates.append(item)
+        let indexPath = IndexPath(row: rowIndex, section: 0)
+        let indexPaths = [indexPath]
+        tableView.insertRows(at: indexPaths, with: .automatic)
+    }
+    
+    
 }
 
 
