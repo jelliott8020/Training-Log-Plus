@@ -37,6 +37,22 @@ class TemplateList {
         return item
     }
     
+    func move(item: TemplateItemObject, to index: Int) {
+        guard let currentIndex = templates.firstIndex(of: item) else {
+            return
+        }
+        templates.remove(at: currentIndex)
+        templates.insert(item, at: index)
+    }
+    
+    func remove(items: [TemplateItemObject]) {
+        for item in items {
+            if let index = templates.firstIndex(of: item) {
+                templates.remove(at: index)
+            }
+        }
+    }
+    
     // Creates a random title for a template item
     private func randTitle() -> String {
         let titles = ["Upper Lower", "3 Day Full Body", "2 Day Full Body w/ Running", "Wendler 531", "5 Day Bodybuilding"]

@@ -25,6 +25,7 @@
 		03D265C223341DC800577E73 /* AddItem2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D265C123341DC800577E73 /* AddItem2ViewController.swift */; };
 		03F1D0772329701700B63042 /* SelectProgressExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1D0762329701700B63042 /* SelectProgressExercisesViewController.swift */; };
 		03FB9EAB2322FA4E00F9D410 /* TemplateItemObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FB9EAA2322FA4E00F9D410 /* TemplateItemObject.swift */; };
+		05B3505B233D64490029234D /* TemplateListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B3505A233D64490029234D /* TemplateListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		03D265C123341DC800577E73 /* AddItem2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItem2ViewController.swift; sourceTree = "<group>"; };
 		03F1D0762329701700B63042 /* SelectProgressExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProgressExercisesViewController.swift; sourceTree = "<group>"; };
 		03FB9EAA2322FA4E00F9D410 /* TemplateItemObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateItemObject.swift; sourceTree = "<group>"; };
+		05B3505A233D64490029234D /* TemplateListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */,
+				05B3505A233D64490029234D /* TemplateListTableViewCell.swift */,
 				03FB9EAA2322FA4E00F9D410 /* TemplateItemObject.swift */,
 				03BB32C92325903300C712D1 /* TemplateList.swift */,
 				03BB32CB2325A52F00C712D1 /* ItemDetailViewController.swift */,
@@ -219,6 +222,7 @@
 				030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */,
 				03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */,
 				03188E08232803E6007302F7 /* ProgressViewController.swift in Sources */,
+				05B3505B233D64490029234D /* TemplateListTableViewCell.swift in Sources */,
 				03B984E2233BE16C00656CFA /* Exercise.swift in Sources */,
 				03D265C223341DC800577E73 /* AddItem2ViewController.swift in Sources */,
 				03FB9EAB2322FA4E00F9D410 /* TemplateItemObject.swift in Sources */,
