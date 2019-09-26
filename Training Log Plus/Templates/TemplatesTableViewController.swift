@@ -13,26 +13,6 @@ class TemplatesTableViewController: UITableViewController {
     // List of template items
     var templateList: TemplateList
     
-    // Add item button
-    @IBAction func addItem(_ sender: Any) {
-        let newRowIndex = templateList.templates.count
-        
-        // This increases the size but we dont need
-        // to use it, so assign it to _
-        _ = templateList.newTemplate()
-        
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        
-        // insertRows requires an array, so just put
-        // the one item into an array
-        let indexPaths = [indexPath]
-        
-        tableView.insertRows(at: indexPaths, with: .automatic)
-    }
-    
-    func addNewTemplate(temp: String) {
-        templateList.addTemplate(temp: temp)
-    }
     
     // Constructor
     required init?(coder aDecoder: NSCoder) {
@@ -47,38 +27,31 @@ class TemplatesTableViewController: UITableViewController {
         //navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    // Toggles check mark on item
-    func configureCheckmark(for cell: UITableViewCell, with item: TemplateItem) {
-        guard let checkmark = cell.viewWithTag(1001) as? UILabel else {
-            return
-        }
-        
-        if item.checked {
-            checkmark.text = "√"
-        } else {
-            checkmark.text = ""
-        }
-        item.toggleChecked()
-    }
-    
     // Configures the text for each row item
-    func configureText(for cell: UITableViewCell, with item: TemplateItem) {
+    func configureText(for cell: UITableViewCell, with item: TemplateItemObject) {
         if let label = cell.viewWithTag(1000) as? UILabel {
             label.text = item.text
         }
     }
     
+    // Add a new template to the list
+    func addNewTemplate(temp: String) {
+        templateList.addTemplate(temp: temp)
+    }
+    
     // When user interacts with the cell
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         // Removes or adds checkmarks to each cell
-        if let cell = tableView.cellForRow(at: indexPath) {
-            let item = templateList.templates[indexPath.row]
-            configureCheckmark(for: cell, with: item)
-            
-            // Makes the highlighting of cell when tapping go away
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+//        if let cell = tableView.cellForRow(at: indexPath) {
+//            let item = templateList.templates[indexPath.row]
+//            configureCheckmark(for: cell, with: item)
+//
+//            // Makes the highlighting of cell when tapping go away
+//
+//        }
     }
     
     // Changes top bar to white
@@ -109,41 +82,83 @@ class TemplatesTableViewController: UITableViewController {
         let item = templateList.templates[indexPath.row]
         configureText(for: cell, with: item)
         
-        configureCheckmark(for: cell, with: item)
+        //configureCheckmark(for: cell, with: item)
         
         return cell
     }
     
+    // Make the segue change between ADD and EDIT views depending on identifier
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddItemSegue" {
-            if let addItemViewController = segue.destination as? AddItemTableViewController {
-                addItemViewController.delegate = self
-                addItemViewController.templateList = templateList
+            if let itemDetailViewController = segue.destination as? ItemDetailViewController {
+                itemDetailViewController.delegate = self
+                itemDetailViewController.templateList = templateList
             }
         } else if segue.identifier == "EditItemSegue" {
-            if let addItemViewController = segue.destination as? AddItemTableViewController {
+            if let itemDetailViewController = segue.destination as? ItemDetailViewController {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                     let item = templateList.templates[indexPath.row]
-                    addItemViewController.itemToEdit = item
-                    addItemViewController.delegate = self
+                    itemDetailViewController.itemToEdit = item
+                    itemDetailViewController.delegate = self
                 }
             }
         }
     }
+    
+        // Toggles check mark on item
+    //    func configureCheckmark(for cell: UITableViewCell, with item: TemplateItemObject) {
+    //        guard let checkmark = cell.viewWithTag(1001) as? UILabel else {
+    //            return
+    //        }
+    //
+    //        if item.checked {
+    //            checkmark.text = "√"
+    //        } else {
+    //            checkmark.text = ""
+    //        }
+    //        item.toggleChecked()
+    //    }
+    
+        // Add item button
+    //    @IBAction func addItem(_ sender: Any) {
+    //        let newRowIndex = templateList.templates.count
+    //
+    //        // This increases the size but we dont need
+    //        // to use it, so assign it to _
+    //        _ = templateList.newTemplate()
+    //
+    //        let indexPath = IndexPath(row: newRowIndex, section: 0)
+    //
+    //        // insertRows requires an array, so just put
+    //        // the one item into an array
+    //        let indexPaths = [indexPath]
+    //
+    //        tableView.insertRows(at: indexPaths, with: .automatic)
+    //    }
 }
 
-extension TemplatesTableViewController: AddItemViewControllerDelegate {
-    func addItemViewControllerDidCancel(_ controller: AddItemTableViewController) {
+// Delegate from the item detail VC
+extension TemplatesTableViewController: ItemDetailViewControllerDelegate {
+    func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController) {
         navigationController?.popViewController(animated: true)
     }
     
-    func addItemViewController(_ controller: AddItemTableViewController, didFinishAdding item: TemplateItem) {
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: TemplateItemObject) {
         navigationController?.popViewController(animated: true)
-        let rowIndex = templateList.templates.count
-        templateList.templates.append(item)
+        let rowIndex = templateList.templates.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)
         let indexPaths = [indexPath]
         tableView.insertRows(at: indexPaths, with: .automatic)
+    }
+    
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: TemplateItemObject) {
+        if let index = templateList.templates.firstIndex(of: item) {
+            let indexPath = IndexPath(row: index, section: 0)
+            if let cell = tableView.cellForRow(at: indexPath) {
+                configureText(for: cell, with: item)
+            }
+        }
+        navigationController?.popViewController(animated: true)
     }
     
     

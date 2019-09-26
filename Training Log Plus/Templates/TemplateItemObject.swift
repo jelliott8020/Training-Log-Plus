@@ -13,14 +13,14 @@ import Foundation
  *  Template item.
  */
 
-class TemplateItem {
+class TemplateItemObject: NSObject {
     
     var text = ""
-    var checked = false
+    //var checked = false
     
     
-    func toggleChecked() {
-        checked = !checked
-    }
+//    func toggleChecked() {
+//        checked = !checked
+//    }
     
 }

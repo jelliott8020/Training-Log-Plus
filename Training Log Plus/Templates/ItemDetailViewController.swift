@@ -9,23 +9,23 @@
 import UIKit
 
 
-protocol AddItemViewControllerDelegate: class {
+protocol ItemDetailViewControllerDelegate: class {
     // User hit cancel
-    func addItemViewControllerDidCancel(_ controller: AddItemTableViewController)
-    // User added item, pass in Template Item
-    func addItemViewController(_ controller: AddItemTableViewController, didFinishAdding item: TemplateItem)
-    
-    func addItemViewController(_ controller: AddItemTableViewController, didFinishEditing item: TemplateItem)
+    func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController)
+    // User added item
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: TemplateItemObject)
+    // User finishes editing
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: TemplateItemObject)
 }
 
-class AddItemTableViewController: UITableViewController {
+class ItemDetailViewController: UITableViewController {
 
     // In order to use the protocol above, need a delegate
     // Any viewController that implements this protocol can be a delegate of the AddItemTableViewController
-    weak var delegate: AddItemViewControllerDelegate?
+    weak var delegate: ItemDetailViewControllerDelegate?
     
     weak var templateList: TemplateList?
-    weak var itemToEdit: TemplateItem?
+    weak var itemToEdit: TemplateItemObject?
     
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     @IBOutlet weak var addBarButton: UIBarButtonItem!
@@ -33,25 +33,25 @@ class AddItemTableViewController: UITableViewController {
     
     // Add item 'cancel' button
     @IBAction func cancel(_ sender: Any) {
-        delegate?.addItemViewControllerDidCancel(self)
+        delegate?.itemDetailViewControllerDidCancel(self)
     }
     
     // Add item 'done' button
     @IBAction func done(_ sender: Any) {
         // Account for editing
-        if let item = itemToEdit {
+        if let item = itemToEdit, let text = textField.text {
+            item.text = text
+            delegate?.itemDetailViewController(self, didFinishEditing: item)
             
         } else {
-            
+            if let item = templateList?.newTemplate() {
+                if let textFieldText = textField.text {
+                    item.text = textFieldText
+                }
+                //item.checked = false
+                delegate?.itemDetailViewController(self, didFinishAdding: item)
+            }
         }
-        
-        
-        let item = TemplateItem()
-        if let textFieldText = textField.text {
-            item.text = textFieldText
-        }
-        item.checked = false
-        delegate?.addItemViewController(self, didFinishAdding: item)
     }
     
     override func viewDidLoad() {
@@ -79,7 +79,7 @@ class AddItemTableViewController: UITableViewController {
 
 }
 
-extension AddItemTableViewController: UITextFieldDelegate {
+extension ItemDetailViewController: UITextFieldDelegate {
     
     // Tapping done button makes keyboard go away
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
