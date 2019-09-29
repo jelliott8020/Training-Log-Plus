@@ -10,7 +10,6 @@
 		030DABD42322CA0000FDC505 /* TemplatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */; };
 		030DABD62322D10C00FDC505 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DABD52322D10C00FDC505 /* ViewController.swift */; };
 		03188E08232803E6007302F7 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03188E07232803E6007302F7 /* ProgressViewController.swift */; };
-		03188E0A232803F2007302F7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03188E09232803F2007302F7 /* SettingsViewController.swift */; };
 		03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03477ED9231DD7A200E967DE /* AppDelegate.swift */; };
 		03477EDC231DD7A200E967DE /* WorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */; };
 		03477EDF231DD7A200E967DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03477EDD231DD7A200E967DE /* Main.storyboard */; };
@@ -25,6 +24,7 @@
 		03D265C223341DC800577E73 /* AddItem2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D265C123341DC800577E73 /* AddItem2ViewController.swift */; };
 		03F1D0772329701700B63042 /* SelectProgressExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1D0762329701700B63042 /* SelectProgressExercisesViewController.swift */; };
 		03FB9EAB2322FA4E00F9D410 /* TemplateItemObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FB9EAA2322FA4E00F9D410 /* TemplateItemObject.swift */; };
+		0599ED5F2341575F0097B82C /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0599ED5E2341575F0097B82C /* ExercisesTableViewController.swift */; };
 		05B3505B233D64490029234D /* TemplateListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B3505A233D64490029234D /* TemplateListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +32,6 @@
 		030DABD32322CA0000FDC505 /* TemplatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesTableViewController.swift; sourceTree = "<group>"; };
 		030DABD52322D10C00FDC505 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		03188E07232803E6007302F7 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
-		03188E09232803F2007302F7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		03477ED6231DD7A200E967DE /* Training Log Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Log Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03477ED9231DD7A200E967DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03477EDB231DD7A200E967DE /* WorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		03D265C123341DC800577E73 /* AddItem2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItem2ViewController.swift; sourceTree = "<group>"; };
 		03F1D0762329701700B63042 /* SelectProgressExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProgressExercisesViewController.swift; sourceTree = "<group>"; };
 		03FB9EAA2322FA4E00F9D410 /* TemplateItemObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateItemObject.swift; sourceTree = "<group>"; };
+		0599ED5E2341575F0097B82C /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
 		05B3505A233D64490029234D /* TemplateListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +88,7 @@
 				03477EE0231DD7A400E967DE /* Assets.xcassets */,
 				03477EE2231DD7A400E967DE /* LaunchScreen.storyboard */,
 				03477EE5231DD7A400E967DE /* Info.plist */,
-				03FB9EB12322FC8900F9D410 /* Settings */,
+				03FB9EB12322FC8900F9D410 /* Exercises */,
 				03FB9EB02322FC8300F9D410 /* Progress */,
 				03FB9EAF2322FC7E00F9D410 /* Workouts */,
 				03FB9EAE2322FC7300F9D410 /* Templates */,
@@ -138,12 +138,12 @@
 			path = Progress;
 			sourceTree = "<group>";
 		};
-		03FB9EB12322FC8900F9D410 /* Settings */ = {
+		03FB9EB12322FC8900F9D410 /* Exercises */ = {
 			isa = PBXGroup;
 			children = (
-				03188E09232803F2007302F7 /* SettingsViewController.swift */,
+				0599ED5E2341575F0097B82C /* ExercisesTableViewController.swift */,
 			);
-			path = Settings;
+			path = Exercises;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,10 +228,10 @@
 				03FB9EAB2322FA4E00F9D410 /* TemplateItemObject.swift in Sources */,
 				03B984E0233BE03F00656CFA /* Attempt.swift in Sources */,
 				03D265BE2334193700577E73 /* DailyWorkoutTableViewController.swift in Sources */,
+				0599ED5F2341575F0097B82C /* ExercisesTableViewController.swift in Sources */,
 				03477EDC231DD7A200E967DE /* WorkoutsViewController.swift in Sources */,
 				030DABD62322D10C00FDC505 /* ViewController.swift in Sources */,
 				03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */,
-				03188E0A232803F2007302F7 /* SettingsViewController.swift in Sources */,
 				03D265C02334197600577E73 /* ChangeTemplateTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
