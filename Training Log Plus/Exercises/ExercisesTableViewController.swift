@@ -12,10 +12,15 @@ class ExercisesTableViewController: UITableViewController {
 
     
     @IBAction func createButton(_ sender: UIBarButtonItem) {
+        // Add item to data here
     }
     
     
     @IBAction func clearButton(_ sender: UIBarButtonItem) {
+        bodyPartTextField.text = ""
+        exerciseNameTextField.text = ""
+        startingWeightTextField.text = ""
+        maxRepsTextField.text = ""
     }
     
     
@@ -37,27 +42,19 @@ class ExercisesTableViewController: UITableViewController {
     var startingWeightPicker = UIPickerView()
     var maxRepsPicker = UIPickerView()
     
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        bodyPartPicker.delegate = self
-//        bodyPartPicker.dataSource = self
         
         bodyPartData = getBodyPartData()
         maxRepsData = getMaxRepsData()
         startingWeightData = getStartingWeightData()
         
         createPickers()
-        createToolbar()
+        createToolbarDoneButton()
     }
     
     func createPickers() {
-//            bodyPartPicker = UIPickerView()
-//            startingWeightPicker = UIPickerView()
-//            maxRepsPicker = UIPickerView()
         
         bodyPartPicker.delegate = self
         startingWeightPicker.delegate = self
@@ -68,7 +65,7 @@ class ExercisesTableViewController: UITableViewController {
         maxRepsTextField.inputView = maxRepsPicker
     }
     
-    func createToolbar() {
+    func createToolbarDoneButton() {
         
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
