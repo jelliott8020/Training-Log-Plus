@@ -52,8 +52,6 @@ class ExercisesTableViewController: UITableViewController {
         
         createPickers()
         createToolbar()
-        
-       
     }
     
     func createPickers() {
@@ -66,8 +64,8 @@ class ExercisesTableViewController: UITableViewController {
         maxRepsPicker.delegate = self
         
         bodyPartTextField.inputView = bodyPartPicker
-        bodyPartTextField.inputView = startingWeightPicker
-        bodyPartTextField.inputView = maxRepsPicker
+        startingWeightTextField.inputView = startingWeightPicker
+        maxRepsTextField.inputView = maxRepsPicker
     }
     
     func createToolbar() {
@@ -83,8 +81,6 @@ class ExercisesTableViewController: UITableViewController {
         bodyPartTextField.inputAccessoryView = toolBar
         maxRepsTextField.inputAccessoryView = toolBar
         startingWeightTextField.inputAccessoryView = toolBar
-        
-        
     }
     
     @objc func doneButtonAction() {
