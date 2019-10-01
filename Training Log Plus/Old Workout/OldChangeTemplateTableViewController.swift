@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChangeTemplateTableViewController: UITableViewController {
+class OldChangeTemplateTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkoutsViewController: UIViewController {
+class OldWorkoutsViewController: UIViewController {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var templateLabel: UILabel!
