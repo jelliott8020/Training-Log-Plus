@@ -20,19 +20,33 @@ class TemplatesTableViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
     
-    // Multiple select and delete circles
-    @IBAction func deleteItems(_ sender: Any) {
-        if let selectedRows = tableView.indexPathsForSelectedRows {
-            var items = [TemplateItemObject]()
-            for indexPath in selectedRows {
-                items.append(templateList.templates[indexPath.row])
-            }
-            templateList.remove(items: items)
-            tableView.beginUpdates()
-            tableView.deleteRows(at: selectedRows, with: .automatic)
-            tableView.endUpdates()
-        }
-    }
+    
+//    // Multiple select and delete circles
+//    @IBAction func deleteItems(_ sender: Any) {
+//        if let selectedRows = tableView.indexPathsForSelectedRows {
+//            var items = [TemplateItemObject]()
+//            for indexPath in selectedRows {
+//                items.append(templateList.templates[indexPath.row])
+//            }
+//            templateList.remove(items: items)
+//            tableView.beginUpdates()
+//            tableView.deleteRows(at: selectedRows, with: .automatic)
+//            tableView.endUpdates()
+//        }
+//    }
+    
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        super.setEditing(editing, animated: true)
+//        tableView.setEditing(tableView.isEditing, animated: true)
+//    }
+    
+//    // Allows moving cells in edit mode
+//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        templateList.move(item: templateList.templates[sourceIndexPath.row], to: destinationIndexPath.row)
+//        //tableView.reloadData()
+//    }
+    
+    
     
     // View loader
     override func viewDidLoad() {
@@ -40,18 +54,20 @@ class TemplatesTableViewController: UITableViewController {
         // Set large title bar
         //navigationController?.navigationBar.prefersLargeTitles = true
         
+        
+        /*****************/
+        //  EDIT BUTTON  //
+        /*****************/
+        
         // Add an edit button to enter "edit mode"
-        navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        //navigationItem.leftBarButtonItem = editButtonItem
+        //navigationItem.leftBarButtonItem?.tintColor = UIColor.white
         
         // Allows the ability to edit multiple items with edit button
-        tableView.allowsMultipleSelectionDuringEditing = true
+        //tableView.allowsMultipleSelectionDuringEditing = true
     }
     
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: true)
-        tableView.setEditing(tableView.isEditing, animated: true)
-    }
+
     
     // Configures the text for each row item
     func configureText(for cell: UITableViewCell, with item: TemplateItemObject) {
@@ -98,11 +114,7 @@ class TemplatesTableViewController: UITableViewController {
         tableView.deleteRows(at: indexPaths, with: .automatic)
     }
     
-    // Allows moving cells in edit mode
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        templateList.move(item: templateList.templates[sourceIndexPath.row], to: destinationIndexPath.row)
-        //tableView.reloadData()
-    }
+
     
     // Tell table how many cells to display
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

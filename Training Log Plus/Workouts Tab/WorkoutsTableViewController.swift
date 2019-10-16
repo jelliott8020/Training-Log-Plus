@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkoutsTableViewController2: UITableViewController {
+class WorkoutsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
