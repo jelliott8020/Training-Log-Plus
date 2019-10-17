@@ -13,7 +13,7 @@ import Foundation
  */
 class TemplateList {
     
-    var templates: [TemplateItemObject] = []
+    var templates: [TemplateItem] = []
     
     init() {
         for _ in 0...5 {
@@ -22,22 +22,22 @@ class TemplateList {
     }
     
     func addTemplate(temp: String) {
-        let item = TemplateItemObject()
+        let item = TemplateItem()
         item.text = temp
         //item.checked = true
         templates.append(item)
     }
     
     // Creates a new template item
-    func newTemplate() -> TemplateItemObject {
-        let item = TemplateItemObject()
+    func newTemplate() -> TemplateItem {
+        let item = TemplateItem()
         item.text = randTitle()
         //item.checked = true
         templates.append(item)
         return item
     }
     
-    func move(item: TemplateItemObject, to index: Int) {
+    func move(item: TemplateItem, to index: Int) {
         guard let currentIndex = templates.firstIndex(of: item) else {
             return
         }
@@ -45,7 +45,7 @@ class TemplateList {
         templates.insert(item, at: index)
     }
     
-    func remove(items: [TemplateItemObject]) {
+    func remove(items: [TemplateItem]) {
         for item in items {
             if let index = templates.firstIndex(of: item) {
                 templates.remove(at: index)

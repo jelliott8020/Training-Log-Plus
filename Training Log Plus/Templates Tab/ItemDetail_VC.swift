@@ -9,23 +9,23 @@
 import UIKit
 
 
-protocol ItemDetailViewControllerDelegate: class {
+protocol ItemDetail_VCDelegate: class {
     // User hit cancel
-    func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController)
+    func itemDetailViewControllerDidCancel(_ controller: ItemDetail_VC)
     // User added item
-    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: TemplateItemObject)
+    func itemDetailViewController(_ controller: ItemDetail_VC, didFinishAdding item: TemplateItem)
     // User finishes editing
-    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: TemplateItemObject)
+    func itemDetailViewController(_ controller: ItemDetail_VC, didFinishEditing item: TemplateItem)
 }
 
-class ItemDetailViewController: UITableViewController {
+class ItemDetail_VC: UITableViewController {
 
     // In order to use the protocol above, need a delegate
     // Any viewController that implements this protocol can be a delegate of the AddItemTableViewController
-    weak var delegate: ItemDetailViewControllerDelegate?
+    weak var delegate: ItemDetail_VCDelegate?
     
     weak var templateList: TemplateList?
-    weak var itemToEdit: TemplateItemObject?
+    weak var itemToEdit: TemplateItem?
     
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     @IBOutlet weak var addBarButton: UIBarButtonItem!
@@ -79,7 +79,7 @@ class ItemDetailViewController: UITableViewController {
 
 }
 
-extension ItemDetailViewController: UITextFieldDelegate {
+extension ItemDetail_VC: UITextFieldDelegate {
     
     // Tapping done button makes keyboard go away
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

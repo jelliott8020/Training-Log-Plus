@@ -8,14 +8,14 @@
 
 import UIKit
 
-class TrainingMaxCalcViewController: UIViewController {
+class TrainingMaxCalc_VC: UIViewController {
     
     @IBOutlet weak var calcedTable: UITableView!
     @IBOutlet weak var repsTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
     
-    var weightPicker = UIPickerView()
-    var repsPicker = UIPickerView()
+    //var weightPicker = UIPickerView()
+    //var repsPicker = UIPickerView()
     
     var weightData: [Int] = []
     var repsData: [Int] = []
@@ -91,20 +91,20 @@ class TrainingMaxCalcViewController: UIViewController {
         weightData = getWeightData()
         repsData = getRepsData()
         
-        createPickers()
+        //createPickers()
         createToolbarDoneButton()
 
         // Do any additional setup after loading the view.
     }
     
     
-    func createPickers() {
-        weightPicker.delegate = self
-        repsPicker.delegate = self
-        
-        repsTextField.inputView = repsPicker
-        weightTextField.inputView = weightPicker
-    }
+//    func createPickers() {
+//        weightPicker.delegate = self
+//        repsPicker.delegate = self
+//
+//        repsTextField.inputView = repsPicker
+//        weightTextField.inputView = weightPicker
+//    }
     
     func createToolbarDoneButton() {
         
@@ -112,8 +112,9 @@ class TrainingMaxCalcViewController: UIViewController {
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         
-        toolBar.setItems([doneButton], animated: false)
+        toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
         weightTextField.inputAccessoryView = toolBar
@@ -148,49 +149,49 @@ class TrainingMaxCalcViewController: UIViewController {
 
 }
 
-extension TrainingMaxCalcViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-        
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        var returnInt = 0
-        
-        if pickerView == weightPicker {
-            returnInt = weightData.count
-        } else if pickerView == repsPicker {
-            returnInt = repsData.count
-        }
-        
-        return returnInt
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        var returnStr = ""
-        
-        if pickerView == weightPicker {
-            returnStr = String(weightData[row])
-        } else if pickerView == repsPicker {
-            returnStr = String(repsData[row])
-        }
-        
-        return returnStr
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == weightPicker {
-            selectedWeight = weightData[row]
-            weightTextField.text = String(selectedWeight!)
-        } else if pickerView == repsPicker {
-            selectedReps = repsData[row]
-            repsTextField.text = String(selectedReps!)
-        }
-    }
-}
+//extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+//    
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//        
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        var returnInt = 0
+//        
+//        if pickerView == weightPicker {
+//            returnInt = weightData.count
+//        } else if pickerView == repsPicker {
+//            returnInt = repsData.count
+//        }
+//        
+//        return returnInt
+//    }
+//    
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        
+//        var returnStr = ""
+//        
+//        if pickerView == weightPicker {
+//            returnStr = String(weightData[row])
+//        } else if pickerView == repsPicker {
+//            returnStr = String(repsData[row])
+//        }
+//        
+//        return returnStr
+//    }
+//    
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        if pickerView == weightPicker {
+//            selectedWeight = weightData[row]
+//            weightTextField.text = String(selectedWeight!)
+//        } else if pickerView == repsPicker {
+//            selectedReps = repsData[row]
+//            repsTextField.text = String(selectedReps!)
+//        }
+//    }
+//}
 
-extension TrainingMaxCalcViewController: UITableViewDelegate, UITableViewDataSource {
+extension TrainingMaxCalc_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return calcedArrayObj.count
     }
@@ -198,7 +199,7 @@ extension TrainingMaxCalcViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let weightForCell = calcedArrayObj[indexPath.row].displayString
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "calcedCell") as! calcedCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CalcedCell") as! Calced_TVCell
         cell.calcedLabel.text = weightForCell
         
         return cell

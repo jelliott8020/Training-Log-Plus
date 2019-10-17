@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectProgressExercisesViewController: UITableViewController {
+class SelectProgressExercises_VC: UITableViewController {
     
     //var mainViewController: ProgressViewController?
     //weak var delegate: ProgressDelegate?
@@ -174,7 +174,7 @@ class SelectProgressExercisesViewController: UITableViewController {
 
 }
 
-extension SelectProgressExercisesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension SelectProgressExercises_VC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

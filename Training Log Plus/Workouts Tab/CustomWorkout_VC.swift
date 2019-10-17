@@ -1,5 +1,5 @@
 //
-//  ChangeTemplateViewController.swift
+//  CustomWorkoutViewController.swift
 //  Training Log Plus
 //
 //  Created by Elliott, Josh on 10/16/19.
@@ -10,8 +10,7 @@ import UIKit
 
 
 
-
-class ChangeTemplateViewController: UITableViewController {
+class CustomWorkout_VC: UITableViewController {
     
 
     override func viewDidLoad() {

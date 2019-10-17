@@ -6,13 +6,14 @@
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class TMCell {
     let reps: Double!
     let weight: Double!
     var tm: Double = 0
     var displayString: String = ""
+
     
     init(reps: Double, weight: Double) {
         self.reps = reps

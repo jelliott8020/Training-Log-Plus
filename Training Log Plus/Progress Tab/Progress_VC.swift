@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgressViewController: UIViewController, ProgressDelegate {
+class Progress_VC: UIViewController, ProgressDelegate {
     
     func passDataBack(bodyPart: String, exercise: String, start: String, end: String) {
         

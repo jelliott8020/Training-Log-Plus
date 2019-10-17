@@ -1,27 +1,19 @@
 //
-//  DailyWorkoutViewController.swift
+//  ItemDetailWorkoutViewController.swift
 //  Training Log Plus
 //
-//  Created by Elliott, Josh on 10/16/19.
+//  Created by Josh Elliott on 10/3/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 
 import UIKit
 
-
-
-
-
-class DailyWorkoutViewController: UITableViewController {
+class ItemDetailWorkout_VC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    @IBAction func cancel(_ sender: Any) {
-        presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
 

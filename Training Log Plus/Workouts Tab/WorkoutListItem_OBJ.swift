@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WorkoutListItemObject: NSObject {
+class WorkoutListItem_OBJ: NSObject {
     
     var text = ""
     

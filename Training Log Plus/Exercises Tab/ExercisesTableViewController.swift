@@ -8,11 +8,20 @@
 
 import UIKit
 
-class ExercisesTableViewController: UITableViewController {
+class Exercises_TVC: UITableViewController {
 
     
     @IBAction func createButton(_ sender: UIBarButtonItem) {
         // Add item to data here
+        selectedStartingWeight = startingWeightTextField.text
+        selectedMaxReps = maxRepsTextField.text
+        selectedExerciseName = exerciseNameTextField.text
+        
+        print(selectedExerciseName!)
+        print(selectedMaxReps!)
+        print(selectedStartingWeight!)
+        print(selectedBodyPart!)
+        
     }
     
     
@@ -31,24 +40,25 @@ class ExercisesTableViewController: UITableViewController {
     
     
     var bodyPartData: [String] = []
-    var maxRepsData: [String] = []
-    var startingWeightData: [String] = []
+    //var maxRepsData: [String] = []
+    //var startingWeightData: [String] = []
     
     var selectedBodyPart: String?
     var selectedStartingWeight: String?
     var selectedMaxReps: String?
+    var selectedExerciseName: String?
     
     var bodyPartPicker = UIPickerView()
-    var startingWeightPicker = UIPickerView()
-    var maxRepsPicker = UIPickerView()
+    //var startingWeightPicker = UIPickerView()
+    //var maxRepsPicker = UIPickerView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bodyPartData = getBodyPartData()
-        maxRepsData = getMaxRepsData()
-        startingWeightData = getStartingWeightData()
+        //maxRepsData = getMaxRepsData()
+        //startingWeightData = getStartingWeightData()
         
         createPickers()
         createToolbarDoneButton()
@@ -57,12 +67,12 @@ class ExercisesTableViewController: UITableViewController {
     func createPickers() {
         
         bodyPartPicker.delegate = self
-        startingWeightPicker.delegate = self
-        maxRepsPicker.delegate = self
+        //startingWeightPicker.delegate = self
+        //maxRepsPicker.delegate = self
         
         bodyPartTextField.inputView = bodyPartPicker
-        startingWeightTextField.inputView = startingWeightPicker
-        maxRepsTextField.inputView = maxRepsPicker
+        //startingWeightTextField.inputView = startingWeightPicker
+        //maxRepsTextField.inputView = maxRepsPicker
     }
     
     func createToolbarDoneButton() {
@@ -71,13 +81,15 @@ class ExercisesTableViewController: UITableViewController {
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         
-        toolBar.setItems([doneButton], animated: false)
+        toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
         bodyPartTextField.inputAccessoryView = toolBar
         maxRepsTextField.inputAccessoryView = toolBar
         startingWeightTextField.inputAccessoryView = toolBar
+        exerciseNameTextField.inputAccessoryView = toolBar
     }
     
     @objc func doneButtonAction() {
@@ -89,32 +101,32 @@ class ExercisesTableViewController: UITableViewController {
         return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
     }
     
-    func getMaxRepsData() -> [String] {
-        var returnArg: [String] = []
-        
-        for i in 0...20 {
-            returnArg.append(String(i))
-        }
-        
-        return returnArg
-    }
+//    func getMaxRepsData() -> [String] {
+//        var returnArg: [String] = []
+//
+//        for i in 0...20 {
+//            returnArg.append(String(i))
+//        }
+//
+//        return returnArg
+//    }
     
-    func getStartingWeightData() -> [String] {
-        var returnArg: [String] = []
-        
-        for i in 5...500 {
-            if i % 5 == 0 {
-                returnArg.append(String(i))
-            }
-        }
-        
-        return returnArg
-    }
+//    func getStartingWeightData() -> [String] {
+//        var returnArg: [String] = []
+//
+//        for i in 5...500 {
+//            if i % 5 == 0 {
+//                returnArg.append(String(i))
+//            }
+//        }
+//
+//        return returnArg
+//    }
     
     
 }
 
-extension ExercisesTableViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -125,11 +137,13 @@ extension ExercisesTableViewController: UIPickerViewDataSource, UIPickerViewDele
         
         if pickerView == bodyPartPicker {
             returnInt = bodyPartData.count
-        } else if pickerView == maxRepsPicker {
-            returnInt = maxRepsData.count
-        } else if pickerView == startingWeightPicker {
-            returnInt = startingWeightData.count
         }
+        
+//        else if pickerView == maxRepsPicker {
+//            returnInt = maxRepsData.count
+//        } else if pickerView == startingWeightPicker {
+//            returnInt = startingWeightData.count
+//        }
         
         return returnInt
     }
@@ -140,11 +154,13 @@ extension ExercisesTableViewController: UIPickerViewDataSource, UIPickerViewDele
         
         if pickerView == bodyPartPicker {
             returnStr = bodyPartData[row]
-        } else if pickerView == maxRepsPicker {
-            returnStr = maxRepsData[row]
-        } else if pickerView == startingWeightPicker {
-            returnStr = startingWeightData[row]
         }
+        
+//        else if pickerView == maxRepsPicker {
+//            returnStr = maxRepsData[row]
+//        } else if pickerView == startingWeightPicker {
+//            returnStr = startingWeightData[row]
+//        }
         
         return returnStr
     }
@@ -153,13 +169,15 @@ extension ExercisesTableViewController: UIPickerViewDataSource, UIPickerViewDele
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
-        } else if pickerView == maxRepsPicker {
-            selectedMaxReps = maxRepsData[row]
-            maxRepsTextField.text = selectedMaxReps
-        } else if pickerView == startingWeightPicker {
-            selectedStartingWeight = startingWeightData[row]
-            startingWeightTextField.text = selectedStartingWeight
         }
+        
+//        else if pickerView == maxRepsPicker {
+//            selectedMaxReps = maxRepsData[row]
+//            maxRepsTextField.text = selectedMaxReps
+//        } else if pickerView == startingWeightPicker {
+//            selectedStartingWeight = startingWeightData[row]
+//            startingWeightTextField.text = selectedStartingWeight
+//        }
     }
 }
 

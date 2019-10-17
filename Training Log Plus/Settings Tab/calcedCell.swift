@@ -8,13 +8,12 @@
 
 import UIKit
 
-class calcedCell: UITableViewCell {
+class Calced_TVCell: UITableViewCell {
     
-    var weight: Int = 0
-    var reps: Int = 0
-    var tm: Int = 0
+//    var weight: Int = 0
+//    var reps: Int = 0
+//    var tm: Int = 0
 
-    
     
     
     @IBOutlet weak var calcedLabel: UILabel!

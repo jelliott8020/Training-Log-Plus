@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TemplatesTableViewController: UITableViewController {
+class TemplatesTable_VC: UITableViewController {
     
     // List of template items
     var templateList: TemplateList
@@ -70,8 +70,8 @@ class TemplatesTableViewController: UITableViewController {
 
     
     // Configures the text for each row item
-    func configureText(for cell: UITableViewCell, with item: TemplateItemObject) {
-        if let templateCell = cell as? TemplateListTableViewCell {
+    func configureText(for cell: UITableViewCell, with item: TemplateItem) {
+        if let templateCell = cell as? TemplateList_TVCell {
             templateCell.templateTextLabel.text = item.text
         }
     }
@@ -139,12 +139,12 @@ class TemplatesTableViewController: UITableViewController {
     // Make the segue change between ADD and EDIT views depending on identifier
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddItemSegue" {
-            if let itemDetailViewController = segue.destination as? ItemDetailViewController {
+            if let itemDetailViewController = segue.destination as? ItemDetail_VC {
                 itemDetailViewController.delegate = self
                 itemDetailViewController.templateList = templateList
             }
         } else if segue.identifier == "EditItemSegue" {
-            if let itemDetailViewController = segue.destination as? ItemDetailViewController {
+            if let itemDetailViewController = segue.destination as? ItemDetail_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                     let item = templateList.templates[indexPath.row]
                     itemDetailViewController.itemToEdit = item
@@ -187,12 +187,12 @@ class TemplatesTableViewController: UITableViewController {
 }
 
 // Delegate from the item detail VC
-extension TemplatesTableViewController: ItemDetailViewControllerDelegate {
-    func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController) {
+extension TemplatesTable_VC: ItemDetail_VCDelegate {
+    func itemDetailViewControllerDidCancel(_ controller: ItemDetail_VC) {
         navigationController?.popViewController(animated: true)
     }
     
-    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: TemplateItemObject) {
+    func itemDetailViewController(_ controller: ItemDetail_VC, didFinishAdding item: TemplateItem) {
         navigationController?.popViewController(animated: true)
         let rowIndex = templateList.templates.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)
@@ -200,7 +200,7 @@ extension TemplatesTableViewController: ItemDetailViewControllerDelegate {
         tableView.insertRows(at: indexPaths, with: .automatic)
     }
     
-    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: TemplateItemObject) {
+    func itemDetailViewController(_ controller: ItemDetail_VC, didFinishEditing item: TemplateItem) {
         if let index = templateList.templates.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             if let cell = tableView.cellForRow(at: indexPath) {

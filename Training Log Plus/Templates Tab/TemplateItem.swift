@@ -13,7 +13,7 @@ import Foundation
  *  Template item.
  */
 
-class TemplateItemObject: NSObject {
+class TemplateItem: NSObject {
     
     var text = ""
     //var checked = false

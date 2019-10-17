@@ -1,5 +1,5 @@
 //
-//  CustomWorkoutViewController.swift
+//  DailyWorkoutViewController.swift
 //  Training Log Plus
 //
 //  Created by Elliott, Josh on 10/16/19.
@@ -10,8 +10,9 @@ import UIKit
 
 
 
-class CustomWorkoutViewController: UITableViewController {
-    
+
+
+class DailyWorkout_ViewCont: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
