@@ -10,6 +10,18 @@ import UIKit
 
 class Progress_VC: UIViewController, ProgressDelegate {
     
+    var bodyPartData: String?
+    var exerciseData: String?
+    var startDateData: String?
+    var endDateData: String?
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    
     func passDataBack(bodyPart: String, exercise: String, start: String, end: String) {
         
         bodyPartLabel.text = bodyPart
@@ -70,6 +82,3 @@ class Progress_VC: UIViewController, ProgressDelegate {
 
 }
 
-protocol ProgressDelegate {
-    func passDataBack(bodyPart: String, exercise: String, start: String, end: String)
-}

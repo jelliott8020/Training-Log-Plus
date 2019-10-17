@@ -8,10 +8,25 @@
 
 import UIKit
 
+
+protocol ProgressDelegate {
+    func passDataBack(bodyPart: String, exercise: String, start: String, end: String)
+}
+
 class SelectProgressExercises_VC: UITableViewController {
     
     //var mainViewController: ProgressViewController?
-    //weak var delegate: ProgressDelegate?
+    var delegate: ProgressDelegate?
+    
+    
+    
+    // This passes the data back to parent VC
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        delegate?.passDataBack(bodyPart: selectedBodyPart!, exercise: selectedExercise!, start: selectedStartDate!, end: selectedEndDate!)
+        
+    }
 
     @IBAction func cancelButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
