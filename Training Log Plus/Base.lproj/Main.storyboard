@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ggv-80-3zG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ggv-80-3zG">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsK-Zg-JX7">
-                                <rect key="frame" x="16" y="74" width="75" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bodypart:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsK-Zg-JX7">
+                                <rect key="frame" x="16" y="74" width="76" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -65,10 +65,10 @@
                         <viewLayoutGuide key="safeArea" id="xk6-X0-T6q"/>
                     </view>
                     <navigationItem key="navigationItem" title="Progress" id="1A0-2c-hYZ">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="FQL-Md-dFs">
+                        <barButtonItem key="rightBarButtonItem" title="Select" id="FQL-Md-dFs">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="Zji-em-fBa" kind="show" id="g7k-q0-gBs"/>
+                                <segue destination="kbC-FL-IAg" kind="show" id="jSf-eC-STF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -346,14 +346,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="TemplateCell" id="Mjj-Qs-JHa" customClass="TemplateListTableViewCell" customModule="Training_Log_Plus" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="320" height="44.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mjj-Qs-JHa" id="g7l-AY-MHk">
-                                    <rect key="frame" x="0.0" y="0.0" width="261" height="44.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="260.5" height="45"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZy-La-f1U">
-                                            <rect key="frame" x="16" y="12" width="42" height="21"/>
+                                            <rect key="frame" x="16" y="12" width="42" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -769,7 +769,7 @@
         <scene sceneID="s35-0p-oca">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W9Q-2N-fQH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Exercises" image="icons8-edit" selectedImage="icons8-fencing" id="xty-fu-akG"/>
+                    <tabBarItem key="tabBarItem" title="Exercises" image="icons8-fencing" selectedImage="icons8-fencing" id="xty-fu-akG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WOh-ad-NMZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -816,69 +816,123 @@
             <point key="canvasLocation" x="1298" y="1210"/>
         </scene>
         <!--Exercise Selector-->
-        <scene sceneID="gQF-Gt-Ep9">
+        <scene sceneID="Mbo-ZQ-gAX">
             <objects>
-                <viewController title="Exercise Selector" hidesBottomBarWhenPushed="YES" id="Zji-em-fBa" customClass="SelectProgressExercisesViewController" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7gL-SN-nuB">
+                <tableViewController id="kbC-FL-IAg" customClass="SelectProgressExercisesViewController" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="JDe-w3-yAL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhF-NH-mDp">
-                                <rect key="frame" x="16" y="77" width="75" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exercise:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gh4-Tj-x9p">
-                                <rect key="frame" x="16" y="106" width="69" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starts:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xd8-hM-vtk">
-                                <rect key="frame" x="16" y="135" width="51" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ends:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ao-OY-eDp">
-                                <rect key="frame" x="16" y="164" width="43" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Gh4-Tj-x9p" firstAttribute="top" secondItem="lhF-NH-mDp" secondAttribute="bottom" constant="8" symbolic="YES" id="1O3-1u-URm"/>
-                            <constraint firstItem="xd8-hM-vtk" firstAttribute="top" secondItem="Gh4-Tj-x9p" secondAttribute="bottom" constant="8" symbolic="YES" id="5qz-UH-GkL"/>
-                            <constraint firstItem="lhF-NH-mDp" firstAttribute="leading" secondItem="Gh4-Tj-x9p" secondAttribute="leading" id="LAH-ul-8Ku"/>
-                            <constraint firstItem="xd8-hM-vtk" firstAttribute="leading" secondItem="6ao-OY-eDp" secondAttribute="leading" id="NJ8-3E-DBp"/>
-                            <constraint firstItem="lhF-NH-mDp" firstAttribute="top" secondItem="qlj-eY-UL3" secondAttribute="top" constant="33" id="dfE-zl-rWV"/>
-                            <constraint firstItem="lhF-NH-mDp" firstAttribute="leading" secondItem="7gL-SN-nuB" secondAttribute="leadingMargin" id="lb1-gZ-crX"/>
-                            <constraint firstItem="Gh4-Tj-x9p" firstAttribute="leading" secondItem="xd8-hM-vtk" secondAttribute="leading" id="o8g-tN-EQy"/>
-                            <constraint firstItem="6ao-OY-eDp" firstAttribute="top" secondItem="xd8-hM-vtk" secondAttribute="bottom" constant="8" symbolic="YES" id="t13-fl-LAn"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="qlj-eY-UL3"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Exercise Selector" id="RJz-Wt-ruP">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="nw7-aM-vTv">
+                        <sections>
+                            <tableViewSection headerTitle="Bodypart" id="FB1-uE-Ufr">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="tVN-EZ-lvV">
+                                        <rect key="frame" x="16" y="55.5" width="288" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tVN-EZ-lvV" id="3FL-i0-x1s">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VvF-ld-wpt">
+                                                    <rect key="frame" x="15" y="5" width="258" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Exercise" id="FYj-MQ-OXq">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VCe-42-9Tv">
+                                        <rect key="frame" x="16" y="155" width="288" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VCe-42-9Tv" id="9QX-JS-nln">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-f9-HVA">
+                                                    <rect key="frame" x="15" y="4" width="258" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Start Date" id="Xjx-0Z-4zp">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7na-uW-LUM">
+                                        <rect key="frame" x="16" y="254.5" width="288" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7na-uW-LUM" id="lKu-vq-BmZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JcG-Hy-4Vw">
+                                                    <rect key="frame" x="15" y="5" width="258" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="End Date" id="sVf-DS-wC2">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="fhd-aI-BK9">
+                                        <rect key="frame" x="16" y="354" width="288" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fhd-aI-BK9" id="z1O-UT-DW9">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="32s-bF-ZZt">
+                                                    <rect key="frame" x="15" y="4" width="258" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="kbC-FL-IAg" id="vDo-gj-vK6"/>
+                            <outlet property="delegate" destination="kbC-FL-IAg" id="VNv-RZ-XJY"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Exercise Selector" id="qCf-Ug-Zwe">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="15M-QB-2WB">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="cancelButton:" destination="Zji-em-fBa" id="v9T-sI-tBz"/>
+                                <action selector="cancelButton:" destination="kbC-FL-IAg" id="pGw-Fc-rBZ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="rH4-G3-cL4">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="kgO-t4-xzj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="doneButton:" destination="Zji-em-fBa" id="VM6-af-u54"/>
+                                <action selector="doneButton:" destination="kbC-FL-IAg" id="v10-JE-Hx8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uMA-JJ-Ut5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <connections>
+                        <outlet property="bodyPartTextField" destination="VvF-ld-wpt" id="v38-kS-d4u"/>
+                        <outlet property="endDateTextField" destination="32s-bF-ZZt" id="nQE-ol-Mnf"/>
+                        <outlet property="exerciseTextField" destination="cdj-f9-HVA" id="KRC-WQ-MDa"/>
+                        <outlet property="startDateTextField" destination="JcG-Hy-4Vw" id="PZU-XG-ryR"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YOG-ab-5dC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2252" y="485"/>
+            <point key="canvasLocation" x="2403.75" y="484.85915492957747"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1ke-F7-f1O">
@@ -1277,7 +1331,6 @@
     <resources>
         <image name="icons8-combo_chart" width="32" height="32"/>
         <image name="icons8-dumbbell" width="32" height="32"/>
-        <image name="icons8-edit" width="32" height="32"/>
         <image name="icons8-fencing" width="32" height="32"/>
         <image name="icons8-list" width="32" height="32"/>
         <image name="icons8-settings" width="32" height="32"/>
