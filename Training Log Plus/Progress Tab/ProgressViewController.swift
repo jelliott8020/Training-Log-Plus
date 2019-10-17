@@ -8,7 +8,28 @@
 
 import UIKit
 
-class ProgressViewController: UIViewController {
+class ProgressViewController: UIViewController, ProgressDelegate {
+    
+    func passDataBack(bodyPart: String, exercise: String, start: String, end: String) {
+        
+        bodyPartLabel.text = bodyPart
+        exerciseLabel.text = exercise
+        startDateLabel.text = start
+        endDateLabel.text = end
+        
+        print(bodyPart)
+        print(exercise)
+        print(start)
+        print(end)
+    }
+    
+    
+    
+    @IBOutlet weak var bodyPartLabel: UILabel!
+    @IBOutlet weak var exerciseLabel: UILabel!
+    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var endDateLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +44,19 @@ class ProgressViewController: UIViewController {
         return .lightContent
     }
     
+    
+    func selectorDoneButtonPressed(bodyPart: String, exercise: String, start: String, end: String) {
+//        bodyPartLabel.text = bodyPart
+//        exerciseLabel.text = exercise
+//        startDateLabel.text = start
+//        endDateLabel.text = end
+        
+//        print(bodyPart)
+//        print(exercise)
+//        print(start)
+//        print(end)
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -34,4 +68,8 @@ class ProgressViewController: UIViewController {
     }
     */
 
+}
+
+protocol ProgressDelegate {
+    func passDataBack(bodyPart: String, exercise: String, start: String, end: String)
 }

@@ -9,13 +9,21 @@
 import UIKit
 
 class SelectProgressExercisesViewController: UITableViewController {
+    
+    //var mainViewController: ProgressViewController?
+    //weak var delegate: ProgressDelegate?
 
     @IBAction func cancelButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func doneButton(_ sender: Any) {
+        //mainViewController?.selectorDoneButtonPressed(bodyPart: selectedBodyPart!, exercise: selectedExercise!, start: selectedStartDate!, end: selectedEndDate!)
         navigationController?.popViewController(animated: true)
+//        print(selectedBodyPart as Any)
+//        print(selectedExercise as Any)
+//        print(selectedStartDate as Any)
+//        print(selectedEndDate as Any)
     }
     
     @IBOutlet weak var bodyPartTextField: UITextField!
@@ -46,6 +54,7 @@ class SelectProgressExercisesViewController: UITableViewController {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         
+        
         bodyPartData = getBodyPartData()
         // Maybe check for bodypart selection before filling in exercise data
         let bodyPart: String = ""
@@ -53,6 +62,7 @@ class SelectProgressExercisesViewController: UITableViewController {
         
         createPickers()
         createToolbarDoneButton()
+        showDatePicker()
         // Do any additional setup after loading the view.
     }
     
@@ -65,12 +75,12 @@ class SelectProgressExercisesViewController: UITableViewController {
         startToolBar.sizeToFit()
         endToolBar.sizeToFit()
         
-        let startDoneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.bordered, target: self, action: Selector("doneStartDatePicker"))
-        let endDoneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.bordered, target: self, action: Selector("doneEndDatePicker"))
+        let startDoneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneStartDatePicker))
+        let endDoneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneEndDatePicker))
         
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.bordered, target: self, action: "cancelDatePicker")
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
         
         startToolBar.setItems([startDoneButton, spaceButton, cancelButton], animated: false)
         endToolBar.setItems([endDoneButton, spaceButton, cancelButton], animated: false)
@@ -85,6 +95,12 @@ class SelectProgressExercisesViewController: UITableViewController {
         exercisePicker.delegate = self
         //startDatePicker.delegate = self
         //endDatePicker.delegate = self
+        
+        bodyPartTextField.inputView = bodyPartPicker
+        exerciseTextField.inputView = exercisePicker
+        startDateTextField.inputView = startDatePicker
+        endDateTextField.inputView = endDatePicker
+        
     }
     
     func createToolbarDoneButton() {
@@ -111,6 +127,7 @@ class SelectProgressExercisesViewController: UITableViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         startDateTextField.text = formatter.string(from: startDatePicker.date)
+        selectedStartDate = startDateTextField.text
         //dismiss date picker dialog
         self.view.endEditing(true)
     }
@@ -120,6 +137,7 @@ class SelectProgressExercisesViewController: UITableViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         endDateTextField.text = formatter.string(from: endDatePicker.date)
+        selectedEndDate = endDateTextField.text
         //dismiss date picker dialog
         self.view.endEditing(true)
     }
@@ -169,11 +187,13 @@ extension SelectProgressExercisesViewController: UIPickerViewDataSource, UIPicke
             returnInt = bodyPartData.count
         } else if pickerView == exercisePicker {
             returnInt = exerciseData.count
-        } else if pickerView == startDatePicker {
-            returnInt = startDateData.count
-        } else if pickerView == endDatePicker {
-            returnInt = endDateData.count
         }
+        
+//        else if pickerView == startDatePicker {
+//            returnInt = startDateData.count
+//        } else if pickerView == endDatePicker {
+//            returnInt = endDateData.count
+//        }
         
         return returnInt
     }
@@ -186,11 +206,13 @@ extension SelectProgressExercisesViewController: UIPickerViewDataSource, UIPicke
             returnStr = bodyPartData[row]
         } else if pickerView == exercisePicker {
             returnStr = exerciseData[row]
-        } else if pickerView == startDatePicker {
-            returnStr = startDateData[row]
-        } else if pickerView == endDatePicker {
-            returnStr = endDateData[row]
         }
+        
+//        else if pickerView == startDatePicker {
+//            returnStr = startDateData[row]
+//        } else if pickerView == endDatePicker {
+//            returnStr = endDateData[row]
+//        }
         
         return returnStr
     }
@@ -202,12 +224,15 @@ extension SelectProgressExercisesViewController: UIPickerViewDataSource, UIPicke
         } else if pickerView == exercisePicker {
             selectedExercise = exerciseData[row]
             exerciseTextField.text = selectedExercise
-        } else if pickerView == startDatePicker {
-            selectedStartDate = startDateData[row]
-            startDateTextField.text = selectedStartDate
-        } else if pickerView == endDatePicker {
-            selectedEndDate = endDateData[row]
-            endDateTextField.text = selectedEndDate
         }
+        
+        
+//        else if pickerView == startDatePicker {
+//            selectedStartDate = startDateData[row]
+//            startDateTextField.text = selectedStartDate
+//        } else if pickerView == endDatePicker {
+//            selectedEndDate = endDateData[row]
+//            endDateTextField.text = selectedEndDate
+//        }
     }
 }
