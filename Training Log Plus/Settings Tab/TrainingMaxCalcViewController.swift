@@ -50,21 +50,34 @@ class TrainingMaxCalcViewController: UIViewController {
             calcedWeightsArray.append(Int(roundedWeight))
             calcedWeightsArrayText.append("Weight: " + weight! + " Reps: " + reps! + " TM: " + String(format: "%.0f", roundedWeight))
             
-            TMCell tm = TMCell(reps: reps, weight: weight)
+            let tm = TMCell(reps: repsNum!, weight: weightNum!)
             calcedArrayObj.append(tm)
+            //calcedArrayObj.sort(by: sorterForFileIDASC)
+            
             
             //print(roundedWeight)
             
-            let indexPath = IndexPath(row: calcedWeightsArrayText.count - 1, section: 0)
+            let indexPath = IndexPath(row: calcedArrayObj.count - 1, section: 0)
             
             calcedTable.beginUpdates()
             calcedTable.insertRows(at: [indexPath], with: .automatic)
             calcedTable.endUpdates()
             
+            filterList()
+            
             weightTextField.text = ""
             repsTextField.text = ""
             view.endEditing(true)
         }
+    }
+    
+    func filterList() {
+        calcedArrayObj = calcedArrayObj.sorted() { $0.tm > $1.tm }
+        calcedTable.reloadData();
+    }
+    
+    func sorterForFileIDASC(this:TMCell, that:TMCell) -> Bool {
+      return this.tm > that.tm
     }
     
     func rounder(_ value: Double, toNearest: Double) -> Double {
@@ -179,14 +192,14 @@ extension TrainingMaxCalcViewController: UIPickerViewDataSource, UIPickerViewDel
 
 extension TrainingMaxCalcViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return calcedWeightsArrayText.count
+        return calcedArrayObj.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weightForCell = calcedWeightsArrayText[indexPath.row]
+        let weightForCell = calcedArrayObj[indexPath.row].displayString
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "calcedCell") as! calcedCell
-        cell.calcedLabel.text = String(weightForCell)
+        cell.calcedLabel.text = weightForCell
         
         return cell
     }
@@ -199,7 +212,7 @@ extension TrainingMaxCalcViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            calcedWeightsArrayText.remove(at: indexPath.row)
+            calcedArrayObj.remove(at: indexPath.row)
             
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)

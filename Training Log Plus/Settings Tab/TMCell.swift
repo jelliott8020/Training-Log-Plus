@@ -11,14 +11,26 @@ import Foundation
 class TMCell {
     let reps: Double!
     let weight: Double!
-    let tm: Double!
-    let displayString: String!
+    var tm: Double = 0
+    var displayString: String = ""
     
     init(reps: Double, weight: Double) {
         self.reps = reps
         self.weight = weight
-        self.tm = rounder(self.weight * self.reps * 0.0333 + self.weight, toNearest: 5)
-        self.displayString = "Weight: " + self.weight + " Reps: " + self.reps + " TM: " + String(format: "%.0f", tm)
+        tm = getTM()
+        displayString = getDisplayString()
+    }
+    
+    func getTM() -> Double {
+        return rounder(weight * reps * 0.0333 + weight, toNearest: 5)
+    }
+    
+    func getDisplayString() -> String {
+        let tmString = String(format: "%.0f", tm)
+        let weightStr = "Weight: " + String(format: "%.0f", weight!)
+        let repsStr = " Reps: " + String(format: "%.0f", reps!)
+        let tmStr = " TM: " + tmString
+        return weightStr + repsStr + tmStr
     }
     
     func rounder(_ value: Double, toNearest: Double) -> Double {
