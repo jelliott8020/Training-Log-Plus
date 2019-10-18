@@ -9,43 +9,13 @@
 import UIKit
 
 
-protocol ProgressDelegate {
+protocol PassDataBackProtocol {
     func passDataBack(bodyPart: String, exercise: String, start: String, end: String)
 }
 
 class SelectProgressExercises_VC: UITableViewController {
     
-    //var mainViewController: ProgressViewController?
-    var delegate: ProgressDelegate?
-    
-    
-    
-    // This passes the data back to parent VC
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        delegate?.passDataBack(bodyPart: selectedBodyPart!, exercise: selectedExercise!, start: selectedStartDate!, end: selectedEndDate!)
-        
-    }
-
-    @IBAction func cancelButton(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func doneButton(_ sender: Any) {
-        //mainViewController?.selectorDoneButtonPressed(bodyPart: selectedBodyPart!, exercise: selectedExercise!, start: selectedStartDate!, end: selectedEndDate!)
-        navigationController?.popViewController(animated: true)
-//        print(selectedBodyPart as Any)
-//        print(selectedExercise as Any)
-//        print(selectedStartDate as Any)
-//        print(selectedEndDate as Any)
-    }
-    
-    @IBOutlet weak var bodyPartTextField: UITextField!
-    @IBOutlet weak var exerciseTextField: UITextField!
-    @IBOutlet weak var startDateTextField: UITextField!
-    @IBOutlet weak var endDateTextField: UITextField!
-    
+    var delegate: PassDataBackProtocol?
     
     var bodyPartData: [String] = []
     var exerciseData: [String] = []
@@ -62,13 +32,27 @@ class SelectProgressExercises_VC: UITableViewController {
     var startDatePicker = UIDatePicker()
     var endDatePicker = UIDatePicker()
     
+    @IBOutlet weak var bodyPartTextField: UITextField!
+    @IBOutlet weak var exerciseTextField: UITextField!
+    @IBOutlet weak var startDateTextField: UITextField!
+    @IBOutlet weak var endDateTextField: UITextField!
     
+    @IBAction func cancelButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func doneButton(_ sender: Any) {
+        
+        delegate?.passDataBack(bodyPart: selectedBodyPart!, exercise: selectedExercise!, start: selectedStartDate!, end: selectedEndDate!)
+        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
-        
         
         bodyPartData = getBodyPartData()
         // Maybe check for bodypart selection before filling in exercise data
@@ -78,7 +62,6 @@ class SelectProgressExercises_VC: UITableViewController {
         createPickers()
         createToolbarDoneButton()
         showDatePicker()
-        // Do any additional setup after loading the view.
     }
     
     func showDatePicker() {
@@ -102,14 +85,11 @@ class SelectProgressExercises_VC: UITableViewController {
         
         endDateTextField.inputAccessoryView = endToolBar
         startDateTextField.inputAccessoryView = startToolBar
-        
     }
     
     func createPickers() {
         bodyPartPicker.delegate = self
         exercisePicker.delegate = self
-        //startDatePicker.delegate = self
-        //endDatePicker.delegate = self
         
         bodyPartTextField.inputView = bodyPartPicker
         exerciseTextField.inputView = exercisePicker
@@ -129,8 +109,6 @@ class SelectProgressExercises_VC: UITableViewController {
         
         bodyPartTextField.inputAccessoryView = toolBar
         exerciseTextField.inputAccessoryView = toolBar
-        startDateTextField.inputAccessoryView = toolBar
-        endDateTextField.inputAccessoryView = toolBar
     }
     
     @objc func doneButtonAction() {
@@ -173,19 +151,6 @@ class SelectProgressExercises_VC: UITableViewController {
         return ["Bench", "Squat", "Deadlift"]
     }
     
-    
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -204,12 +169,6 @@ extension SelectProgressExercises_VC: UIPickerViewDataSource, UIPickerViewDelega
             returnInt = exerciseData.count
         }
         
-//        else if pickerView == startDatePicker {
-//            returnInt = startDateData.count
-//        } else if pickerView == endDatePicker {
-//            returnInt = endDateData.count
-//        }
-        
         return returnInt
     }
     
@@ -222,13 +181,7 @@ extension SelectProgressExercises_VC: UIPickerViewDataSource, UIPickerViewDelega
         } else if pickerView == exercisePicker {
             returnStr = exerciseData[row]
         }
-        
-//        else if pickerView == startDatePicker {
-//            returnStr = startDateData[row]
-//        } else if pickerView == endDatePicker {
-//            returnStr = endDateData[row]
-//        }
-        
+
         return returnStr
     }
     
@@ -240,14 +193,5 @@ extension SelectProgressExercises_VC: UIPickerViewDataSource, UIPickerViewDelega
             selectedExercise = exerciseData[row]
             exerciseTextField.text = selectedExercise
         }
-        
-        
-//        else if pickerView == startDatePicker {
-//            selectedStartDate = startDateData[row]
-//            startDateTextField.text = selectedStartDate
-//        } else if pickerView == endDatePicker {
-//            selectedEndDate = endDateData[row]
-//            endDateTextField.text = selectedEndDate
-//        }
     }
 }

@@ -124,6 +124,27 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		03D1260D2359405100E28D02 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		03D1260E2359405600E28D02 /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		03D1260F2359405800E28D02 /* New Group2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group2";
+			sourceTree = "<group>";
+		};
 		03FB9EAE2322FC7300F9D410 /* Templates Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +160,9 @@
 		03FB9EAF2322FC7E00F9D410 /* Workouts Tab */ = {
 			isa = PBXGroup;
 			children = (
+				03D1260F2359405800E28D02 /* New Group2 */,
+				03D1260E2359405600E28D02 /* New Group1 */,
+				03D1260D2359405100E28D02 /* New Group */,
 				033C28292346893000A73B69 /* ItemDetailWorkout_VC.swift */,
 				052D19F22343A6F4003183B4 /* WorkoutList.swift */,
 				052D19F42343A789003183B4 /* WorkoutListItem_OBJ.swift */,
