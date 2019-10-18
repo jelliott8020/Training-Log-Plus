@@ -124,27 +124,6 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		03D1260D2359405100E28D02 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
-		03D1260E2359405600E28D02 /* New Group1 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group1";
-			sourceTree = "<group>";
-		};
-		03D1260F2359405800E28D02 /* New Group2 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group2";
-			sourceTree = "<group>";
-		};
 		03FB9EAE2322FC7300F9D410 /* Templates Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,9 +139,9 @@
 		03FB9EAF2322FC7E00F9D410 /* Workouts Tab */ = {
 			isa = PBXGroup;
 			children = (
-				03D1260F2359405800E28D02 /* New Group2 */,
-				03D1260E2359405600E28D02 /* New Group1 */,
-				03D1260D2359405100E28D02 /* New Group */,
+				0583C40A235A4F70001AAFBA /* Change Template */,
+				0583C409235A4F6B001AAFBA /* Custom Workout */,
+				0583C408235A4F64001AAFBA /* Begin Workout */,
 				033C28292346893000A73B69 /* ItemDetailWorkout_VC.swift */,
 				052D19F22343A6F4003183B4 /* WorkoutList.swift */,
 				052D19F42343A789003183B4 /* WorkoutListItem_OBJ.swift */,
@@ -192,12 +171,41 @@
 			path = "Exercises Tab";
 			sourceTree = "<group>";
 		};
-		05CBE50B2357738600E766F8 /* Settings Tab */ = {
+		0583C408235A4F64001AAFBA /* Begin Workout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Begin Workout";
+			sourceTree = "<group>";
+		};
+		0583C409235A4F6B001AAFBA /* Custom Workout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Custom Workout";
+			sourceTree = "<group>";
+		};
+		0583C40A235A4F70001AAFBA /* Change Template */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Change Template";
+			sourceTree = "<group>";
+		};
+		0583C40B235A4F8A001AAFBA /* TM Calculator */ = {
 			isa = PBXGroup;
 			children = (
 				05E06531235918CA00807493 /* calcedCell.swift */,
 				0377F5FE2357E6AE0015AEDB /* TrainingMaxCalc_VC.swift */,
 				0377F6042358087B0015AEDB /* TMCell.swift */,
+			);
+			path = "TM Calculator";
+			sourceTree = "<group>";
+		};
+		05CBE50B2357738600E766F8 /* Settings Tab */ = {
+			isa = PBXGroup;
+			children = (
+				0583C40B235A4F8A001AAFBA /* TM Calculator */,
 			);
 			path = "Settings Tab";
 			sourceTree = "<group>";

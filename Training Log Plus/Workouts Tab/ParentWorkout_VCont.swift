@@ -19,21 +19,21 @@ class ParentWorkout_VCont: UIViewController {
     
 
     
-    @IBAction func beginWorkoutButton(_ sender: UIButton) {
-        print("being")
-    }
-    
-    @IBAction func changeTemplateButton(_ sender: UIButton) {
-        print("change")
-    }
-    
-    @IBAction func skipDayButton(_ sender: UIButton) {
-        print("skip")
-    }
-    
-    @IBAction func customWorkoutButton(_ sender: UIButton) {
-        print("custom")
-    }
+//    @IBAction func beginWorkoutButton(_ sender: UIButton) {
+//        print("being")
+//    }
+//    
+//    @IBAction func changeTemplateButton(_ sender: UIButton) {
+//        print("change")
+//    }
+//    
+//    @IBAction func skipDayButton(_ sender: UIButton) {
+//        print("skip")
+//    }
+//    
+//    @IBAction func customWorkoutButton(_ sender: UIButton) {
+//        print("custom")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
