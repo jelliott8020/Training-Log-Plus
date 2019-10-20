@@ -1,27 +1,31 @@
 //
-//  ChangeTemplateViewController.swift
+//  AmrapPerformance_ViewController.swift
 //  Training Log Plus
 //
-//  Created by Elliott, Josh on 10/16/19.
+//  Created by Josh Elliott on 10/19/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 
 import UIKit
 
+class AmrapPerformance_VC: UIViewController {
 
-
-
-class ChangeTemplate_ViewController: UITableViewController {
     
-
+    @IBOutlet weak var currentWeight: UILabel!
+    @IBOutlet weak var trainingMaxLabel: UILabel!
+    
+    @IBAction func repsSelector(_ sender: UITextField) {
+    }
+    
+    
+    @IBOutlet weak var pastAttemptsTable: UITableView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    @IBAction func cancel(_ sender: Any) {
-        presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
 

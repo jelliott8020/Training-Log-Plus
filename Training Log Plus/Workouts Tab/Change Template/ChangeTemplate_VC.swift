@@ -1,5 +1,5 @@
 //
-//  DailyWorkoutViewController.swift
+//  ChangeTemplateViewController.swift
 //  Training Log Plus
 //
 //  Created by Elliott, Josh on 10/16/19.
@@ -10,9 +10,8 @@ import UIKit
 
 
 
-
-
-class DailyWorkout_ViewCont: UITableViewController {
+class ChangeTemplate_VC: UITableViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

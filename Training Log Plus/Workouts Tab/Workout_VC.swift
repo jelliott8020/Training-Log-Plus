@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ParentWorkout_VCont: UIViewController {
+class Workout_VC: UIViewController {
 
     
     

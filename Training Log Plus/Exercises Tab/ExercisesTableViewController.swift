@@ -8,18 +8,16 @@
 
 import UIKit
 
-class Exercises_TVC: UITableViewController {
+class AddExercisesToData_TVC: UITableViewController {
 
+    
     
     @IBAction func createButton(_ sender: UIBarButtonItem) {
         // Add item to data here
-        selectedStartingWeight = startingWeightTextField.text
-        selectedMaxReps = maxRepsTextField.text
-        selectedExerciseName = exerciseNameTextField.text
+        selectedBodyPart = bodyPartTextField.text
+        selectedExercise = exerciseTextField.text
         
-        print(selectedExerciseName!)
-        print(selectedMaxReps!)
-        print(selectedStartingWeight!)
+        print(selectedExercise!)
         print(selectedBodyPart!)
         
     }
@@ -27,52 +25,48 @@ class Exercises_TVC: UITableViewController {
     
     @IBAction func clearButton(_ sender: UIBarButtonItem) {
         bodyPartTextField.text = ""
-        exerciseNameTextField.text = ""
-        startingWeightTextField.text = ""
-        maxRepsTextField.text = ""
+        exerciseTextField.text = ""
     }
     
     
     @IBOutlet weak var bodyPartTextField: UITextField!
-    @IBOutlet weak var exerciseNameTextField: UITextField!
-    @IBOutlet weak var startingWeightTextField: UITextField!
-    @IBOutlet weak var maxRepsTextField: UITextField!
+    @IBOutlet weak var exerciseTextField: UITextField!
     
     
     var bodyPartData: [String] = []
-    //var maxRepsData: [String] = []
-    //var startingWeightData: [String] = []
+    var exerciseData: [String] = []
     
     var selectedBodyPart: String?
-    var selectedStartingWeight: String?
-    var selectedMaxReps: String?
-    var selectedExerciseName: String?
+    var selectedExercise: String?
     
     var bodyPartPicker = UIPickerView()
-    //var startingWeightPicker = UIPickerView()
-    //var maxRepsPicker = UIPickerView()
+    var exercisePicker = UIPickerView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bodyPartData = getBodyPartData()
-        //maxRepsData = getMaxRepsData()
-        //startingWeightData = getStartingWeightData()
+        
+        // Will have to figure how to fill this AFTER bodypart picker is selected
+        exerciseData = getExerciseData()
         
         createPickers()
         createToolbarDoneButton()
     }
     
+    func getExerciseData() -> [String] {
+        // Fill this from database after bodypart picker is selected
+        return [""]
+    }
+    
     func createPickers() {
         
         bodyPartPicker.delegate = self
-        //startingWeightPicker.delegate = self
-        //maxRepsPicker.delegate = self
+        exercisePicker.delegate = self
         
         bodyPartTextField.inputView = bodyPartPicker
-        //startingWeightTextField.inputView = startingWeightPicker
-        //maxRepsTextField.inputView = maxRepsPicker
+        exerciseTextField.inputView = exercisePicker
     }
     
     func createToolbarDoneButton() {
@@ -87,9 +81,7 @@ class Exercises_TVC: UITableViewController {
         toolBar.isUserInteractionEnabled = true
         
         bodyPartTextField.inputAccessoryView = toolBar
-        maxRepsTextField.inputAccessoryView = toolBar
-        startingWeightTextField.inputAccessoryView = toolBar
-        exerciseNameTextField.inputAccessoryView = toolBar
+        exerciseTextField.inputAccessoryView = toolBar
     }
     
     @objc func doneButtonAction() {
@@ -100,33 +92,9 @@ class Exercises_TVC: UITableViewController {
     func getBodyPartData() -> [String] {
         return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
     }
-    
-//    func getMaxRepsData() -> [String] {
-//        var returnArg: [String] = []
-//
-//        for i in 0...20 {
-//            returnArg.append(String(i))
-//        }
-//
-//        return returnArg
-//    }
-    
-//    func getStartingWeightData() -> [String] {
-//        var returnArg: [String] = []
-//
-//        for i in 5...500 {
-//            if i % 5 == 0 {
-//                returnArg.append(String(i))
-//            }
-//        }
-//
-//        return returnArg
-//    }
-    
-    
 }
 
-extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
+extension AddExercisesToData_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -137,6 +105,8 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         
         if pickerView == bodyPartPicker {
             returnInt = bodyPartData.count
+        } else if pickerView == exercisePicker {
+            returnInt = exerciseData.count
         }
         
 //        else if pickerView == maxRepsPicker {
@@ -154,6 +124,8 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         
         if pickerView == bodyPartPicker {
             returnStr = bodyPartData[row]
+        } else if pickerView == exercisePicker {
+            returnStr = exerciseData[row]
         }
         
 //        else if pickerView == maxRepsPicker {
@@ -169,6 +141,9 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
+        } else if pickerView == exercisePicker {
+            selectedExercise = exerciseData[row]
+            exerciseTextField.text = selectedExercise
         }
         
 //        else if pickerView == maxRepsPicker {
