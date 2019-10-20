@@ -13,89 +13,155 @@ class AddExerciseToData_TVC: UITableViewController {
     
     @IBOutlet weak var bodyPartTextField: UITextField!
     @IBOutlet weak var exerciseTextField: UITextField!
+    @IBOutlet weak var wendlerSwitchOutlet: UISwitch!
     
-    @IBAction func wendlerSwitch(_ sender: UISwitch) {
-    }
+    var bodyPartData: [String] = []
+    var exerciseData: [String] = []
     
-    @IBAction func addToDataButton(_ sender: UIButton) {
-    }
+    var selectedBodyPart: String?
+    var selectedExercise: String?
+    var selectedWender: Bool?
     
+    var bodyPartPicker = UIPickerView()
+    var exercisePicker = UIPickerView()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bodyPartData = getBodyPartData()
+        exerciseData = getExerciseData()
+        
+        createPickers()
+        createToolbarDoneButton()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // Edit button
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    
+    @IBAction func wendlerSwitch(_ sender: UISwitch) {
+        if sender.isOn {
+            selectedWender = true
+        } else {
+            selectedWender = false
+        }
+    }
+    
+    @IBAction func addToDataButton(_ sender: UIButton) {
+        selectedBodyPart = bodyPartTextField.text
+        selectedExercise = exerciseTextField.text
+        
+        print(selectedExercise!)
+        print(selectedBodyPart!)
+        print(selectedWender!)
+    }
+    
+    @IBAction func clearButton(_ sender: UIBarButtonItem) {
+        bodyPartTextField.text = ""
+        exerciseTextField.text = ""
+        wendlerSwitchOutlet.setOn(false, animated: true)
+        selectedWender = false
+    }
+    
+    func createPickers() {
+        
+        bodyPartPicker.delegate = self
+        exercisePicker.delegate = self
+        
+        bodyPartTextField.inputView = bodyPartPicker
+        exerciseTextField.inputView = exercisePicker
+    }
+    
+    func createToolbarDoneButton() {
+        
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        bodyPartTextField.inputAccessoryView = toolBar
+        exerciseTextField.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneButtonAction() {
+        self.view.endEditing(true)
+    }
+    
+    func getBodyPartData() -> [String] {
+        return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
+    }
+    
+    func getExerciseData() -> [String] {
+        // Fill this from database after bodypart picker is selected
+        return ["Squat", "Deadlift", "Bench"]
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+
+}
+
+extension AddExerciseToData_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        var returnInt = 0
+        
+        if pickerView == bodyPartPicker {
+            returnInt = bodyPartData.count
+        } else if pickerView == exercisePicker {
+            returnInt = exerciseData.count
+        }
+        
+//        else if pickerView == maxRepsPicker {
+//            returnInt = maxRepsData.count
+//        } else if pickerView == startingWeightPicker {
+//            returnInt = startingWeightData.count
+//        }
+        
+        return returnInt
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        var returnStr = ""
+        
+        if pickerView == bodyPartPicker {
+            returnStr = bodyPartData[row]
+        } else if pickerView == exercisePicker {
+            returnStr = exerciseData[row]
+        }
+        
+//        else if pickerView == maxRepsPicker {
+//            returnStr = maxRepsData[row]
+//        } else if pickerView == startingWeightPicker {
+//            returnStr = startingWeightData[row]
+//        }
+        
+        return returnStr
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == bodyPartPicker {
+            selectedBodyPart = bodyPartData[row]
+            bodyPartTextField.text = selectedBodyPart
+        } else if pickerView == exercisePicker {
+            selectedExercise = exerciseData[row]
+            exerciseTextField.text = selectedExercise
+        }
+        
+//        else if pickerView == maxRepsPicker {
+//            selectedMaxReps = maxRepsData[row]
+//            maxRepsTextField.text = selectedMaxReps
+//        } else if pickerView == startingWeightPicker {
+//            selectedStartingWeight = startingWeightData[row]
+//            startingWeightTextField.text = selectedStartingWeight
+//        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

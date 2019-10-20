@@ -14,6 +14,10 @@ class TrainingMaxCalc_VC: UIViewController {
     @IBOutlet weak var repsTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
     
+    @IBOutlet weak var exerciseTextField: UITextField!
+    
+    @IBOutlet weak var highestTMLabel: UILabel!
+    
     //var weightPicker = UIPickerView()
     //var repsPicker = UIPickerView()
     
@@ -31,6 +35,9 @@ class TrainingMaxCalc_VC: UIViewController {
         insertNewCalc()
     }
     
+    @IBAction func addTmToExerciseButton(_ sender: UIButton) {
+        
+    }
     
     // create struct with weight, reps, tm, and string
     // append struct to array

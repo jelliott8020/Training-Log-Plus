@@ -12,27 +12,8 @@ class Exercises_TVC: UITableViewController {
 
     
     
-    @IBAction func createButton(_ sender: UIBarButtonItem) {
-        // Add item to data here
-        selectedBodyPart = bodyPartTextField.text
-        selectedExercise = exerciseTextField.text
-        
-        print(selectedExercise!)
-        print(selectedBodyPart!)
-        
-    }
-    
-    
-    @IBAction func clearButton(_ sender: UIBarButtonItem) {
-        bodyPartTextField.text = ""
-        exerciseTextField.text = ""
-    }
-    
-    
     @IBOutlet weak var bodyPartTextField: UITextField!
-    
     @IBOutlet weak var exerciseTextField: UITextField!
-    
     
     var bodyPartData: [String] = []
     var exerciseData: [String] = []
@@ -56,9 +37,18 @@ class Exercises_TVC: UITableViewController {
         createToolbarDoneButton()
     }
     
-    func getExerciseData() -> [String] {
-        // Fill this from database after bodypart picker is selected
-        return ["Squat", "Deadlift", "Bench"]
+    @IBAction func createButton(_ sender: UIBarButtonItem) {
+        // Add item to data here
+        selectedBodyPart = bodyPartTextField.text
+        selectedExercise = exerciseTextField.text
+        
+        print(selectedExercise!)
+        print(selectedBodyPart!)
+    }
+    
+    @IBAction func clearButton(_ sender: UIBarButtonItem) {
+        bodyPartTextField.text = ""
+        exerciseTextField.text = ""
     }
     
     func createPickers() {
@@ -92,6 +82,11 @@ class Exercises_TVC: UITableViewController {
     
     func getBodyPartData() -> [String] {
         return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
+    }
+    
+    func getExerciseData() -> [String] {
+        // Fill this from database after bodypart picker is selected
+        return ["Squat", "Deadlift", "Bench"]
     }
 }
 
