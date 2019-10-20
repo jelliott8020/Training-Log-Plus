@@ -1,5 +1,5 @@
 //
-//  AddExercise_TVC.swift
+//  BodyBuildingPerformance_TableViewController.swift
 //  Training Log Plus
 //
 //  Created by Josh Elliott on 10/19/19.
@@ -8,17 +8,9 @@
 
 import UIKit
 
-class AddExerciseToData_TVC: UITableViewController {
+class BodyBuildingPerformance_TVC: UITableViewController {
 
     
-    @IBOutlet weak var bodyPartTextField: UITextField!
-    @IBOutlet weak var exerciseTextField: UITextField!
-    
-    @IBAction func wendlerSwitch(_ sender: UISwitch) {
-    }
-    
-    @IBAction func addToDataButton(_ sender: UIButton) {
-    }
     
     
     override func viewDidLoad() {

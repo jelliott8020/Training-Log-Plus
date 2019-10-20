@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddExercisesToData_TVC: UITableViewController {
+class Exercises_TVC: UITableViewController {
 
     
     
@@ -30,6 +30,7 @@ class AddExercisesToData_TVC: UITableViewController {
     
     
     @IBOutlet weak var bodyPartTextField: UITextField!
+    
     @IBOutlet weak var exerciseTextField: UITextField!
     
     
@@ -57,7 +58,7 @@ class AddExercisesToData_TVC: UITableViewController {
     
     func getExerciseData() -> [String] {
         // Fill this from database after bodypart picker is selected
-        return [""]
+        return ["Squat", "Deadlift", "Bench"]
     }
     
     func createPickers() {
@@ -94,7 +95,7 @@ class AddExercisesToData_TVC: UITableViewController {
     }
 }
 
-extension AddExercisesToData_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
+extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
