@@ -45,12 +45,24 @@ class TMCell {
 //        // End Test
         
         
+        // Test
+        
+        
         
         let tmString = String(format: "%.0f", trainingMax)
         let weightStr = "Weight: " + String(format: "%.0f", weight!)
         let repsStr = " Reps: " + String(format: "%.0f", reps!)
+        
+        let firstPart = NSMutableString(string: weightStr + repsStr)
+        
         let tmStr = " TM: " + tmString
-        return weightStr + repsStr + tmStr
+        
+        let myAttribute = [ NSAttributedString.Key.foregroundColor: UIColor.red ]
+        let myAttrString = NSAttributedString(string: tmStr, attributes: myAttribute)
+        
+        //firstPart.append(myAttrString as String)
+        
+        return firstPart as String
     }
     
     func rounder(_ value: Double, toNearest: Double) -> Double {
