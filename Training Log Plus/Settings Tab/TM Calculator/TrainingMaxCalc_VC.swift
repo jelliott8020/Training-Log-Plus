@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TrainingMaxCalc_VC: UIViewController {
+class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var calcedTable: UITableView!
     @IBOutlet weak var repsTextField: UITextField!
@@ -18,31 +18,48 @@ class TrainingMaxCalc_VC: UIViewController {
     
     @IBOutlet weak var highestTMLabel: UILabel!
     
-    //var weightPicker = UIPickerView()
-    //var repsPicker = UIPickerView()
+    var exerciseData: [String] = []
     
-    var weightData: [Int] = []
-    var repsData: [Int] = []
     var calcedWeightsArray: [Int] = []
     var calcedWeightsArrayText: [String] = []
+    
     var calcedArrayObj: [TMCell] = []
     
     var selectedWeight: Int?
     var selectedReps: Int?
+    var selectedExercise: String?
+    
+    var exercisePicker = UIPickerView()
+    
+    var highestTMNum = 0.0
     
     
+    // Calculate and add to table button
     @IBAction func calculateButton(_ sender: UIButton) {
         insertNewCalc()
+        
+        // Update highest label here
     }
     
+    // Add TM to Exercise
     @IBAction func addTmToExerciseButton(_ sender: UIButton) {
+        // Add TM and current date to exercise data
+    }
+    
+    // Clear Data button
+    @IBAction func clearData(_ sender: UIBarButtonItem) {
+        calcedWeightsArray.removeAll()
+        calcedWeightsArrayText.removeAll()
+        calcedArrayObj.removeAll()
+        highestTMNum = 0
+        highestTMLabel.text = String(format: "%.0f", highestTMNum)
+        calcedTable.reloadData()
+        exerciseTextField.text = ""
+        selectedExercise = ""
         
     }
     
-    // create struct with weight, reps, tm, and string
-    // append struct to array
-    // sort array by tm
-    
+    // Insert new calced cell to table
     func insertNewCalc() {
         let reps = repsTextField.text
         let weight = weightTextField.text
@@ -56,6 +73,11 @@ class TrainingMaxCalc_VC: UIViewController {
             
             calcedWeightsArray.append(Int(roundedWeight))
             calcedWeightsArrayText.append("Weight: " + weight! + " Reps: " + reps! + " TM: " + String(format: "%.0f", roundedWeight))
+            
+            if roundedWeight >= highestTMNum {
+                highestTMNum = roundedWeight
+                highestTMLabel.text = String(format: "%.0f", highestTMNum)
+            }
             
             let tm = TMCell(reps: repsNum!, weight: weightNum!)
             calcedArrayObj.append(tm)
@@ -95,23 +117,19 @@ class TrainingMaxCalc_VC: UIViewController {
         super.viewDidLoad()
         calcedTable.tableFooterView = UIView(frame: CGRect.zero)
         
-        weightData = getWeightData()
-        repsData = getRepsData()
+        highestTMLabel.text = String(format: "%.0f", highestTMNum)
         
-        //createPickers()
+        exerciseData = getExerciseData()
+        
+        createPickers()
         createToolbarDoneButton()
-
-        // Do any additional setup after loading the view.
     }
     
     
-//    func createPickers() {
-//        weightPicker.delegate = self
-//        repsPicker.delegate = self
-//
-//        repsTextField.inputView = repsPicker
-//        weightTextField.inputView = weightPicker
-//    }
+    func createPickers() {
+        exercisePicker.delegate = self
+        exerciseTextField.inputView = exercisePicker
+    }
     
     func createToolbarDoneButton() {
         
@@ -129,74 +147,67 @@ class TrainingMaxCalc_VC: UIViewController {
     }
     
     @objc func doneButtonAction() {
-        self.view.endEditing(true)
+        
+        
+        if weightTextField.isEditing {
+            weightTextField.resignFirstResponder()
+            repsTextField.becomeFirstResponder()
+        } else if repsTextField.isEditing {
+            insertNewCalc()
+            self.view.endEditing(true)
+        }
     }
     
-    func getWeightData() -> [Int] {
-        var returnArg: [Int] = []
+    func getExerciseData() -> [String] {
+        // Get data from database here
         
-        for i in 0...500 {
-            if i % 5 == 0 {
-                returnArg.append(i)
-            }
-        }
-        
-        return returnArg
+        return ["Squat", "Deadlift", "Bench"]
     }
     
-    func getRepsData() -> [Int] {
-        var returnArg: [Int] = []
-        
-        for i in 0...30 {
-            returnArg.append(i)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == weightTextField {
+            textField.resignFirstResponder()
+            repsTextField.becomeFirstResponder()
         }
-        
-        return returnArg
+        return true
     }
 
 }
 
-//extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
-//    
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//        
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        var returnInt = 0
-//        
-//        if pickerView == weightPicker {
-//            returnInt = weightData.count
-//        } else if pickerView == repsPicker {
-//            returnInt = repsData.count
-//        }
-//        
-//        return returnInt
-//    }
-//    
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        
-//        var returnStr = ""
-//        
-//        if pickerView == weightPicker {
-//            returnStr = String(weightData[row])
-//        } else if pickerView == repsPicker {
-//            returnStr = String(repsData[row])
-//        }
-//        
-//        return returnStr
-//    }
-//    
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if pickerView == weightPicker {
-//            selectedWeight = weightData[row]
-//            weightTextField.text = String(selectedWeight!)
-//        } else if pickerView == repsPicker {
-//            selectedReps = repsData[row]
-//            repsTextField.text = String(selectedReps!)
-//        }
-//    }
-//}
+extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+        
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        var returnInt = 0
+        
+        if pickerView == exercisePicker {
+            returnInt = exerciseData.count
+        }
+        
+        return returnInt
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        var returnStr = ""
+        
+        if pickerView == exercisePicker {
+            returnStr = String(exerciseData[row])
+        }
+        
+        return returnStr
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == exercisePicker {
+            selectedExercise = exerciseData[row]
+            exerciseTextField.text = selectedExercise
+        }
+    }
+}
 
 extension TrainingMaxCalc_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
