@@ -11,14 +11,14 @@ import UIKit
 class TMCell {
     let reps: Double!
     let weight: Double!
-    var tm: Double = 0
+    var trainingMax: Double = 0
     var displayString: String = ""
 
     
     init(reps: Double, weight: Double) {
         self.reps = reps
         self.weight = weight
-        tm = getTM()
+        trainingMax = getTM()
         displayString = getDisplayString()
     }
     
@@ -27,7 +27,26 @@ class TMCell {
     }
     
     func getDisplayString() -> String {
-        let tmString = String(format: "%.0f", tm)
+        
+        // Test
+        
+//        let totalString = "Weight: " + weight! + " Reps: " + reps! + " TM: "
+//        //let roundedFormatted = String(format: "%.0f", roundedWeight)
+//
+//        let firstAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: UIColor.green, NSAttributedString.Key.kern: 10]
+//        let secondAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+//
+//        let firstString = NSMutableAttributedString(string: totalString, attributes: firstAttributes)
+//        let secondString = NSAttributedString(string: roundedFormatted, attributes: secondAttributes)
+//        //let thirdString = NSAttributedString(string: "hate")
+//
+//        firstString.append(secondString)
+//
+//        // End Test
+        
+        
+        
+        let tmString = String(format: "%.0f", trainingMax)
         let weightStr = "Weight: " + String(format: "%.0f", weight!)
         let repsStr = " Reps: " + String(format: "%.0f", reps!)
         let tmStr = " TM: " + tmString

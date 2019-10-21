@@ -43,7 +43,7 @@
 		05CBE50F23577EA400E766F8 /* CurrentWorkout_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE50E23577EA400E766F8 /* CurrentWorkout_VC.swift */; };
 		05CBE51123577EC300E766F8 /* ChangeTemplate_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE51023577EC300E766F8 /* ChangeTemplate_VC.swift */; };
 		05CBE51323577ECC00E766F8 /* CustomWorkout_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE51223577ECC00E766F8 /* CustomWorkout_VC.swift */; };
-		05E06532235918CA00807493 /* calcedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E06531235918CA00807493 /* calcedCell.swift */; };
+		05E06532235918CA00807493 /* Calced_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E06531235918CA00807493 /* Calced_TVCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,7 +85,7 @@
 		05CBE50E23577EA400E766F8 /* CurrentWorkout_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWorkout_VC.swift; sourceTree = "<group>"; };
 		05CBE51023577EC300E766F8 /* ChangeTemplate_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTemplate_VC.swift; sourceTree = "<group>"; };
 		05CBE51223577ECC00E766F8 /* CustomWorkout_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWorkout_VC.swift; sourceTree = "<group>"; };
-		05E06531235918CA00807493 /* calcedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calcedCell.swift; sourceTree = "<group>"; };
+		05E06531235918CA00807493 /* Calced_TVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calced_TVCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,7 +241,7 @@
 		0583C40B235A4F8A001AAFBA /* TM Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				05E06531235918CA00807493 /* calcedCell.swift */,
+				05E06531235918CA00807493 /* Calced_TVCell.swift */,
 				0377F5FE2357E6AE0015AEDB /* TrainingMaxCalc_VC.swift */,
 				0377F6042358087B0015AEDB /* TMCell.swift */,
 			);
@@ -360,7 +360,7 @@
 				05CBE51123577EC300E766F8 /* ChangeTemplate_VC.swift in Sources */,
 				033C28262346872800A73B69 /* WorkoutDay.swift in Sources */,
 				03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */,
-				05E06532235918CA00807493 /* calcedCell.swift in Sources */,
+				05E06532235918CA00807493 /* Calced_TVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

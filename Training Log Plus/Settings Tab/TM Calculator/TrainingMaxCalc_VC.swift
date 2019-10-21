@@ -11,27 +11,23 @@ import UIKit
 class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var calcedTable: UITableView!
+    
     @IBOutlet weak var repsTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
-    
     @IBOutlet weak var exerciseTextField: UITextField!
     
     @IBOutlet weak var highestTMLabel: UILabel!
     
     var exerciseData: [String] = []
-    
-    var calcedWeightsArray: [Int] = []
-    var calcedWeightsArrayText: [String] = []
-    
+    var calcedWeightsArray: [Double] = []
     var calcedArrayObj: [TMCell] = []
     
     var selectedWeight: Int?
     var selectedReps: Int?
     var selectedExercise: String?
+    var highestTMNum = 0.0
     
     var exercisePicker = UIPickerView()
-    
-    var highestTMNum = 0.0
     
     
     // Calculate and add to table button
@@ -49,7 +45,6 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     // Clear Data button
     @IBAction func clearData(_ sender: UIBarButtonItem) {
         calcedWeightsArray.removeAll()
-        calcedWeightsArrayText.removeAll()
         calcedArrayObj.removeAll()
         highestTMNum = 0
         highestTMLabel.text = String(format: "%.0f", highestTMNum)
@@ -68,23 +63,17 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
             let weightNum: Double? = Double(weight!)
             let repsNum: Double? = Double(reps!)
             
-            let calcedWeight = weightNum! * repsNum! * 0.0333 + weightNum!
-            let roundedWeight = rounder(calcedWeight, toNearest: 5)
+            let tmObj = TMCell(reps: repsNum!, weight: weightNum!)
+            calcedArrayObj.append(tmObj)
             
-            calcedWeightsArray.append(Int(roundedWeight))
-            calcedWeightsArrayText.append("Weight: " + weight! + " Reps: " + reps! + " TM: " + String(format: "%.0f", roundedWeight))
+            let tmNum = tmObj.trainingMax
             
-            if roundedWeight >= highestTMNum {
-                highestTMNum = roundedWeight
+            calcedWeightsArray.append(tmNum)
+            
+            if tmNum >= highestTMNum {
+                highestTMNum = tmNum
                 highestTMLabel.text = String(format: "%.0f", highestTMNum)
             }
-            
-            let tm = TMCell(reps: repsNum!, weight: weightNum!)
-            calcedArrayObj.append(tm)
-            //calcedArrayObj.sort(by: sorterForFileIDASC)
-            
-            
-            //print(roundedWeight)
             
             let indexPath = IndexPath(row: calcedArrayObj.count - 1, section: 0)
             
@@ -101,12 +90,12 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     }
     
     func filterList() {
-        calcedArrayObj = calcedArrayObj.sorted() { $0.tm > $1.tm }
+        calcedArrayObj = calcedArrayObj.sorted() { $0.trainingMax > $1.trainingMax }
         calcedTable.reloadData();
     }
     
     func sorterForFileIDASC(this:TMCell, that:TMCell) -> Bool {
-      return this.tm > that.tm
+      return this.trainingMax > that.trainingMax
     }
     
     func rounder(_ value: Double, toNearest: Double) -> Double {
