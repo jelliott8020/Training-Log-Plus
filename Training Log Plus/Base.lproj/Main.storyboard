@@ -328,7 +328,7 @@
         <!--Templates-->
         <scene sceneID="Zfy-ib-Hmu">
             <objects>
-                <tableViewController id="2TX-Qi-pvL" customClass="TemplatesTable_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="2TX-Qi-pvL" customClass="TemplateParent_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="wAl-Op-jlp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

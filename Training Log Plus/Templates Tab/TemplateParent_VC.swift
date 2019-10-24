@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TemplatesTable_VC: UITableViewController {
+class TemplateParent_VC: UITableViewController {
     
     
     var templateList: TemplateList // Items for the table
@@ -222,7 +222,7 @@ class TemplatesTable_VC: UITableViewController {
 
 
 // Delegate from the item detail VC
-extension TemplatesTable_VC: ItemDetail_VCDelegate {
+extension TemplateParent_VC: ItemDetail_VCDelegate {
     
     
     /*
