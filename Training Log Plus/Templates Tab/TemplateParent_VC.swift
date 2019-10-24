@@ -105,12 +105,12 @@ class TemplateParent_VC: UITableViewController {
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddItemSegue" {
-            if let itemDetailViewController = segue.destination as? ItemDetail_VC {
+            if let itemDetailViewController = segue.destination as? AddEditTemplate_VC {
                 itemDetailViewController.delegate = self
                 itemDetailViewController.templateList = templateList
             }
         } else if segue.identifier == "EditItemSegue" {
-            if let itemDetailViewController = segue.destination as? ItemDetail_VC {
+            if let itemDetailViewController = segue.destination as? AddEditTemplate_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                     let item = templateList.templates[indexPath.row]
                     itemDetailViewController.itemToEdit = item
@@ -126,7 +126,7 @@ class TemplateParent_VC: UITableViewController {
      */
     func configureText(for cell: UITableViewCell, with item: TemplateItem) {
         if let templateCell = cell as? TemplateList_TVCell {
-            templateCell.templateTextLabel.text = item.text
+            templateCell.templateTextLabel.text = item.templateTitle
         }
     }
     
@@ -228,7 +228,7 @@ extension TemplateParent_VC: ItemDetail_VCDelegate {
     /*
      * Cancel button will pop the view controller
      */
-    func itemDetailViewControllerDidCancel(_ controller: ItemDetail_VC) {
+    func itemDetailViewControllerDidCancel(_ controller: AddEditTemplate_VC) {
         navigationController?.popViewController(animated: true)
     }
     
@@ -236,7 +236,7 @@ extension TemplateParent_VC: ItemDetail_VCDelegate {
     /*
      *
      */
-    func itemDetailViewController(_ controller: ItemDetail_VC, didFinishAdding item: TemplateItem) {
+    func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishAdding item: TemplateItem) {
         navigationController?.popViewController(animated: true)
         let rowIndex = templateList.templates.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)
@@ -248,7 +248,7 @@ extension TemplateParent_VC: ItemDetail_VCDelegate {
     /*
      *
      */
-    func itemDetailViewController(_ controller: ItemDetail_VC, didFinishEditing item: TemplateItem) {
+    func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishEditing item: TemplateItem) {
         if let index = templateList.templates.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             if let cell = tableView.cellForRow(at: indexPath) {

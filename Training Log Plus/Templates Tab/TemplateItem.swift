@@ -15,10 +15,13 @@ import Foundation
 
 class TemplateItem: NSObject {
     
-    var text = ""
+    var templateTitle = ""
     var listOfWorkouts: [Exercise] = []
     var dateStarted: String = ""
     var currentDayIndex = 0
+    var numDaysOfWeek = 0
+    var wendlerYesNo = true
+    var numOfWeeks = 0
     //var checked = false
     
     

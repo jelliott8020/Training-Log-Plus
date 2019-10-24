@@ -23,7 +23,7 @@ class TemplateList {
     
     func addTemplate(temp: String) {
         let item = TemplateItem()
-        item.text = temp
+        item.templateTitle = temp
         //item.checked = true
         templates.append(item)
     }
@@ -31,7 +31,7 @@ class TemplateList {
     // Creates a new template item
     func newTemplate() -> TemplateItem {
         let item = TemplateItem()
-        item.text = randTitle()
+        item.templateTitle = randTitle()
         //item.checked = true
         templates.append(item)
         return item

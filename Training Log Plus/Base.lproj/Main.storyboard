@@ -335,14 +335,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="TemplateCell" id="Mjj-Qs-JHa" customClass="TemplateList_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="320" height="44.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mjj-Qs-JHa" id="g7l-AY-MHk">
-                                    <rect key="frame" x="0.0" y="0.0" width="261" height="44.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="261" height="45"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZy-La-f1U">
-                                            <rect key="frame" x="16" y="12" width="42" height="21"/>
+                                            <rect key="frame" x="16" y="12" width="42" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -357,7 +357,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="templateTextLabel" destination="aZy-La-f1U" id="neg-5S-jNH"/>
-                                    <segue destination="iGM-s4-UM7" kind="show" identifier="EditItemSegue" trigger="accessoryAction" id="EPD-bE-xLj"/>
+                                    <segue destination="dco-58-xFr" kind="show" identifier="AddItemSegue" id="k20-yL-o1N"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -370,7 +370,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="DJI-bU-rOs">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="iGM-s4-UM7" kind="show" identifier="AddItemSegue" id="mmr-zD-ry9"/>
+                                <segue destination="dco-58-xFr" kind="show" identifier="AddItemSegue" id="mMw-if-v3O"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -378,69 +378,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WNn-OO-7d0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1134" y="-665"/>
-        </scene>
-        <!--Title-->
-        <scene sceneID="wHj-tR-B0r">
-            <objects>
-                <tableViewController title="Title" hidesBottomBarWhenPushed="YES" id="iGM-s4-UM7" customClass="ItemDetail_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ZKw-2q-OQL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection id="FJr-bt-mSj">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="b1J-KM-MPJ">
-                                        <rect key="frame" x="0.0" y="18" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b1J-KM-MPJ" id="eAH-wZ-YlD">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SeB-zD-hUx">
-                                                    <rect key="frame" x="16" y="6" width="288" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                                    <connections>
-                                                        <action selector="done:" destination="iGM-s4-UM7" eventType="editingDidEndOnExit" id="ezJ-ZD-SZg"/>
-                                                        <outlet property="delegate" destination="iGM-s4-UM7" id="rHk-aY-eo9"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="iGM-s4-UM7" id="Zbu-gE-fKN"/>
-                            <outlet property="delegate" destination="iGM-s4-UM7" id="8Da-0X-XoV"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Create Template" id="D2L-l7-Gw7">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="UQi-B8-gQK">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="cancel:" destination="iGM-s4-UM7" id="rMV-oZ-EKc"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Done" id="gMd-oJ-OY6">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="done:" destination="iGM-s4-UM7" id="nst-yR-uBL"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="addBarButton" destination="gMd-oJ-OY6" id="Ww5-Xh-eHB"/>
-                        <outlet property="cancelBarButton" destination="UQi-B8-gQK" id="J9S-8X-Ba2"/>
-                        <outlet property="textField" destination="SeB-zD-hUx" id="YJL-17-wH0"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ve-FI-AUp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2064" y="-665"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="P7z-dq-WoN">
@@ -1204,20 +1141,20 @@
             </objects>
             <point key="canvasLocation" x="2064" y="-2253"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Template-->
         <scene sceneID="WaS-KW-cjg">
             <objects>
-                <viewController id="dco-58-xFr" sceneMemberID="viewController">
+                <viewController id="dco-58-xFr" customClass="AddEditTemplate_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ds2-f7-kky">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fjh-yg-Saz">
-                                <rect key="frame" x="16" y="187" width="288" height="361"/>
+                                <rect key="frame" x="16" y="201" width="288" height="347"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutDay" id="mE4-Gd-Y5L">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutDay" id="mE4-Gd-Y5L" customClass="workoutDaysInTemplate_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mE4-Gd-Y5L" id="vx6-65-KVu">
@@ -1237,30 +1174,67 @@
                                 </prototypes>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Template Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eAs-QV-HFe">
-                                <rect key="frame" x="16" y="51" width="288" height="30"/>
+                                <rect key="frame" x="16" y="61" width="288" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Workouts" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="421-vK-fiU">
-                                <rect key="frame" x="16" y="89" width="153" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Days/Week" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="421-vK-fiU">
+                                <rect key="frame" x="16" y="99" width="93" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRx-0o-ws0">
-                                <rect key="frame" x="221" y="89" width="46" height="30"/>
+                                <rect key="frame" x="52" y="141" width="217" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="createButton:" destination="dco-58-xFr" eventType="touchUpInside" id="ofw-DG-nok"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wendler?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fps-Fl-RjB">
+                                <rect key="frame" x="117" y="99" width="86" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Weeks?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8BW-HU-XxT">
+                                <rect key="frame" x="211" y="99" width="93" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="h4K-Ve-GnZ"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Create Template" id="SWx-yd-k4Y">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="gdW-Sj-yIu">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="cancelButton:" destination="dco-58-xFr" id="PRl-6U-3T3"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="ffT-h9-hSA">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="doneButtonAction:" destination="dco-58-xFr" id="ovA-Us-ZVg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="doneButtonOutlet" destination="ffT-h9-hSA" id="rbH-Z8-5Y1"/>
+                        <outlet property="numDaysOfWeekTextField" destination="421-vK-fiU" id="xYg-EB-seJ"/>
+                        <outlet property="numOfWeeksTextField" destination="8BW-HU-XxT" id="pEd-o2-fjY"/>
+                        <outlet property="templateTitleTextField" destination="eAs-QV-HFe" id="HTH-AJ-n5P"/>
+                        <outlet property="wendlerYesNoTextField" destination="Fps-Fl-RjB" id="dTH-ed-cZT"/>
+                        <outlet property="workoutDaysTable" destination="fjh-yg-Saz" id="PtS-69-JZk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MsA-2W-Ink" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2957" y="-665"/>
+            <point key="canvasLocation" x="2063" y="-665"/>
         </scene>
         <!--Settings-->
         <scene sceneID="01V-tP-32F">
@@ -1538,6 +1512,6 @@
         <image name="icons8-settings" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EPD-bE-xLj"/>
+        <segue reference="k20-yL-o1N"/>
     </inferredMetricsTieBreakers>
 </document>
