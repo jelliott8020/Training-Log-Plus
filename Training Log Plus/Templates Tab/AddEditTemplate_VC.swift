@@ -62,6 +62,7 @@ class AddEditTemplate_VC: UIViewController {
             
             doneButtonOutlet.isEnabled = true
         }
+        
         navigationItem.largeTitleDisplayMode = .never
     }
     
@@ -70,9 +71,9 @@ class AddEditTemplate_VC: UIViewController {
      */
     override func viewWillAppear(_ animated: Bool) {
         
-        if itemToEdit != nil {
-            return
-        }
+//        if itemToEdit != nil {
+//            return
+//        }
         templateTitleTextField.becomeFirstResponder()
     }
     
@@ -82,12 +83,20 @@ class AddEditTemplate_VC: UIViewController {
     
     @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
         // Account for editing
+        
+        
         if let item = itemToEdit, let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerYesNoTextField.text, let weeks = numOfWeeksTextField.text  {
+            
+            if (checkForGoodInput(tempTitle, days, weeks, wen)) {
+                return
+            } else {
+                resetTextBoxColor()
+            }
             
             item.templateTitle = tempTitle
             item.numOfWeeks = Int(weeks)!
             item.numDaysOfWeek = Int(days)!
-            
+
             if (wen == "Yes") {
                 item.wendlerYesNo = true
             } else {
@@ -100,6 +109,12 @@ class AddEditTemplate_VC: UIViewController {
             if let item = templateList?.newTemplate() {
                 
                 if let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerYesNoTextField.text, let weeks = numOfWeeksTextField.text {
+                    
+                    if (checkForGoodInput(tempTitle, days, weeks, wen)) {
+                        return
+                    } else {
+                        resetTextBoxColor()
+                    }
                     
                     item.templateTitle = tempTitle
                     item.templateTitle = tempTitle
@@ -123,7 +138,84 @@ class AddEditTemplate_VC: UIViewController {
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         delegate?.itemDetailViewControllerDidCancel(self)
     }
+    
+    func resetTextBoxColor() {
+        
+        
+        
+        
+        
+    }
+    
+    func checkForGoodInput(_ tempTitle: String, _ days: String, _ weeks: String, _ wen: String) -> Bool {
+        if (tempTitle == "" || weeks == "" || days == "" || wen == "") {
+            
+            if (tempTitle == "") {
+                shakeAndRedTextField(templateTitleTextField)
+            } else {
+                returnToDefaultTextField(wendlerYesNoTextField)
+            }
+            
+            if (weeks == "") {
+                shakeAndRedTextField(numOfWeeksTextField)
+            } else {
+                returnToDefaultTextField(wendlerYesNoTextField)
+            }
+            
+            if (days == "") {
+                shakeAndRedTextField(numDaysOfWeekTextField)
+            } else {
+                returnToDefaultTextField(wendlerYesNoTextField)
+            }
+            
+            
+            if (wen == "" /*&& !(wen.lowercased() == "yes" || wen.lowercased() == "no")*/) {
+                shakeAndRedTextField(wendlerYesNoTextField)
+                
+            } else if (wen.lowercased() != "yes") {
+                shakeAndRedTextField(wendlerYesNoTextField)
+                
+            } else if (wen.lowercased() != "no") {
+                shakeAndRedTextField(wendlerYesNoTextField)
+                
+            } else {
+                returnToDefaultTextField(wendlerYesNoTextField)
+                
+            }
+            
+            
+            return true
+            
+        }
+        return false
+    }
+    
+    func shakeAndRedTextField(_ textField: UITextField) {
+        let redColor = UIColor.red
+        textField.shake()
+        textField.layer.borderWidth = 1.0
+        textField.layer.cornerRadius = 5
+        textField.layer.borderColor = redColor.cgColor
+    }
+    
+    func returnToDefaultTextField(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+        textField.layer.borderWidth = 1.0
+        textField.layer.cornerRadius = 5
+    }
+    
+    
 
+}
+
+extension UIView {
+    func shake() {
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.duration = 0.6
+        animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
+        layer.add(animation, forKey: "shake")
+    }
 }
 
 extension AddEditTemplate_VC: UITextFieldDelegate {

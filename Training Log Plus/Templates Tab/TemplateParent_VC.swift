@@ -68,6 +68,27 @@ class TemplateParent_VC: UITableViewController {
      */
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
+//        if editingStyle == .delete {
+//
+//            let alert = UIAlertController(title:  "Are you sure?", message: "", preferredStyle: .alert)
+//
+//            let noButton = UIAlertAction(title: "No", style: UIAlertAction.Style.destructive, handler: nil)
+//            let yesButton = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { (action) -> Void in
+//                self.templateList.templates.remove(at: indexPath.row)
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+//
+//            } )
+//
+//            alert.addAction(yesButton)
+//            alert.addAction(noButton)
+//
+//            present(alert, animated: true, completion: nil)
+//
+//        } else if editingStyle == .insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }
+        
+        
         templateList.templates.remove(at: indexPath.row)
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)

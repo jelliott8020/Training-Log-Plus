@@ -15,7 +15,6 @@ class Progress_VC: UIViewController, PassDataBackProtocol {
     var startDateData: String?
     var endDateData: String?
     
-    @IBOutlet weak var bodyPartLabel: UILabel!
     @IBOutlet weak var exerciseLabel: UILabel!
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
@@ -28,7 +27,6 @@ class Progress_VC: UIViewController, PassDataBackProtocol {
     
     func passDataBack(bodyPart: String, exercise: String, start: String, end: String) {
         
-        bodyPartLabel.text = bodyPart
         exerciseLabel.text = exercise
         startDateLabel.text = start
         endDateLabel.text = end
