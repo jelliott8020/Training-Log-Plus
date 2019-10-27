@@ -76,7 +76,12 @@ class Exercises_TVC: UITableViewController {
     }
     
     @objc func doneButtonAction() {
-        self.view.endEditing(true)
+        if bodyPartTextField.isEditing {
+            bodyPartTextField.resignFirstResponder()
+            exerciseTextField.becomeFirstResponder()
+        } else if exerciseTextField.isEditing {
+            exerciseTextField.resignFirstResponder()
+        }
     }
     
     

@@ -31,15 +31,15 @@ class AddEditTemplate_VC: UIViewController {
     weak var itemToEdit: TemplateItem?
     
     @IBOutlet weak var doneButtonOutlet: UIBarButtonItem!
-    
-    
-
-    
     @IBOutlet weak var templateTitleTextField: UITextField!
     @IBOutlet weak var numDaysOfWeekTextField: UITextField!
-    @IBOutlet weak var wendlerYesNoTextField: UITextField!
+    @IBOutlet weak var wendlerTextField: UITextField!
     @IBOutlet weak var numOfWeeksTextField: UITextField!
     @IBOutlet weak var workoutDaysTable: UITableView!
+    
+    var wendlerPicker = UIPickerView()
+    var wendlerData: [String] = []
+    var selectedWendler: String?
     
     @IBAction func createButton(_ sender: UIButton) {
         // Add stuff to table
@@ -48,6 +48,11 @@ class AddEditTemplate_VC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        wendlerData = getWendlerData()
+        createPickers()
+        createToolBarDoneButton()
+        
         if let item = itemToEdit {
             title = "Edit Template"
             templateTitleTextField.text = item.templateTitle
@@ -55,15 +60,56 @@ class AddEditTemplate_VC: UIViewController {
             numOfWeeksTextField.text = String(item.numOfWeeks)
             
             if item.wendlerYesNo {
-                wendlerYesNoTextField.text = "Yes"
+                wendlerTextField.text = "Yes"
             } else {
-                wendlerYesNoTextField.text = "No"
+                wendlerTextField.text = "No"
             }
             
             doneButtonOutlet.isEnabled = true
         }
         
         navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    func createPickers() {
+        wendlerPicker.delegate = self
+        wendlerTextField.inputView = wendlerPicker
+    }
+    
+    func createToolbarDoneButton() {
+        
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        wendlerTextField.inputAccessoryView = toolBar
+        
+        //exerciseTextField.inputAccessoryView = toolBar
+        //wendlerTextField.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneButtonAction() {
+        /*if bodyPartTextField.isEditing {
+            bodyPartTextField.resignFirstResponder()
+            exerciseTextField.becomeFirstResponder()
+        } else if exerciseTextField.isEditing {
+            exerciseTextField.resignFirstResponder()
+            wendlerTextField.becomeFirstResponder()
+        } else*/
+        
+        if wendlerTextField.isEditing {
+            // Add to DB here
+            self.view.endEditing(true)
+        }
+    }
+    
+    func getWendlerData() -> [String] {
+        return ["Yes", "No"]
     }
     
     /*
@@ -77,20 +123,13 @@ class AddEditTemplate_VC: UIViewController {
         templateTitleTextField.becomeFirstResponder()
     }
     
-//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//        return nil
-//    }
-    
     @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
         // Account for editing
         
-        
-        if let item = itemToEdit, let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerYesNoTextField.text, let weeks = numOfWeeksTextField.text  {
+        if let item = itemToEdit, let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerTextField.text, let weeks = numOfWeeksTextField.text  {
             
             if (checkForGoodInput(tempTitle, days, weeks, wen)) {
                 return
-            } else {
-                resetTextBoxColor()
             }
             
             item.templateTitle = tempTitle
@@ -108,12 +147,10 @@ class AddEditTemplate_VC: UIViewController {
         } else {
             if let item = templateList?.newTemplate() {
                 
-                if let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerYesNoTextField.text, let weeks = numOfWeeksTextField.text {
+                if let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerTextField.text, let weeks = numOfWeeksTextField.text {
                     
                     if (checkForGoodInput(tempTitle, days, weeks, wen)) {
                         return
-                    } else {
-                        resetTextBoxColor()
                     }
                     
                     item.templateTitle = tempTitle
@@ -139,13 +176,6 @@ class AddEditTemplate_VC: UIViewController {
         delegate?.itemDetailViewControllerDidCancel(self)
     }
     
-    func resetTextBoxColor() {
-        
-        
-        
-        
-        
-    }
     
     func checkForGoodInput(_ tempTitle: String, _ days: String, _ weeks: String, _ wen: String) -> Bool {
         if (tempTitle == "" || weeks == "" || days == "" || wen == "") {
@@ -153,39 +183,28 @@ class AddEditTemplate_VC: UIViewController {
             if (tempTitle == "") {
                 shakeAndRedTextField(templateTitleTextField)
             } else {
-                returnToDefaultTextField(wendlerYesNoTextField)
+                returnToDefaultTextField(wendlerTextField)
             }
             
             if (weeks == "") {
                 shakeAndRedTextField(numOfWeeksTextField)
             } else {
-                returnToDefaultTextField(wendlerYesNoTextField)
+                returnToDefaultTextField(wendlerTextField)
             }
             
             if (days == "") {
                 shakeAndRedTextField(numDaysOfWeekTextField)
             } else {
-                returnToDefaultTextField(wendlerYesNoTextField)
+                returnToDefaultTextField(wendlerTextField)
             }
             
-            
-            if (wen == "" /*&& !(wen.lowercased() == "yes" || wen.lowercased() == "no")*/) {
-                shakeAndRedTextField(wendlerYesNoTextField)
-                
-            } else if (wen.lowercased() != "yes") {
-                shakeAndRedTextField(wendlerYesNoTextField)
-                
-            } else if (wen.lowercased() != "no") {
-                shakeAndRedTextField(wendlerYesNoTextField)
-                
+            if (!(wen.lowercased() == "yes" || wen.lowercased() == "no")) {
+                shakeAndRedTextField(wendlerTextField)
             } else {
-                returnToDefaultTextField(wendlerYesNoTextField)
-                
+                returnToDefaultTextField(wendlerTextField)
             }
-            
             
             return true
-            
         }
         return false
     }
@@ -247,3 +266,40 @@ extension AddEditTemplate_VC: UITextFieldDelegate {
     }
     
 }
+
+extension AddEditTemplate_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+        
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        var returnInt = 0
+        
+        if pickerView == wendlerPicker {
+            returnInt = wendlerData.count
+        }
+        
+        return returnInt
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        var returnStr = ""
+        
+        if pickerView == wendlerPicker {
+            returnStr = wendlerData[row]
+        }
+        
+        return returnStr
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == wendlerPicker {
+            selectedWendler = wendlerData[row]
+            wendlerTextField.text = selectedWendler
+        }
+    }
+}
+
+

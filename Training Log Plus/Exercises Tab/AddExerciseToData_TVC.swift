@@ -13,24 +13,27 @@ class AddExerciseToData_TVC: UITableViewController {
     
     @IBOutlet weak var bodyPartTextField: UITextField!
     @IBOutlet weak var exerciseTextField: UITextField!
-    @IBOutlet weak var wendlerSwitchOutlet: UISwitch!
+    @IBOutlet weak var wendlerTextField: UITextField!
     
     var bodyPartData: [String] = []
     var exerciseData: [String] = []
+    var wendlerData: [String] = []
     
     var selectedBodyPart: String?
     var selectedExercise: String?
-    var selectedWender: Bool?
+    var selectedWendler: String?
     
     var bodyPartPicker = UIPickerView()
-    var exercisePicker = UIPickerView()
+    //var exercisePicker = UIPickerView()
+    var wendlerPicker = UIPickerView()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bodyPartData = getBodyPartData()
-        exerciseData = getExerciseData()
+        //exerciseData = getExerciseData()
+        wendlerData = getWendlerData()
         
         createPickers()
         createToolbarDoneButton()
@@ -39,38 +42,41 @@ class AddExerciseToData_TVC: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    
-    @IBAction func wendlerSwitch(_ sender: UISwitch) {
-        if sender.isOn {
-            selectedWender = true
-        } else {
-            selectedWender = false
-        }
-    }
-    
     @IBAction func addToDataButton(_ sender: UIButton) {
         selectedBodyPart = bodyPartTextField.text
         selectedExercise = exerciseTextField.text
         
         print(selectedExercise!)
         print(selectedBodyPart!)
-        print(selectedWender!)
+        print(selectedWendler!)
+        
+        // Add to database here
+        // Also add with toolbar done button below
     }
     
     @IBAction func clearButton(_ sender: UIBarButtonItem) {
         bodyPartTextField.text = ""
         exerciseTextField.text = ""
-        wendlerSwitchOutlet.setOn(false, animated: true)
-        selectedWender = false
+        wendlerTextField.text = ""
+        selectedWendler = "Yes"
     }
+    
+    
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     func createPickers() {
         
         bodyPartPicker.delegate = self
-        exercisePicker.delegate = self
+        //exercisePicker.delegate = self
+        wendlerPicker.delegate = self
         
         bodyPartTextField.inputView = bodyPartPicker
-        exerciseTextField.inputView = exercisePicker
+        //exerciseTextField.inputView = exercisePicker
+        wendlerTextField.inputView = wendlerPicker
     }
     
     func createToolbarDoneButton() {
@@ -86,19 +92,28 @@ class AddExerciseToData_TVC: UITableViewController {
         
         bodyPartTextField.inputAccessoryView = toolBar
         exerciseTextField.inputAccessoryView = toolBar
+        wendlerTextField.inputAccessoryView = toolBar
     }
     
     @objc func doneButtonAction() {
-        self.view.endEditing(true)
+        if bodyPartTextField.isEditing {
+            bodyPartTextField.resignFirstResponder()
+            exerciseTextField.becomeFirstResponder()
+        } else if exerciseTextField.isEditing {
+            exerciseTextField.resignFirstResponder()
+            wendlerTextField.becomeFirstResponder()
+        } else if wendlerTextField.isEditing {
+            // Add to DB here
+            self.view.endEditing(true)
+        }
     }
     
     func getBodyPartData() -> [String] {
         return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
     }
     
-    func getExerciseData() -> [String] {
-        // Fill this from database after bodypart picker is selected
-        return ["Squat", "Deadlift", "Bench"]
+    func getWendlerData() -> [String] {
+        return ["Yes", "No"]
     }
 
 
@@ -115,15 +130,9 @@ extension AddExerciseToData_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         
         if pickerView == bodyPartPicker {
             returnInt = bodyPartData.count
-        } else if pickerView == exercisePicker {
-            returnInt = exerciseData.count
+        } else if pickerView == wendlerPicker {
+            returnInt = wendlerData.count
         }
-        
-//        else if pickerView == maxRepsPicker {
-//            returnInt = maxRepsData.count
-//        } else if pickerView == startingWeightPicker {
-//            returnInt = startingWeightData.count
-//        }
         
         return returnInt
     }
@@ -134,15 +143,9 @@ extension AddExerciseToData_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         
         if pickerView == bodyPartPicker {
             returnStr = bodyPartData[row]
-        } else if pickerView == exercisePicker {
-            returnStr = exerciseData[row]
+        } else if pickerView == wendlerPicker {
+            returnStr = wendlerData[row]
         }
-        
-//        else if pickerView == maxRepsPicker {
-//            returnStr = maxRepsData[row]
-//        } else if pickerView == startingWeightPicker {
-//            returnStr = startingWeightData[row]
-//        }
         
         return returnStr
     }
@@ -151,17 +154,9 @@ extension AddExerciseToData_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
-        } else if pickerView == exercisePicker {
-            selectedExercise = exerciseData[row]
-            exerciseTextField.text = selectedExercise
+        } else if pickerView == wendlerPicker {
+            selectedWendler = wendlerData[row]
+            wendlerTextField.text = selectedWendler
         }
-        
-//        else if pickerView == maxRepsPicker {
-//            selectedMaxReps = maxRepsData[row]
-//            maxRepsTextField.text = selectedMaxReps
-//        } else if pickerView == startingWeightPicker {
-//            selectedStartingWeight = startingWeightData[row]
-//            startingWeightTextField.text = selectedStartingWeight
-//        }
     }
 }

@@ -15,8 +15,9 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var repsTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var exerciseTextField: UITextField!
+    @IBOutlet weak var selectTmToAddTextField: UITextField!
     
-    @IBOutlet weak var highestTMLabel: UILabel!
+    //@IBOutlet weak var highestTMLabel: UILabel!
     
     var exerciseData: [String] = []
     var calcedWeightsArray: [Double] = []
@@ -25,7 +26,8 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     var selectedWeight: Int?
     var selectedReps: Int?
     var selectedExercise: String?
-    var highestTMNum = 0.0
+    var selectedTmToAdd: Int?
+    //var highestTMNum = 0.0
     
     var exercisePicker = UIPickerView()
     
@@ -40,19 +42,26 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     // Add TM to Exercise
     @IBAction func addTmToExerciseButton(_ sender: UIButton) {
         // Add TM and current date to exercise data
+        // Also go done and have done button from exercise call the method
     }
     
     // Clear Data button
     @IBAction func clearData(_ sender: UIBarButtonItem) {
         calcedWeightsArray.removeAll()
         calcedArrayObj.removeAll()
-        highestTMNum = 0
-        highestTMLabel.text = String(format: "%.0f", highestTMNum)
+//        highestTMNum = 0
+//        highestTMLabel.text = String(format: "%.0f", highestTMNum)
         calcedTable.reloadData()
         exerciseTextField.text = ""
         selectedExercise = ""
         
     }
+    
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     // Insert new calced cell to table
     func insertNewCalc() {
@@ -70,10 +79,10 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
             
             calcedWeightsArray.append(tmNum)
             
-            if tmNum >= highestTMNum {
-                highestTMNum = tmNum
-                highestTMLabel.text = String(format: "%.0f", highestTMNum)
-            }
+//            if tmNum >= highestTMNum {
+//                highestTMNum = tmNum
+//                highestTMLabel.text = String(format: "%.0f", highestTMNum)
+//            }
             
             let indexPath = IndexPath(row: calcedArrayObj.count - 1, section: 0)
             
@@ -106,12 +115,15 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         calcedTable.tableFooterView = UIView(frame: CGRect.zero)
         
-        highestTMLabel.text = String(format: "%.0f", highestTMNum)
+//        highestTMLabel.text = String(format: "%.0f", highestTMNum)
         
         exerciseData = getExerciseData()
         
         createPickers()
         createToolbarDoneButton()
+        
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        
     }
     
     
@@ -133,14 +145,20 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
         
         weightTextField.inputAccessoryView = toolBar
         repsTextField.inputAccessoryView = toolBar
+        selectTmToAddTextField.inputAccessoryView = toolBar
+        exerciseTextField.inputAccessoryView = toolBar
     }
     
     @objc func doneButtonAction() {
-        
-        
         if weightTextField.isEditing {
             weightTextField.resignFirstResponder()
             repsTextField.becomeFirstResponder()
+        } else if selectTmToAddTextField.isEditing {
+            selectTmToAddTextField.resignFirstResponder()
+            exerciseTextField.becomeFirstResponder()
+        } else if exerciseTextField.isEditing {
+            // insert to database here
+            self.view.endEditing(true)
         } else if repsTextField.isEditing {
             insertNewCalc()
             self.view.endEditing(true)
