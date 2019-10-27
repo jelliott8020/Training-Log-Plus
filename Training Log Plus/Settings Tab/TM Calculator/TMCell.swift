@@ -9,12 +9,15 @@
 import UIKit
 
 class TMCell {
+    
     let reps: Double!
     let weight: Double!
     var trainingMax: Double = 0
-    var displayString: String = ""
+    var displayString: NSMutableAttributedString?
 
-    
+    /*
+     * Initializer
+     */
     init(reps: Double, weight: Double) {
         self.reps = reps
         self.weight = weight
@@ -22,49 +25,45 @@ class TMCell {
         displayString = getDisplayString()
     }
     
+    
+    /*
+     * Getter for TM
+     *
+     * Calculates the Training Max with the reps and weight
+     */
     func getTM() -> Double {
         return rounder(weight * reps * 0.0333 + weight, toNearest: 5)
     }
     
-    func getDisplayString() -> String {
+    
+    /*
+     * Get Display String
+     *
+     * Gets the formatted display string for the cell
+     */
+    func getDisplayString() -> NSMutableAttributedString {
         
-        // Test
-        
-//        let totalString = "Weight: " + weight! + " Reps: " + reps! + " TM: "
-//        //let roundedFormatted = String(format: "%.0f", roundedWeight)
-//
-//        let firstAttributes: [NSAttributedString.Key: Any] = [.backgroundColor: UIColor.green, NSAttributedString.Key.kern: 10]
-//        let secondAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
-//
-//        let firstString = NSMutableAttributedString(string: totalString, attributes: firstAttributes)
-//        let secondString = NSAttributedString(string: roundedFormatted, attributes: secondAttributes)
-//        //let thirdString = NSAttributedString(string: "hate")
-//
-//        firstString.append(secondString)
-//
-//        // End Test
-        
-        
-        // Test
-        
-        
-        
-        let tmString = String(format: "%.0f", trainingMax)
+        let tmString = " TM: " + String(format: "%.0f", trainingMax)
         let weightStr = "Weight: " + String(format: "%.0f", weight!)
-        let repsStr = " Reps: " + String(format: "%.0f", reps!)
+        let repsStr = "  |  Reps: " + String(format: "%.0f", reps!) + "  | "
         
-        let firstPart = NSMutableString(string: weightStr + repsStr)
+        let totalString = weightStr + repsStr + tmString
         
-        let tmStr = " TM: " + tmString
+        let strNumber: NSString = totalString as NSString
+        let range = (strNumber).range(of: tmString)
+        let attribute = NSMutableAttributedString.init(string: strNumber as String)
+        attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: range)
+        attribute.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 17.0), range: range)
         
-        let myAttribute = [ NSAttributedString.Key.foregroundColor: UIColor.red ]
-        let myAttrString = NSAttributedString(string: tmStr, attributes: myAttribute)
-        
-        //firstPart.append(myAttrString as String)
-        
-        return firstPart as String
+        return attribute
     }
     
+    
+    /*
+     * Rounder Function
+     *
+     * Rounds the given double to the nearest value
+     */
     func rounder(_ value: Double, toNearest: Double) -> Double {
         return round(value / toNearest) * toNearest
     }

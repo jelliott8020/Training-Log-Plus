@@ -42,11 +42,20 @@ class SelectProgressExercises_VC: UITableViewController {
     }
     
     @IBAction func doneButton(_ sender: Any) {
-        
-        delegate?.passDataBack(bodyPart: selectedBodyPart!, exercise: selectedExercise!, start: selectedStartDate!, end: selectedEndDate!)
-        dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
-
+        doneAction()
+    }
+    
+    func doneAction() {
+        if let body = bodyPartTextField.text, let exer = exerciseTextField.text, let start = startDateTextField.text, let end = endDateTextField.text {
+            
+            if (checkForGoodInput(body, exer, start, end)) {
+                return
+            }
+            
+            delegate?.passDataBack(bodyPart: selectedBodyPart!, exercise: selectedExercise!, start: selectedStartDate!, end: selectedEndDate!)
+            dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     
@@ -78,10 +87,10 @@ class SelectProgressExercises_VC: UITableViewController {
         
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        //let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
         
-        startToolBar.setItems([startDoneButton, spaceButton, cancelButton], animated: false)
-        endToolBar.setItems([endDoneButton, spaceButton, cancelButton], animated: false)
+        startToolBar.setItems([spaceButton, startDoneButton], animated: false)
+        endToolBar.setItems([spaceButton, endDoneButton], animated: false)
         
         endDateTextField.inputAccessoryView = endToolBar
         startDateTextField.inputAccessoryView = startToolBar
@@ -102,9 +111,10 @@ class SelectProgressExercises_VC: UITableViewController {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
         
-        toolBar.setItems([doneButton], animated: false)
+        toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
         bodyPartTextField.inputAccessoryView = toolBar
@@ -112,7 +122,14 @@ class SelectProgressExercises_VC: UITableViewController {
     }
     
     @objc func doneButtonAction() {
-        self.view.endEditing(true)
+        
+        if bodyPartTextField.isEditing {
+            bodyPartTextField.resignFirstResponder()
+            exerciseTextField.becomeFirstResponder()
+        } else if exerciseTextField.isEditing {
+            exerciseTextField.resignFirstResponder()
+            startDateTextField.becomeFirstResponder()
+        }
     }
     
     @objc func doneStartDatePicker() {
@@ -122,7 +139,9 @@ class SelectProgressExercises_VC: UITableViewController {
         startDateTextField.text = formatter.string(from: startDatePicker.date)
         selectedStartDate = startDateTextField.text
         //dismiss date picker dialog
-        self.view.endEditing(true)
+        
+        startDateTextField.resignFirstResponder()
+        endDateTextField.becomeFirstResponder()
     }
     
     @objc func doneEndDatePicker() {
@@ -132,13 +151,15 @@ class SelectProgressExercises_VC: UITableViewController {
         endDateTextField.text = formatter.string(from: endDatePicker.date)
         selectedEndDate = endDateTextField.text
         //dismiss date picker dialog
+        
+        doneAction()
         self.view.endEditing(true)
     }
 
-    @objc func cancelDatePicker(){
-        //cancel button dismiss datepicker dialog
-        self.view.endEditing(true)
-    }
+//    @objc func cancelDatePicker(){
+//        //cancel button dismiss datepicker dialog
+//        self.view.endEditing(true)
+//    }
     
     func getBodyPartData() -> [String] {
         return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
@@ -149,6 +170,53 @@ class SelectProgressExercises_VC: UITableViewController {
         // Maybe check for bodypart selection before filling in exercise data
         // Query Core Date for exercises here after getting bodypart
         return ["Bench", "Squat", "Deadlift"]
+    }
+    
+    func checkForGoodInput(_ bodyPart: String, _ exer: String, _ start: String, _ end: String) -> Bool {
+        if (bodyPart == "" || start == "" || exer == "" || end == "") {
+            
+            if (bodyPart == "") {
+                shakeAndRedTextField(bodyPartTextField)
+            } else {
+                returnToDefaultTextField(bodyPartTextField)
+            }
+            
+            if (start == "") {
+                shakeAndRedTextField(startDateTextField)
+            } else {
+                returnToDefaultTextField(startDateTextField)
+            }
+            
+            if (exer == "") {
+                shakeAndRedTextField(exerciseTextField)
+            } else {
+                returnToDefaultTextField(exerciseTextField)
+            }
+            
+            if (end == "") {
+                shakeAndRedTextField(endDateTextField)
+            } else {
+                returnToDefaultTextField(endDateTextField)
+            }
+
+            
+            return true
+        }
+        return false
+    }
+    
+    func shakeAndRedTextField(_ textField: UITextField) {
+        let redColor = UIColor.red
+        textField.shake()
+        textField.layer.borderWidth = 1.0
+        textField.layer.cornerRadius = 5
+        textField.layer.borderColor = redColor.cgColor
+    }
+    
+    func returnToDefaultTextField(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+        textField.layer.borderWidth = 1.0
+        textField.layer.cornerRadius = 5
     }
     
 

@@ -11,7 +11,6 @@ import UIKit
 class Exercises_TVC: UITableViewController {
 
     
-    
     @IBOutlet weak var bodyPartTextField: UITextField!
     @IBOutlet weak var exerciseTextField: UITextField!
     
@@ -25,6 +24,10 @@ class Exercises_TVC: UITableViewController {
     var exercisePicker = UIPickerView()
     
     
+    /*
+     View Did Load
+     
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +40,12 @@ class Exercises_TVC: UITableViewController {
         createToolbarDoneButton()
     }
     
+    
+    /*
+     Create Button
+     
+     Adds data to database
+     */
     @IBAction func createButton(_ sender: UIBarButtonItem) {
         // Add item to data here
         selectedBodyPart = bodyPartTextField.text
@@ -46,11 +55,24 @@ class Exercises_TVC: UITableViewController {
         print(selectedBodyPart!)
     }
     
+    
+    /*
+     Clear Button
+     
+     IBAction clearButton
+     Clears the data from all the textfields
+     */
     @IBAction func clearButton(_ sender: UIBarButtonItem) {
         bodyPartTextField.text = ""
         exerciseTextField.text = ""
     }
     
+    
+    /*
+     Create Pickers
+     
+     Creates the pickers for the text fields
+     */
     func createPickers() {
         
         bodyPartPicker.delegate = self
@@ -60,6 +82,12 @@ class Exercises_TVC: UITableViewController {
         exerciseTextField.inputView = exercisePicker
     }
     
+    
+    /*
+     Create Tool Bar Done Button
+     
+     Creates done buttons for the toolbars
+     */
     func createToolbarDoneButton() {
         
         let toolBar = UIToolbar()
@@ -75,6 +103,12 @@ class Exercises_TVC: UITableViewController {
         exerciseTextField.inputAccessoryView = toolBar
     }
     
+    
+    /*
+     Done Button Action
+     
+     Tells the toolbar what to do when done is tapped
+     */
     @objc func doneButtonAction() {
         if bodyPartTextField.isEditing {
             bodyPartTextField.resignFirstResponder()
@@ -85,16 +119,33 @@ class Exercises_TVC: UITableViewController {
     }
     
     
+    /*
+     Get BodyPart Data
+     
+     Gets the body part data for the picker
+     */
     func getBodyPartData() -> [String] {
         return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
     }
     
+    
+    /*
+     Get Exercise Data
+     
+     Gets the exercise data for the picker
+     */
     func getExerciseData() -> [String] {
         // Fill this from database after bodypart picker is selected
         return ["Squat", "Deadlift", "Bench"]
     }
 }
 
+
+/*
+ Picker
+ 
+ Delegate and Data Source
+ */
 extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -110,12 +161,6 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
             returnInt = exerciseData.count
         }
         
-//        else if pickerView == maxRepsPicker {
-//            returnInt = maxRepsData.count
-//        } else if pickerView == startingWeightPicker {
-//            returnInt = startingWeightData.count
-//        }
-        
         return returnInt
     }
     
@@ -129,12 +174,6 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
             returnStr = exerciseData[row]
         }
         
-//        else if pickerView == maxRepsPicker {
-//            returnStr = maxRepsData[row]
-//        } else if pickerView == startingWeightPicker {
-//            returnStr = startingWeightData[row]
-//        }
-        
         return returnStr
     }
     
@@ -146,14 +185,6 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
             selectedExercise = exerciseData[row]
             exerciseTextField.text = selectedExercise
         }
-        
-//        else if pickerView == maxRepsPicker {
-//            selectedMaxReps = maxRepsData[row]
-//            maxRepsTextField.text = selectedMaxReps
-//        } else if pickerView == startingWeightPicker {
-//            selectedStartingWeight = startingWeightData[row]
-//            startingWeightTextField.text = selectedStartingWeight
-//        }
     }
 }
 

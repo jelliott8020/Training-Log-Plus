@@ -51,7 +51,7 @@ class AddEditTemplate_VC: UIViewController {
         
         wendlerData = getWendlerData()
         createPickers()
-        createToolBarDoneButton()
+        createToolbarDoneButton()
         
         if let item = itemToEdit {
             title = "Edit Template"
@@ -81,7 +81,7 @@ class AddEditTemplate_VC: UIViewController {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AETdoneButtonAction))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         
         toolBar.setItems([spaceButton, doneButton], animated: false)
@@ -93,7 +93,7 @@ class AddEditTemplate_VC: UIViewController {
         //wendlerTextField.inputAccessoryView = toolBar
     }
     
-    @objc func doneButtonAction() {
+    @objc func AETdoneButtonAction() {
         /*if bodyPartTextField.isEditing {
             bodyPartTextField.resignFirstResponder()
             exerciseTextField.becomeFirstResponder()
@@ -183,19 +183,19 @@ class AddEditTemplate_VC: UIViewController {
             if (tempTitle == "") {
                 shakeAndRedTextField(templateTitleTextField)
             } else {
-                returnToDefaultTextField(wendlerTextField)
+                returnToDefaultTextField(templateTitleTextField)
             }
             
             if (weeks == "") {
                 shakeAndRedTextField(numOfWeeksTextField)
             } else {
-                returnToDefaultTextField(wendlerTextField)
+                returnToDefaultTextField(templateTitleTextField)
             }
             
             if (days == "") {
                 shakeAndRedTextField(numDaysOfWeekTextField)
             } else {
-                returnToDefaultTextField(wendlerTextField)
+                returnToDefaultTextField(numDaysOfWeekTextField)
             }
             
             if (!(wen.lowercased() == "yes" || wen.lowercased() == "no")) {
