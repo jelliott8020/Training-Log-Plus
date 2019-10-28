@@ -14,12 +14,18 @@ class TemplateParent_VC: UITableViewController {
     var templateList: TemplateList // Items for the table
     
     
+    /*
+     * Initializer
+     */
     required init?(coder aDecoder: NSCoder) {
         templateList = TemplateList()
         super.init(coder: aDecoder)
     }
     
     
+    /*
+     * View Did Load
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,30 +74,29 @@ class TemplateParent_VC: UITableViewController {
      */
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-//        if editingStyle == .delete {
-//
-//            let alert = UIAlertController(title:  "Are you sure?", message: "", preferredStyle: .alert)
-//
-//            let noButton = UIAlertAction(title: "No", style: UIAlertAction.Style.destructive, handler: nil)
-//            let yesButton = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { (action) -> Void in
-//                self.templateList.templates.remove(at: indexPath.row)
-//                tableView.deleteRows(at: [indexPath], with: .fade)
-//
-//            } )
-//
-//            alert.addAction(yesButton)
-//            alert.addAction(noButton)
-//
-//            present(alert, animated: true, completion: nil)
-//
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
+        if editingStyle == .delete {
+
+            let alert = UIAlertController(title:  "Are you sure?", message: "", preferredStyle: .alert)
+
+            let noButton = UIAlertAction(title: "No", style: UIAlertAction.Style.destructive, handler: nil)
+            let yesButton = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { (action) -> Void in
+                self.templateList.templates.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+
+            } )
+
+            alert.addAction(yesButton)
+            alert.addAction(noButton)
+
+            present(alert, animated: true, completion: nil)
+
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
         
-        
-        templateList.templates.remove(at: indexPath.row)
-        let indexPaths = [indexPath]
-        tableView.deleteRows(at: indexPaths, with: .automatic)
+//        templateList.templates.remove(at: indexPath.row)
+//        let indexPaths = [indexPath]
+//        tableView.deleteRows(at: indexPaths, with: .automatic)
     }
     
     
@@ -130,6 +135,7 @@ class TemplateParent_VC: UITableViewController {
                 itemDetailViewController.delegate = self
                 itemDetailViewController.templateList = templateList
             }
+            print("add")
         } else if segue.identifier == "EditItemSegue" {
             if let itemDetailViewController = segue.destination as? AddEditTemplate_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
@@ -138,6 +144,7 @@ class TemplateParent_VC: UITableViewController {
                     itemDetailViewController.delegate = self
                 }
             }
+            print("edit")
         }
     }
     
@@ -255,40 +262,27 @@ extension TemplateParent_VC: ItemDetail_VCDelegate {
     
     
     /*
-     *
+     * After adding, data is passed back
      */
     func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishAdding item: TemplateItem) {
-        print("add 1")
-        navigationController?.popViewController(animated: true)
-        print("add 2")
+ navigationController?.popViewController(animated: true)
         let rowIndex = templateList.templates.count - 1
-        print("add 3")
         let indexPath = IndexPath(row: rowIndex, section: 0)
-        print("add 4")
         let indexPaths = [indexPath]
-        print("add 5")
         tableView.insertRows(at: indexPaths, with: .automatic)
-        print("add 6")
     }
     
     
     /*
-     *
+     * After editing, data is passed back
      */
     func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishEditing item: TemplateItem) {
-        print("edit 1")
         if let index = templateList.templates.firstIndex(of: item) {
-            print("edit 2")
             let indexPath = IndexPath(row: index, section: 0)
-            print("edit 3")
             if let cell = tableView.cellForRow(at: indexPath) {
-                print("edit 4")
                 configureText(for: cell, with: item)
             }
-            print("edit 5")
         }
-        print("edit 6")
         navigationController?.popViewController(animated: true)
-        print("edit 7")
     }
 }

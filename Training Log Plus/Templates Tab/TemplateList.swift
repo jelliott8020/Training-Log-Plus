@@ -16,7 +16,8 @@ class TemplateList {
     var templates: [TemplateItem] = []
     
     init() {
-        addTemplate("placeholder")
+        addTemplate("placeholder1")
+        addTemplate("placeholder2")
     }
     
     func addTemplate(_ temp: String) {
