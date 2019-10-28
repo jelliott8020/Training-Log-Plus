@@ -16,12 +16,10 @@ class TemplateList {
     var templates: [TemplateItem] = []
     
     init() {
-        for _ in 0...5 {
-            _ = newTemplate()
-        }
+        addTemplate("placeholder")
     }
     
-    func addTemplate(temp: String) {
+    func addTemplate(_ temp: String) {
         let item = TemplateItem()
         item.templateTitle = temp
         //item.checked = true
@@ -31,7 +29,7 @@ class TemplateList {
     // Creates a new template item
     func newTemplate() -> TemplateItem {
         let item = TemplateItem()
-        item.templateTitle = randTitle()
+        //item.templateTitle = randTitle()
         //item.checked = true
         templates.append(item)
         return item
@@ -52,6 +50,7 @@ class TemplateList {
             }
         }
     }
+    
     
     // Creates a random title for a template item
     private func randTitle() -> String {

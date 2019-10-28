@@ -13,6 +13,6 @@ class WorkoutDay {
     
     var exercises: [Exercise] = []
     
-    
+    var title: String?
     
 }

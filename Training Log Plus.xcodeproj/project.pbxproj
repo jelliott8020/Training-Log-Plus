@@ -180,6 +180,7 @@
 		03B984DE233BE02300656CFA /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */,
 				03B984DF233BE03F00656CFA /* Attempt.swift */,
 				03B984E1233BE16C00656CFA /* Exercise.swift */,
 				033C28252346872800A73B69 /* WorkoutDay.swift */,
@@ -193,7 +194,6 @@
 				05C3B40323623CB00087BAC4 /* DayCreation */,
 				030DABD32322CA0000FDC505 /* TemplateParent_VC.swift */,
 				05B3505A233D64490029234D /* TemplateList_TVCell.swift */,
-				03FB9EAA2322FA4E00F9D410 /* TemplateItem.swift */,
 				03BB32C92325903300C712D1 /* TemplateList.swift */,
 				03BB32CB2325A52F00C712D1 /* AddEditTemplate_VC.swift */,
 				05C3B3FF236236C10087BAC4 /* workoutDaysInTemplate_TVCell.swift */,

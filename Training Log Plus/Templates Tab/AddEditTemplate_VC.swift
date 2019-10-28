@@ -41,13 +41,39 @@ class AddEditTemplate_VC: UIViewController {
     var wendlerData: [String] = []
     var selectedWendler: String?
     
+    var workoutDaysArray: [WorkoutDay] = []
+    
     @IBAction func createButton(_ sender: UIButton) {
+        
+        let numOfDays = Int(numDaysOfWeekTextField.text!)!
+        
+        
+        for n in 0...numOfDays-1 {
+            let dayObj = WorkoutDay()
+            dayObj.title = "fart\(n)"
+            workoutDaysArray.append(dayObj)
+            
+            
+            let indexPath = IndexPath(row: workoutDaysArray.count - 1, section: 0)
+            
+            workoutDaysTable.beginUpdates()
+            workoutDaysTable.insertRows(at: [indexPath], with: .automatic)
+            workoutDaysTable.endUpdates()
+            
+            //view.endEditing(true)
+        }
+        
         // Add stuff to table
+    }
+    
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        delegate?.itemDetailViewControllerDidCancel(self)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        workoutDaysTable.tableFooterView = UIView(frame: CGRect.zero)
         
         wendlerData = getWendlerData()
         createPickers()
@@ -90,7 +116,6 @@ class AddEditTemplate_VC: UIViewController {
         wendlerTextField.inputAccessoryView = toolBar
         
         //exerciseTextField.inputAccessoryView = toolBar
-        //wendlerTextField.inputAccessoryView = toolBar
     }
     
     @objc func AETdoneButtonAction() {
@@ -125,22 +150,40 @@ class AddEditTemplate_VC: UIViewController {
     
     @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
         // Account for editing
+        if let tempTitleChk = templateTitleTextField.text, let daysChk = numDaysOfWeekTextField.text, let wenChk = wendlerTextField.text, let weeksChk = numOfWeeksTextField.text {
+            if (checkForGoodInput(tempTitleChk, daysChk, weeksChk, wenChk)) {
+                return
+            }
+        }
+        
+        returnToDefaultTextField(numDaysOfWeekTextField)
+        returnToDefaultTextField(numOfWeeksTextField)
+        returnToDefaultTextField(wendlerTextField)
+        
         
         if let item = itemToEdit, let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerTextField.text, let weeks = numOfWeeksTextField.text  {
             
-            if (checkForGoodInput(tempTitle, days, weeks, wen)) {
-                return
-            }
             
+            
+            print("past check edit")
+            
+//
+            
+            print("1 edit")
             item.templateTitle = tempTitle
-            item.numOfWeeks = Int(weeks)!
-            item.numDaysOfWeek = Int(days)!
+            print("2 edit")
+            item.numOfWeeks = Int(weeks) ?? 0
+            print("3 edit")
+            item.numDaysOfWeek = Int(days) ?? 0
+            print("4 edit")
 
             if (wen == "Yes") {
                 item.wendlerYesNo = true
             } else {
                 item.wendlerYesNo = false
             }
+            
+            print("before delegate edit")
             
             delegate?.itemDetailViewController(self, didFinishEditing: item)
             
@@ -149,14 +192,16 @@ class AddEditTemplate_VC: UIViewController {
                 
                 if let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerTextField.text, let weeks = numOfWeeksTextField.text {
                     
-                    if (checkForGoodInput(tempTitle, days, weeks, wen)) {
-                        return
-                    }
+                    print("past check new")
                     
+                    
+                    print("1 new")
                     item.templateTitle = tempTitle
-                    item.templateTitle = tempTitle
-                    item.numOfWeeks = Int(weeks)!
-                    item.numDaysOfWeek = Int(days)!
+                    print("2 new \(item.templateTitle)")
+                    item.numOfWeeks = Int(weeks) ?? 0
+                    print("3 new \(item.numOfWeeks)")
+                    item.numDaysOfWeek = Int(days) ?? 0
+                    print("4 new \(item.numDaysOfWeek)")
                     
                     if (wen == "Yes") {
                         item.wendlerYesNo = true
@@ -165,6 +210,8 @@ class AddEditTemplate_VC: UIViewController {
                     }
                     
                 }
+                
+                print("before delegate new")
                 //item.checked = false
                 delegate?.itemDetailViewController(self, didFinishAdding: item)
             }
@@ -172,13 +219,8 @@ class AddEditTemplate_VC: UIViewController {
     }
     
     
-    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
-        delegate?.itemDetailViewControllerDidCancel(self)
-    }
-    
-    
     func checkForGoodInput(_ tempTitle: String, _ days: String, _ weeks: String, _ wen: String) -> Bool {
-        if (tempTitle == "" || weeks == "" || days == "" || wen == "") {
+        if (tempTitle == "" || weeks == "" || !weeks.isInt || days == "" || !days.isInt || wen == "") {
             
             if (tempTitle == "") {
                 shakeAndRedTextField(templateTitleTextField)
@@ -186,13 +228,13 @@ class AddEditTemplate_VC: UIViewController {
                 returnToDefaultTextField(templateTitleTextField)
             }
             
-            if (weeks == "") {
+            if (weeks == "" || !weeks.isInt) {
                 shakeAndRedTextField(numOfWeeksTextField)
             } else {
-                returnToDefaultTextField(templateTitleTextField)
+                returnToDefaultTextField(numOfWeeksTextField)
             }
             
-            if (days == "") {
+            if (days == "" || !days.isInt) {
                 shakeAndRedTextField(numDaysOfWeekTextField)
             } else {
                 returnToDefaultTextField(numDaysOfWeekTextField)
@@ -237,6 +279,12 @@ extension UIView {
     }
 }
 
+extension String {
+    var isInt: Bool {
+        return Int(self) != nil
+    }
+}
+
 extension AddEditTemplate_VC: UITextFieldDelegate {
     
     // Tapping done button makes keyboard go away
@@ -264,8 +312,9 @@ extension AddEditTemplate_VC: UITextFieldDelegate {
         }
         return true
     }
-    
 }
+
+
 
 extension AddEditTemplate_VC: UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -298,6 +347,40 @@ extension AddEditTemplate_VC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == wendlerPicker {
             selectedWendler = wendlerData[row]
             wendlerTextField.text = selectedWendler
+        }
+    }
+}
+
+/*
+ * TableView Delegate and Data Source
+ */
+extension AddEditTemplate_VC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return workoutDaysArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let weightForCell = workoutDaysArray[indexPath.row].title
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutDay") as! workoutDaysInTemplate_TVCell
+        cell.cellLabel.text = weightForCell
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            workoutDaysArray.remove(at: indexPath.row)
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
         }
     }
 }

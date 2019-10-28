@@ -156,7 +156,7 @@ class TemplateParent_VC: UITableViewController {
      * Add a new template to the list
      */
     func addNewTemplate(temp: String) {
-        templateList.addTemplate(temp: temp)
+        templateList.addTemplate(temp)
     }
     
     
@@ -258,11 +258,17 @@ extension TemplateParent_VC: ItemDetail_VCDelegate {
      *
      */
     func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishAdding item: TemplateItem) {
+        print("add 1")
         navigationController?.popViewController(animated: true)
+        print("add 2")
         let rowIndex = templateList.templates.count - 1
+        print("add 3")
         let indexPath = IndexPath(row: rowIndex, section: 0)
+        print("add 4")
         let indexPaths = [indexPath]
+        print("add 5")
         tableView.insertRows(at: indexPaths, with: .automatic)
+        print("add 6")
     }
     
     
@@ -270,12 +276,19 @@ extension TemplateParent_VC: ItemDetail_VCDelegate {
      *
      */
     func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishEditing item: TemplateItem) {
+        print("edit 1")
         if let index = templateList.templates.firstIndex(of: item) {
+            print("edit 2")
             let indexPath = IndexPath(row: index, section: 0)
+            print("edit 3")
             if let cell = tableView.cellForRow(at: indexPath) {
+                print("edit 4")
                 configureText(for: cell, with: item)
             }
+            print("edit 5")
         }
+        print("edit 6")
         navigationController?.popViewController(animated: true)
+        print("edit 7")
     }
 }
