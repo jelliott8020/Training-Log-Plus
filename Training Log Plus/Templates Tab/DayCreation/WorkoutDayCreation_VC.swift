@@ -31,6 +31,7 @@ class WorkoutDayCreation_VC: UIViewController {
     @IBOutlet weak var exerciseTable: UITableView!
     
     var workoutObj: WorkoutDay?
+    var exerciseArg: [Exercise] = []
     
     
     @IBAction func updateNameButton(_ sender: UIButton) {
@@ -59,7 +60,49 @@ class WorkoutDayCreation_VC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        exerciseTable.tableFooterView = UIView(frame: CGRect.zero)
+        
+        exerciseArg = workoutObj!.getExercises()
 
 
+    }
+}
+
+/*
+ * TableView Delegate and Data Source
+ */
+extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return exerciseArg.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let weightForCell = exerciseArg[indexPath.row].name
+        
+        
+        /*
+         * ERROR HERE
+         */
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! MainExercise_TVCell
+        cell.trainingMaxLabel.text = weightForCell
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            exerciseArg.remove(at: indexPath.row)
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
     }
 }

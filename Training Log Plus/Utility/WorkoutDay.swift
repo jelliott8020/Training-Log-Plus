@@ -15,4 +15,12 @@ class WorkoutDay {
     
     var title: String?
     
+    func getExercises() -> [Exercise] {
+        return exercises
+    }
+    
+    func addExercise(ex: Exercise) {
+        exercises.append(ex)
+    }
+    
 }

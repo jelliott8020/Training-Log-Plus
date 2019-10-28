@@ -227,6 +227,14 @@ class AddEditTemplate_VC: UIViewController, WorkoutCreationPassDataBackProtocol 
             if let workoutDayCreation_VC = segue.destination as? WorkoutDayCreation_VC {
                 
                 // Just passing the first one for now
+                let ex1 = Exercise(name: "Bench", isWendler: true)
+                let ex2 = Exercise(name: "Bench", isWendler: true)
+                let ex3 = Exercise(name: "Bench", isWendler: true)
+                
+                workoutDaysArray[0].addExercise(ex: ex1)
+                workoutDaysArray[0].addExercise(ex: ex2)
+                workoutDaysArray[0].addExercise(ex: ex3)
+                
                 workoutDayCreation_VC.workoutObj = workoutDaysArray[0]
             
                 workoutDayCreation_VC.delegate = self
