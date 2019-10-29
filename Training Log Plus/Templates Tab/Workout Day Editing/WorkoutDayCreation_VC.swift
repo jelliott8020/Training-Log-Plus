@@ -17,13 +17,13 @@ import UIKit
 //    func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishEditing item: TemplateItem)
 //}
 
-protocol WorkoutCreationPassDataBackProtocol {
+protocol WorkoutDayCreation_VC_Delegate {
     func passWorkoutObjBack(workoutObj: WorkoutDay)
 }
 
 class WorkoutDayCreation_VC: UIViewController {
     
-    var delegate: WorkoutCreationPassDataBackProtocol?
+    var delegate: WorkoutDayCreation_VC_Delegate?
 
     @IBOutlet weak var workoutNameTextField: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -84,8 +84,8 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
         /*
          * ERROR HERE
          */
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! MainExercise_TVCell
-        cell.trainingMaxLabel.text = weightForCell // error, trainingMaxLabel is nil
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! DayMainExercise_TVCell
+        cell.mainExerLabel.text = weightForCell // error, trainingMaxLabel is nil
         
         return cell
     }

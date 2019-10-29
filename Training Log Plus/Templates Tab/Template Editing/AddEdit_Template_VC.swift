@@ -9,25 +9,25 @@
 import UIKit
 
 
-protocol ItemDetail_VCDelegate: class {
+protocol AddEdit_Template_VC_Delegate: class {
     // User hit cancel
-    func itemDetailViewControllerDidCancel(_ controller: AddEditTemplate_VC)
+    func itemDetailViewControllerDidCancel(_ controller: AddEdit_Template_VC)
     // User added item
-    func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishAdding item: TemplateItem)
+    func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishAdding item: TemplateItem)
     // User finishes editing
-    func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishEditing item: TemplateItem)
+    func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishEditing item: TemplateItem)
 }
 
 
 /*
  * This class allows 2 views, an Add and Edit
  */
-class AddEditTemplate_VC: UIViewController, WorkoutCreationPassDataBackProtocol {
+class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
     
 
     // In order to use the protocol above, need a delegate
     // Any viewController that implements this protocol can be a delegate of the AddItemTableViewController
-    weak var delegate: ItemDetail_VCDelegate?
+    weak var delegate: AddEdit_Template_VC_Delegate?
     weak var templateList: TemplateList?
     weak var itemToEdit: TemplateItem?
     weak var globalTemplateItem: TemplateItem?
@@ -87,8 +87,7 @@ class AddEditTemplate_VC: UIViewController, WorkoutCreationPassDataBackProtocol 
         let numOfDays = Int(numDaysOfWeekTextField.text!)!
         
         for n in 0...numOfDays-1 {
-            let dayObj = WorkoutDay()
-            dayObj.title = "fart\(n)"
+            let dayObj = WorkoutDay(title: "fart\(n)")
             workoutDaysArray.append(dayObj)
         
             let indexPath = IndexPath(row: workoutDaysArray.count - 1, section: 0)
@@ -104,6 +103,7 @@ class AddEditTemplate_VC: UIViewController, WorkoutCreationPassDataBackProtocol 
             item.listOfWorkouts = workoutDaysArray
         } else {
             globalTemplateItem?.listOfWorkouts = workoutDaysArray
+            print("Added the array")
         }
     }
     
@@ -133,6 +133,8 @@ class AddEditTemplate_VC: UIViewController, WorkoutCreationPassDataBackProtocol 
             } else {
                 wendlerTextField.text = "No"
             }
+            
+            workoutDaysArray = item.listOfWorkouts
             
             doneButtonOutlet.isEnabled = true
         } else {
@@ -193,6 +195,7 @@ class AddEditTemplate_VC: UIViewController, WorkoutCreationPassDataBackProtocol 
 
                         //item.checked = false
                     delegate?.itemDetailViewController(self, didFinishAdding: globalTemplateItem!)
+                    print("passed back the template object")
         //            if let item = templateList?.newTemplate() {
         //
         //                if let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerTextField.text, let weeks = numOfWeeksTextField.text {
@@ -265,7 +268,7 @@ class AddEditTemplate_VC: UIViewController, WorkoutCreationPassDataBackProtocol 
     }
 }
 
-extension AddEditTemplate_VC {
+extension AddEdit_Template_VC {
     
     /*
      * Return to Default Text Field
@@ -417,7 +420,7 @@ extension String {
     }
 }
 
-extension AddEditTemplate_VC: UITextFieldDelegate {
+extension AddEdit_Template_VC: UITextFieldDelegate {
     
     // Tapping done button makes keyboard go away
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -450,7 +453,7 @@ extension AddEditTemplate_VC: UITextFieldDelegate {
 /*
  * Picker Delegate and Datasource
  */
-extension AddEditTemplate_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+extension AddEdit_Template_VC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -489,7 +492,7 @@ extension AddEditTemplate_VC: UIPickerViewDataSource, UIPickerViewDelegate {
 /*
  * TableView Delegate and Data Source
  */
-extension AddEditTemplate_VC: UITableViewDelegate, UITableViewDataSource {
+extension AddEdit_Template_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return workoutDaysArray.count
     }

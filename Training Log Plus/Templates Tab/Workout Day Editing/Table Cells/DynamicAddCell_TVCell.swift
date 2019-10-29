@@ -11,6 +11,7 @@ import UIKit
 class DynamicAddCell_TVCell: UITableViewCell {
 
     
+    @IBOutlet weak var dynAddAccButton: UIButton!
     
     
     override func awakeFromNib() {

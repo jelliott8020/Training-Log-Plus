@@ -23,8 +23,13 @@ class TemplateList {
     func addTemplate(_ temp: String) {
         let item = TemplateItem()
         item.templateTitle = temp
+        item.listOfWorkouts = addExercises()
         //item.checked = true
         templates.append(item)
+    }
+    
+    func addTemplateObj(_ temp: TemplateItem) {
+        templates.append(temp);
     }
     
     // Creates a new template item
@@ -50,6 +55,20 @@ class TemplateList {
                 templates.remove(at: index)
             }
         }
+    }
+    
+    private func addExercises() -> [WorkoutDay] {
+        var exArg: [WorkoutDay] = []
+        let ex1 = WorkoutDay(title: "Upper")
+        let ex2 = WorkoutDay(title: "Lower")
+        let ex3 = WorkoutDay(title: "Chest")
+        let ex4 = WorkoutDay(title: "Back")
+        exArg.append(ex1)
+        exArg.append(ex2)
+        exArg.append(ex3)
+        exArg.append(ex4)
+        
+        return exArg
     }
     
     

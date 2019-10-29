@@ -334,7 +334,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TemplateCell" id="Mjj-Qs-JHa" customClass="TemplateList_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TemplateCell" id="Mjj-Qs-JHa" customClass="Template_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mjj-Qs-JHa" id="g7l-AY-MHk">
@@ -1144,7 +1144,7 @@
         <!--Create Template-->
         <scene sceneID="WaS-KW-cjg">
             <objects>
-                <viewController id="dco-58-xFr" customClass="AddEditTemplate_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dco-58-xFr" customClass="AddEdit_Template_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ds2-f7-kky">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1154,14 +1154,14 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutDay" id="mE4-Gd-Y5L" customClass="workoutDaysInTemplate_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="288" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="288" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mE4-Gd-Y5L" id="vx6-65-KVu">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yig-e9-dYi">
-                                                    <rect key="frame" x="15" y="11" width="258" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="258" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="258" id="xQz-k7-IER"/>
                                                     </constraints>
@@ -1293,7 +1293,7 @@
                                 <rect key="frame" x="16" y="153" width="288" height="366"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainExercise" id="6o4-68-mxc" customClass="MainExercise_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainExercise" id="6o4-68-mxc" customClass="DayMainExercise_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="288" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6o4-68-mxc" id="ZHW-xd-H3h">
@@ -1314,10 +1314,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="mainExerLabel" destination="JfV-qo-jqE" id="675-em-lr9"/>
                                             <segue destination="fQ3-IN-ysP" kind="show" id="7No-Uh-dCy"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccessoryExercise" id="hpi-6P-Dns" customClass="AccessoryExercise_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccessoryExercise" id="hpi-6P-Dns" customClass="DayAccExercise_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="71" width="288" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hpi-6P-Dns" id="qCQ-xd-Bly">
@@ -1338,6 +1339,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="accExerLabel" destination="T5h-Pr-06o" id="7uY-Gt-mvl"/>
                                             <segue destination="ivg-fp-8Sl" kind="show" id="ZfS-j0-KR6"/>
                                         </connections>
                                     </tableViewCell>
@@ -1363,6 +1365,9 @@
                                                 <constraint firstItem="H9N-qn-ihL" firstAttribute="bottom" secondItem="sSc-27-Bnd" secondAttribute="bottomMargin" id="x8o-j4-WYR"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dynAddAccButton" destination="H9N-qn-ihL" id="Qte-bW-AoR"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1423,7 +1428,7 @@
         <!--Accessory Exercise-->
         <scene sceneID="4or-sv-RrP">
             <objects>
-                <viewController id="ivg-fp-8Sl" customClass="AddAccessoryExercise_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ivg-fp-8Sl" customClass="AddEdit_AccessoryExercise_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4IV-d8-MEK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1451,14 +1456,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="pastAccessoryData" id="ViA-OW-UbS" customClass="AccessoryExercise_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="288" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="288" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ViA-OW-UbS" id="nBD-x9-Ui9">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12/12/99       245       12, 12, 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEt-dk-SsN">
-                                                    <rect key="frame" x="15" y="11" width="265" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="265" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="265" id="IKa-mT-1MN"/>
                                                     </constraints>
@@ -1539,7 +1544,7 @@
         <!--Main Exercise-->
         <scene sceneID="KIH-qd-K9q">
             <objects>
-                <viewController id="fQ3-IN-ysP" customClass="AddMainExercise_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fQ3-IN-ysP" customClass="AddEdit_MainExercise_VC" customModule="Training_Log_Plus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="te0-s1-J2n">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1572,14 +1577,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="calcedTrainingMaxes" id="e8O-pt-YzJ" customClass="MainExercise_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="288" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="288" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e8O-pt-YzJ" id="qWJ-WF-6GU">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12/12/99        245" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OU0-Ta-Dq0">
-                                                    <rect key="frame" x="15" y="11" width="265" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="265" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="265" id="aXw-kx-ltj"/>
                                                     </constraints>

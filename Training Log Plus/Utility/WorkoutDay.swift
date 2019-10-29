@@ -13,7 +13,11 @@ class WorkoutDay {
     
     var exercises: [Exercise] = []
     
-    var title: String?
+    var title: String
+    
+    init(title: String) {
+        self.title = title
+    }
     
     func getExercises() -> [Exercise] {
         return exercises

@@ -131,13 +131,13 @@ class TemplateParent_VC: UITableViewController {
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddItemSegue" {
-            if let itemDetailViewController = segue.destination as? AddEditTemplate_VC {
+            if let itemDetailViewController = segue.destination as? AddEdit_Template_VC {
                 itemDetailViewController.delegate = self
                 itemDetailViewController.templateList = templateList
             }
             print("add")
         } else if segue.identifier == "EditItemSegue" {
-            if let itemDetailViewController = segue.destination as? AddEditTemplate_VC {
+            if let itemDetailViewController = segue.destination as? AddEdit_Template_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                     let item = templateList.templates[indexPath.row]
                     itemDetailViewController.itemToEdit = item
@@ -153,7 +153,7 @@ class TemplateParent_VC: UITableViewController {
      * Configure the text for each row item
      */
     func configureText(for cell: UITableViewCell, with item: TemplateItem) {
-        if let templateCell = cell as? TemplateList_TVCell {
+        if let templateCell = cell as? Template_TVCell {
             templateCell.templateTextLabel.text = item.templateTitle
         }
     }
@@ -250,13 +250,13 @@ class TemplateParent_VC: UITableViewController {
 
 
 // Delegate from the item detail VC
-extension TemplateParent_VC: ItemDetail_VCDelegate {
+extension TemplateParent_VC: AddEdit_Template_VC_Delegate {
     
     
     /*
      * Cancel button will pop the view controller
      */
-    func itemDetailViewControllerDidCancel(_ controller: AddEditTemplate_VC) {
+    func itemDetailViewControllerDidCancel(_ controller: AddEdit_Template_VC) {
         navigationController?.popViewController(animated: true)
     }
     
@@ -264,8 +264,9 @@ extension TemplateParent_VC: ItemDetail_VCDelegate {
     /*
      * After adding, data is passed back
      */
-    func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishAdding item: TemplateItem) {
+    func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishAdding item: TemplateItem) {
  navigationController?.popViewController(animated: true)
+        //templateList.addTemplateObj(item)
         let rowIndex = templateList.templates.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)
         let indexPaths = [indexPath]
@@ -276,7 +277,7 @@ extension TemplateParent_VC: ItemDetail_VCDelegate {
     /*
      * After editing, data is passed back
      */
-    func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishEditing item: TemplateItem) {
+    func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishEditing item: TemplateItem) {
         if let index = templateList.templates.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             if let cell = tableView.cellForRow(at: indexPath) {

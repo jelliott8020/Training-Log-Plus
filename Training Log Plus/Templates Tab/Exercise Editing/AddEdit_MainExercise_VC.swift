@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddMainExercise_VC: UIViewController {
+class AddEdit_MainExercise_VC: UIViewController {
 
     
     @IBOutlet weak var addButton: UIBarButtonItem!

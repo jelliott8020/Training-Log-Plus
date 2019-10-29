@@ -11,7 +11,7 @@ import UIKit
 /*
  * Table view cell for the template view
  */
-class TemplateList_TVCell: UITableViewCell {
+class Template_TVCell: UITableViewCell {
 
     
     @IBOutlet weak var templateTextLabel: UILabel!
