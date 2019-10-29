@@ -10,10 +10,6 @@ import UIKit
 
 class Exercises_TVC: UITableViewController {
 
-    
-    @IBOutlet weak var bodyPartTextField: UITextField!
-    @IBOutlet weak var exerciseTextField: UITextField!
-    
     var bodyPartData: [String] = []
     var exerciseData: [String] = []
     
@@ -24,53 +20,60 @@ class Exercises_TVC: UITableViewController {
     var exercisePicker = UIPickerView()
     
     
+    @IBOutlet weak var bodyPartTextField: UITextField!
+    @IBOutlet weak var exerciseTextField: UITextField!
+    
+    @IBAction func createButton(_ sender: UIBarButtonItem) {
+        createButtonFunc()
+    }
+    @IBAction func clearButton(_ sender: UIBarButtonItem) {
+        clearButtonFunction()
+    }
+    
+    
     /*
-     View Did Load
+     * View Did Load
      */
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bodyPartData = getBodyPartData()
+        bodyPartData = Util.getGenericBodyPartData()
         
         // Will have to figure how to fill this AFTER bodypart picker is selected
-        exerciseData = getExerciseData()
+        exerciseData = Util.getGenericExerciseData()
         
         createPickers()
         createToolbarDoneButton()
     }
     
-    
+
     /*
-     Create Button
-     
-     Adds data to database
+     * Create Button Function
+     *
+     * Adds data to database
      */
-    @IBAction func createButton(_ sender: UIBarButtonItem) {
+    func createButtonFunc() {
         // Add item to data here
         selectedBodyPart = bodyPartTextField.text
         selectedExercise = exerciseTextField.text
-        
-        print(selectedExercise!)
-        print(selectedBodyPart!)
     }
     
     
     /*
-     Clear Button
-     
-     IBAction clearButton
-     Clears the data from all the textfields
+     * Clear Button Function
+     *
+     * Clears the data from all the textfields
      */
-    @IBAction func clearButton(_ sender: UIBarButtonItem) {
-        bodyPartTextField.text = ""
-        exerciseTextField.text = ""
+    func clearButtonFunction() {
+        Util.clearTextField(bodyPartTextField)
+        Util.clearTextField(exerciseTextField)
     }
     
     
     /*
-     Create Pickers
-     
-     Creates the pickers for the text fields
+     * Create Pickers
+     *
+     * Creates the pickers for the text fields
      */
     func createPickers() {
         
@@ -83,9 +86,9 @@ class Exercises_TVC: UITableViewController {
     
     
     /*
-     Create Tool Bar Done Button
-     
-     Creates done buttons for the toolbars
+     * Create Tool Bar Done Button
+     *
+     * Creates done buttons for the toolbars
      */
     func createToolbarDoneButton() {
         
@@ -104,9 +107,9 @@ class Exercises_TVC: UITableViewController {
     
     
     /*
-     Done Button Action
-     
-     Tells the toolbar what to do when done is tapped
+     * Done Button Action
+     *
+     * Tells the toolbar what to do when done is tapped
      */
     @objc func doneButtonAction() {
         if bodyPartTextField.isEditing {
@@ -116,34 +119,11 @@ class Exercises_TVC: UITableViewController {
             exerciseTextField.resignFirstResponder()
         }
     }
-    
-    
-    /*
-     Get BodyPart Data
-     
-     Gets the body part data for the picker
-     */
-    func getBodyPartData() -> [String] {
-        return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
-    }
-    
-    
-    /*
-     Get Exercise Data
-     
-     Gets the exercise data for the picker
-     */
-    func getExerciseData() -> [String] {
-        // Fill this from database after bodypart picker is selected
-        return ["Squat", "Deadlift", "Bench"]
-    }
 }
 
 
 /*
- Picker
- 
- Delegate and Data Source
+ * Picker
  */
 extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
     

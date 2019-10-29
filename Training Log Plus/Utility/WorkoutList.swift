@@ -10,7 +10,7 @@ import Foundation
 
 class WorkoutList {
     
-    var exercises: [WorkoutListItem_OBJ] = []
+    var exercises: [WorkoutDay] = []
     
     init() {
         for _ in 0...5 {
@@ -19,19 +19,17 @@ class WorkoutList {
     }
     
     func addExercise(temp: String) {
-        let item = WorkoutListItem_OBJ()
-        item.text = temp
+        let item = WorkoutDay(title: temp)
         exercises.append(item)
     }
     
-    func newExercise() -> WorkoutListItem_OBJ {
-        let item = WorkoutListItem_OBJ()
-        item.text = randTitle()
+    func newExercise() -> WorkoutDay {
+        let item = WorkoutDay(title: randTitle())
         exercises.append(item)
         return item
     }
     
-    func move(item: WorkoutListItem_OBJ, to index: Int) {
+    func move(item: WorkoutDay, to index: Int) {
         guard let currentIndex = exercises.firstIndex(of: item) else {
             return
         }
@@ -39,7 +37,7 @@ class WorkoutList {
         exercises.insert(item, at: index)
     }
     
-    func remove(items: [WorkoutListItem_OBJ]) {
+    func remove(items: [WorkoutDay]) {
         for item in items {
             if let index = exercises.firstIndex(of: item) {
                 exercises.remove(at: index)
@@ -48,7 +46,7 @@ class WorkoutList {
     }
     
     private func randTitle() -> String {
-        let titles = ["1", "2", "3", "4", "5"]
+        let titles = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4", "Exercise 5"]
         let ranNum = Int.random(in: 0 ... titles.count-1)
         return titles[ranNum]
     }

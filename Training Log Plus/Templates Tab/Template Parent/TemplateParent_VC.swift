@@ -11,7 +11,7 @@ import UIKit
 class TemplateParent_VC: UITableViewController {
     
     
-    var templateList: TemplateList // Items for the table
+    var templateList: TemplateList
     
     
     /*
@@ -28,17 +28,6 @@ class TemplateParent_VC: UITableViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /*****************/
-        //  EDIT BUTTON  //
-        /*****************/
-        
-        // Add an edit button to enter "edit mode"
-        //navigationItem.leftBarButtonItem = editButtonItem
-        //navigationItem.leftBarButtonItem?.tintColor = UIColor.white
-        
-        // Allows the ability to edit multiple items with edit button
-        //tableView.allowsMultipleSelectionDuringEditing = true
     }
     
     
@@ -93,10 +82,6 @@ class TemplateParent_VC: UITableViewController {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
-        
-//        templateList.templates.remove(at: indexPath.row)
-//        let indexPaths = [indexPath]
-//        tableView.deleteRows(at: indexPaths, with: .automatic)
     }
     
     
@@ -126,6 +111,8 @@ class TemplateParent_VC: UITableViewController {
     
     
     /*
+     * Prepare for Segue
+     *
      * Different segue changes depending on segue identifier
      * This allows 2 different buttons to open the same VC
      */
@@ -144,7 +131,6 @@ class TemplateParent_VC: UITableViewController {
                     itemDetailViewController.delegate = self
                 }
             }
-            print("edit")
         }
     }
     
@@ -152,7 +138,7 @@ class TemplateParent_VC: UITableViewController {
     /*
      * Configure the text for each row item
      */
-    func configureText(for cell: UITableViewCell, with item: TemplateItem) {
+    func configureText(for cell: UITableViewCell, with item: Template) {
         if let templateCell = cell as? Template_TVCell {
             templateCell.templateTextLabel.text = item.title
         }
@@ -162,7 +148,7 @@ class TemplateParent_VC: UITableViewController {
     /*
      * Add a new template to the list
      */
-    func addNewTemplate(temp: TemplateItem) {
+    func addNewTemplate(temp: Template) {
         templateList.addTemplate(temp)
     }
     
@@ -174,6 +160,7 @@ class TemplateParent_VC: UITableViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
     
     // ********************* //
     //   Toggle check marks  //
@@ -249,9 +236,10 @@ class TemplateParent_VC: UITableViewController {
 }
 
 
-// Delegate from the item detail VC
+/*
+ * Delegate
+ */
 extension TemplateParent_VC: AddEdit_Template_VC_Delegate {
-    
     
     /*
      * Cancel button will pop the view controller
@@ -264,7 +252,7 @@ extension TemplateParent_VC: AddEdit_Template_VC_Delegate {
     /*
      * After adding, data is passed back
      */
-    func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishAdding item: TemplateItem) {
+    func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishAdding item: Template) {
  navigationController?.popViewController(animated: true)
         //templateList.addTemplateObj(item)
         let rowIndex = templateList.templates.count - 1
@@ -277,7 +265,7 @@ extension TemplateParent_VC: AddEdit_Template_VC_Delegate {
     /*
      * After editing, data is passed back
      */
-    func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishEditing item: TemplateItem) {
+    func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishEditing item: Template) {
         if let index = templateList.templates.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             if let cell = tableView.cellForRow(at: indexPath) {

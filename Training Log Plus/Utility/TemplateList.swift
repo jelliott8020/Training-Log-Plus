@@ -13,22 +13,28 @@ import Foundation
  */
 class TemplateList {
     
-    var templates: [TemplateItem] = []
+    var templates: [Template] = []
     
     init() {
-        let temp1 = TemplateItem()
-        temp1.title = "placeholder1"
+        let temp1 = Template()
+        temp1.title = "Template Title 1"
         temp1.listOfWorkouts = addWorkouts()
+        temp1.numDaysOfWeek = temp1.listOfWorkouts.count
+        temp1.numOfWeeks = 1
         templates.append(temp1)
         
-        let temp2 = TemplateItem()
-        temp2.title = "placeholder1"
+        let temp2 = Template()
+        temp2.title = "Template Title 2"
         temp2.listOfWorkouts = addWorkouts()
+        temp2.numDaysOfWeek = temp2.listOfWorkouts.count
+        temp1.numOfWeeks = 2
         templates.append(temp2)
         
-        let temp3 = TemplateItem()
-        temp3.title = "placeholder1"
+        let temp3 = Template()
+        temp3.title = "Template Title 3"
         temp3.listOfWorkouts = addWorkouts()
+        temp3.numDaysOfWeek = temp3.listOfWorkouts.count
+        temp1.numOfWeeks = 3
         templates.append(temp3)
         
     }
@@ -37,7 +43,7 @@ class TemplateList {
     /*
      Add Template: Adds a template object to array
      */
-    func addTemplate(_ temp: TemplateItem) {
+    func addTemplate(_ temp: Template) {
         templates.append(temp);
     }
     
@@ -45,8 +51,8 @@ class TemplateList {
     /*
      New Template: Adds a new blank template object to array
      */
-    func newTemplate() -> TemplateItem {
-        let item = TemplateItem()
+    func newTemplate() -> Template {
+        let item = Template()
         templates.append(item)
         return item
     }
@@ -55,7 +61,7 @@ class TemplateList {
     /*
      Move Template: Moves template to a different index in array
      */
-    func move(item: TemplateItem, to index: Int) {
+    func move(item: Template, to index: Int) {
         guard let currentIndex = templates.firstIndex(of: item) else {
             return
         }
@@ -67,7 +73,7 @@ class TemplateList {
     /*
      Remove Template: Removes a template from the array
      */
-    func remove(items: [TemplateItem]) {
+    func remove(items: [Template]) {
         for item in items {
             if let index = templates.firstIndex(of: item) {
                 templates.remove(at: index)
@@ -98,7 +104,7 @@ class TemplateList {
      Random Title: Creates and returns a random WorkoutDay title
      */
     private func randTitle() -> String {
-        let titles = ["Upper Lower", "3 Day Full Body", "2 Day Full Body w/ Running", "Wendler 531", "5 Day Bodybuilding"]
+        let titles = ["Workout Day 1", "Workout Day 2", "Workout Day 3", "Workout Day 4"]
         let ranNum = Int.random(in: 0 ... titles.count-1)
         return titles[ranNum]
     }

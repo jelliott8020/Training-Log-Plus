@@ -29,6 +29,16 @@ class AddEdit_AccessoryExercise_VC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func addButton(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
 
     /*
     // MARK: - Navigation

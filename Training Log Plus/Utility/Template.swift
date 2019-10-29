@@ -13,7 +13,7 @@ import Foundation
  *  Template item.
  */
 
-class TemplateItem: NSObject {
+class Template: NSObject {
     
     var title = ""
     var listOfWorkouts: [WorkoutDay] = []

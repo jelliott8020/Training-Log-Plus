@@ -40,21 +40,44 @@ class SelectProgressExercises_VC: UITableViewController {
     @IBAction func cancelButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
     @IBAction func doneButton(_ sender: Any) {
         doneAction()
     }
     
+    
+    /*
+     * View Did Load
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
+        
+        bodyPartData = Util.getGenericBodyPartData()
+        // Maybe check for bodypart selection before filling in exercise data
+        let bodyPart: String = ""
+        // Will need to check data for bodypart before filling this in
+        exerciseData = Util.getGenericExerciseData()
+        
+        createPickers()
+        createToolbarDoneButton()
+        showDatePicker()
+    }
+    
+    
+    /*
+     * Done Button Action
+     *
+     * Checks for good data and then passes the textfields back to Progress VC
+     */
     func doneAction() {
         if let body = bodyPartTextField.text, let exer = exerciseTextField.text, let start = startDateTextField.text, let end = endDateTextField.text {
             
-            let util = UtilityFunctions()
             var check = false
             
-            check = util.checkForBlankInput(str: body, txtField: bodyPartTextField)
-            check = util.checkForBlankInput(str: exer, txtField: exerciseTextField)
-            check = util.checkForBlankInput(str: start, txtField: startDateTextField)
-            check = util.checkForBlankInput(str: end, txtField: endDateTextField)
+            check = Util.checkForBlankInput(str: body, txtField: bodyPartTextField)
+            check = Util.checkForBlankInput(str: exer, txtField: exerciseTextField)
+            check = Util.checkForBlankInput(str: start, txtField: startDateTextField)
+            check = Util.checkForBlankInput(str: end, txtField: endDateTextField)
             
             if (check) {
                 return
@@ -67,20 +90,11 @@ class SelectProgressExercises_VC: UITableViewController {
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationItem.largeTitleDisplayMode = .never
-        
-        bodyPartData = getBodyPartData()
-        // Maybe check for bodypart selection before filling in exercise data
-        let bodyPart: String = ""
-        exerciseData = getExerciseData(bodyPart)
-        
-        createPickers()
-        createToolbarDoneButton()
-        showDatePicker()
-    }
-    
+    /*
+     * Show Data Picker
+     *
+     * Creates date pickers and adds toolbars to them
+     */
     func showDatePicker() {
         endDatePicker.datePickerMode = .date
         startDatePicker.datePickerMode = .date
@@ -95,8 +109,6 @@ class SelectProgressExercises_VC: UITableViewController {
         
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         
-        //let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
-        
         startToolBar.setItems([spaceButton, startDoneButton], animated: false)
         endToolBar.setItems([spaceButton, endDoneButton], animated: false)
         
@@ -104,6 +116,10 @@ class SelectProgressExercises_VC: UITableViewController {
         startDateTextField.inputAccessoryView = startToolBar
     }
     
+    
+    /*
+     * Create Pickers
+     */
     func createPickers() {
         bodyPartPicker.delegate = self
         exercisePicker.delegate = self
@@ -112,9 +128,12 @@ class SelectProgressExercises_VC: UITableViewController {
         exerciseTextField.inputView = exercisePicker
         startDateTextField.inputView = startDatePicker
         endDateTextField.inputView = endDatePicker
-        
     }
     
+    
+    /*
+     * Creete Toolbar Done Button
+     */
     func createToolbarDoneButton() {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
@@ -129,6 +148,10 @@ class SelectProgressExercises_VC: UITableViewController {
         exerciseTextField.inputAccessoryView = toolBar
     }
     
+    
+    /*
+     * Done button action
+     */
     @objc func doneButtonAction() {
         
         if bodyPartTextField.isEditing {
@@ -140,6 +163,10 @@ class SelectProgressExercises_VC: UITableViewController {
         }
     }
     
+    
+    /*
+     * Done action for start date picker
+     */
     @objc func doneStartDatePicker() {
         //For date formate
         let formatter = DateFormatter()
@@ -152,6 +179,10 @@ class SelectProgressExercises_VC: UITableViewController {
         endDateTextField.becomeFirstResponder()
     }
     
+    
+    /*
+     * Done action for end date picker
+     */
     @objc func doneEndDatePicker() {
         //For date formate
         let formatter = DateFormatter()
@@ -162,22 +193,6 @@ class SelectProgressExercises_VC: UITableViewController {
         
         doneAction()
         self.view.endEditing(true)
-    }
-
-//    @objc func cancelDatePicker(){
-//        //cancel button dismiss datepicker dialog
-//        self.view.endEditing(true)
-//    }
-    
-    func getBodyPartData() -> [String] {
-        return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
-    }
-    
-    func getExerciseData(_ bodyPart: String) -> [String] {
-        
-        // Maybe check for bodypart selection before filling in exercise data
-        // Query Core Date for exercises here after getting bodypart
-        return ["Bench", "Squat", "Deadlift"]
     }
 }
 

@@ -8,14 +8,6 @@
 
 import UIKit
 
-//protocol WorkoutDayCreation_Delegate: class {
-//    // User hit cancel
-//    func itemDetailViewControllerDidCancel(_ controller: AddEditTemplate_VC)
-//    // User added item
-//    func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishAdding item: TemplateItem)
-//    // User finishes editing
-//    func itemDetailViewController(_ controller: AddEditTemplate_VC, didFinishEditing item: TemplateItem)
-//}
 
 protocol WorkoutDayCreation_VC_Delegate {
     func passWorkoutObjBack(workoutObj: WorkoutDay)
@@ -24,22 +16,47 @@ protocol WorkoutDayCreation_VC_Delegate {
 class WorkoutDayCreation_VC: UIViewController {
     
     var delegate: WorkoutDayCreation_VC_Delegate?
+    var workoutObj: WorkoutDay?
+    var exerciseArg: [Exercise] = []
 
     @IBOutlet weak var workoutNameTextField: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var exerciseTable: UITableView!
     
-    var workoutObj: WorkoutDay?
-    var exerciseArg: [Exercise] = []
-    
-    
     @IBAction func updateNameButton(_ sender: UIButton) {
-        // Update VC Title with text
+        updateNameFunction()
     }
     
     @IBAction func doneButton(_ sender: UIBarButtonItem) {
+        doneButtonAction()
+    }
+    
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+
+    }
+    
+    
+    /*
+     * View Did Load
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        exerciseTable.tableFooterView = UIView(frame: CGRect.zero)
+        
+        exerciseArg = workoutObj!.getExercises()
+        self.title = workoutObj?.title
+    }
+    
+    
+    /*
+     * Done Button Action
+     *
+     * Updates title of WorkoutDay Object, passes it back to parent VC
+     */
+    func doneButtonAction() {
         if let name = workoutNameTextField.text {
             
             workoutObj?.title = name
@@ -51,21 +68,26 @@ class WorkoutDayCreation_VC: UIViewController {
         }
     }
     
-    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
-
-    }
     
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        exerciseTable.tableFooterView = UIView(frame: CGRect.zero)
-        
-        exerciseArg = workoutObj!.getExercises()
-
-
+    /*
+     * Update Name Function
+     *
+     * Updates the name from the textfield
+     * Updates the object's title as well
+     */
+    func updateNameFunction() {
+        if let title = workoutNameTextField.text {
+            var check = false
+            
+            check = Util.checkForBlankInput(str: title, txtField: workoutNameTextField)
+            
+            if (check) {
+                return
+            }
+            
+            self.title = workoutNameTextField.text
+            workoutObj?.title = workoutNameTextField.text!
+        }
     }
 }
 

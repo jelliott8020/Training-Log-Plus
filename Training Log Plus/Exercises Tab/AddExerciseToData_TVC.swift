@@ -10,11 +10,6 @@ import UIKit
 
 class AddExerciseToData_TVC: UITableViewController {
 
-    
-    @IBOutlet weak var bodyPartTextField: UITextField!
-    @IBOutlet weak var exerciseTextField: UITextField!
-    @IBOutlet weak var wendlerTextField: UITextField!
-    
     var bodyPartData: [String] = []
     var exerciseData: [String] = []
     var wendlerData: [String] = []
@@ -25,16 +20,31 @@ class AddExerciseToData_TVC: UITableViewController {
     
     var bodyPartPicker = UIPickerView()
     var wendlerPicker = UIPickerView()
+    
+    
+    @IBOutlet weak var bodyPartTextField: UITextField!
+    @IBOutlet weak var exerciseTextField: UITextField!
+    @IBOutlet weak var wendlerTextField: UITextField!
 
+    @IBAction func addToDataButton(_ sender: UIButton) {
+        addButtonFunction()
+    }
+    @IBAction func clearButton(_ sender: UIBarButtonItem) {
+        clearButtonFunction()
+    }
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     /*
-     View Did Load
+     * View Did Load
      */
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bodyPartData = getBodyPartData()
-        wendlerData = getWendlerData()
+        bodyPartData = Util.getGenericBodyPartData()
+        wendlerData = Util.getYesOrNoForPickerData()
         
         createPickers()
         createToolbarDoneButton()
@@ -45,19 +55,18 @@ class AddExerciseToData_TVC: UITableViewController {
     
     
     /*
-     Add to Data Button
-     
-     Adds the data to the database
+     * Add to Data Button
+     *
+     * Adds the data to the database
      */
-    @IBAction func addToDataButton(_ sender: UIButton) {
+    func addButtonFunction() {
         if let body = bodyPartTextField.text, let exer = exerciseTextField.text, let wen = wendlerTextField.text {
             
             var check = false
-            let util = UtilityFunctions()
             
-            check = util.checkForBlankInput(str: body, txtField: bodyPartTextField)
-            check = util.checkForBlankInput(str: exer, txtField: exerciseTextField)
-            check = util.checkForBlankInput(str: wen, txtField: wendlerTextField)
+            check = Util.checkForBlankInput(str: body, txtField: bodyPartTextField)
+            check = Util.checkForBlankInput(str: exer, txtField: exerciseTextField)
+            check = Util.checkForBlankInput(str: wen, txtField: wendlerTextField)
             
             if (check) {
                 return
@@ -67,37 +76,8 @@ class AddExerciseToData_TVC: UITableViewController {
         selectedBodyPart = bodyPartTextField.text
         selectedExercise = exerciseTextField.text
         
-        print(selectedExercise!)
-        print(selectedBodyPart!)
-        print(selectedWendler!)
-        
         // Add to database here
         // Also add with toolbar done button below
-    }
-    
-    
-    
-    
-    
-    /*
-     Clear Button
-     
-     IBAction for Clear Button on View
-     Clears all the textFields
-     */
-    @IBAction func clearButton(_ sender: UIBarButtonItem) {
-        clearButtonFunction()
-    }
-    
-    
-    /*
-     Cancel Button
-     
-     IBAction for Cancel Button on view
-     Pops the View Controller off the stack
-     */
-    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
     }
     
     
@@ -135,6 +115,7 @@ class AddExerciseToData_TVC: UITableViewController {
         wendlerTextField.inputAccessoryView = toolBar
     }
     
+    
     /*
      * Done Button Action
      *
@@ -156,39 +137,20 @@ class AddExerciseToData_TVC: UITableViewController {
 
 
 /*
- Utility Functions
+ * Utility Functions
  */
 extension AddExerciseToData_TVC {
     
-    /*
-     Get Wendler Data
-     
-     Returns data to fill Wendler Picker
-     */
-    func getWendlerData() -> [String] {
-        return ["Yes", "No"]
-    }
-    
     
     /*
-     Get BodyPart Data
-     
-     Returns data to fill BodyPart Picker
-     */
-    func getBodyPartData() -> [String] {
-        return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
-    }
-    
-    
-    /*
-     Clear Button Function
-     
-     Clears data from the textfields
+     * Clear Button Function
+     *
+     * Clears data from the textfields
      */
     func clearButtonFunction() {
-        bodyPartTextField.text = ""
-        exerciseTextField.text = ""
-        wendlerTextField.text = ""
+        Util.clearTextField(bodyPartTextField)
+        Util.clearTextField(exerciseTextField)
+        Util.clearTextField(wendlerTextField)
         selectedWendler = "Yes"
     }
 }

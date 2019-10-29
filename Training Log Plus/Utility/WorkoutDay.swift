@@ -9,7 +9,7 @@
 import Foundation
 
 
-class WorkoutDay {
+class WorkoutDay: NSObject {
     
     var exercises: [Exercise] = []
     
