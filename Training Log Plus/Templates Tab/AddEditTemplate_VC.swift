@@ -235,6 +235,8 @@ class AddEditTemplate_VC: UIViewController, WorkoutCreationPassDataBackProtocol 
                 workoutDaysArray[0].addExercise(ex: ex2)
                 workoutDaysArray[0].addExercise(ex: ex3)
                 
+                workoutDaysArray[0].title = "Tester1"
+                
                 workoutDayCreation_VC.workoutObj = workoutDaysArray[0]
             
                 workoutDayCreation_VC.delegate = self

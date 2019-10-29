@@ -39,6 +39,8 @@
 		052D19F72343A90F003183B4 /* WorkoutList_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D19F62343A90F003183B4 /* WorkoutList_TVCell.swift */; };
 		052D409F2359153100667D2E /* Exercises_TVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D409E2359153100667D2E /* Exercises_TVC.swift */; };
 		05B3505B233D64490029234D /* TemplateList_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B3505A233D64490029234D /* TemplateList_TVCell.swift */; };
+		05C1953F236886ED0014D212 /* DayMainExercise_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C1953E236886ED0014D212 /* DayMainExercise_TVCell.swift */; };
+		05C19541236887000014D212 /* DayAccExercise_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C19540236887000014D212 /* DayAccExercise_TVCell.swift */; };
 		05C3B400236236C10087BAC4 /* workoutDaysInTemplate_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C3B3FF236236C10087BAC4 /* workoutDaysInTemplate_TVCell.swift */; };
 		05C3B40223623C000087BAC4 /* WorkoutDayCreation_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C3B40123623C000087BAC4 /* WorkoutDayCreation_VC.swift */; };
 		05C3B40523623D250087BAC4 /* AddMainExercise_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C3B40423623D250087BAC4 /* AddMainExercise_VC.swift */; };
@@ -88,6 +90,8 @@
 		052D19F62343A90F003183B4 /* WorkoutList_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList_TVCell.swift; sourceTree = "<group>"; };
 		052D409E2359153100667D2E /* Exercises_TVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercises_TVC.swift; sourceTree = "<group>"; };
 		05B3505A233D64490029234D /* TemplateList_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateList_TVCell.swift; sourceTree = "<group>"; };
+		05C1953E236886ED0014D212 /* DayMainExercise_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayMainExercise_TVCell.swift; sourceTree = "<group>"; };
+		05C19540236887000014D212 /* DayAccExercise_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAccExercise_TVCell.swift; sourceTree = "<group>"; };
 		05C3B3FF236236C10087BAC4 /* workoutDaysInTemplate_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutDaysInTemplate_TVCell.swift; sourceTree = "<group>"; };
 		05C3B40123623C000087BAC4 /* WorkoutDayCreation_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDayCreation_VC.swift; sourceTree = "<group>"; };
 		05C3B40423623D250087BAC4 /* AddMainExercise_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMainExercise_VC.swift; sourceTree = "<group>"; };
@@ -191,7 +195,8 @@
 		03FB9EAE2322FC7300F9D410 /* Templates Tab */ = {
 			isa = PBXGroup;
 			children = (
-				05C3B40323623CB00087BAC4 /* DayCreation */,
+				05C1953D236886B90014D212 /* Exercise Editing */,
+				05C3B40323623CB00087BAC4 /* Day Editing */,
 				030DABD32322CA0000FDC505 /* TemplateParent_VC.swift */,
 				05B3505A233D64490029234D /* TemplateList_TVCell.swift */,
 				03BB32C92325903300C712D1 /* TemplateList.swift */,
@@ -264,17 +269,26 @@
 			path = "TM Calculator";
 			sourceTree = "<group>";
 		};
-		05C3B40323623CB00087BAC4 /* DayCreation */ = {
+		05C1953D236886B90014D212 /* Exercise Editing */ = {
+			isa = PBXGroup;
+			children = (
+				05C3B40823623E040087BAC4 /* MainExercise_TVCell.swift */,
+				05C3B40A23623E120087BAC4 /* AccessoryExercise_TVCell.swift */,
+			);
+			path = "Exercise Editing";
+			sourceTree = "<group>";
+		};
+		05C3B40323623CB00087BAC4 /* Day Editing */ = {
 			isa = PBXGroup;
 			children = (
 				05C3B40123623C000087BAC4 /* WorkoutDayCreation_VC.swift */,
 				05C3B40423623D250087BAC4 /* AddMainExercise_VC.swift */,
 				05C3B40623623D340087BAC4 /* AddAccessoryExercise_VC.swift */,
-				05C3B40823623E040087BAC4 /* MainExercise_TVCell.swift */,
-				05C3B40A23623E120087BAC4 /* AccessoryExercise_TVCell.swift */,
+				05C1953E236886ED0014D212 /* DayMainExercise_TVCell.swift */,
+				05C19540236887000014D212 /* DayAccExercise_TVCell.swift */,
 				05C3B40C23623E210087BAC4 /* DynamicAddCell_TVCell.swift */,
 			);
-			path = DayCreation;
+			path = "Day Editing";
 			sourceTree = "<group>";
 		};
 		05CBE50B2357738600E766F8 /* Settings Tab */ = {
@@ -360,6 +374,7 @@
 				05C3B40523623D250087BAC4 /* AddMainExercise_VC.swift in Sources */,
 				03B2D80F235BD6DB00005CC5 /* ExerciseBB_TableViewCell.swift in Sources */,
 				03F1D0772329701700B63042 /* SelectProgressExercises_VC.swift in Sources */,
+				05C19541236887000014D212 /* DayAccExercise_TVCell.swift in Sources */,
 				030DABD42322CA0000FDC505 /* TemplateParent_VC.swift in Sources */,
 				052D409F2359153100667D2E /* Exercises_TVC.swift in Sources */,
 				05C3B40B23623E120087BAC4 /* AccessoryExercise_TVCell.swift in Sources */,
@@ -385,6 +400,7 @@
 				03B984E2233BE16C00656CFA /* Exercise.swift in Sources */,
 				03FB9EAB2322FA4E00F9D410 /* TemplateItem.swift in Sources */,
 				03B984E0233BE03F00656CFA /* Attempt.swift in Sources */,
+				05C1953F236886ED0014D212 /* DayMainExercise_TVCell.swift in Sources */,
 				05C3B40D23623E210087BAC4 /* DynamicAddCell_TVCell.swift in Sources */,
 				052D19F72343A90F003183B4 /* WorkoutList_TVCell.swift in Sources */,
 				03B2D813235BD7E700005CC5 /* ChangeTemplate_TVCell.swift in Sources */,

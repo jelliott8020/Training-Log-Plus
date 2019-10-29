@@ -85,7 +85,7 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
          * ERROR HERE
          */
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! MainExercise_TVCell
-        cell.trainingMaxLabel.text = weightForCell
+        cell.trainingMaxLabel.text = weightForCell // error, trainingMaxLabel is nil
         
         return cell
     }
