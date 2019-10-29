@@ -28,7 +28,7 @@ class AddExerciseToData_TVC: UITableViewController {
 
     
     /*
-     * View Did Load
+     View Did Load
      */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +45,21 @@ class AddExerciseToData_TVC: UITableViewController {
     
     
     /*
-     * Add to Data Button
-     *
-     * Adds the data to the database
+     Add to Data Button
+     
+     Adds the data to the database
      */
     @IBAction func addToDataButton(_ sender: UIButton) {
         if let body = bodyPartTextField.text, let exer = exerciseTextField.text, let wen = wendlerTextField.text {
-            if (checkForGoodInput(body, exer, wen)) {
+            
+            var check = false
+            let util = UtilityFunctions()
+            
+            check = util.checkForBlankInput(str: body, txtField: bodyPartTextField)
+            check = util.checkForBlankInput(str: exer, txtField: exerciseTextField)
+            check = util.checkForBlankInput(str: wen, txtField: wendlerTextField)
+            
+            if (check) {
                 return
             }
         }
@@ -68,88 +76,27 @@ class AddExerciseToData_TVC: UITableViewController {
     }
     
     
-    /*
-     * Check for Good Input
-     *
-     * Checks the given strings for good input
-     * If bad, turns border red, shakes them
-     * If good, returns border to default state
-     */
-    func checkForGoodInput(_ body: String, _ exer: String, _ wen: String) -> Bool {
-        if (body == "" || wen == "" || exer == "") {
-            
-            if (body == "") {
-                shakeAndRedTextField(bodyPartTextField)
-            } else {
-                returnToDefaultTextField(bodyPartTextField)
-            }
-            
-            if (wen == "") {
-                shakeAndRedTextField(wendlerTextField)
-            } else {
-                returnToDefaultTextField(wendlerTextField)
-            }
-            
-            if (exer == "") {
-                shakeAndRedTextField(exerciseTextField)
-            } else {
-                returnToDefaultTextField(exerciseTextField)
-            }
-            
-            return true
-        }
-        return false
-    }
+    
     
     
     /*
-     * Shake And Red Text Field
-     *
-     * Turns the given text field's border red and shakes it
-     */
-    func shakeAndRedTextField(_ textField: UITextField) {
-        let redColor = UIColor.red
-        textField.shake()
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5
-        textField.layer.borderColor = redColor.cgColor
-    }
-    
-    
-    /*
-     * Return to Default Text Field
-     *
-     * Changes the text field value back to default
-     */
-    func returnToDefaultTextField(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5
-    }
-    
-    
-    /*
-     * Clear Button
-     *
-     * IBAction for Clear Button on View
-     * Clears all the textFields
+     Clear Button
+     
+     IBAction for Clear Button on View
+     Clears all the textFields
      */
     @IBAction func clearButton(_ sender: UIBarButtonItem) {
-        bodyPartTextField.text = ""
-        exerciseTextField.text = ""
-        wendlerTextField.text = ""
-        selectedWendler = "Yes"
+        clearButtonFunction()
     }
     
     
     /*
-     * Cancel Button
-     *
-     * IBAction for Cancel Button on view
-     * Pops the View Controller off the stack
+     Cancel Button
+     
+     IBAction for Cancel Button on view
+     Pops the View Controller off the stack
      */
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
-        
         navigationController?.popViewController(animated: true)
     }
     
@@ -205,25 +152,44 @@ class AddExerciseToData_TVC: UITableViewController {
             self.view.endEditing(true)
         }
     }
+}
+
+
+/*
+ Utility Functions
+ */
+extension AddExerciseToData_TVC {
+    
+    /*
+     Get Wendler Data
+     
+     Returns data to fill Wendler Picker
+     */
+    func getWendlerData() -> [String] {
+        return ["Yes", "No"]
+    }
     
     
     /*
-    * Get BodyPart Data
-    *
-    * Returns data to fill BodyPart Picker
-    */
+     Get BodyPart Data
+     
+     Returns data to fill BodyPart Picker
+     */
     func getBodyPartData() -> [String] {
         return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
     }
     
     
     /*
-     * Get Wendler Data
-     *
-     * Returns data to fill Wendler Picker
+     Clear Button Function
+     
+     Clears data from the textfields
      */
-    func getWendlerData() -> [String] {
-        return ["Yes", "No"]
+    func clearButtonFunction() {
+        bodyPartTextField.text = ""
+        exerciseTextField.text = ""
+        wendlerTextField.text = ""
+        selectedWendler = "Yes"
     }
 }
 

@@ -154,7 +154,7 @@ class TemplateParent_VC: UITableViewController {
      */
     func configureText(for cell: UITableViewCell, with item: TemplateItem) {
         if let templateCell = cell as? Template_TVCell {
-            templateCell.templateTextLabel.text = item.templateTitle
+            templateCell.templateTextLabel.text = item.title
         }
     }
     
@@ -162,7 +162,7 @@ class TemplateParent_VC: UITableViewController {
     /*
      * Add a new template to the list
      */
-    func addNewTemplate(temp: String) {
+    func addNewTemplate(temp: TemplateItem) {
         templateList.addTemplate(temp)
     }
     

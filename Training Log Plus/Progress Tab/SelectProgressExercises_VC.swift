@@ -48,7 +48,15 @@ class SelectProgressExercises_VC: UITableViewController {
     func doneAction() {
         if let body = bodyPartTextField.text, let exer = exerciseTextField.text, let start = startDateTextField.text, let end = endDateTextField.text {
             
-            if (checkForGoodInput(body, exer, start, end)) {
+            let util = UtilityFunctions()
+            var check = false
+            
+            check = util.checkForBlankInput(str: body, txtField: bodyPartTextField)
+            check = util.checkForBlankInput(str: exer, txtField: exerciseTextField)
+            check = util.checkForBlankInput(str: start, txtField: startDateTextField)
+            check = util.checkForBlankInput(str: end, txtField: endDateTextField)
+            
+            if (check) {
                 return
             }
             
@@ -171,55 +179,6 @@ class SelectProgressExercises_VC: UITableViewController {
         // Query Core Date for exercises here after getting bodypart
         return ["Bench", "Squat", "Deadlift"]
     }
-    
-    func checkForGoodInput(_ bodyPart: String, _ exer: String, _ start: String, _ end: String) -> Bool {
-        if (bodyPart == "" || start == "" || exer == "" || end == "") {
-            
-            if (bodyPart == "") {
-                shakeAndRedTextField(bodyPartTextField)
-            } else {
-                returnToDefaultTextField(bodyPartTextField)
-            }
-            
-            if (start == "") {
-                shakeAndRedTextField(startDateTextField)
-            } else {
-                returnToDefaultTextField(startDateTextField)
-            }
-            
-            if (exer == "") {
-                shakeAndRedTextField(exerciseTextField)
-            } else {
-                returnToDefaultTextField(exerciseTextField)
-            }
-            
-            if (end == "") {
-                shakeAndRedTextField(endDateTextField)
-            } else {
-                returnToDefaultTextField(endDateTextField)
-            }
-
-            
-            return true
-        }
-        return false
-    }
-    
-    func shakeAndRedTextField(_ textField: UITextField) {
-        let redColor = UIColor.red
-        textField.shake()
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5
-        textField.layer.borderColor = redColor.cgColor
-    }
-    
-    func returnToDefaultTextField(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5
-    }
-    
-
 }
 
 extension SelectProgressExercises_VC: UIPickerViewDataSource, UIPickerViewDelegate {

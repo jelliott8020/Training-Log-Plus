@@ -80,12 +80,8 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let weightForCell = exerciseArg[indexPath.row].name
         
-        
-        /*
-         * ERROR HERE
-         */
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! DayMainExercise_TVCell
-        cell.mainExerLabel.text = weightForCell // error, trainingMaxLabel is nil
+        cell.mainExerLabel.text = weightForCell
         
         return cell
     }

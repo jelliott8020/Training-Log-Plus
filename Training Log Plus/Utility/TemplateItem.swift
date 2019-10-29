@@ -15,7 +15,7 @@ import Foundation
 
 class TemplateItem: NSObject {
     
-    var templateTitle = ""
+    var title = ""
     var listOfWorkouts: [WorkoutDay] = []
     var dateStarted: String = ""
     var currentDayIndex = 0

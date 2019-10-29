@@ -16,31 +16,45 @@ class TemplateList {
     var templates: [TemplateItem] = []
     
     init() {
-        addTemplate("placeholder1")
-        addTemplate("placeholder2")
+        let temp1 = TemplateItem()
+        temp1.title = "placeholder1"
+        temp1.listOfWorkouts = addWorkouts()
+        templates.append(temp1)
+        
+        let temp2 = TemplateItem()
+        temp2.title = "placeholder1"
+        temp2.listOfWorkouts = addWorkouts()
+        templates.append(temp2)
+        
+        let temp3 = TemplateItem()
+        temp3.title = "placeholder1"
+        temp3.listOfWorkouts = addWorkouts()
+        templates.append(temp3)
+        
     }
     
-    func addTemplate(_ temp: String) {
-        let item = TemplateItem()
-        item.templateTitle = temp
-        item.listOfWorkouts = addExercises()
-        //item.checked = true
-        templates.append(item)
-    }
     
-    func addTemplateObj(_ temp: TemplateItem) {
+    /*
+     Add Template: Adds a template object to array
+     */
+    func addTemplate(_ temp: TemplateItem) {
         templates.append(temp);
     }
     
-    // Creates a new template item
+    
+    /*
+     New Template: Adds a new blank template object to array
+     */
     func newTemplate() -> TemplateItem {
         let item = TemplateItem()
-        //item.templateTitle = randTitle()
-        //item.checked = true
         templates.append(item)
         return item
     }
     
+    
+    /*
+     Move Template: Moves template to a different index in array
+     */
     func move(item: TemplateItem, to index: Int) {
         guard let currentIndex = templates.firstIndex(of: item) else {
             return
@@ -49,6 +63,10 @@ class TemplateList {
         templates.insert(item, at: index)
     }
     
+    
+    /*
+     Remove Template: Removes a template from the array
+     */
     func remove(items: [TemplateItem]) {
         for item in items {
             if let index = templates.firstIndex(of: item) {
@@ -57,12 +75,16 @@ class TemplateList {
         }
     }
     
-    private func addExercises() -> [WorkoutDay] {
+    
+    /*
+     Add Workouts: Create WorkoutDay array, add random stuff, return
+     */
+    private func addWorkouts() -> [WorkoutDay] {
         var exArg: [WorkoutDay] = []
-        let ex1 = WorkoutDay(title: "Upper")
-        let ex2 = WorkoutDay(title: "Lower")
-        let ex3 = WorkoutDay(title: "Chest")
-        let ex4 = WorkoutDay(title: "Back")
+        let ex1 = WorkoutDay(title: randTitle())
+        let ex2 = WorkoutDay(title: randTitle())
+        let ex3 = WorkoutDay(title: randTitle())
+        let ex4 = WorkoutDay(title: randTitle())
         exArg.append(ex1)
         exArg.append(ex2)
         exArg.append(ex3)
@@ -72,11 +94,12 @@ class TemplateList {
     }
     
     
-    // Creates a random title for a template item
+    /*
+     Random Title: Creates and returns a random WorkoutDay title
+     */
     private func randTitle() -> String {
         let titles = ["Upper Lower", "3 Day Full Body", "2 Day Full Body w/ Running", "Wendler 531", "5 Day Bodybuilding"]
         let ranNum = Int.random(in: 0 ... titles.count-1)
         return titles[ranNum]
     }
-    
 }

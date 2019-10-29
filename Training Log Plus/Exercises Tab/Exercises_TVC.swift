@@ -26,7 +26,6 @@ class Exercises_TVC: UITableViewController {
     
     /*
      View Did Load
-     
      */
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -124,7 +124,7 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
         // This checks if its nil. If its not, its an edit segeue
         if let item = itemToEdit {
             title = "Edit Template"
-            templateTitleTextField.text = item.templateTitle
+            templateTitleTextField.text = item.title
             numDaysOfWeekTextField.text = String(item.numDaysOfWeek)
             numOfWeeksTextField.text = String(item.numOfWeeks)
             
@@ -154,19 +154,24 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
      */
     func doneButtonActionFunc() {
         if let tempTitleChk = templateTitleTextField.text, let daysChk = numDaysOfWeekTextField.text, let wenChk = wendlerTextField.text, let weeksChk = numOfWeeksTextField.text {
-                    if (checkForGoodInput(tempTitleChk, daysChk, weeksChk, wenChk)) {
-                        return
-                    }
-                }
-                
-                returnToDefaultTextField(numDaysOfWeekTextField)
-                returnToDefaultTextField(numOfWeeksTextField)
-                returnToDefaultTextField(wendlerTextField)
+                    
+            let util = UtilityFunctions()
+            var check = false
+            
+            check = util.checkForBlankInput(str: tempTitleChk, txtField: templateTitleTextField)
+            check = util.checkForBlankInput(str: daysChk, txtField: numDaysOfWeekTextField)
+            check = util.checkForBlankInput(str: weeksChk, txtField: numOfWeeksTextField)
+            check = util.checkForBlankInput(str: wenChk, txtField: wendlerTextField)
+            
+            
+            if (check) {
+                return
+            }
                 
                 
                 if let item = itemToEdit, let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerTextField.text, let weeks = numOfWeeksTextField.text  {
                     
-                    item.templateTitle = tempTitle
+                    item.title = tempTitle
                     item.numOfWeeks = Int(weeks) ?? 0
                     item.numDaysOfWeek = Int(days) ?? 0
 
@@ -182,7 +187,7 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
                     
                         if let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerTextField.text, let weeks = numOfWeeksTextField.text {
                             
-                            globalTemplateItem?.templateTitle = tempTitle
+                            globalTemplateItem?.title = tempTitle
                             globalTemplateItem?.numOfWeeks = Int(weeks) ?? 0
                             globalTemplateItem?.numDaysOfWeek = Int(days) ?? 0
                             
@@ -196,26 +201,9 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
                         //item.checked = false
                     delegate?.itemDetailViewController(self, didFinishAdding: globalTemplateItem!)
                     print("passed back the template object")
-        //            if let item = templateList?.newTemplate() {
-        //
-        //                if let tempTitle = templateTitleTextField.text, let days = numDaysOfWeekTextField.text, let wen = wendlerTextField.text, let weeks = numOfWeeksTextField.text {
-        //
-        //                    item.templateTitle = tempTitle
-        //                    item.numOfWeeks = Int(weeks) ?? 0
-        //                    item.numDaysOfWeek = Int(days) ?? 0
-        //
-        //                    if (wen == "Yes") {
-        //                        item.wendlerYesNo = true
-        //                    } else {
-        //                        item.wendlerYesNo = false
-        //                    }
-        //                }
-        //
-        //                //item.checked = false
-        //                delegate?.itemDetailViewController(self, didFinishAdding: item)
-        //            }
-                }
+            }
     }
+}
     
     
     /*
@@ -270,26 +258,7 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
 
 extension AddEdit_Template_VC {
     
-    /*
-     * Return to Default Text Field
-     */
-    func returnToDefaultTextField(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5
-    }
-    
-    
-    /*
-     * Shake and Red Text Field
-     */
-    func shakeAndRedTextField(_ textField: UITextField) {
-        let redColor = UIColor.red
-        textField.shake()
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5
-        textField.layer.borderColor = redColor.cgColor
-    }
+
     
     
     /*
@@ -316,42 +285,6 @@ extension AddEdit_Template_VC {
         
         wendlerTextField.inputAccessoryView = toolBar
         //exerciseTextField.inputAccessoryView = toolBar
-    }
-    
-    
-    /*
-     * Check for Good Input
-     */
-    func checkForGoodInput(_ tempTitle: String, _ days: String, _ weeks: String, _ wen: String) -> Bool {
-        if (tempTitle == "" || weeks == "" || !weeks.isInt || days == "" || !days.isInt || wen == "") {
-            
-            if (tempTitle == "") {
-                shakeAndRedTextField(templateTitleTextField)
-            } else {
-                returnToDefaultTextField(templateTitleTextField)
-            }
-            
-            if (weeks == "" || !weeks.isInt) {
-                shakeAndRedTextField(numOfWeeksTextField)
-            } else {
-                returnToDefaultTextField(numOfWeeksTextField)
-            }
-            
-            if (days == "" || !days.isInt) {
-                shakeAndRedTextField(numDaysOfWeekTextField)
-            } else {
-                returnToDefaultTextField(numDaysOfWeekTextField)
-            }
-            
-            if (!(wen.lowercased() == "yes" || wen.lowercased() == "no")) {
-                shakeAndRedTextField(wendlerTextField)
-            } else {
-                returnToDefaultTextField(wendlerTextField)
-            }
-            
-            return true
-        }
-        return false
     }
     
     
