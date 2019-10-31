@@ -10,7 +10,7 @@ import Foundation
 
 class WorkoutList {
     
-    var exercises: [WorkoutDay] = []
+    var workouts: [WorkoutDay] = []
     
     init() {
         for _ in 0...5 {
@@ -20,27 +20,31 @@ class WorkoutList {
     
     func addExercise(temp: String) {
         let item = WorkoutDay(title: temp)
-        exercises.append(item)
+        workouts.append(item)
+    }
+    
+    func addWorkoutObj(_ obj: WorkoutDay) {
+        workouts.append(obj)
     }
     
     func newExercise() -> WorkoutDay {
         let item = WorkoutDay(title: randTitle())
-        exercises.append(item)
+        workouts.append(item)
         return item
     }
     
     func move(item: WorkoutDay, to index: Int) {
-        guard let currentIndex = exercises.firstIndex(of: item) else {
+        guard let currentIndex = workouts.firstIndex(of: item) else {
             return
         }
-        exercises.remove(at: currentIndex)
-        exercises.insert(item, at: index)
+        workouts.remove(at: currentIndex)
+        workouts.insert(item, at: index)
     }
     
     func remove(items: [WorkoutDay]) {
         for item in items {
-            if let index = exercises.firstIndex(of: item) {
-                exercises.remove(at: index)
+            if let index = workouts.firstIndex(of: item) {
+                workouts.remove(at: index)
             }
         }
     }

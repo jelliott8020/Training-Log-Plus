@@ -13,7 +13,6 @@ class TemplateParent_VC: UITableViewController {
     
     var templateList: TemplateList
     
-    
     /*
      * Initializer
      */
@@ -31,6 +30,11 @@ class TemplateParent_VC: UITableViewController {
     }
     
     
+    @IBAction func addTemplateButton(_ sender: UIBarButtonItem) {
+        alertWithTF()
+    }
+    
+    
     /*
      * When user interacts with cell
      */
@@ -43,18 +47,6 @@ class TemplateParent_VC: UITableViewController {
         
         // Animation to show they interacted
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        // ********************* //
-        // Remove/add checkmarks //
-        // ********************* //
-        // Removes or adds checkmarks to each cell
-        //        if let cell = tableView.cellForRow(at: indexPath) {
-        //            let item = templateList.templates[indexPath.row]
-        //            configureCheckmark(for: cell, with: item)
-        //
-        //            // Makes the highlighting of cell when tapping go away
-        //
-        //        }
     }
     
     
@@ -64,21 +56,21 @@ class TemplateParent_VC: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-
+            
             let alert = UIAlertController(title:  "Are you sure?", message: "", preferredStyle: .alert)
-
+            
             let noButton = UIAlertAction(title: "No", style: UIAlertAction.Style.destructive, handler: nil)
             let yesButton = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { (action) -> Void in
                 self.templateList.templates.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-
+                
             } )
-
+            
             alert.addAction(yesButton)
             alert.addAction(noButton)
-
+            
             present(alert, animated: true, completion: nil)
-
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
@@ -110,11 +102,88 @@ class TemplateParent_VC: UITableViewController {
     }
     
     
+    func alertWithTF() {
+        //Step : 1
+        let alert = UIAlertController(title: "Create Template", message: "Table Information", preferredStyle: UIAlertController.Style.alert )
+        
+        //Step : 2
+        let save = UIAlertAction(title: "Create", style: .default) { (alertAction) in
+            let tempNameTxtField = alert.textFields![0] as UITextField
+            let numDaysTxtField = alert.textFields![1] as UITextField
+            let wendlerYesNoTxtField = alert.textFields![2] as UITextField
+            let numWeeksTxtField = alert.textFields![3] as UITextField
+            
+            if let title = tempNameTxtField.text, let days = numDaysTxtField.text, let wen = wendlerYesNoTxtField.text, let weeks = numWeeksTxtField.text {
+                
+                var check = Util.checkForBlankInput(str: title, txtField: tempNameTxtField)
+                check = Util.checkForBlankInput(str: days, txtField: numDaysTxtField)
+                check = Util.checkForBlankInput(str: wen, txtField: wendlerYesNoTxtField)
+                check = Util.checkForBlankInput(str: weeks, txtField: numWeeksTxtField)
+                
+                if (check) {
+                    return
+                }
+                
+                
+                print(tempNameTxtField.text!)
+                print("TF 1 : \(tempNameTxtField.text!)")
+                
+                print(numDaysTxtField.text!)
+                print("TF 2 : \(numDaysTxtField.text!)")
+                
+                print(numDaysTxtField.text!)
+                print("TF 3 : \(wendlerYesNoTxtField.text!)")
+                
+                print(numDaysTxtField.text!)
+                print("TF 4 : \(numWeeksTxtField.text!)")
+                
+                
+                self.performSegue(withIdentifier: "AddItemSegue", sender: self)
+                
+            }
+            
+        }
+        
+        alert.addTextField { (tempNameTxtField) in
+            tempNameTxtField.placeholder = "Template Title:"
+            tempNameTxtField.textColor = .red
+        }
+        
+        alert.addTextField { (numDaysTxtField) in
+            numDaysTxtField.placeholder = "Number of Days per Week:"
+            numDaysTxtField.textColor = .blue
+        }
+        
+        alert.addTextField { (wendlerYesNoTxtField) in
+            wendlerYesNoTxtField.placeholder = "Will there be Wendler Progression?"
+            wendlerYesNoTxtField.textColor = .green
+        }
+        
+        alert.addTextField { (numWeeksTxtField) in
+            numWeeksTxtField.placeholder = "Number of Weeks"
+            numWeeksTxtField.textColor = .purple
+        }
+        
+        //Step : 4
+        alert.addAction(save)
+        //Cancel action
+        let cancel = UIAlertAction(title: "Cancel", style: .default) { (alertAction) in }
+        alert.addAction(cancel)
+        //OR single line action
+        //alert.addAction(UIAlertAction(title: "Cancel", style: .default) { (alertAction) in })
+        
+        self.present(alert, animated:true, completion: nil)
+        
+        print("got")
+    }
+    
+    
     /*
-     * Prepare for Segue
+     * Prepare For Segue
      *
-     * Different segue changes depending on segue identifier
-     * This allows 2 different buttons to open the same VC
+     * Different segue changes depending on segue identifier.
+     * This allows 2 different buttons to open the same VC.
+     * If editing, pass the item. If adding, will create new item there.
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddItemSegue" {
@@ -122,7 +191,6 @@ class TemplateParent_VC: UITableViewController {
                 itemDetailViewController.delegate = self
                 itemDetailViewController.templateList = templateList
             }
-            print("add")
         } else if segue.identifier == "EditItemSegue" {
             if let itemDetailViewController = segue.destination as? AddEdit_Template_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
@@ -136,7 +204,7 @@ class TemplateParent_VC: UITableViewController {
     
     
     /*
-     * Configure the text for each row item
+     * Configure the text for each row item.
      */
     func configureText(for cell: UITableViewCell, with item: Template) {
         if let templateCell = cell as? Template_TVCell {
@@ -160,86 +228,15 @@ class TemplateParent_VC: UITableViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    
-    // ********************* //
-    //   Toggle check marks  //
-    // ********************* //
-    //    func configureCheckmark(for cell: UITableViewCell, with item: TemplateItemObject) {
-    //        guard let checkmark = cell.viewWithTag(1001) as? UILabel else {
-    //            return
-    //        }
-    //
-    //        if item.checked {
-    //            checkmark.text = "√"
-    //        } else {
-    //            checkmark.text = ""
-    //        }
-    //        item.toggleChecked()
-    //    }
-    
-    
-    // ********************* //
-    // Old add button action //
-    // ********************* //
-    //    @IBAction func addItem(_ sender: Any) {
-    //        let newRowIndex = templateList.templates.count
-    //
-    //        // This increases the size but we dont need
-    //        // to use it, so assign it to _
-    //        _ = templateList.newTemplate()
-    //
-    //        let indexPath = IndexPath(row: newRowIndex, section: 0)
-    //
-    //        // insertRows requires an array, so just put
-    //        // the one item into an array
-    //        let indexPaths = [indexPath]
-    //
-    //        tableView.insertRows(at: indexPaths, with: .automatic)
-    //    }
-    
-    
-    // ******************* //
-    // Set editing mode on //
-    // ******************* //
-    //    override func setEditing(_ editing: Bool, animated: Bool) {
-    //        super.setEditing(editing, animated: true)
-    //        tableView.setEditing(tableView.isEditing, animated: true)
-    //    }
-    
-    
-    // ********************************* //
-    // Allows moving cells in edit mode  //
-    // ********************************* //
-    
-    //    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath:          IndexPath, to destinationIndexPath: IndexPath) {
-    //        templateList.move(item: templateList.templates[sourceIndexPath.row], to:          destinationIndexPath.row)
-    //        //tableView.reloadData()
-    //    }
-    
-    
-    // ********************************** //
-    // Multiple select and delete circles //
-    // ********************************** //
-    //    @IBAction func deleteItems(_ sender: Any) {
-    //        if let selectedRows = tableView.indexPathsForSelectedRows {
-    //            var items = [TemplateItemObject]()
-    //            for indexPath in selectedRows {
-    //                items.append(templateList.templates[indexPath.row])
-    //            }
-    //            templateList.remove(items: items)
-    //            tableView.beginUpdates()
-    //            tableView.deleteRows(at: selectedRows, with: .automatic)
-    //            tableView.endUpdates()
-    //        }
-    //    }
 }
 
 
 /*
  * Delegate
+ *
+ * Implements the functions that allow the New or Edited Template to be passed back
  */
-extension TemplateParent_VC: AddEdit_Template_VC_Delegate {
+extension TemplateParent_VC: Pass_AddEditTemplate_BackTo_TemplateParent_Delegate {
     
     /*
      * Cancel button will pop the view controller
@@ -253,7 +250,7 @@ extension TemplateParent_VC: AddEdit_Template_VC_Delegate {
      * After adding, data is passed back
      */
     func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishAdding item: Template) {
- navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
         //templateList.addTemplateObj(item)
         let rowIndex = templateList.templates.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)

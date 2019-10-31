@@ -53,6 +53,7 @@
 		05CBE51123577EC300E766F8 /* ChangeTemplate_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE51023577EC300E766F8 /* ChangeTemplate_VC.swift */; };
 		05CBE51323577ECC00E766F8 /* CustomWorkout_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE51223577ECC00E766F8 /* CustomWorkout_VC.swift */; };
 		05E06532235918CA00807493 /* Calced_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E06531235918CA00807493 /* Calced_TVCell.swift */; };
+		05E323F5236B2A1D00FAAF04 /* SavedCodeSnippets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E323F4236B2A1D00FAAF04 /* SavedCodeSnippets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		05CBE51023577EC300E766F8 /* ChangeTemplate_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTemplate_VC.swift; sourceTree = "<group>"; };
 		05CBE51223577ECC00E766F8 /* CustomWorkout_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWorkout_VC.swift; sourceTree = "<group>"; };
 		05E06531235918CA00807493 /* Calced_TVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calced_TVCell.swift; sourceTree = "<group>"; };
+		05E323F4236B2A1D00FAAF04 /* SavedCodeSnippets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCodeSnippets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				03B984DF233BE03F00656CFA /* Attempt.swift */,
 				03B984E1233BE16C00656CFA /* Exercise.swift */,
 				033C28252346872800A73B69 /* WorkoutDay.swift */,
+				05E323F4236B2A1D00FAAF04 /* SavedCodeSnippets.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */,
 				03B2D811235BD6F100005CC5 /* ExerciseRepsAndDone_TableViewCell.swift in Sources */,
 				052D19F32343A6F4003183B4 /* WorkoutList.swift in Sources */,
+				05E323F5236B2A1D00FAAF04 /* SavedCodeSnippets.swift in Sources */,
 				03188E08232803E6007302F7 /* Progress_VC.swift in Sources */,
 				05B3505B233D64490029234D /* Template_TVCell.swift in Sources */,
 				0377F6052358087B0015AEDB /* TMCell.swift in Sources */,

@@ -9,13 +9,20 @@
 import UIKit
 
 
-protocol WorkoutDayCreation_VC_Delegate {
-    func passWorkoutObjBack(workoutObj: WorkoutDay)
+protocol Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate {
+    //func passWorkoutObjBack(workoutObj: WorkoutDay)
+    // User hit cancel
+    func workoutDayObject_DidCancel(_ controller: WorkoutDayCreation_VC)
+    // User added item
+    func workoutDayObjectCreation_PassTo_AddEditTemplate(_ controller: WorkoutDayCreation_VC, didFinishAdding item: WorkoutDay)
+    // User finishes editing
+    func workoutDayObjectCreation_PassTo_AddEditTemplate(_ controller: WorkoutDayCreation_VC, didFinishEditing item: WorkoutDay)
 }
+
 
 class WorkoutDayCreation_VC: UIViewController {
     
-    var delegate: WorkoutDayCreation_VC_Delegate?
+    var delegate: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate?
     var workoutObj: WorkoutDay?
     var exerciseArg: [Exercise] = []
 
@@ -61,7 +68,9 @@ class WorkoutDayCreation_VC: UIViewController {
             
             workoutObj?.title = name
             
-            delegate?.passWorkoutObjBack(workoutObj: workoutObj!)
+            //delegate?.passWorkoutObjBack(workoutObj: workoutObj!)
+            
+            delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishAdding: workoutObj!)
             
             dismiss(animated: true, completion: nil)
             self.navigationController?.popViewController(animated: true)
@@ -90,6 +99,7 @@ class WorkoutDayCreation_VC: UIViewController {
         }
     }
 }
+
 
 /*
  * TableView Delegate and Data Source

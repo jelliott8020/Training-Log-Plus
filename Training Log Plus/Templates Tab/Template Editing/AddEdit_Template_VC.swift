@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol AddEdit_Template_VC_Delegate: class {
+protocol Pass_AddEditTemplate_BackTo_TemplateParent_Delegate: class {
     // User hit cancel
     func itemDetailViewControllerDidCancel(_ controller: AddEdit_Template_VC)
     // User added item
@@ -22,12 +22,12 @@ protocol AddEdit_Template_VC_Delegate: class {
 /*
  * This class allows 2 views, an Add and Edit
  */
-class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
+class AddEdit_Template_VC: UIViewController {
     
     
     // In order to use the protocol above, need a delegate
     // Any viewController that implements this protocol can be a delegate of the AddItemTableViewController
-    weak var delegate: AddEdit_Template_VC_Delegate?
+    weak var delegate: Pass_AddEditTemplate_BackTo_TemplateParent_Delegate?
     weak var templateList: TemplateList?
     weak var itemToEdit: Template?
     weak var globalTemplateItem: Template?
@@ -35,7 +35,8 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
     var wendlerPicker = UIPickerView()
     var wendlerData: [String] = []
     var selectedWendler: String?
-    var workoutDaysArray: [WorkoutDay] = []
+    
+    var workoutDaysList: WorkoutList
     
     @IBOutlet weak var doneButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var templateTitleTextField: UITextField!
@@ -53,6 +54,15 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
     @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
         // Account for editing
         doneButtonActionFunc()
+    }
+    
+    
+    /*
+     * Initializer
+     */
+    required init?(coder aDecoder: NSCoder) {
+        workoutDaysList = WorkoutList()
+        super.init(coder: aDecoder)
     }
     
     
@@ -81,7 +91,7 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
                 wendlerTextField.text = "No"
             }
             
-            workoutDaysArray = item.listOfWorkouts
+            workoutDaysList.workouts = item.listOfWorkouts
             
             doneButtonOutlet.isEnabled = true
         } else {
@@ -98,10 +108,9 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
      * Protocol function, receives the object from WorkoutDayCreation_VC
      */
     func passWorkoutObjBack(workoutObj: WorkoutDay) {
-        print("")
         
         // Just replacing the first item
-        workoutDaysArray[0] = workoutObj
+        workoutDaysList.addWorkoutObj(workoutObj)
         workoutDaysTable.reloadData()
         
     }
@@ -118,9 +127,9 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
         
         for n in 0...numOfDays-1 {
             let dayObj = WorkoutDay(title: "fart\(n)")
-            workoutDaysArray.append(dayObj)
+            workoutDaysList.addWorkoutObj(dayObj)
             
-            let indexPath = IndexPath(row: workoutDaysArray.count - 1, section: 0)
+            let indexPath = IndexPath(row: workoutDaysList.workouts.count - 1, section: 0)
             
             workoutDaysTable.beginUpdates()
             workoutDaysTable.insertRows(at: [indexPath], with: .automatic)
@@ -130,9 +139,9 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
         }
         
         if let item = itemToEdit {
-            item.listOfWorkouts = workoutDaysArray
+            item.listOfWorkouts = workoutDaysList.workouts
         } else {
-            globalTemplateItem?.listOfWorkouts = workoutDaysArray
+            globalTemplateItem?.listOfWorkouts = workoutDaysList.workouts
         }
     }
     
@@ -194,21 +203,81 @@ class AddEdit_Template_VC: UIViewController, WorkoutDayCreation_VC_Delegate {
     
     
     /*
-     * Different segue changes depending on segue identifier
-     * This allows 2 different buttons to open the same VC
+     * Prepare For Segue
+     *
+     * When opening up segue, passes information to the new VC
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "workoutDaySegue" {
             
             if let workoutDayCreation_VC = segue.destination as? WorkoutDayCreation_VC {
-                workoutDayCreation_VC.workoutObj = workoutDaysArray[0]
-                workoutDayCreation_VC.delegate = self
+                if let cell = sender as? UITableViewCell, let indexPath = workoutDaysTable.indexPath(for: cell) {
+                    let item = workoutDaysList.workouts[indexPath.row]
+                    workoutDayCreation_VC.workoutObj = item
+                    workoutDayCreation_VC.delegate = self
+                }
+                
             }
+        }
+    }
+    
+    /*
+     * Configure the text for each row item.
+     */
+    func configureText(for cell: UITableViewCell, with item: WorkoutDay) {
+        if let templateCell = cell as? workoutDaysInTemplate_TVCell {
+            templateCell.cellLabel.text = item.title
         }
     }
 }
 
+/*
+ * Delegate
+ *
+ * Implements the functions that allow the New or Edited Template to be passed back
+ */
+extension AddEdit_Template_VC: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate {
+    
+    /*
+     * Cancel button will pop the view controller
+     */
+    func workoutDayObject_DidCancel(_ controller: WorkoutDayCreation_VC) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    /*
+     * After adding, data is passed back
+     */
+    func workoutDayObjectCreation_PassTo_AddEditTemplate(_ controller: WorkoutDayCreation_VC, didFinishAdding item: WorkoutDay) {
+ navigationController?.popViewController(animated: true)
+        //templateList.addTemplateObj(item)
+        let rowIndex = workoutDaysList.workouts.count - 1
+        let indexPath = IndexPath(row: rowIndex, section: 0)
+        let indexPaths = [indexPath]
+        workoutDaysTable.insertRows(at: indexPaths, with: .automatic)
+    }
+    
+    
+    /*
+     * After editing, data is passed back
+     */
+    func workoutDayObjectCreation_PassTo_AddEditTemplate(_ controller: WorkoutDayCreation_VC, didFinishEditing item: WorkoutDay) {
+        if let index = workoutDaysList.workouts.firstIndex(of: item) {
+            let indexPath = IndexPath(row: index, section: 0)
+            if let cell = workoutDaysTable.cellForRow(at: indexPath) {
+                configureText(for: cell, with: item)
+            }
+        }
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+
+/*
+ * Utility Functions
+ */
 extension AddEdit_Template_VC {
     
     /*
@@ -337,11 +406,11 @@ extension AddEdit_Template_VC: UIPickerViewDataSource, UIPickerViewDelegate {
  */
 extension AddEdit_Template_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workoutDaysArray.count
+        return workoutDaysList.workouts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weightForCell = workoutDaysArray[indexPath.row].title
+        let weightForCell = workoutDaysList.workouts[indexPath.row].title
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutDay") as! workoutDaysInTemplate_TVCell
         cell.cellLabel.text = weightForCell
@@ -357,7 +426,7 @@ extension AddEdit_Template_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            workoutDaysArray.remove(at: indexPath.row)
+            workoutDaysList.workouts.remove(at: indexPath.row)
             
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
