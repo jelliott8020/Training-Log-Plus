@@ -16,7 +16,8 @@ import Foundation
 class Template: NSObject {
     
     var title = ""
-    var listOfWorkouts: [WorkoutDay] = []
+    //var listOfWorkouts: [WorkoutDay] = []
+    var workoutList: WorkoutList
     var dateStarted: String = ""
     var currentDayIndex = 0
     var numDaysOfWeek = 0
@@ -24,6 +25,10 @@ class Template: NSObject {
     var numOfWeeks = 0
     //var checked = false
     
+    
+    override init() {
+        workoutList = WorkoutList()
+    }
     
     
 //    func toggleChecked() {

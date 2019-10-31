@@ -12,26 +12,33 @@ class WorkoutList {
     
     var workouts: [WorkoutDay] = []
     
-    init() {
-        for _ in 0...5 {
-            _ = newExercise()
-        }
-    }
+//    init() {
+//        for _ in 0...5 {
+//            _ = newExercise()
+//        }
+//    }
     
-    func addExercise(temp: String) {
-        let item = WorkoutDay(title: temp)
-        workouts.append(item)
-    }
     
     func addWorkoutObj(_ obj: WorkoutDay) {
         workouts.append(obj)
     }
     
-    func newExercise() -> WorkoutDay {
-        let item = WorkoutDay(title: randTitle())
+    func addWorkoutObjWithTitle(_ title: String) {
+        let item = WorkoutDay()
+        item.setTitle(title)
         workouts.append(item)
-        return item
     }
+    
+    func addBlankWorkoutObj() {
+        let item = WorkoutDay()
+        workouts.append(item)
+    }
+    
+//    func newExercise() -> WorkoutDay {
+//        let item = WorkoutDay(title: randTitle())
+//        workouts.append(item)
+//        return item
+//    }
     
     func move(item: WorkoutDay, to index: Int) {
         guard let currentIndex = workouts.firstIndex(of: item) else {

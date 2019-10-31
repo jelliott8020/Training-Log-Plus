@@ -13,9 +13,9 @@ class WorkoutDay: NSObject {
     
     var exercises: [Exercise] = []
     
-    var title: String
-    
-    init(title: String) {
+    var title: String?
+
+    func setTitle(_ title: String) {
         self.title = title
     }
     

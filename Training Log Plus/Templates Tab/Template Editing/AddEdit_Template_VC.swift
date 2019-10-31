@@ -86,29 +86,52 @@ class AddEdit_Template_VC: UIViewController {
         // Else create a new TemplateItem
         if let item = itemToEdit {
             title = "Edit Template"
-            templateTitleTextField.text = item.title
-            numDaysOfWeekTextField.text = String(item.numDaysOfWeek)
-            numOfWeeksTextField.text = String(item.numOfWeeks)
             
-            if item.wendlerYesNo {
-                wendlerTextField.text = "Yes"
-            } else {
-                wendlerTextField.text = "No"
-            }
+            setTextFields(title: item.title, days: String(item.numDaysOfWeek), wen: item.wendlerYesNo, weeks: String(item.numOfWeeks))
             
-            workoutDaysList.workouts = item.listOfWorkouts
+            workoutDaysList = item.workoutList
             
             doneButtonOutlet.isEnabled = true
         } else {
-            globalTemplateItem = templateList?.newTemplate()
-            globalTemplateItem?.numOfWeeks = passedWeeks!
-            globalTemplateItem?.numDaysOfWeek = passedDays!
-            globalTemplateItem?.wendlerYesNo = passedWen!
-            globalTemplateItem?.title = passedTitle!
             
+            if let title = passedTitle, let wen = passedWen, let weeks = passedWeeks, let days = passedDays {
+                globalTemplateItem = templateList?.newTemplate()
+                globalTemplateItem?.numOfWeeks = weeks
+                globalTemplateItem?.numDaysOfWeek = days
+                globalTemplateItem?.wendlerYesNo = wen
+                globalTemplateItem?.title = title
+                
+                
+                for _ in 1...days {
+                    let newWorkout = WorkoutDay()
+                    newWorkout.setTitle("Tap to edit")
+                    globalTemplateItem?.workoutList.addWorkoutObj(newWorkout)
+                    workoutDaysList.addWorkoutObj(newWorkout)
+                }
+                
+                setTextFields(title: passedTitle!, days: String(passedDays!), wen: passedWen!, weeks: String(passedWeeks!))
+            }
         }
         
         navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    
+    /*
+     * Set Text Fields
+     *
+     * Sets the text field's values with the object passed
+     */
+    func setTextFields(title: String, days: String, wen: Bool, weeks: String) {
+        templateTitleTextField.text = title
+        numDaysOfWeekTextField.text = days
+        numOfWeeksTextField.text = weeks
+        
+        if wen {
+            wendlerTextField.text = "Yes"
+        } else {
+            wendlerTextField.text = "No"
+        }
     }
     
     
@@ -135,8 +158,8 @@ class AddEdit_Template_VC: UIViewController {
     func createButtonFunc() {
         let numOfDays = Int(numDaysOfWeekTextField.text!)!
         
-        for n in 0...numOfDays-1 {
-            let dayObj = WorkoutDay(title: "fart\(n)")
+        for _ in 0...numOfDays-1 {
+            let dayObj = WorkoutDay()
             workoutDaysList.addWorkoutObj(dayObj)
             
             let indexPath = IndexPath(row: workoutDaysList.workouts.count - 1, section: 0)
@@ -149,9 +172,9 @@ class AddEdit_Template_VC: UIViewController {
         }
         
         if let item = itemToEdit {
-            item.listOfWorkouts = workoutDaysList.workouts
+            item.workoutList = workoutDaysList
         } else {
-            globalTemplateItem?.listOfWorkouts = workoutDaysList.workouts
+            globalTemplateItem?.workoutList = workoutDaysList
         }
     }
     
@@ -261,12 +284,11 @@ extension AddEdit_Template_VC: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Dele
      * After adding, data is passed back
      */
     func workoutDayObjectCreation_PassTo_AddEditTemplate(_ controller: WorkoutDayCreation_VC, didFinishAdding item: WorkoutDay) {
- navigationController?.popViewController(animated: true)
-        //templateList.addTemplateObj(item)
+        //navigationController?.popViewController(animated: true)
+        workoutDaysList.addWorkoutObj(item)
         let rowIndex = workoutDaysList.workouts.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)
-        let indexPaths = [indexPath]
-        workoutDaysTable.insertRows(at: indexPaths, with: .automatic)
+        workoutDaysTable.insertRows(at: [indexPath], with: .automatic)
     }
     
     
@@ -280,7 +302,7 @@ extension AddEdit_Template_VC: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Dele
                 configureText(for: cell, with: item)
             }
         }
-        navigationController?.popViewController(animated: true)
+        //navigationController?.popViewController(animated: true)
     }
 }
 

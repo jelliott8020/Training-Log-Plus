@@ -18,25 +18,28 @@ class TemplateList {
     init() {
         let temp1 = Template()
         temp1.title = "Template Title 1"
-        temp1.listOfWorkouts = addWorkouts()
-        temp1.numDaysOfWeek = temp1.listOfWorkouts.count
+        
+        let wo1 = WorkoutDay()
+        wo1.setTitle("Tester1")
+        print(wo1)
+        let wo2 = WorkoutDay()
+        wo2.setTitle("Tester2")
+        let wo3 = WorkoutDay()
+        wo3.setTitle("Tester3")
+        let wo4 = WorkoutDay()
+        wo4.setTitle("Tester4")
+        
+        temp1.workoutList.addWorkoutObj(wo1)
+        
+        temp1.workoutList.addWorkoutObj(wo2)
+        temp1.workoutList.addWorkoutObj(wo3)
+        temp1.workoutList.addWorkoutObj(wo4)
+        
+        print(temp1.workoutList as Any)
+        print("count \(temp1.workoutList.workouts.count)")
+        temp1.numDaysOfWeek = temp1.workoutList.workouts.count
         temp1.numOfWeeks = 1
         templates.append(temp1)
-        
-        let temp2 = Template()
-        temp2.title = "Template Title 2"
-        temp2.listOfWorkouts = addWorkouts()
-        temp2.numDaysOfWeek = temp2.listOfWorkouts.count
-        temp1.numOfWeeks = 2
-        templates.append(temp2)
-        
-        let temp3 = Template()
-        temp3.title = "Template Title 3"
-        temp3.listOfWorkouts = addWorkouts()
-        temp3.numDaysOfWeek = temp3.listOfWorkouts.count
-        temp1.numOfWeeks = 3
-        templates.append(temp3)
-        
     }
     
     
@@ -85,18 +88,25 @@ class TemplateList {
     /*
      Add Workouts: Create WorkoutDay array, add random stuff, return
      */
-    private func addWorkouts() -> [WorkoutDay] {
-        var exArg: [WorkoutDay] = []
-        let ex1 = WorkoutDay(title: randTitle())
-        let ex2 = WorkoutDay(title: randTitle())
-        let ex3 = WorkoutDay(title: randTitle())
-        let ex4 = WorkoutDay(title: randTitle())
-        exArg.append(ex1)
-        exArg.append(ex2)
-        exArg.append(ex3)
-        exArg.append(ex4)
+    func addWorkouts() -> [WorkoutDay] {
+        print("hi")
+        var workoutArg: [WorkoutDay] = []
+        let wo1 = WorkoutDay()
+        wo1.setTitle("Tester1")
+        let wo2 = WorkoutDay()
+        wo2.setTitle("Tester2")
+        let wo3 = WorkoutDay()
+        wo3.setTitle("Tester3")
+        let wo4 = WorkoutDay()
+        wo4.setTitle("Tester4")
+        workoutArg.append(wo1)
+        workoutArg.append(wo2)
+        workoutArg.append(wo3)
+        workoutArg.append(wo4)
         
-        return exArg
+        print(workoutArg.count)
+        
+        return workoutArg
     }
     
     

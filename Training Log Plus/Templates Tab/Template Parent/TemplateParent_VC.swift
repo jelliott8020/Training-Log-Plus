@@ -135,6 +135,11 @@ class TemplateParent_VC: UITableViewController {
                     self.alertWen = false
                 }
                 
+                print(self.alertTitle as Any)
+                print(self.alertDays as Any)
+                print(self.alertWen as Any)
+                print(self.alertWeeks as Any)
+                
                 
                 if (check) {
                     return
@@ -189,7 +194,7 @@ class TemplateParent_VC: UITableViewController {
                 addTempVC.passedTitle = alertTitle
                 addTempVC.passedWen = alertWen
                 addTempVC.passedDays = alertDays
-                addTempVC.passedDays = alertWeeks
+                addTempVC.passedWeeks = alertWeeks
             }
         } else if segue.identifier == "EditItemSegue" {
             if let editTempVC = segue.destination as? AddEdit_Template_VC {

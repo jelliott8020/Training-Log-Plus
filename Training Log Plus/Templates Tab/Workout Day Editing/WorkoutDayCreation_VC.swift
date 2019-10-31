@@ -64,17 +64,19 @@ class WorkoutDayCreation_VC: UIViewController {
      * Updates title of WorkoutDay Object, passes it back to parent VC
      */
     func doneButtonAction() {
-        if let name = workoutNameTextField.text {
-            
-            workoutObj?.title = name
-            
-            //delegate?.passWorkoutObjBack(workoutObj: workoutObj!)
-            
-            delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishAdding: workoutObj!)
-            
-            dismiss(animated: true, completion: nil)
-            self.navigationController?.popViewController(animated: true)
-        }
+//        if let name = workoutNameTextField.text {
+//            
+//            workoutObj?.title = name
+//            
+//            //delegate?.passWorkoutObjBack(workoutObj: workoutObj!)
+//            
+//            
+//        }
+        
+        delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishEditing: workoutObj!)
+        
+        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
