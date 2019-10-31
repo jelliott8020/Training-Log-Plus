@@ -32,6 +32,11 @@ class AddEdit_Template_VC: UIViewController {
     weak var itemToEdit: Template?
     weak var globalTemplateItem: Template?
     
+    var passedTitle: String?
+    var passedDays: Int?
+    var passedWen: Bool?
+    var passedWeeks: Int?
+    
     var wendlerPicker = UIPickerView()
     var wendlerData: [String] = []
     var selectedWendler: String?
@@ -96,6 +101,11 @@ class AddEdit_Template_VC: UIViewController {
             doneButtonOutlet.isEnabled = true
         } else {
             globalTemplateItem = templateList?.newTemplate()
+            globalTemplateItem?.numOfWeeks = passedWeeks!
+            globalTemplateItem?.numDaysOfWeek = passedDays!
+            globalTemplateItem?.wendlerYesNo = passedWen!
+            globalTemplateItem?.title = passedTitle!
+            
         }
         
         navigationItem.largeTitleDisplayMode = .never

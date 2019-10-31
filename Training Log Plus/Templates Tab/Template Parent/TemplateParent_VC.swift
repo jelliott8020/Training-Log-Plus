@@ -13,6 +13,11 @@ class TemplateParent_VC: UITableViewController {
     
     var templateList: TemplateList
     
+    var alertTitle: String?
+    var alertDays: Int?
+    var alertWen: Bool?
+    var alertWeeks: Int?
+    
     /*
      * Initializer
      */
@@ -31,7 +36,7 @@ class TemplateParent_VC: UITableViewController {
     
     
     @IBAction func addTemplateButton(_ sender: UIBarButtonItem) {
-        alertWithTF()
+        addButtonAlert()
     }
     
     
@@ -102,7 +107,7 @@ class TemplateParent_VC: UITableViewController {
     }
     
     
-    func alertWithTF() {
+    func addButtonAlert() {
         //Step : 1
         let alert = UIAlertController(title: "Create Template", message: "Table Information", preferredStyle: UIAlertController.Style.alert )
         
@@ -120,28 +125,23 @@ class TemplateParent_VC: UITableViewController {
                 check = Util.checkForBlankInput(str: wen, txtField: wendlerYesNoTxtField)
                 check = Util.checkForBlankInput(str: weeks, txtField: numWeeksTxtField)
                 
+                self.alertTitle = title
+                self.alertDays = Int(days)
+                self.alertWeeks = Int(weeks)
+                
+                if (wen.lowercased() == "yes") {
+                    self.alertWen = true
+                } else {
+                    self.alertWen = false
+                }
+                
+                
                 if (check) {
                     return
                 }
                 
-                
-                print(tempNameTxtField.text!)
-                print("TF 1 : \(tempNameTxtField.text!)")
-                
-                print(numDaysTxtField.text!)
-                print("TF 2 : \(numDaysTxtField.text!)")
-                
-                print(numDaysTxtField.text!)
-                print("TF 3 : \(wendlerYesNoTxtField.text!)")
-                
-                print(numDaysTxtField.text!)
-                print("TF 4 : \(numWeeksTxtField.text!)")
-                
-                
                 self.performSegue(withIdentifier: "AddItemSegue", sender: self)
-                
             }
-            
         }
         
         alert.addTextField { (tempNameTxtField) in
@@ -164,17 +164,13 @@ class TemplateParent_VC: UITableViewController {
             numWeeksTxtField.textColor = .purple
         }
         
-        //Step : 4
-        alert.addAction(save)
-        //Cancel action
         let cancel = UIAlertAction(title: "Cancel", style: .default) { (alertAction) in }
+        
+        alert.addAction(save)
         alert.addAction(cancel)
-        //OR single line action
-        //alert.addAction(UIAlertAction(title: "Cancel", style: .default) { (alertAction) in })
         
         self.present(alert, animated:true, completion: nil)
         
-        print("got")
     }
     
     
@@ -187,16 +183,20 @@ class TemplateParent_VC: UITableViewController {
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddItemSegue" {
-            if let itemDetailViewController = segue.destination as? AddEdit_Template_VC {
-                itemDetailViewController.delegate = self
-                itemDetailViewController.templateList = templateList
+            if let addTempVC = segue.destination as? AddEdit_Template_VC {
+                addTempVC.delegate = self
+                addTempVC.templateList = templateList
+                addTempVC.passedTitle = alertTitle
+                addTempVC.passedWen = alertWen
+                addTempVC.passedDays = alertDays
+                addTempVC.passedDays = alertWeeks
             }
         } else if segue.identifier == "EditItemSegue" {
-            if let itemDetailViewController = segue.destination as? AddEdit_Template_VC {
+            if let editTempVC = segue.destination as? AddEdit_Template_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                     let item = templateList.templates[indexPath.row]
-                    itemDetailViewController.itemToEdit = item
-                    itemDetailViewController.delegate = self
+                    editTempVC.itemToEdit = item
+                    editTempVC.delegate = self
                 }
             }
         }
