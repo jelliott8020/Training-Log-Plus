@@ -8,8 +8,23 @@
 
 import UIKit
 
+protocol Pass_AccessoryExerciseObject_BackTo_WorkoutDayCreation_Delegate {
+    //func passWorkoutObjBack(workoutObj: WorkoutDay)
+    // User hit cancel
+    func addEditAccExercise_DidCancel(_ controller: AddEdit_AccessoryExercise_VC)
+    // User added item
+    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_AccessoryExercise_VC, didFinishAdding item: Exercise)
+    // User finishes editing
+    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_AccessoryExercise_VC, didFinishEditing item: Exercise)
+}
+
 class AddEdit_AccessoryExercise_VC: UIViewController {
 
+    
+    var delegate: Pass_AccessoryExerciseObject_BackTo_WorkoutDayCreation_Delegate?
+    var pastAttemptsList: [Attempt] = []
+    var passedInExerciseObj: Exercise?
+    
     
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
@@ -25,6 +40,11 @@ class AddEdit_AccessoryExercise_VC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pastAttempsTable.tableFooterView = UIView(frame: CGRect.zero)
+        
+        pastAttemptsList = passedInExerciseObj!.attemptList
+        self.title = passedInExerciseObj?.title
 
         // Do any additional setup after loading the view.
     }
@@ -35,7 +55,10 @@ class AddEdit_AccessoryExercise_VC: UIViewController {
     }
     
     @IBAction func addButton(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
+        
+        delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishAdding: passedInExerciseObj!)
+        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -50,4 +73,22 @@ class AddEdit_AccessoryExercise_VC: UIViewController {
     }
     */
 
+}
+
+extension AddEdit_AccessoryExercise_VC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let weightForCell = pastAttemptsList[indexPath.row].titleForTest
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "calcedTrainingMaxes") as! AccessoryExercise_TVCell
+        
+        cell.pastAttemptLabel.text = weightForCell
+        
+        return cell
+    }
+    
+    
 }

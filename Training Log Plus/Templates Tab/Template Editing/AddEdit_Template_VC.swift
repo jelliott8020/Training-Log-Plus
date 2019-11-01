@@ -139,19 +139,6 @@ class AddEdit_Template_VC: UIViewController {
     }
     
     
-    /*
-     * Pass Workout Object Back
-     *
-     * Protocol function, receives the object from WorkoutDayCreation_VC
-     */
-    func passWorkoutObjBack(workoutObj: WorkoutDay) {
-        
-        // Just replacing the first item
-        workoutDaysList.append(workoutObj)
-        workoutDaysTable.reloadData()
-        
-    }
-    
     func addButtonAlert() {
         //Step : 1
         let alert = UIAlertController(title: "Workout Name", message: "", preferredStyle: UIAlertController.Style.alert )
@@ -295,8 +282,7 @@ class AddEdit_Template_VC: UIViewController {
                 if let cell = sender as? UITableViewCell, let indexPath = workoutDaysTable.indexPath(for: cell) {
                     
                     let item = workoutDaysList[indexPath.row]
-                    workoutDayCreation_VC.workoutObj = item
-                    //workoutDayCreation_VC.passedTitle = alertName
+                    workoutDayCreation_VC.passedInWorkoutObj = item
                     workoutDayCreation_VC.delegate = self
                 }
             }

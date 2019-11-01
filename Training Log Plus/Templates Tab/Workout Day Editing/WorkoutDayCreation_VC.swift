@@ -23,11 +23,10 @@ protocol Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate {
 class WorkoutDayCreation_VC: UIViewController {
     
     var delegate: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate?
-    var workoutObj: WorkoutDay?
-    var accExerciseArg: [Exercise] = []
-    var mainExerciseArg: [Exercise] = []
+    var passedInWorkoutObj: WorkoutDay?
+    var accExerciseList: [Exercise] = []
+    var mainExerciseList: [Exercise] = []
     
-    var passedTitle: String?
 
     @IBOutlet weak var workoutNameTextField: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -61,10 +60,10 @@ class WorkoutDayCreation_VC: UIViewController {
         
         exerciseTable.tableFooterView = UIView(frame: CGRect.zero)
         
-        accExerciseArg = workoutObj!.accExerciseList
-        mainExerciseArg = workoutObj!.mainExerciseList
+        accExerciseList = passedInWorkoutObj!.accExerciseList
+        mainExerciseList = passedInWorkoutObj!.mainExerciseList
         //workoutObj?.title = passedTitle
-        self.title = workoutObj?.title
+        self.title = passedInWorkoutObj?.title
     }
     
     
@@ -83,7 +82,7 @@ class WorkoutDayCreation_VC: UIViewController {
 //            
 //        }
         
-        delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishEditing: workoutObj!)
+        delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishEditing: passedInWorkoutObj!)
         
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
@@ -107,7 +106,33 @@ class WorkoutDayCreation_VC: UIViewController {
             }
             
             self.title = workoutNameTextField.text
-            workoutObj?.title = workoutNameTextField.text!
+            passedInWorkoutObj?.title = workoutNameTextField.text!
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "MainExSegue" {
+            if let mainEx_VC = segue.destination as? AddEdit_MainExercise_VC {
+                if let cell = sender as? UITableViewCell, let indexPath = exerciseTable.indexPath(for: cell) {
+                    
+                    let item = mainExerciseList[indexPath.row]
+                    mainEx_VC.passedInExerciseObj = item
+                    mainEx_VC.delegate = self
+                }
+                
+            }
+            
+        } else if segue.identifier == "AccExSegue" {
+            if let accEx_VC = segue.destination as? AddEdit_AccessoryExercise_VC {
+                if let cell = sender as? UITableViewCell, let indexPath = exerciseTable.indexPath(for: cell) {
+                    
+                    let item = accExerciseList[indexPath.row]
+                    accEx_VC.passedInExerciseObj = item
+                    accEx_VC.delegate = self
+                }
+                
+            }
         }
     }
 }
@@ -119,8 +144,10 @@ class WorkoutDayCreation_VC: UIViewController {
 extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 1 {
-            return accExerciseArg.count
+        if section == 0 {
+            return mainExerciseList.count
+        } else if section == 1 {
+            return accExerciseList.count
         }
         return 1
         
@@ -131,12 +158,12 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
         let dummyCell = UITableViewCell()
         
         if indexPath.section == 0 {
-            let weightForCell = mainExerciseArg[indexPath.row].title
+            let weightForCell = mainExerciseList[indexPath.row].title
             let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! DayMainExercise_TVCell
             cell.mainExerLabel.text = weightForCell
             return cell
         } else if indexPath.section == 1 {
-            let weightForCell = accExerciseArg[indexPath.row].title
+            let weightForCell = accExerciseList[indexPath.row].title
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccessoryExercise") as! DayAccExercise_TVCell
             cell.accExerLabel.text = weightForCell
             return cell
@@ -184,12 +211,56 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            accExerciseArg.remove(at: indexPath.row)
+            accExerciseList.remove(at: indexPath.row)
             
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
         }
+    }
+    
+
+}
+
+
+/*
+ * Delegate
+ *
+ * Implements the functions that allow the New or Edited Template to be passed back
+ */
+extension WorkoutDayCreation_VC: Pass_MainExerciseObject_BackTo_WorkoutDayCreation_Delegate {
+    
+    /*
+     * Cancel button will pop the view controller
+     */
+    func addEditMainExercise_DidCancel(_ controller: AddEdit_MainExercise_VC) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    /*
+     * After adding, data is passed back
+     */
+    func addEditMainExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishAdding item: Exercise) {
+        //navigationController?.popViewController(animated: true)
+        mainExerciseList.append(item)
+        let rowIndex = mainExerciseList.count - 1
+        let indexPath = IndexPath(row: rowIndex, section: 0)
+        exerciseTable.insertRows(at: [indexPath], with: .automatic)
+    }
+    
+    
+    /*
+     * After editing, data is passed back
+     */
+    func addEditMainExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishEditing item: Exercise) {
+        if let index = mainExerciseList.firstIndex(of: item) {
+            let indexPath = IndexPath(row: index, section: 0)
+            if let cell = exerciseTable.cellForRow(at: indexPath) {
+                cell.textLabel?.text = item.title
+            }
+        }
+        //navigationController?.popViewController(animated: true)
     }
 }
 

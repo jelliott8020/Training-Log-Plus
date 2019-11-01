@@ -8,17 +8,23 @@
 
 import UIKit
 
+protocol Pass_MainExerciseObject_BackTo_WorkoutDayCreation_Delegate {
+    //func passWorkoutObjBack(workoutObj: WorkoutDay)
+    // User hit cancel
+    func addEditMainExercise_DidCancel(_ controller: AddEdit_MainExercise_VC)
+    // User added item
+    func addEditMainExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishAdding item: Exercise)
+    // User finishes editing
+    func addEditMainExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishEditing item: Exercise)
+}
+
+
 class AddEdit_MainExercise_VC: UIViewController {
 
+    var delegate: Pass_MainExerciseObject_BackTo_WorkoutDayCreation_Delegate?
+    var pastAttemptsList: [Attempt] = []
+    var passedInExerciseObj: Exercise?
     
-    @IBOutlet weak var addButton: UIBarButtonItem!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
-    
-    @IBOutlet weak var bodyPartTextField: UITextField!
-    @IBOutlet weak var exerciseTextField: UITextField!
-    @IBOutlet weak var progressionSchemeTextField: UITextField!
-    @IBOutlet weak var trainingMaxTextField: UITextField!
-    @IBOutlet weak var pastTrainingMaxTable: UITableView!
     
     var bodyPartPicker = UIPickerView()
     var exercisePicker = UIPickerView()
@@ -33,8 +39,19 @@ class AddEdit_MainExercise_VC: UIViewController {
     var selectedProgressionScheme: String?
     var selectedTrainingMax: String?
     
-    var pastAttemptsList: [Attempt] = []
     
+    
+    
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
+    @IBOutlet weak var bodyPartTextField: UITextField!
+    @IBOutlet weak var exerciseTextField: UITextField!
+    @IBOutlet weak var progressionSchemeTextField: UITextField!
+    @IBOutlet weak var trainingMaxTextField: UITextField!
+    @IBOutlet weak var pastTrainingMaxTable: UITableView!
+    
+
     
     required init?(coder aDecoder: NSCoder) {
         //pastAttemptsList = AttemptList()
@@ -44,6 +61,11 @@ class AddEdit_MainExercise_VC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pastTrainingMaxTable.tableFooterView = UIView(frame: CGRect.zero)
+        
+        pastAttemptsList = passedInExerciseObj!.attemptList
+        self.title = passedInExerciseObj?.title
         
         bodyPartData = Util.getGenericBodyPartData()
         exerciseData = Util.getGenericExerciseData()
@@ -64,8 +86,10 @@ class AddEdit_MainExercise_VC: UIViewController {
     }
     
     func addButtonAction() {
-        navigationController?.popViewController(animated: true)
-
+        
+        delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishAdding: passedInExerciseObj!)
+        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     /*
