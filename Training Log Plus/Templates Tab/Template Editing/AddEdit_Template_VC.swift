@@ -43,7 +43,7 @@ class AddEdit_Template_VC: UIViewController {
     
     var alertName: String?
     
-    var workoutDaysList: WorkoutList
+    var workoutDaysList: [WorkoutDay] = []
     
     @IBOutlet weak var doneButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var workoutDaysTable: UITableView!
@@ -65,7 +65,7 @@ class AddEdit_Template_VC: UIViewController {
      * Initializer
      */
     required init?(coder aDecoder: NSCoder) {
-        workoutDaysList = WorkoutList()
+        //workoutDaysList = WorkoutList()
         super.init(coder: aDecoder)
     }
     
@@ -108,9 +108,9 @@ class AddEdit_Template_VC: UIViewController {
                 
                 for _ in 1...days {
                     let newWorkout = WorkoutDay()
-                    newWorkout.setTitle("Tap to edit")
-                    globalTemplateItem?.workoutList.addWorkoutObj(newWorkout)
-                    workoutDaysList.addWorkoutObj(newWorkout)
+                    newWorkout.title = "Tap to edit"
+                    globalTemplateItem?.addWorkout(newWorkout)
+                    workoutDaysList.append(newWorkout)
                 }
                 
                 setLabels(title: passedTitle!, days: String(passedDays!), wen: passedWen!, weeks: String(passedWeeks!))
@@ -147,7 +147,7 @@ class AddEdit_Template_VC: UIViewController {
     func passWorkoutObjBack(workoutObj: WorkoutDay) {
         
         // Just replacing the first item
-        workoutDaysList.addWorkoutObj(workoutObj)
+        workoutDaysList.append(workoutObj)
         workoutDaysTable.reloadData()
         
     }
@@ -294,7 +294,7 @@ class AddEdit_Template_VC: UIViewController {
             if let workoutDayCreation_VC = segue.destination as? WorkoutDayCreation_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = workoutDaysTable.indexPath(for: cell) {
                     
-                    let item = workoutDaysList.workouts[indexPath.row]
+                    let item = workoutDaysList[indexPath.row]
                     workoutDayCreation_VC.workoutObj = item
                     //workoutDayCreation_VC.passedTitle = alertName
                     workoutDayCreation_VC.delegate = self
@@ -333,8 +333,8 @@ extension AddEdit_Template_VC: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Dele
      */
     func workoutDayObjectCreation_PassTo_AddEditTemplate(_ controller: WorkoutDayCreation_VC, didFinishAdding item: WorkoutDay) {
         //navigationController?.popViewController(animated: true)
-        workoutDaysList.addWorkoutObj(item)
-        let rowIndex = workoutDaysList.workouts.count - 1
+        workoutDaysList.append(item)
+        let rowIndex = workoutDaysList.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)
         workoutDaysTable.insertRows(at: [indexPath], with: .automatic)
     }
@@ -344,7 +344,7 @@ extension AddEdit_Template_VC: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Dele
      * After editing, data is passed back
      */
     func workoutDayObjectCreation_PassTo_AddEditTemplate(_ controller: WorkoutDayCreation_VC, didFinishEditing item: WorkoutDay) {
-        if let index = workoutDaysList.workouts.firstIndex(of: item) {
+        if let index = workoutDaysList.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             if let cell = workoutDaysTable.cellForRow(at: indexPath) {
                 configureText(for: cell, with: item)
@@ -399,11 +399,11 @@ extension AddEdit_Template_VC: UITextFieldDelegate {
  */
 extension AddEdit_Template_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workoutDaysList.workouts.count
+        return workoutDaysList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weightForCell = workoutDaysList.workouts[indexPath.row].title
+        let weightForCell = workoutDaysList[indexPath.row].title
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutDay") as! workoutDaysInTemplate_TVCell
         
@@ -444,7 +444,7 @@ extension AddEdit_Template_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            workoutDaysList.workouts.remove(at: indexPath.row)
+            workoutDaysList.remove(at: indexPath.row)
             
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)

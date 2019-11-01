@@ -25,7 +25,7 @@ class WorkoutDayCreation_VC: UIViewController {
     var delegate: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate?
     var workoutObj: WorkoutDay?
     var accExerciseArg: [Exercise] = []
-    var mainExercise: Exercise?
+    var mainExerciseArg: [Exercise] = []
     
     var passedTitle: String?
 
@@ -61,8 +61,8 @@ class WorkoutDayCreation_VC: UIViewController {
         
         exerciseTable.tableFooterView = UIView(frame: CGRect.zero)
         
-        accExerciseArg = workoutObj!.getExercises()
-        mainExercise = workoutObj!.getMainExercise()
+        accExerciseArg = workoutObj!.accExerciseList
+        mainExerciseArg = workoutObj!.mainExerciseList
         //workoutObj?.title = passedTitle
         self.title = workoutObj?.title
     }
@@ -131,12 +131,12 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
         let dummyCell = UITableViewCell()
         
         if indexPath.section == 0 {
-            let weightForCell = mainExercise?.name
+            let weightForCell = mainExerciseArg[indexPath.row].title
             let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! DayMainExercise_TVCell
             cell.mainExerLabel.text = weightForCell
             return cell
         } else if indexPath.section == 1 {
-            let weightForCell = accExerciseArg[indexPath.row].name
+            let weightForCell = accExerciseArg[indexPath.row].title
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccessoryExercise") as! DayAccExercise_TVCell
             cell.accExerLabel.text = weightForCell
             return cell

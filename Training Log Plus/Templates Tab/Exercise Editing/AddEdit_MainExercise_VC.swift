@@ -33,11 +33,11 @@ class AddEdit_MainExercise_VC: UIViewController {
     var selectedProgressionScheme: String?
     var selectedTrainingMax: String?
     
-    var pastAttemptsList: AttemptList
+    var pastAttemptsList: [Attempt] = []
     
     
     required init?(coder aDecoder: NSCoder) {
-        pastAttemptsList = AttemptList()
+        //pastAttemptsList = AttemptList()
         super.init(coder: aDecoder)
     }
     
@@ -135,7 +135,7 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weightForCell = pastAttemptsList.attempts[indexPath.row].titleForTest
+        let weightForCell = pastAttemptsList[indexPath.row].titleForTest
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "calcedTrainingMaxes") as! MainExercise_TVCell
         

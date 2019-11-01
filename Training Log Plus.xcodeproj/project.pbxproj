@@ -32,10 +32,8 @@
 		03B984E2233BE16C00656CFA /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B984E1233BE16C00656CFA /* Exercise.swift */; };
 		03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32C92325903300C712D1 /* TemplateList.swift */; };
 		03BB32CC2325A52F00C712D1 /* AddEdit_Template_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32CB2325A52F00C712D1 /* AddEdit_Template_VC.swift */; };
-		03C0DD1B236BCFAF00BF8F9E /* AttemptList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C0DD1A236BCFAF00BF8F9E /* AttemptList.swift */; };
 		03F1D0772329701700B63042 /* SelectProgressExercises_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1D0762329701700B63042 /* SelectProgressExercises_VC.swift */; };
 		03FB9EAB2322FA4E00F9D410 /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FB9EAA2322FA4E00F9D410 /* Template.swift */; };
-		052D19F32343A6F4003183B4 /* WorkoutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D19F22343A6F4003183B4 /* WorkoutList.swift */; };
 		052D19F72343A90F003183B4 /* WorkoutList_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D19F62343A90F003183B4 /* WorkoutList_TVCell.swift */; };
 		052D409F2359153100667D2E /* Exercises_TVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D409E2359153100667D2E /* Exercises_TVC.swift */; };
 		05739D152368C5AA00B70A4E /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05739D142368C5AA00B70A4E /* Util.swift */; };
@@ -52,7 +50,6 @@
 		05CBE50F23577EA400E766F8 /* CurrentWorkout_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE50E23577EA400E766F8 /* CurrentWorkout_VC.swift */; };
 		05CBE51123577EC300E766F8 /* ChangeTemplate_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE51023577EC300E766F8 /* ChangeTemplate_VC.swift */; };
 		05CBE51323577ECC00E766F8 /* CustomWorkout_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE51223577ECC00E766F8 /* CustomWorkout_VC.swift */; };
-		05D03323236B6206008BE9AA /* ExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D03322236B6206008BE9AA /* ExerciseList.swift */; };
 		05E06532235918CA00807493 /* Calced_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E06531235918CA00807493 /* Calced_TVCell.swift */; };
 		05E323F5236B2A1D00FAAF04 /* SavedCodeSnippets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E323F4236B2A1D00FAAF04 /* SavedCodeSnippets.swift */; };
 /* End PBXBuildFile section */
@@ -85,10 +82,8 @@
 		03B984E1233BE16C00656CFA /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		03BB32C92325903300C712D1 /* TemplateList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateList.swift; sourceTree = "<group>"; };
 		03BB32CB2325A52F00C712D1 /* AddEdit_Template_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEdit_Template_VC.swift; sourceTree = "<group>"; };
-		03C0DD1A236BCFAF00BF8F9E /* AttemptList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptList.swift; sourceTree = "<group>"; };
 		03F1D0762329701700B63042 /* SelectProgressExercises_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProgressExercises_VC.swift; sourceTree = "<group>"; };
 		03FB9EAA2322FA4E00F9D410 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
-		052D19F22343A6F4003183B4 /* WorkoutList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList.swift; sourceTree = "<group>"; };
 		052D19F62343A90F003183B4 /* WorkoutList_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList_TVCell.swift; sourceTree = "<group>"; };
 		052D409E2359153100667D2E /* Exercises_TVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercises_TVC.swift; sourceTree = "<group>"; };
 		05739D142368C5AA00B70A4E /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -105,7 +100,6 @@
 		05CBE50E23577EA400E766F8 /* CurrentWorkout_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWorkout_VC.swift; sourceTree = "<group>"; };
 		05CBE51023577EC300E766F8 /* ChangeTemplate_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTemplate_VC.swift; sourceTree = "<group>"; };
 		05CBE51223577ECC00E766F8 /* CustomWorkout_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWorkout_VC.swift; sourceTree = "<group>"; };
-		05D03322236B6206008BE9AA /* ExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseList.swift; sourceTree = "<group>"; };
 		05E06531235918CA00807493 /* Calced_TVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calced_TVCell.swift; sourceTree = "<group>"; };
 		05E323F4236B2A1D00FAAF04 /* SavedCodeSnippets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCodeSnippets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,14 +182,11 @@
 		03B984DE233BE02300656CFA /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				03FB9EAA2322FA4E00F9D410 /* Template.swift */,
 				03BB32C92325903300C712D1 /* TemplateList.swift */,
+				03FB9EAA2322FA4E00F9D410 /* Template.swift */,
 				033C28252346872800A73B69 /* WorkoutDay.swift */,
-				052D19F22343A6F4003183B4 /* WorkoutList.swift */,
 				03B984E1233BE16C00656CFA /* Exercise.swift */,
-				05D03322236B6206008BE9AA /* ExerciseList.swift */,
 				03B984DF233BE03F00656CFA /* Attempt.swift */,
-				03C0DD1A236BCFAF00BF8F9E /* AttemptList.swift */,
 				05E323F4236B2A1D00FAAF04 /* SavedCodeSnippets.swift */,
 				05739D142368C5AA00B70A4E /* Util.swift */,
 			);
@@ -438,7 +429,6 @@
 				03B2D80B235BD67400005CC5 /* BodyBuildingPerformance_TVC.swift in Sources */,
 				03B2D80D235BD6C600005CC5 /* ExerciseAMRAP_TableViewCell.swift in Sources */,
 				05C3B40723623D340087BAC4 /* AddEdit_AccessoryExercise_VC.swift in Sources */,
-				03C0DD1B236BCFAF00BF8F9E /* AttemptList.swift in Sources */,
 				05C3B40223623C000087BAC4 /* WorkoutDayCreation_VC.swift in Sources */,
 				05CBE51323577ECC00E766F8 /* CustomWorkout_VC.swift in Sources */,
 				03B2D809235BD5B600005CC5 /* BodyBuildingPerformance_TVCell.swift in Sources */,
@@ -446,7 +436,6 @@
 				033C282A2346893000A73B69 /* ItemDetailWorkout_VC.swift in Sources */,
 				03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */,
 				03B2D811235BD6F100005CC5 /* ExerciseRepsAndDone_TableViewCell.swift in Sources */,
-				052D19F32343A6F4003183B4 /* WorkoutList.swift in Sources */,
 				05E323F5236B2A1D00FAAF04 /* SavedCodeSnippets.swift in Sources */,
 				03188E08232803E6007302F7 /* Progress_VC.swift in Sources */,
 				05B3505B233D64490029234D /* Template_TVCell.swift in Sources */,
@@ -465,7 +454,6 @@
 				030DABD62322D10C00FDC505 /* ViewController.swift in Sources */,
 				05CBE51123577EC300E766F8 /* ChangeTemplate_VC.swift in Sources */,
 				033C28262346872800A73B69 /* WorkoutDay.swift in Sources */,
-				05D03323236B6206008BE9AA /* ExerciseList.swift in Sources */,
 				03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */,
 				05E06532235918CA00807493 /* Calced_TVCell.swift in Sources */,
 				05C3B40923623E040087BAC4 /* MainExercise_TVCell.swift in Sources */,

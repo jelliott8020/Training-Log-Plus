@@ -11,29 +11,62 @@ import Foundation
 
 class WorkoutDay: NSObject {
     
-    var mainExercise: Exercise?
-    var accExercises: ExerciseList?
+//    var mainExerciseList: ExerciseList?
+//    var accExerciseList: ExerciseList?
+    
+    var mainExerciseList: [Exercise] = []
+    var accExerciseList: [Exercise] = []
     
     var title: String?
-
-    func setTitle(_ title: String) {
-        self.title = title
+    
+    
+    func addAccExercise(_ obj: Exercise) {
+        accExerciseList.append(obj)
+    }
+    func addMainExercise(_ obj: Exercise) {
+        mainExerciseList.append(obj)
     }
     
-    func getExercises() -> [Exercise] {
-        return accExercises!.exercises!
+    func addBlankAccExerciseObj() {
+        let item = Exercise()
+        accExerciseList.append(item)
     }
-
-    func getMainExercise() -> Exercise {
-        return mainExercise!
-    }
-
-    func addAccExercise(ex: Exercise) {
-        accExercises?.addExercise(ex)
+    func addBlankMainExerciseObj() {
+        let item = Exercise()
+        mainExerciseList.append(item)
     }
     
-    func addMainExercise(ex: Exercise) {
-        mainExercise = ex
+    
+    func moveAcc(item: Exercise, to index: Int) {
+        guard let currentIndex = accExerciseList.firstIndex(of: item) else {
+            return
+        }
+        accExerciseList.remove(at: currentIndex)
+        accExerciseList.insert(item, at: index)
+    }
+    
+    func moveMain(item: Exercise, to index: Int) {
+        guard let currentIndex = mainExerciseList.firstIndex(of: item) else {
+            return
+        }
+        mainExerciseList.remove(at: currentIndex)
+        mainExerciseList.insert(item, at: index)
+    }
+    
+    func removeAcc(items: [Exercise]) {
+        for item in items {
+            if let index = accExerciseList.firstIndex(of: item) {
+                accExerciseList.remove(at: index)
+            }
+        }
+    }
+    
+    func removeMain(items: [Exercise]) {
+        for item in items {
+            if let index = accExerciseList.firstIndex(of: item) {
+                accExerciseList.remove(at: index)
+            }
+        }
     }
     
 }

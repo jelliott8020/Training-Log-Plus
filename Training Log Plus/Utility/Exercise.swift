@@ -9,31 +9,21 @@
 import Foundation
 
 
-class Exercise {
+class Exercise: NSObject {
     
-    var name: String
-    var attemptList: AttemptList?
-    var isWendler: Bool
+    var title: String = ""
+    var attemptList: [Attempt] = []
+    var isWendler: Bool?
     var cues: [String] = []
-    
 
-    init(_ name: String) {
-        self.name = name
-        self.isWendler = true
-        getData(name)
+    
+    func addAttempt(_ obj: Attempt) {
+        attemptList.append(obj)
     }
     
-    
-    
-
-    func getData(_ name: String) {
-        // fill in the attempts list here
-        // fill in cues list here
-        // check if its empty
-    }
-    
-    func getAttemptAtDate(date: Date) {
-        // Find an attempt object with the certain date
+    func addBlankAttempt() {
+        let item = Attempt()
+        attemptList.append(item)
     }
     
 }

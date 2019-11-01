@@ -16,23 +16,20 @@ import Foundation
 class Template: NSObject {
     
     var title = ""
-    //var listOfWorkouts: [WorkoutDay] = []
-    var workoutList: WorkoutList
-    var dateStarted: String = ""
+    var workoutList: [WorkoutDay] = []
+    var dateStarted: Date = Date.init()
     var currentDayIndex = 0
     var numDaysOfWeek = 0
     var wendlerYesNo = true
     var numOfWeeks = 0
-    //var checked = false
     
     
-    override init() {
-        workoutList = WorkoutList()
+    func addWorkout(_ obj: WorkoutDay) {
+        workoutList.append(obj)
     }
     
-    
-//    func toggleChecked() {
-//        checked = !checked
-//    }
-    
+    func addBlankWorkout() {
+        let item = WorkoutDay()
+        workoutList.append(item)
+    }
 }

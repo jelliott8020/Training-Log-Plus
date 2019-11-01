@@ -16,51 +16,104 @@ class TemplateList {
     var templates: [Template] = []
     
     init() {
-        let temp1 = Template()
-        temp1.title = "Template Title 1"
         
-        let wo1 = WorkoutDay()
-        wo1.setTitle("Tester1")
-//        let wo2 = WorkoutDay()
-//        wo2.setTitle("Tester2")
-//        let wo3 = WorkoutDay()
-//        wo3.setTitle("Tester3")
-//        let wo4 = WorkoutDay()
-//        wo4.setTitle("Tester4")
+        // Create Template
+        let temp1 = newTemplate("Template Title 1")
         
         
-        let ex1 = Exercise("Bench")
-        let ex2 = Exercise("Squatter")
-        let ex3 = Exercise("Dead")
+        // Create WorkoutDay
+        let wo1 = newWorkoutDay("Tester1")
         
-        let mainEx = Exercise("Main Ex")
         
-        let att1 = Attempt()
-        att1.titleForTest = "Attemp1"
-        let att2 = Attempt()
-        att2.titleForTest = "Attempt2"
-        let att3 = Attempt()
-        att3.titleForTest = "Attempt3"
+        // Create Accessory Exercises
+        let ex1 = newExercise("Bench")
+        let ex2 = newExercise("Squatter")
+        let ex3 = newExercise("Dead")
         
-        mainEx.attemptList?.addAttemptObj(att1)
-        mainEx.attemptList?.addAttemptObj(att2)
-        mainEx.attemptList?.addAttemptObj(att3)
         
-        wo1.addMainExercise(ex: mainEx)
+        // Create Main Exercise
+        let mainEx = newExercise("Main Ex")
         
-        wo1.addAccExercise(ex: ex1)
-        wo1.addAccExercise(ex: ex2)
-        wo1.addAccExercise(ex: ex3)
         
-        temp1.workoutList.addWorkoutObj(wo1)
-        //temp1.workoutList.addWorkoutObj(wo2)
-        //temp1.workoutList.addWorkoutObj(wo3)
-        //temp1.workoutList.addWorkoutObj(wo4)
+        // Add attempts to Main Exercise
+        let mainAtt1 = newAttempt("MainAttemp1")
+        let mainAtt2 = newAttempt("MainAttempt2")
+        let mainAtt3 = newAttempt("MainAttempt3")
+        mainEx.addAttempt(mainAtt1)
+        mainEx.addAttempt(mainAtt2)
+        mainEx.addAttempt(mainAtt3)
         
-        temp1.numDaysOfWeek = temp1.workoutList.workouts.count
+        
+        // Add attempts to Acc Exercises
+        let ex1Att1 = newAttempt("ex1Att1")
+        let ex1Att2 = newAttempt("ex1Att2")
+        let ex1Att3 = newAttempt("ex1Att3")
+        ex1.addAttempt(ex1Att1)
+        ex1.addAttempt(ex1Att2)
+        ex1.addAttempt(ex1Att3)
+        
+        let ex2Att1 = newAttempt("ex2Att1")
+        let ex2Att2 = newAttempt("ex2Att2")
+        let ex2Att3 = newAttempt("ex2Att3")
+        ex2.addAttempt(ex2Att1)
+        ex2.addAttempt(ex2Att2)
+        ex2.addAttempt(ex2Att3)
+        
+        let ex3Att1 = newAttempt("ex3Att1")
+        let ex3Att2 = newAttempt("ex3Att2")
+        let ex3Att3 = newAttempt("ex3Att3")
+        ex3.addAttempt(ex3Att1)
+        ex3.addAttempt(ex3Att2)
+        ex3.addAttempt(ex3Att3)
+        
+        
+        // Add Main Exercise to Workout
+        wo1.addMainExercise(mainEx)
+        
+        // Add Accessories to Workout
+        wo1.addAccExercise(ex1)
+        wo1.addAccExercise(ex2)
+        wo1.addAccExercise(ex3)
+        
+        // Add Workout to Template
+        temp1.addWorkout(wo1)
+        
+        // Add Template Characterists
+        temp1.numDaysOfWeek = temp1.workoutList.count
         temp1.numOfWeeks = 1
         templates.append(temp1)
     }
+    
+    /********************/
+    // Helper Functions //
+    /********************/
+    func newAttempt(_ name: String) -> Attempt {
+        let item = Attempt()
+        item.titleForTest = name
+        return item
+    }
+    
+    func newExercise(_ name: String) -> Exercise {
+        let item = Exercise()
+        item.title = name
+        return item
+    }
+    
+    func newWorkoutDay(_ name: String) -> WorkoutDay {
+        let item = WorkoutDay()
+        item.title = name
+        return item
+    }
+    
+    func newTemplate(_ name: String) -> Template {
+        let item = Template()
+        item.title = name
+        return item
+    }
+    
+    // END HELPER FUCNTIONS //
+    
+    
     
     
     /*
@@ -112,13 +165,13 @@ class TemplateList {
         print("hi")
         var workoutArg: [WorkoutDay] = []
         let wo1 = WorkoutDay()
-        wo1.setTitle("Tester1")
+        wo1.title = "Tester1"
         let wo2 = WorkoutDay()
-        wo2.setTitle("Tester2")
+        wo2.title = "Tester1"
         let wo3 = WorkoutDay()
-        wo3.setTitle("Tester3")
+        wo3.title = "Tester1"
         let wo4 = WorkoutDay()
-        wo4.setTitle("Tester4")
+        wo4.title = "Tester1"
         workoutArg.append(wo1)
         workoutArg.append(wo2)
         workoutArg.append(wo3)
@@ -127,15 +180,5 @@ class TemplateList {
         print(workoutArg.count)
         
         return workoutArg
-    }
-    
-    
-    /*
-     Random Title: Creates and returns a random WorkoutDay title
-     */
-    private func randTitle() -> String {
-        let titles = ["Workout Day 1", "Workout Day 2", "Workout Day 3", "Workout Day 4"]
-        let ranNum = Int.random(in: 0 ... titles.count-1)
-        return titles[ranNum]
     }
 }
