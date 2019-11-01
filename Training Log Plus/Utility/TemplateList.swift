@@ -21,22 +21,30 @@ class TemplateList {
         
         let wo1 = WorkoutDay()
         wo1.setTitle("Tester1")
-        print(wo1)
-        let wo2 = WorkoutDay()
-        wo2.setTitle("Tester2")
-        let wo3 = WorkoutDay()
-        wo3.setTitle("Tester3")
-        let wo4 = WorkoutDay()
-        wo4.setTitle("Tester4")
+//        let wo2 = WorkoutDay()
+//        wo2.setTitle("Tester2")
+//        let wo3 = WorkoutDay()
+//        wo3.setTitle("Tester3")
+//        let wo4 = WorkoutDay()
+//        wo4.setTitle("Tester4")
+        
+        
+        let ex1 = Exercise("Bench")
+        let ex2 = Exercise("Squatter")
+        let ex3 = Exercise("Dead")
+        let mainEx = Exercise("Main Ex")
+        
+        wo1.addMainExercise(ex: mainEx)
+        
+        wo1.addAccExercise(ex: ex1)
+        wo1.addAccExercise(ex: ex2)
+        wo1.addAccExercise(ex: ex3)
         
         temp1.workoutList.addWorkoutObj(wo1)
+        //temp1.workoutList.addWorkoutObj(wo2)
+        //temp1.workoutList.addWorkoutObj(wo3)
+        //temp1.workoutList.addWorkoutObj(wo4)
         
-        temp1.workoutList.addWorkoutObj(wo2)
-        temp1.workoutList.addWorkoutObj(wo3)
-        temp1.workoutList.addWorkoutObj(wo4)
-        
-        print(temp1.workoutList as Any)
-        print("count \(temp1.workoutList.workouts.count)")
         temp1.numDaysOfWeek = temp1.workoutList.workouts.count
         temp1.numOfWeeks = 1
         templates.append(temp1)

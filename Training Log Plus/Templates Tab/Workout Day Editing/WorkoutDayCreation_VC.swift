@@ -24,7 +24,10 @@ class WorkoutDayCreation_VC: UIViewController {
     
     var delegate: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate?
     var workoutObj: WorkoutDay?
-    var exerciseArg: [Exercise] = []
+    var accExerciseArg: [Exercise] = []
+    var mainExercise: Exercise?
+    
+    var passedTitle: String?
 
     @IBOutlet weak var workoutNameTextField: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -53,7 +56,9 @@ class WorkoutDayCreation_VC: UIViewController {
         
         exerciseTable.tableFooterView = UIView(frame: CGRect.zero)
         
-        exerciseArg = workoutObj!.getExercises()
+        accExerciseArg = workoutObj!.getExercises()
+        mainExercise = workoutObj!.getMainExercise()
+        //workoutObj?.title = passedTitle
         self.title = workoutObj?.title
     }
     
@@ -108,16 +113,48 @@ class WorkoutDayCreation_VC: UIViewController {
  */
 extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exerciseArg.count
+        
+        if section == 1 {
+            return accExerciseArg.count
+        }
+        return 1
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weightForCell = exerciseArg[indexPath.row].name
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! DayMainExercise_TVCell
-        cell.mainExerLabel.text = weightForCell
+        let dummyCell = UITableViewCell()
         
-        return cell
+        if indexPath.section == 0 {
+            let weightForCell = mainExercise?.name
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! DayMainExercise_TVCell
+            cell.mainExerLabel.text = weightForCell
+            return cell
+        } else if indexPath.section == 1 {
+            let weightForCell = accExerciseArg[indexPath.row].name
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AccessoryExercise") as! DayAccExercise_TVCell
+            cell.accExerLabel.text = weightForCell
+            return cell
+        }
+        
+        return dummyCell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        
+        if section == 0 {
+            label.text = "Main Exercise"
+        } else if section == 1 {
+            label.text = "Accessory Exercises"
+        }
+        
+        label.backgroundColor = UIColor(rgb: 0x2980B9)
+        return label
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -128,11 +165,29 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            exerciseArg.remove(at: indexPath.row)
+            accExerciseArg.remove(at: indexPath.row)
             
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
         }
     }
+}
+
+extension UIColor {
+   convenience init(red: Int, green: Int, blue: Int) {
+       assert(red >= 0 && red <= 255, "Invalid red component")
+       assert(green >= 0 && green <= 255, "Invalid green component")
+       assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+   }
+
+   convenience init(rgb: Int) {
+       self.init(
+           red: (rgb >> 16) & 0xFF,
+           green: (rgb >> 8) & 0xFF,
+           blue: rgb & 0xFF
+       )
+   }
 }

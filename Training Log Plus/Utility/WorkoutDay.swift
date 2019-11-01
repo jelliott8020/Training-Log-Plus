@@ -11,7 +11,8 @@ import Foundation
 
 class WorkoutDay: NSObject {
     
-    var exercises: [Exercise] = []
+    var mainExercise: Exercise?
+    var accExercises: [Exercise] = []
     
     var title: String?
 
@@ -20,11 +21,19 @@ class WorkoutDay: NSObject {
     }
     
     func getExercises() -> [Exercise] {
-        return exercises
+        return accExercises
     }
     
-    func addExercise(ex: Exercise) {
-        exercises.append(ex)
+    func getMainExercise() -> Exercise {
+        return mainExercise!
+    }
+    
+    func addAccExercise(ex: Exercise) {
+        accExercises.append(ex)
+    }
+    
+    func addMainExercise(ex: Exercise) {
+        mainExercise = ex
     }
     
 }

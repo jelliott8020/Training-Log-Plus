@@ -17,9 +17,9 @@ class Exercise {
     var cues: [String] = []
     
 
-    init(name: String, isWendler: Bool) {
+    init(_ name: String) {
         self.name = name
-        self.isWendler = isWendler
+        self.isWendler = true
         getData(name)
     }
     

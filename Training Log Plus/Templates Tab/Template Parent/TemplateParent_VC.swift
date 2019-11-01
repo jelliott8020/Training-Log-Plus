@@ -18,6 +18,15 @@ class TemplateParent_VC: UITableViewController {
     var alertWen: Bool?
     var alertWeeks: Int?
     
+    //var wendlerPicker = UIPickerView()
+    //var wendlerData: [String] = []
+    var selectedWendler: String?
+    
+    var tempNameTxtField: UITextField?
+    var numDaysTxtField: UITextField?
+    var wendlerYesNoTxtField: UITextField?
+    var numWeeksTxtField: UITextField?
+    
     /*
      * Initializer
      */
@@ -32,6 +41,8 @@ class TemplateParent_VC: UITableViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        //wendlerData = Util.getYesOrNoForPickerData()
+        //self.wendlerPicker.delegate = self
     }
     
     
@@ -111,19 +122,23 @@ class TemplateParent_VC: UITableViewController {
         //Step : 1
         let alert = UIAlertController(title: "Create Template", message: "Table Information", preferredStyle: UIAlertController.Style.alert )
         
+        
+        
+        
         //Step : 2
         let save = UIAlertAction(title: "Create", style: .default) { (alertAction) in
-            let tempNameTxtField = alert.textFields![0] as UITextField
-            let numDaysTxtField = alert.textFields![1] as UITextField
-            let wendlerYesNoTxtField = alert.textFields![2] as UITextField
-            let numWeeksTxtField = alert.textFields![3] as UITextField
             
-            if let title = tempNameTxtField.text, let days = numDaysTxtField.text, let wen = wendlerYesNoTxtField.text, let weeks = numWeeksTxtField.text {
+            self.tempNameTxtField = alert.textFields![0] as UITextField
+            self.numDaysTxtField = alert.textFields![1] as UITextField
+            self.wendlerYesNoTxtField = alert.textFields![2] as UITextField
+            self.numWeeksTxtField = alert.textFields![3] as UITextField
+            
+            if let title = self.tempNameTxtField?.text, let days = self.numDaysTxtField?.text, let wen = self.wendlerYesNoTxtField?.text, let weeks = self.numWeeksTxtField?.text {
                 
-                var check = Util.checkForBlankInput(str: title, txtField: tempNameTxtField)
-                check = Util.checkForBlankInput(str: days, txtField: numDaysTxtField)
-                check = Util.checkForBlankInput(str: wen, txtField: wendlerYesNoTxtField)
-                check = Util.checkForBlankInput(str: weeks, txtField: numWeeksTxtField)
+                var check = Util.checkForBlankInput(str: title, txtField: self.tempNameTxtField!)
+                check = Util.checkForBlankInput(str: days, txtField: self.numDaysTxtField!)
+                check = Util.checkForBlankInput(str: wen, txtField: self.wendlerYesNoTxtField!)
+                check = Util.checkForBlankInput(str: weeks, txtField: self.numWeeksTxtField!)
                 
                 self.alertTitle = title
                 self.alertDays = Int(days)
@@ -135,12 +150,6 @@ class TemplateParent_VC: UITableViewController {
                     self.alertWen = false
                 }
                 
-                print(self.alertTitle as Any)
-                print(self.alertDays as Any)
-                print(self.alertWen as Any)
-                print(self.alertWeeks as Any)
-                
-                
                 if (check) {
                     return
                 }
@@ -149,24 +158,29 @@ class TemplateParent_VC: UITableViewController {
             }
         }
         
+        //let toolBar = createToolbarDoneButton()
+        
         alert.addTextField { (tempNameTxtField) in
             tempNameTxtField.placeholder = "Template Title:"
-            tempNameTxtField.textColor = .red
+            //tempNameTxtField.inputAccessoryView = toolBar
         }
         
         alert.addTextField { (numDaysTxtField) in
             numDaysTxtField.placeholder = "Number of Days per Week:"
-            numDaysTxtField.textColor = .blue
+            numDaysTxtField.keyboardType = UIKeyboardType.numberPad
+            //numDaysTxtField.inputAccessoryView = toolBar
         }
         
         alert.addTextField { (wendlerYesNoTxtField) in
             wendlerYesNoTxtField.placeholder = "Will there be Wendler Progression?"
-            wendlerYesNoTxtField.textColor = .green
+            //wendlerYesNoTxtField.inputView = self.wendlerPicker
+            //wendlerYesNoTxtField.inputAccessoryView = toolBar
         }
         
         alert.addTextField { (numWeeksTxtField) in
             numWeeksTxtField.placeholder = "Number of Weeks"
-            numWeeksTxtField.textColor = .purple
+            numWeeksTxtField.keyboardType = UIKeyboardType.numberPad
+            //numWeeksTxtField.inputAccessoryView = toolBar
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .default) { (alertAction) in }
@@ -277,3 +291,100 @@ extension TemplateParent_VC: Pass_AddEditTemplate_BackTo_TemplateParent_Delegate
         navigationController?.popViewController(animated: true)
     }
 }
+
+/*
+ * Utility Functions
+ */
+extension TemplateParent_VC {
+    
+    
+    /*
+     * Create Tool Bar Done Button
+     *
+     * Creates done buttons for the toolbars
+     */
+    func createToolbarDoneButton() -> UIToolbar {
+        
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        return toolBar
+    }
+    
+    
+    /*
+     * Done Button Action
+     *
+     * Tells the toolbar what to do when done is tapped
+     */
+    @objc func doneButtonAction() {
+        if tempNameTxtField!.isEditing {
+            tempNameTxtField!.resignFirstResponder()
+            numDaysTxtField!.becomeFirstResponder()
+        } else if numDaysTxtField!.isEditing {
+            numDaysTxtField!.resignFirstResponder()
+            wendlerYesNoTxtField!.becomeFirstResponder()
+        } else if wendlerYesNoTxtField!.isEditing {
+            wendlerYesNoTxtField!.resignFirstResponder()
+            numWeeksTxtField!.becomeFirstResponder()
+        } else if numWeeksTxtField!.isEditing {
+            numWeeksTxtField!.resignFirstResponder()
+            self.performSegue(withIdentifier: "AddItemSegue", sender: self)
+        }
+    }
+    
+//    /*
+//     * Show keyboard automatically without tapping
+//     */
+//    override func viewWillAppear(_ animated: Bool) {
+//
+//        //        if itemToEdit != nil {
+//        //            return
+//        //        }
+//        templateTitleTextField.becomeFirstResponder()
+//    }
+}
+
+///*
+// * Picker
+// */
+//extension TemplateParent_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+//
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        var returnInt = 0
+//
+//        if pickerView == wendlerPicker {
+//            returnInt = wendlerData.count
+//        }
+//
+//        return returnInt
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//
+//        var returnStr = ""
+//
+//        if pickerView == wendlerPicker {
+//            returnStr = wendlerData[row]
+//        }
+//
+//        return returnStr
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        if pickerView == wendlerPicker {
+//            selectedWendler = wendlerData[row]
+//            wendlerYesNoTxtField?.text = selectedWendler
+//        }
+//    }
+//}
