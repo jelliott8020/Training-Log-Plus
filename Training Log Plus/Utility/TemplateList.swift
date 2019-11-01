@@ -32,7 +32,19 @@ class TemplateList {
         let ex1 = Exercise("Bench")
         let ex2 = Exercise("Squatter")
         let ex3 = Exercise("Dead")
+        
         let mainEx = Exercise("Main Ex")
+        
+        let att1 = Attempt()
+        att1.titleForTest = "Attemp1"
+        let att2 = Attempt()
+        att2.titleForTest = "Attempt2"
+        let att3 = Attempt()
+        att3.titleForTest = "Attempt3"
+        
+        mainEx.attemptList?.addAttemptObj(att1)
+        mainEx.attemptList?.addAttemptObj(att2)
+        mainEx.attemptList?.addAttemptObj(att3)
         
         wo1.addMainExercise(ex: mainEx)
         

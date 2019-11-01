@@ -10,6 +10,10 @@ import Foundation
 
 class ExerciseList {
     
+    var exercises: [Exercise]?
     
+    func addExercise(_ obj: Exercise) {
+        exercises?.append(obj)
+    }
     
 }

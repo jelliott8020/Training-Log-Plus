@@ -10,17 +10,19 @@ import Foundation
 
 class Attempt {
     
-    var date: Date
+    var titleForTest: String?
+    var date: Date?
     var reps: [Int] = []
-    var sets: Int
-    var weight: Double
+    var sets: Int?
+    var weight: Double?
     
-    init(date: Date, reps: Int, sets: Int, weight: Double) {
-        self.date = date
-        self.sets = sets
-        self.weight = weight
-        getData()
-    }
+//    init(date: Date, reps: Int, sets: Int, weight: Double) {
+//        self.date = date
+//        self.sets = sets
+//        self.weight = weight
+//        getData()
+//    }
+    
     
     func getData() {
         // fill in data from here

@@ -70,6 +70,15 @@ class Util {
         return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
     }
     
+    /*
+     * Get Progression Scheme Data
+     *
+     * Gets the progression scheme data for the picker
+     */
+    static func getGenericProgressionData() -> [String] {
+        return ["531 5x5 FSL", "531 2x10 FSL", "531 base (XXX+)", "531 + Boring But Big (50%/60%/70%)", "Rep Goal - Total", "Rep Goal - per Set", "531 pyramid (5 sets)", "5x5 linear progression", "3x5 linear + 2x12 70%"]
+    }
+    
     
     /*
      * Get Exercise Data

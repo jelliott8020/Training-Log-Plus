@@ -20,9 +20,37 @@ class AddEdit_MainExercise_VC: UIViewController {
     @IBOutlet weak var trainingMaxTextField: UITextField!
     @IBOutlet weak var pastTrainingMaxTable: UITableView!
     
+    var bodyPartPicker = UIPickerView()
+    var exercisePicker = UIPickerView()
+    var progressionPicker = UIPickerView()
+    
+    var bodyPartData: [String] = []
+    var exerciseData: [String] = []
+    var progressionSchemeData: [String] = []
+    
+    var selectedBodyPart: String?
+    var selectedExercise: String?
+    var selectedProgressionScheme: String?
+    var selectedTrainingMax: String?
+    
+    var pastAttemptsList: AttemptList
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        pastAttemptsList = AttemptList()
+        super.init(coder: aDecoder)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        bodyPartData = Util.getGenericBodyPartData()
+        exerciseData = Util.getGenericExerciseData()
+        progressionSchemeData = Util.getGenericProgressionData()
+        
+        createPickers()
+        createToolbarDoneButton()
         // Do any additional setup after loading the view.
     }
     
@@ -32,17 +60,141 @@ class AddEdit_MainExercise_VC: UIViewController {
     }
     
     @IBAction func addButton(_ sender: UIBarButtonItem) {
+        addButtonAction()
+    }
+    
+    func addButtonAction() {
         navigationController?.popViewController(animated: true)
+
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+     * Create Pickers
+     *
+     * Creates the pickers for the text fields
+     */
+    func createPickers() {
+        
+        bodyPartPicker.delegate = self
+        exercisePicker.delegate = self
+        progressionPicker.delegate = self
+        
+        bodyPartTextField.inputView = bodyPartPicker
+        exerciseTextField.inputView = exercisePicker
+        progressionSchemeTextField.inputView = progressionPicker
     }
-    */
+    
+    /*
+     * Create Tool Bar Done Button
+     *
+     * Creates done buttons for the toolbars
+     */
+    func createToolbarDoneButton() {
+        
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        bodyPartTextField.inputAccessoryView = toolBar
+        exerciseTextField.inputAccessoryView = toolBar
+        progressionSchemeTextField.inputAccessoryView = toolBar
+    }
+    
+    
+    /*
+     * Done Button Action
+     *
+     * Tells the toolbar what to do when done is tapped
+     */
+    @objc func doneButtonAction() {
+        if bodyPartTextField.isEditing {
+            bodyPartTextField.resignFirstResponder()
+            exerciseTextField.becomeFirstResponder()
+        } else if exerciseTextField.isEditing {
+            exerciseTextField.resignFirstResponder()
+            progressionSchemeTextField.becomeFirstResponder()
+        } else if progressionSchemeTextField.isEditing {
+            progressionSchemeTextField.resignFirstResponder()
+            trainingMaxTextField.becomeFirstResponder()
+        } else if trainingMaxTextField.isEditing {
+            trainingMaxTextField.resignFirstResponder()
+            addButtonAction()
+        }
+    }
 
+}
+
+extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let weightForCell = pastAttemptsList.attempts[indexPath.row].titleForTest
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "calcedTrainingMaxes") as! MainExercise_TVCell
+        
+        cell.trainingMaxLabel.text = weightForCell
+        
+        return cell
+    }
+    
+    
+}
+
+/*
+ * Picker
+ */
+extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+        
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        var returnInt = 0
+        
+        if pickerView == bodyPartPicker {
+            returnInt = bodyPartData.count
+        } else if pickerView == exercisePicker {
+            returnInt = exerciseData.count
+        } else if pickerView == progressionPicker {
+            returnInt = progressionSchemeData.count
+        }
+        
+        return returnInt
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        var returnStr = ""
+        
+        if pickerView == bodyPartPicker {
+            returnStr = bodyPartData[row]
+        } else if pickerView == exercisePicker {
+            returnStr = exerciseData[row]
+        } else if pickerView == progressionPicker {
+            returnStr = progressionSchemeData[row]
+        }
+        
+        return returnStr
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == bodyPartPicker {
+            selectedBodyPart = bodyPartData[row]
+            bodyPartTextField.text = selectedBodyPart
+        } else if pickerView == exercisePicker {
+            selectedExercise = exerciseData[row]
+            exerciseTextField.text = selectedExercise
+        } else if pickerView == progressionPicker {
+            selectedProgressionScheme = progressionSchemeData[row]
+            progressionSchemeTextField.text = selectedProgressionScheme
+        }
+    }
 }

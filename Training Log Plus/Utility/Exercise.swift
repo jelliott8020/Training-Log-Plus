@@ -12,7 +12,7 @@ import Foundation
 class Exercise {
     
     var name: String
-    var attemptList: [Attempt] = []
+    var attemptList: AttemptList?
     var isWendler: Bool
     var cues: [String] = []
     
@@ -22,6 +22,8 @@ class Exercise {
         self.isWendler = true
         getData(name)
     }
+    
+    
     
 
     func getData(_ name: String) {
