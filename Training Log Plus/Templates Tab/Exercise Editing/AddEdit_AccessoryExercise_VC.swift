@@ -45,6 +45,9 @@ class AddEdit_AccessoryExercise_VC: UIViewController {
         
         pastAttemptsList = passedInExerciseObj!.attemptList
         self.title = passedInExerciseObj?.title
+        
+        bodyPartTextField.text = passedInExerciseObj!.bodyPart
+        exerciseTextField.text = passedInExerciseObj!.title
 
         // Do any additional setup after loading the view.
     }
@@ -56,7 +59,7 @@ class AddEdit_AccessoryExercise_VC: UIViewController {
     
     @IBAction func addButton(_ sender: UIBarButtonItem) {
         
-        delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishAdding: passedInExerciseObj!)
+        delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
     }
@@ -83,7 +86,7 @@ extension AddEdit_AccessoryExercise_VC: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let weightForCell = pastAttemptsList[indexPath.row].titleForTest
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "calcedTrainingMaxes") as! AccessoryExercise_TVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "pastAccessoryData") as! AccessoryExercise_TVCell
         
         cell.pastAttemptLabel.text = weightForCell
         

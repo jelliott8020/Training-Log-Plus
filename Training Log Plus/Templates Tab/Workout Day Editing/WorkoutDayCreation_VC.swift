@@ -264,6 +264,47 @@ extension WorkoutDayCreation_VC: Pass_MainExerciseObject_BackTo_WorkoutDayCreati
     }
 }
 
+/*
+ * Delegate
+ *
+ * Implements the functions that allow the New or Edited Template to be passed back
+ */
+extension WorkoutDayCreation_VC: Pass_AccessoryExerciseObject_BackTo_WorkoutDayCreation_Delegate {
+    
+    /*
+     * Cancel button will pop the view controller
+     */
+    func addEditAccExercise_DidCancel(_ controller: AddEdit_AccessoryExercise_VC) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    /*
+     * After adding, data is passed back
+     */
+    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_AccessoryExercise_VC, didFinishAdding item: Exercise) {
+        //navigationController?.popViewController(animated: true)
+        accExerciseList.append(item)
+        let rowIndex = accExerciseList.count - 1
+        let indexPath = IndexPath(row: rowIndex, section: 1)
+        exerciseTable.insertRows(at: [indexPath], with: .automatic)
+    }
+    
+    
+    /*
+     * After editing, data is passed back
+     */
+    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_AccessoryExercise_VC, didFinishEditing item: Exercise) {
+        if let index = accExerciseList.firstIndex(of: item) {
+            let indexPath = IndexPath(row: index, section: 1)
+            if let cell = exerciseTable.cellForRow(at: indexPath) {
+                cell.textLabel?.text = item.title
+            }
+        }
+        //navigationController?.popViewController(animated: true)
+    }
+}
+
 extension UIColor {
    convenience init(red: Int, green: Int, blue: Int) {
        assert(red >= 0 && red <= 255, "Invalid red component")

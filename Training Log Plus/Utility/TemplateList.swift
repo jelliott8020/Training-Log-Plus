@@ -27,12 +27,20 @@ class TemplateList {
         
         // Create Accessory Exercises
         let ex1 = newExercise("Bench")
+        ex1.bodyPart = "Push"
+        ex1.progression = "531"
         let ex2 = newExercise("Squatter")
+        ex2.bodyPart = "Legs"
+        ex2.progression = "Cube"
         let ex3 = newExercise("Dead")
+        ex3.bodyPart = "Pull"
+        ex3.progression = "Starting Strength"
         
         
         // Create Main Exercise
         let mainEx = newExercise("Main Ex")
+        mainEx.bodyPart = "Main Bodypart"
+        mainEx.progression = "531 BBB"
         
         
         // Add attempts to Main Exercise

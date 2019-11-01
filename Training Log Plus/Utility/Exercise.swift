@@ -15,7 +15,9 @@ class Exercise: NSObject {
     var attemptList: [Attempt] = []
     var isWendler: Bool?
     var cues: [String] = []
-
+    
+    var bodyPart: String?
+    var progression: String?
     
     func addAttempt(_ obj: Attempt) {
         attemptList.append(obj)

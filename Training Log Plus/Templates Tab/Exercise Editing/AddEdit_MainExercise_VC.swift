@@ -40,8 +40,6 @@ class AddEdit_MainExercise_VC: UIViewController {
     var selectedTrainingMax: String?
     
     
-    
-    
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
@@ -51,7 +49,13 @@ class AddEdit_MainExercise_VC: UIViewController {
     @IBOutlet weak var trainingMaxTextField: UITextField!
     @IBOutlet weak var pastTrainingMaxTable: UITableView!
     
-
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    @IBAction func addButton(_ sender: UIBarButtonItem) {
+        addButtonAction()
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         //pastAttemptsList = AttemptList()
@@ -66,28 +70,25 @@ class AddEdit_MainExercise_VC: UIViewController {
         
         pastAttemptsList = passedInExerciseObj!.attemptList
         self.title = passedInExerciseObj?.title
+        bodyPartTextField.text = passedInExerciseObj!.bodyPart
+        exerciseTextField.text = passedInExerciseObj!.title
+        progressionSchemeTextField.text = passedInExerciseObj!.progression
         
         bodyPartData = Util.getGenericBodyPartData()
         exerciseData = Util.getGenericExerciseData()
         progressionSchemeData = Util.getGenericProgressionData()
         
-        createPickers()
-        createToolbarDoneButton()
+        //createPickers()
+        //createToolbarDoneButton()
         // Do any additional setup after loading the view.
     }
     
     
-    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func addButton(_ sender: UIBarButtonItem) {
-        addButtonAction()
-    }
+
     
     func addButtonAction() {
         
-        delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishAdding: passedInExerciseObj!)
+        delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
     }
@@ -167,7 +168,6 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
     
 }
 
