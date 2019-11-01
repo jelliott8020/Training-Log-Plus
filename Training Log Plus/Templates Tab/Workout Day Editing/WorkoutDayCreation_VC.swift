@@ -27,7 +27,7 @@ class WorkoutDayCreation_VC: UIViewController {
     var accExerciseList: [Exercise] = []
     var mainExerciseList: [Exercise] = []
     
-
+    
     @IBOutlet weak var workoutNameTextField: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
@@ -43,11 +43,15 @@ class WorkoutDayCreation_VC: UIViewController {
     
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
-
+        
     }
     
     @IBAction func addMoreButton(_ sender: UIButton) {
-        // Popup here to add exercises
+        let newExercise = Exercise()
+        newExercise.title = "Tap to edit"
+        passedInWorkoutObj?.addAccExercise(newExercise)
+        accExerciseList.append(newExercise)
+        exerciseTable.reloadData()
     }
     
     
@@ -73,14 +77,14 @@ class WorkoutDayCreation_VC: UIViewController {
      * Updates title of WorkoutDay Object, passes it back to parent VC
      */
     func doneButtonAction() {
-//        if let name = workoutNameTextField.text {
-//            
-//            workoutObj?.title = name
-//            
-//            //delegate?.passWorkoutObjBack(workoutObj: workoutObj!)
-//            
-//            
-//        }
+        //        if let name = workoutNameTextField.text {
+        //
+        //            workoutObj?.title = name
+        //
+        //            //delegate?.passWorkoutObjBack(workoutObj: workoutObj!)
+        //
+        //
+        //        }
         
         delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishEditing: passedInWorkoutObj!)
         
@@ -219,7 +223,7 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-
+    
 }
 
 
@@ -306,19 +310,19 @@ extension WorkoutDayCreation_VC: Pass_AccessoryExerciseObject_BackTo_WorkoutDayC
 }
 
 extension UIColor {
-   convenience init(red: Int, green: Int, blue: Int) {
-       assert(red >= 0 && red <= 255, "Invalid red component")
-       assert(green >= 0 && green <= 255, "Invalid green component")
-       assert(blue >= 0 && blue <= 255, "Invalid blue component")
-
-       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-   }
-
-   convenience init(rgb: Int) {
-       self.init(
-           red: (rgb >> 16) & 0xFF,
-           green: (rgb >> 8) & 0xFF,
-           blue: rgb & 0xFF
-       )
-   }
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
 }

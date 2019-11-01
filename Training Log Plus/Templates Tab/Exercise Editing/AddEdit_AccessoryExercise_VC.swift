@@ -59,6 +59,9 @@ class AddEdit_AccessoryExercise_VC: UIViewController {
     
     @IBAction func addButton(_ sender: UIBarButtonItem) {
         
+        passedInExerciseObj?.bodyPart = bodyPartTextField.text
+        passedInExerciseObj?.title = exerciseTextField.text
+        
         delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
@@ -80,8 +83,10 @@ class AddEdit_AccessoryExercise_VC: UIViewController {
 
 extension AddEdit_AccessoryExercise_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return pastAttemptsList.count
     }
+    
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let weightForCell = pastAttemptsList[indexPath.row].titleForTest

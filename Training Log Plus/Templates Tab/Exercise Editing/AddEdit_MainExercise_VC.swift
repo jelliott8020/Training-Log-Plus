@@ -88,6 +88,10 @@ class AddEdit_MainExercise_VC: UIViewController {
     
     func addButtonAction() {
         
+        passedInExerciseObj?.bodyPart = bodyPartTextField.text
+        passedInExerciseObj?.title = exerciseTextField.text
+        passedInExerciseObj?.progression = progressionSchemeTextField.text
+        
         delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
@@ -177,7 +181,7 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
 extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return pastAttemptsList.count
     }
         
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

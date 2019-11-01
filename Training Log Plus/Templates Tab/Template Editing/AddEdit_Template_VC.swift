@@ -106,7 +106,7 @@ class AddEdit_Template_VC: UIViewController {
                 self.title = title
                 
                 
-                for _ in 1...days {
+                for _ in 0...days-1 {
                     let newWorkout = WorkoutDay()
                     newWorkout.title = "Tap to edit"
                     globalTemplateItem?.addWorkout(newWorkout)
@@ -156,9 +156,11 @@ class AddEdit_Template_VC: UIViewController {
 //                check = Util.checkForBlankInput(str: weeks, txtField: self.numWeeksTxtField!)
                 
                 self.alertName = name
+
 //                if (check) {
 //                    return
 //                }
+                
                 
                 self.performSegue(withIdentifier: "workoutDaySegue", sender: self)
             }

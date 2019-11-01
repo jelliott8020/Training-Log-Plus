@@ -140,6 +140,14 @@ class TemplateParent_VC: UITableViewController {
                 check = Util.checkForBlankInput(str: wen, txtField: self.wendlerYesNoTxtField!)
                 check = Util.checkForBlankInput(str: weeks, txtField: self.numWeeksTxtField!)
                 
+                if Int(days)! <= 1 {
+                    let alert = UIAlertController(title: "Invalid entry", message: "Days less than 1", preferredStyle: UIAlertController.Style.alert)
+                    let okButton = UIAlertAction(title: "Ok", style: .default) { (alertAction) in self.addButtonAlert()}
+                    alert.addAction(okButton)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }
+                
                 self.alertTitle = title
                 self.alertDays = Int(days)
                 self.alertWeeks = Int(weeks)

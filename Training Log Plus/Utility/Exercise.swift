@@ -11,7 +11,7 @@ import Foundation
 
 class Exercise: NSObject {
     
-    var title: String = ""
+    var title: String?
     var attemptList: [Attempt] = []
     var isWendler: Bool?
     var cues: [String] = []
