@@ -415,6 +415,20 @@ extension AddEdit_Template_VC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    /*
+     * When user interacts with cell
+     */
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Prevents cell from being opened while in edit mode
+        if tableView.isEditing {
+            return
+        }
+        
+        // Animation to show they interacted
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }

@@ -47,6 +47,11 @@ class WorkoutDayCreation_VC: UIViewController {
 
     }
     
+    @IBAction func addMoreButton(_ sender: UIButton) {
+        // Popup here to add exercises
+    }
+    
+    
     
     /*
      * View Did Load
@@ -159,6 +164,20 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    /*
+     * When user interacts with cell
+     */
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Prevents cell from being opened while in edit mode
+        if tableView.isEditing {
+            return
+        }
+        
+        // Animation to show they interacted
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

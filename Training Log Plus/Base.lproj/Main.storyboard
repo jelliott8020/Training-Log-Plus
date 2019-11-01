@@ -1362,25 +1362,6 @@
                                             <segue destination="ivg-fp-8Sl" kind="show" id="ZfS-j0-KR6"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DynamicCell" id="EUZ-IA-p5n" customClass="DynamicAddCell_TVCell" customModule="Training_Log_Plus" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="288" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EUZ-IA-p5n" id="sSc-27-Bnd">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H9N-qn-ihL">
-                                                    <rect key="frame" x="15" y="10" width="265" height="23"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <state key="normal" title="Button" image="plus" catalog="system"/>
-                                                </button>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="dynAddAccButton" destination="H9N-qn-ihL" id="Qte-bW-AoR"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="tQc-X7-C7X" id="wmy-Tx-uwL"/>
@@ -1393,6 +1374,14 @@
                                 <state key="normal" title="Update Title"/>
                                 <connections>
                                     <action selector="updateNameButton:" destination="tQc-X7-C7X" eventType="touchUpInside" id="bEC-cu-y05"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MrB-fO-eWf">
+                                <rect key="frame" x="220" y="109" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add More"/>
+                                <connections>
+                                    <action selector="addMoreButton:" destination="tQc-X7-C7X" eventType="touchUpInside" id="Zfj-tw-YVy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1929,7 +1918,6 @@
         <image name="icons8-fencing" width="32" height="32"/>
         <image name="icons8-list" width="32" height="32"/>
         <image name="icons8-settings" width="32" height="32"/>
-        <image name="plus" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="E2s-Xb-xBa"/>

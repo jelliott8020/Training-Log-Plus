@@ -47,7 +47,6 @@
 		05C3B40723623D340087BAC4 /* AddEdit_AccessoryExercise_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C3B40623623D340087BAC4 /* AddEdit_AccessoryExercise_VC.swift */; };
 		05C3B40923623E040087BAC4 /* MainExercise_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C3B40823623E040087BAC4 /* MainExercise_TVCell.swift */; };
 		05C3B40B23623E120087BAC4 /* AccessoryExercise_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C3B40A23623E120087BAC4 /* AccessoryExercise_TVCell.swift */; };
-		05C3B40D23623E210087BAC4 /* DynamicAddCell_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C3B40C23623E210087BAC4 /* DynamicAddCell_TVCell.swift */; };
 		05CBE50D2357796D00E766F8 /* Workout_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE50C2357796D00E766F8 /* Workout_VC.swift */; };
 		05CBE50F23577EA400E766F8 /* CurrentWorkout_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE50E23577EA400E766F8 /* CurrentWorkout_VC.swift */; };
 		05CBE51123577EC300E766F8 /* ChangeTemplate_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CBE51023577EC300E766F8 /* ChangeTemplate_VC.swift */; };
@@ -100,7 +99,6 @@
 		05C3B40623623D340087BAC4 /* AddEdit_AccessoryExercise_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEdit_AccessoryExercise_VC.swift; sourceTree = "<group>"; };
 		05C3B40823623E040087BAC4 /* MainExercise_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainExercise_TVCell.swift; sourceTree = "<group>"; };
 		05C3B40A23623E120087BAC4 /* AccessoryExercise_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryExercise_TVCell.swift; sourceTree = "<group>"; };
-		05C3B40C23623E210087BAC4 /* DynamicAddCell_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicAddCell_TVCell.swift; sourceTree = "<group>"; };
 		05CBE50C2357796D00E766F8 /* Workout_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout_VC.swift; sourceTree = "<group>"; };
 		05CBE50E23577EA400E766F8 /* CurrentWorkout_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWorkout_VC.swift; sourceTree = "<group>"; };
 		05CBE51023577EC300E766F8 /* ChangeTemplate_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTemplate_VC.swift; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 			children = (
 				05C1953E236886ED0014D212 /* DayMainExercise_TVCell.swift */,
 				05C19540236887000014D212 /* DayAccExercise_TVCell.swift */,
-				05C3B40C23623E210087BAC4 /* DynamicAddCell_TVCell.swift */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -455,7 +452,6 @@
 				03FB9EAB2322FA4E00F9D410 /* Template.swift in Sources */,
 				03B984E0233BE03F00656CFA /* Attempt.swift in Sources */,
 				05C1953F236886ED0014D212 /* DayMainExercise_TVCell.swift in Sources */,
-				05C3B40D23623E210087BAC4 /* DynamicAddCell_TVCell.swift in Sources */,
 				052D19F72343A90F003183B4 /* WorkoutList_TVCell.swift in Sources */,
 				05739D152368C5AA00B70A4E /* Util.swift in Sources */,
 				03B2D813235BD7E700005CC5 /* ChangeTemplate_TVCell.swift in Sources */,
