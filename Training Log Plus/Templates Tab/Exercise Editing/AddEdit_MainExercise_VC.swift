@@ -16,6 +16,9 @@ protocol Pass_MainExerciseObject_BackTo_WorkoutDayCreation_Delegate {
     func addEditMainExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishAdding item: Exercise)
     // User finishes editing
     func addEditMainExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishEditing item: Exercise)
+    
+    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishAdding item: Exercise)
+    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishEditing item: Exercise)
 }
 
 
@@ -38,6 +41,8 @@ class AddEdit_MainExercise_VC: UIViewController {
     var selectedExercise: String?
     var selectedProgressionScheme: String?
     var selectedTrainingMax: String?
+    
+    var isItMain: Bool?
     
     
     @IBOutlet weak var addButton: UIBarButtonItem!
@@ -92,7 +97,13 @@ class AddEdit_MainExercise_VC: UIViewController {
         passedInExerciseObj?.title = exerciseTextField.text
         passedInExerciseObj?.progression = progressionSchemeTextField.text
         
-        delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
+        if (isItMain!) {
+            delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
+        } else {
+            delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
+        }
+        
+        
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
     }
@@ -160,20 +171,20 @@ class AddEdit_MainExercise_VC: UIViewController {
 
 extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return pastAttemptsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weightForCell = pastAttemptsList[indexPath.row].titleForTest
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "calcedTrainingMaxes") as! MainExercise_TVCell
-        
-        cell.trainingMaxLabel.text = weightForCell
-        
-        return cell
+
+            let weightForCell = pastAttemptsList[indexPath.row].titleForTest
+            let cell = tableView.dequeueReusableCell(withIdentifier: "calcedTrainingMaxes") as! MainExercise_TVCell
+            
+            cell.trainingMaxLabel.text = weightForCell
+            
+            return cell
     }
-    
 }
+
 
 /*
  * Picker

@@ -76,7 +76,37 @@ class Util {
      * Gets the progression scheme data for the picker
      */
     static func getGenericProgressionData() -> [String] {
-        return ["531 5x5 FSL", "531 2x10 FSL", "531 base (XXX+)", "531 + Boring But Big (50%/60%/70%)", "Rep Goal - Total", "Rep Goal - per Set", "531 pyramid (5 sets)", "5x5 linear progression", "3x5 linear + 2x12 70%"]
+        return [
+            "3x5 Rep Goal",
+            "5x5 Rep Goal",
+            "3x5 + 2x12 @ 70%",
+            "25 reps over 3 sets",
+            "25 reps over 5 sets",
+            "12/10/8/6, weight +10%",
+            "6/8/10/12, weight -10%",
+            "15/12/10/8, weight +10%",
+            "8/10/12/15, weight -10%",
+            "3x12 Rep Goal",
+            "3x10 Rep Goal",
+            "3x8 Rep Goal"
+            
+        ]
+    }
+    
+    
+    /*
+     * Get Progression Scheme Data
+     *
+     * Gets the progression scheme data for the picker
+     */
+    static func getWendlerProgressionData() -> [String] {
+        return [
+            "531 Base (3 sets)",
+            "531 + 2x10 FSL",
+            "531 + 5x5 FSL",
+            "531 + BBB",
+            "531 Pyramid (5 sets)",
+        ]
     }
     
     

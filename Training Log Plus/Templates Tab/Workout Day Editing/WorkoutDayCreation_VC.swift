@@ -46,13 +46,22 @@ class WorkoutDayCreation_VC: UIViewController {
         
     }
     
-    @IBAction func addMoreButton(_ sender: UIButton) {
+    @IBAction func addMoreAccButton(_ sender: UIButton) {
         let newExercise = Exercise()
         newExercise.title = "Tap to edit"
         passedInWorkoutObj?.addAccExercise(newExercise)
         accExerciseList.append(newExercise)
         exerciseTable.reloadData()
     }
+    
+    @IBAction func addMoreMainButton(_ sender: UIButton) {
+        let newExercise = Exercise()
+        newExercise.title = "Tap to edit"
+        passedInWorkoutObj?.addMainExercise(newExercise)
+        mainExerciseList.append(newExercise)
+        exerciseTable.reloadData()
+    }
+    
     
     
     
@@ -122,20 +131,21 @@ class WorkoutDayCreation_VC: UIViewController {
                     
                     let item = mainExerciseList[indexPath.row]
                     mainEx_VC.passedInExerciseObj = item
+                    mainEx_VC.isItMain = true
                     mainEx_VC.delegate = self
                 }
                 
             }
-            
         } else if segue.identifier == "AccExSegue" {
-            if let accEx_VC = segue.destination as? AddEdit_AccessoryExercise_VC {
+            if let mainEx_VC = segue.destination as? AddEdit_MainExercise_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = exerciseTable.indexPath(for: cell) {
-                    
+
                     let item = accExerciseList[indexPath.row]
-                    accEx_VC.passedInExerciseObj = item
-                    accEx_VC.delegate = self
+                    mainEx_VC.passedInExerciseObj = item
+                    mainEx_VC.isItMain = false
+                    mainEx_VC.delegate = self
                 }
-                
+
             }
         }
     }
@@ -181,8 +191,14 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
         
         if section == 0 {
             label.text = "Main Exercise"
+            label.textColor = UIColor.white
+            label.font = UIFont.boldSystemFont(ofSize: 17.0)
+            label.textAlignment = .center
         } else if section == 1 {
             label.text = "Accessory Exercises"
+            label.textColor = UIColor.white
+            label.font = UIFont.boldSystemFont(ofSize: 17.0)
+            label.textAlignment = .center
         }
         
         label.backgroundColor = UIColor(rgb: 0x2980B9)
@@ -212,14 +228,32 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+    /*
+     * Swipe to delete
+     */
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            accExerciseList.remove(at: indexPath.row)
             
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
+            let alert = UIAlertController(title:  "Are you sure?", message: "", preferredStyle: .alert)
+            
+            let noButton = UIAlertAction(title: "No", style: UIAlertAction.Style.destructive, handler: nil)
+            let yesButton = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { (action) -> Void in
+                self.accExerciseList.remove(at: indexPath.row)
+                
+                tableView.beginUpdates()
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.endUpdates()
+                
+            } )
+            
+            alert.addAction(yesButton)
+            alert.addAction(noButton)
+            
+            present(alert, animated: true, completion: nil)
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
@@ -244,6 +278,8 @@ extension WorkoutDayCreation_VC: Pass_MainExerciseObject_BackTo_WorkoutDayCreati
     
     /*
      * After adding, data is passed back
+     *
+     * MAIN
      */
     func addEditMainExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishAdding item: Exercise) {
         //navigationController?.popViewController(animated: true)
@@ -251,11 +287,28 @@ extension WorkoutDayCreation_VC: Pass_MainExerciseObject_BackTo_WorkoutDayCreati
         let rowIndex = mainExerciseList.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)
         exerciseTable.insertRows(at: [indexPath], with: .automatic)
+        exerciseTable.reloadData()
+    }
+    
+    /*
+     * After adding, data is passed back
+     *
+     * ACCESSORY
+     */
+    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishAdding item: Exercise) {
+        //navigationController?.popViewController(animated: true)
+        accExerciseList.append(item)
+        let rowIndex = accExerciseList.count - 1
+        let indexPath = IndexPath(row: rowIndex, section: 1)
+        exerciseTable.insertRows(at: [indexPath], with: .automatic)
+        exerciseTable.reloadData()
     }
     
     
     /*
      * After editing, data is passed back
+     *
+     * MAIN
      */
     func addEditMainExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishEditing item: Exercise) {
         if let index = mainExerciseList.firstIndex(of: item) {
@@ -264,50 +317,27 @@ extension WorkoutDayCreation_VC: Pass_MainExerciseObject_BackTo_WorkoutDayCreati
                 cell.textLabel?.text = item.title
             }
         }
+        exerciseTable.reloadData()
         //navigationController?.popViewController(animated: true)
     }
-}
-
-/*
- * Delegate
- *
- * Implements the functions that allow the New or Edited Template to be passed back
- */
-extension WorkoutDayCreation_VC: Pass_AccessoryExerciseObject_BackTo_WorkoutDayCreation_Delegate {
-    
-    /*
-     * Cancel button will pop the view controller
-     */
-    func addEditAccExercise_DidCancel(_ controller: AddEdit_AccessoryExercise_VC) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    
-    /*
-     * After adding, data is passed back
-     */
-    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_AccessoryExercise_VC, didFinishAdding item: Exercise) {
-        //navigationController?.popViewController(animated: true)
-        accExerciseList.append(item)
-        let rowIndex = accExerciseList.count - 1
-        let indexPath = IndexPath(row: rowIndex, section: 1)
-        exerciseTable.insertRows(at: [indexPath], with: .automatic)
-    }
-    
     
     /*
      * After editing, data is passed back
+     *
+     * ACCESSORY
      */
-    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_AccessoryExercise_VC, didFinishEditing item: Exercise) {
+    func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishEditing item: Exercise) {
         if let index = accExerciseList.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 1)
             if let cell = exerciseTable.cellForRow(at: indexPath) {
                 cell.textLabel?.text = item.title
             }
         }
+        exerciseTable.reloadData()
         //navigationController?.popViewController(animated: true)
     }
 }
+
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {

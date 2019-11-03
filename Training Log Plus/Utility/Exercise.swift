@@ -15,6 +15,7 @@ class Exercise: NSObject {
     var attemptList: [Attempt] = []
     var isWendler: Bool?
     var cues: [String] = []
+    var cellDisplayTitle: String?
     
     var bodyPart: String?
     var progression: String?
