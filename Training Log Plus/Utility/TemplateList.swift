@@ -17,6 +17,8 @@ class TemplateList {
     
     init() {
         
+        
+        
         // Create Template
         let temp1 = newTemplate("Template Title 1")
         

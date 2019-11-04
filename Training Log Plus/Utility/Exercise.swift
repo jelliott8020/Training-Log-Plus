@@ -20,6 +20,7 @@ class Exercise: NSObject {
     
     var bodyPart: String?
     var progression: String?
+    var startingWeight: Int?
     
     func addAttempt(_ obj: Attempt) {
         attemptList.append(obj)

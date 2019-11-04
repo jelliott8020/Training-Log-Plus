@@ -96,6 +96,7 @@ class AddEdit_MainExercise_VC: UIViewController {
         passedInExerciseObj?.bodyPart = bodyPartTextField.text
         passedInExerciseObj?.name = exerciseTextField.text
         passedInExerciseObj?.progression = progressionSchemeTextField.text
+        passedInExerciseObj?.startingWeight = Int(trainingMaxTextField.text!)
         
         if (isItMain!) {
             delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
