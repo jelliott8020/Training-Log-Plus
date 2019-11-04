@@ -20,57 +20,57 @@ class TemplateList {
         
         
         // Create Template
-        let temp1 = newTemplate("Template Title 1")
+        let temp1 = getNewTemplate("Template Title 1")
         
         // Create WorkoutDay
-        let wo1 = newWorkoutDay("Tester1")
+        let wo1 = getNewWorkoutDay("Tester1")
         
         
         // Create Accessory Exercises
-        let ex1 = newExercise("Bench")
+        let ex1 = getNewExercise("Bench")
         ex1.bodyPart = "Push"
         ex1.progression = "531"
-        let ex2 = newExercise("Squatter")
+        let ex2 = getNewExercise("Squatter")
         ex2.bodyPart = "Legs"
         ex2.progression = "Cube"
-        let ex3 = newExercise("Dead")
+        let ex3 = getNewExercise("Dead")
         ex3.bodyPart = "Pull"
         ex3.progression = "Starting Strength"
         
         
         // Create Main Exercise
-        let mainEx = newExercise("Main Ex")
+        let mainEx = getNewExercise("Main Ex")
         mainEx.bodyPart = "Main Bodypart"
         mainEx.progression = "531 BBB"
         
         
         // Add attempts to Main Exercise
-        let mainAtt1 = newAttempt("MainAttemp1")
-        let mainAtt2 = newAttempt("MainAttempt2")
-        let mainAtt3 = newAttempt("MainAttempt3")
+        let mainAtt1 = getNewAttempt("MainAttemp1")
+        let mainAtt2 = getNewAttempt("MainAttempt2")
+        let mainAtt3 = getNewAttempt("MainAttempt3")
         mainEx.addAttempt(mainAtt1)
         mainEx.addAttempt(mainAtt2)
         mainEx.addAttempt(mainAtt3)
         
         
         // Add attempts to Acc Exercises
-        let ex1Att1 = newAttempt("ex1Att1")
-        let ex1Att2 = newAttempt("ex1Att2")
-        let ex1Att3 = newAttempt("ex1Att3")
+        let ex1Att1 = getNewAttempt("ex1Att1")
+        let ex1Att2 = getNewAttempt("ex1Att2")
+        let ex1Att3 = getNewAttempt("ex1Att3")
         ex1.addAttempt(ex1Att1)
         ex1.addAttempt(ex1Att2)
         ex1.addAttempt(ex1Att3)
         
-        let ex2Att1 = newAttempt("ex2Att1")
-        let ex2Att2 = newAttempt("ex2Att2")
-        let ex2Att3 = newAttempt("ex2Att3")
+        let ex2Att1 = getNewAttempt("ex2Att1")
+        let ex2Att2 = getNewAttempt("ex2Att2")
+        let ex2Att3 = getNewAttempt("ex2Att3")
         ex2.addAttempt(ex2Att1)
         ex2.addAttempt(ex2Att2)
         ex2.addAttempt(ex2Att3)
         
-        let ex3Att1 = newAttempt("ex3Att1")
-        let ex3Att2 = newAttempt("ex3Att2")
-        let ex3Att3 = newAttempt("ex3Att3")
+        let ex3Att1 = getNewAttempt("ex3Att1")
+        let ex3Att2 = getNewAttempt("ex3Att2")
+        let ex3Att3 = getNewAttempt("ex3Att3")
         ex3.addAttempt(ex3Att1)
         ex3.addAttempt(ex3Att2)
         ex3.addAttempt(ex3Att3)
@@ -96,25 +96,25 @@ class TemplateList {
     /********************/
     // Helper Functions //
     /********************/
-    func newAttempt(_ name: String) -> Attempt {
+    func getNewAttempt(_ name: String) -> Attempt {
         let item = Attempt()
         item.titleForTest = name
         return item
     }
     
-    func newExercise(_ name: String) -> Exercise {
+    func getNewExercise(_ name: String) -> Exercise {
         let item = Exercise()
         item.name = name
         return item
     }
     
-    func newWorkoutDay(_ name: String) -> WorkoutDay {
+    func getNewWorkoutDay(_ name: String) -> WorkoutDay {
         let item = WorkoutDay()
         item.title = name
         return item
     }
     
-    func newTemplate(_ name: String) -> Template {
+    func getNewTemplate(_ name: String) -> Template {
         let item = Template()
         item.name = name
         return item

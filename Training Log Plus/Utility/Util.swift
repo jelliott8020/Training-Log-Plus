@@ -42,11 +42,10 @@ class Util {
      Turns the given text field's border red and shakes it
      */
     static func shakeAndRedTextField(_ textField: UITextField) {
-        let redColor = UIColor.red
         textField.shake()
         textField.layer.borderWidth = 1.0
         textField.layer.cornerRadius = 5
-        textField.layer.borderColor = redColor.cgColor
+        textField.layer.borderColor = UIColor.red.cgColor
     }
     
     
@@ -67,7 +66,14 @@ class Util {
      * Gets the body part data for the picker
      */
     static func getGenericBodyPartData() -> [String] {
-        return ["Chest", "Back", "Shoulders", "Arms", "Legs", "Abs", "Misc"]
+        return [
+            "Chest",
+            "Back",
+            "Shoulders",
+            "Arms",
+            "Legs",
+            "Abs",
+            "Misc"]
     }
     
     /*
@@ -109,6 +115,12 @@ class Util {
             "531 + 5x5 FSL",
             "531 + BBB",
             "531 Pyramid (5 sets)",
+            "531 + 2x5 FSL + 1 Joker",
+            "531 + 2x5 FSL + 2 Joker",
+            "531 + 2x5 FSL + 3 Joker",
+            "531 Pyramid + 1 Joker",
+            "531 Pyramid + 2 Joker",
+            "531 Pyramid + 3 Joker",
         ]
     }
     
@@ -120,7 +132,11 @@ class Util {
      */
     static func getGenericExerciseData() -> [String] {
         // Fill this from database after bodypart picker is selected
-        return ["Squat", "Deadlift", "Bench"]
+        return [
+            "Squat",
+            "Deadlift",
+            "Bench"
+        ]
     }
     
     
@@ -130,7 +146,10 @@ class Util {
      * Returns data to fill Wendler Picker
      */
     static func getYesOrNoForPickerData() -> [String] {
-        return ["Yes", "No"]
+        return [
+            "Yes",
+            "No"
+        ]
     }
 }
 
