@@ -29,7 +29,6 @@
 		03B2D813235BD7E700005CC5 /* ChangeTemplate_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2D812235BD7E700005CC5 /* ChangeTemplate_TVCell.swift */; };
 		03B2D817235BDC6C00005CC5 /* AddExerciseToData_TVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2D816235BDC6C00005CC5 /* AddExerciseToData_TVC.swift */; };
 		03B984E0233BE03F00656CFA /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B984DF233BE03F00656CFA /* Attempt.swift */; };
-		03B984E2233BE16C00656CFA /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B984E1233BE16C00656CFA /* Exercise.swift */; };
 		03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32C92325903300C712D1 /* TemplateList.swift */; };
 		03BB32CC2325A52F00C712D1 /* AddEdit_Template_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB32CB2325A52F00C712D1 /* AddEdit_Template_VC.swift */; };
 		03F1D0772329701700B63042 /* SelectProgressExercises_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1D0762329701700B63042 /* SelectProgressExercises_VC.swift */; };
@@ -37,7 +36,9 @@
 		052D19F72343A90F003183B4 /* WorkoutList_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D19F62343A90F003183B4 /* WorkoutList_TVCell.swift */; };
 		052D409F2359153100667D2E /* Exercises_TVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D409E2359153100667D2E /* Exercises_TVC.swift */; };
 		05739D152368C5AA00B70A4E /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05739D142368C5AA00B70A4E /* Util.swift */; };
+		058666E9236FA1FD0056E950 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058666E8236FA1FD0056E950 /* Exercise.swift */; };
 		05B3505B233D64490029234D /* Template_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B3505A233D64490029234D /* Template_TVCell.swift */; };
+		05B9CA20236F98C80027B363 /* Training Log Plus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05B9CA1E236F98C80027B363 /* Training Log Plus.xcdatamodeld */; };
 		05C1953F236886ED0014D212 /* DayMainExercise_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C1953E236886ED0014D212 /* DayMainExercise_TVCell.swift */; };
 		05C19541236887000014D212 /* DayAccExercise_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C19540236887000014D212 /* DayAccExercise_TVCell.swift */; };
 		05C3B400236236C10087BAC4 /* workoutDaysInTemplate_TVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C3B3FF236236C10087BAC4 /* workoutDaysInTemplate_TVCell.swift */; };
@@ -78,7 +79,6 @@
 		03B2D812235BD7E700005CC5 /* ChangeTemplate_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTemplate_TVCell.swift; sourceTree = "<group>"; };
 		03B2D816235BDC6C00005CC5 /* AddExerciseToData_TVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseToData_TVC.swift; sourceTree = "<group>"; };
 		03B984DF233BE03F00656CFA /* Attempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
-		03B984E1233BE16C00656CFA /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		03BB32C92325903300C712D1 /* TemplateList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateList.swift; sourceTree = "<group>"; };
 		03BB32CB2325A52F00C712D1 /* AddEdit_Template_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEdit_Template_VC.swift; sourceTree = "<group>"; };
 		03F1D0762329701700B63042 /* SelectProgressExercises_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProgressExercises_VC.swift; sourceTree = "<group>"; };
@@ -86,7 +86,9 @@
 		052D19F62343A90F003183B4 /* WorkoutList_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList_TVCell.swift; sourceTree = "<group>"; };
 		052D409E2359153100667D2E /* Exercises_TVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercises_TVC.swift; sourceTree = "<group>"; };
 		05739D142368C5AA00B70A4E /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		058666E8236FA1FD0056E950 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		05B3505A233D64490029234D /* Template_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template_TVCell.swift; sourceTree = "<group>"; };
+		05B9CA1F236F98C80027B363 /* Training Log Plus.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Training Log Plus.xcdatamodel"; sourceTree = "<group>"; };
 		05C1953E236886ED0014D212 /* DayMainExercise_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayMainExercise_TVCell.swift; sourceTree = "<group>"; };
 		05C19540236887000014D212 /* DayAccExercise_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAccExercise_TVCell.swift; sourceTree = "<group>"; };
 		05C3B3FF236236C10087BAC4 /* workoutDaysInTemplate_TVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutDaysInTemplate_TVCell.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				03FB9EAE2322FC7300F9D410 /* Templates Tab */,
 				05CBE50B2357738600E766F8 /* Settings Tab */,
 				03B984DE233BE02300656CFA /* Utility */,
+				05B9CA1E236F98C80027B363 /* Training Log Plus.xcdatamodeld */,
 			);
 			path = "Training Log Plus";
 			sourceTree = "<group>";
@@ -180,10 +183,10 @@
 		03B984DE233BE02300656CFA /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				058666E8236FA1FD0056E950 /* Exercise.swift */,
 				03BB32C92325903300C712D1 /* TemplateList.swift */,
 				03FB9EAA2322FA4E00F9D410 /* Template.swift */,
 				033C28252346872800A73B69 /* WorkoutDay.swift */,
-				03B984E1233BE16C00656CFA /* Exercise.swift */,
 				03B984DF233BE03F00656CFA /* Attempt.swift */,
 				05E323F4236B2A1D00FAAF04 /* SavedCodeSnippets.swift */,
 				05739D142368C5AA00B70A4E /* Util.swift */,
@@ -412,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05B9CA20236F98C80027B363 /* Training Log Plus.xcdatamodeld in Sources */,
 				03BB32CC2325A52F00C712D1 /* AddEdit_Template_VC.swift in Sources */,
 				05C3B40523623D250087BAC4 /* AddEdit_MainExercise_VC.swift in Sources */,
 				03B2D80F235BD6DB00005CC5 /* ExerciseBB_TableViewCell.swift in Sources */,
@@ -428,6 +432,7 @@
 				05C3B40223623C000087BAC4 /* WorkoutDayCreation_VC.swift in Sources */,
 				05CBE51323577ECC00E766F8 /* CustomWorkout_VC.swift in Sources */,
 				03B2D809235BD5B600005CC5 /* BodyBuildingPerformance_TVCell.swift in Sources */,
+				058666E9236FA1FD0056E950 /* Exercise.swift in Sources */,
 				03B2D805235BD38F00005CC5 /* AmrapPerformance_VC.swift in Sources */,
 				033C282A2346893000A73B69 /* ItemDetailWorkout_VC.swift in Sources */,
 				03BB32CA2325903300C712D1 /* TemplateList.swift in Sources */,
@@ -437,7 +442,6 @@
 				05B3505B233D64490029234D /* Template_TVCell.swift in Sources */,
 				0377F6052358087B0015AEDB /* TMCell.swift in Sources */,
 				03B2D807235BD58200005CC5 /* AmrapPerformance_TVCell.swift in Sources */,
-				03B984E2233BE16C00656CFA /* Exercise.swift in Sources */,
 				03FB9EAB2322FA4E00F9D410 /* Template.swift in Sources */,
 				03B984E0233BE03F00656CFA /* Attempt.swift in Sources */,
 				05C1953F236886ED0014D212 /* DayMainExercise_TVCell.swift in Sources */,
@@ -652,6 +656,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		05B9CA1E236F98C80027B363 /* Training Log Plus.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				05B9CA1F236F98C80027B363 /* Training Log Plus.xcdatamodel */,
+			);
+			currentVersion = 05B9CA1F236F98C80027B363 /* Training Log Plus.xcdatamodel */;
+			path = "Training Log Plus.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 03477ECE231DD7A200E967DE /* Project object */;
 }

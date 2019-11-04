@@ -78,18 +78,21 @@ class Util {
     static func getGenericProgressionData() -> [String] {
         return [
             "3x5 Rep Goal",
-            "5x5 Rep Goal",
             "3x5 + 2x12 @ 70%",
+            "3x8 Rep Goal",
+            "3x10 Rep Goal",
+            "3x12 Rep Goal",
+            "4x5 Rep Goal",
+            "4x8 Rep Goal",
+            "4x10 Rep Goal",
+            "4x12 Rep Goal",
+            "5x5 Rep Goal",
             "25 reps over 3 sets",
             "25 reps over 5 sets",
             "12/10/8/6, weight +10%",
-            "6/8/10/12, weight -10%",
             "15/12/10/8, weight +10%",
-            "8/10/12/15, weight -10%",
-            "3x12 Rep Goal",
-            "3x10 Rep Goal",
-            "3x8 Rep Goal"
-            
+            "6/8/10/12, weight -10%",
+            "8/10/12/15, weight -10%"
         ]
     }
     

@@ -235,7 +235,7 @@ class TemplateParent_VC: UITableViewController {
      */
     func configureText(for cell: UITableViewCell, with item: Template) {
         if let templateCell = cell as? Template_TVCell {
-            templateCell.templateTextLabel.text = item.title
+            templateCell.templateTextLabel.text = item.name
         }
     }
     

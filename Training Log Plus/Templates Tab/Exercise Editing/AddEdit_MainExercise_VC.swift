@@ -74,17 +74,17 @@ class AddEdit_MainExercise_VC: UIViewController {
         pastTrainingMaxTable.tableFooterView = UIView(frame: CGRect.zero)
         
         pastAttemptsList = passedInExerciseObj!.attemptList
-        self.title = passedInExerciseObj?.title
+        self.title = passedInExerciseObj?.name
         bodyPartTextField.text = passedInExerciseObj!.bodyPart
-        exerciseTextField.text = passedInExerciseObj!.title
+        exerciseTextField.text = passedInExerciseObj!.name
         progressionSchemeTextField.text = passedInExerciseObj!.progression
         
         bodyPartData = Util.getGenericBodyPartData()
         exerciseData = Util.getGenericExerciseData()
         progressionSchemeData = Util.getGenericProgressionData()
         
-        //createPickers()
-        //createToolbarDoneButton()
+        createPickers()
+        createToolbarDoneButton()
         // Do any additional setup after loading the view.
     }
     
@@ -94,7 +94,7 @@ class AddEdit_MainExercise_VC: UIViewController {
     func addButtonAction() {
         
         passedInExerciseObj?.bodyPart = bodyPartTextField.text
-        passedInExerciseObj?.title = exerciseTextField.text
+        passedInExerciseObj?.name = exerciseTextField.text
         passedInExerciseObj?.progression = progressionSchemeTextField.text
         
         if (isItMain!) {
@@ -143,6 +143,7 @@ class AddEdit_MainExercise_VC: UIViewController {
         bodyPartTextField.inputAccessoryView = toolBar
         exerciseTextField.inputAccessoryView = toolBar
         progressionSchemeTextField.inputAccessoryView = toolBar
+        trainingMaxTextField.inputAccessoryView = toolBar
     }
     
     
@@ -192,7 +193,7 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
 extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return pastAttemptsList.count
+        return 1
     }
         
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

@@ -87,9 +87,9 @@ class AddEdit_Template_VC: UIViewController {
         // If its an item thats passed (itemToEdit), fill in data
         // Else create a new TemplateItem
         if let item = itemToEdit {
-            self.title = item.title
+            self.title = item.name
             
-            setLabels(title: item.title, days: String(item.numDaysOfWeek), wen: item.wendlerYesNo, weeks: String(item.numOfWeeks))
+            setLabels(title: item.name, days: String(item.numDaysOfWeek), wen: item.wendlerYesNo, weeks: String(item.numOfWeeks))
             
             workoutDaysList = item.workoutList
             
@@ -101,7 +101,7 @@ class AddEdit_Template_VC: UIViewController {
                 globalTemplateItem?.numOfWeeks = weeks
                 globalTemplateItem?.numDaysOfWeek = days
                 globalTemplateItem?.wendlerYesNo = wen
-                globalTemplateItem?.title = title
+                globalTemplateItem?.name = title
                 
                 self.title = title
                 

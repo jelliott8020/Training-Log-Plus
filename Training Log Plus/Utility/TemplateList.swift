@@ -20,7 +20,6 @@ class TemplateList {
         // Create Template
         let temp1 = newTemplate("Template Title 1")
         
-        
         // Create WorkoutDay
         let wo1 = newWorkoutDay("Tester1")
         
@@ -103,7 +102,7 @@ class TemplateList {
     
     func newExercise(_ name: String) -> Exercise {
         let item = Exercise()
-        item.title = name
+        item.name = name
         return item
     }
     
@@ -115,7 +114,7 @@ class TemplateList {
     
     func newTemplate(_ name: String) -> Template {
         let item = Template()
-        item.title = name
+        item.name = name
         return item
     }
     

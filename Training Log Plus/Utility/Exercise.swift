@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import CoreData
 
 
 class Exercise: NSObject {
     
-    var title: String?
+    var name: String?
     var attemptList: [Attempt] = []
     var isWendler: Bool?
     var cues: [String] = []
