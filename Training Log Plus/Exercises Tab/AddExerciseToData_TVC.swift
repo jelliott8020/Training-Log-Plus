@@ -78,7 +78,7 @@ class AddExerciseToData_TVC: UITableViewController {
             item.name = exerciseTextField.text!
             item.progression = ""
             item.startingWeight = 0
-            item.attemptList = []
+            //item.attemptList = []
             
             print(item)
             

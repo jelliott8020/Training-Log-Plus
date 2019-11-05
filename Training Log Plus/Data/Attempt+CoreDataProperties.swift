@@ -21,6 +21,5 @@ extension Attempt {
     @NSManaged public var sets: Int32
     @NSManaged public var titleForTest: String?
     @NSManaged public var weight: Double
-    @NSManaged public var exercise: Exercise?
 
 }
