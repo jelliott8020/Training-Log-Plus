@@ -6,29 +6,29 @@
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 
-import Foundation
-import CoreData
-
-
-class Exercise: NSObject {
-    
-    var name: String?
-    var attemptList: [Attempt] = []
-    var isWendler: Bool?
-    var cues: [String] = []
-    var cellDisplayTitle: String?
-    
-    var bodyPart: String?
-    var progression: String?
-    var startingWeight: Int?
-    
-    func addAttempt(_ obj: Attempt) {
-        attemptList.append(obj)
-    }
-    
-    func addBlankAttempt() {
-        let item = Attempt()
-        attemptList.append(item)
-    }
-    
-}
+//import Foundation
+//import CoreData
+//
+//
+//public class Exercise: NSManagedObject {
+//
+//    var name: String?
+//    var attemptList: [Attempt] = []
+//    var isWendler: Bool?
+//    var cues: [String] = []
+//    var cellDisplayTitle: String?
+//
+//    var bodyPart: String?
+//    var progression: String?
+//    var startingWeight: Int?
+//
+//    func addAttempt(_ obj: Attempt) {
+//        attemptList.append(obj)
+//    }
+//
+//    func addBlankAttempt() {
+//        let item = Attempt()
+//        attemptList.append(item)
+//    }
+//
+//}

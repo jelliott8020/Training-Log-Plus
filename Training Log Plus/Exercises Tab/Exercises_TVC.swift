@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class Exercises_TVC: UITableViewController {
 
     var bodyPartData: [String] = []
-    var exerciseData: [String] = []
+    //var exerciseData: [String] = []
+    var exerciseData: [Exercise] = []
     
     var selectedBodyPart: String?
     var selectedExercise: String?
@@ -19,6 +21,8 @@ class Exercises_TVC: UITableViewController {
     var bodyPartPicker = UIPickerView()
     var exercisePicker = UIPickerView()
     
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBOutlet weak var bodyPartTextField: UITextField!
     @IBOutlet weak var exerciseTextField: UITextField!
@@ -40,11 +44,39 @@ class Exercises_TVC: UITableViewController {
         bodyPartData = Util.getGenericBodyPartData()
         
         // Will have to figure how to fill this AFTER bodypart picker is selected
-        exerciseData = Util.getGenericExerciseData()
+        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
+        
+        do {
+            exerciseData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        //exerciseData = Util.getGenericExerciseData()
         
         createPickers()
         createToolbarDoneButton()
     }
+    
+//    private func refresh() {
+//
+//        let request = Friend.fetchRequest() as NSFetchRequest<Friend>
+//
+//        if !query.isEmpty {
+//            request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", query)
+//        }
+//
+//        //let sort = NSSortDescriptor(keyPath: \Friend.name, ascending: true)
+//        let sort = NSSortDescriptor(key: #keyPath(Friend.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+//        request.sortDescriptors = [sort]
+//
+//
+//        do {
+//            friends = try context.fetch(request)
+//        } catch let error as NSError {
+//            print("Could not fetch. \(error), \(error.userInfo)")
+//        }
+//    }
     
 
     /*
@@ -150,7 +182,7 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodyPartPicker {
             returnStr = bodyPartData[row]
         } else if pickerView == exercisePicker {
-            returnStr = exerciseData[row]
+            returnStr = exerciseData[row].name
         }
         
         return returnStr
@@ -161,7 +193,7 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
         } else if pickerView == exercisePicker {
-            selectedExercise = exerciseData[row]
+            selectedExercise = exerciseData[row].name
             exerciseTextField.text = selectedExercise
         }
     }

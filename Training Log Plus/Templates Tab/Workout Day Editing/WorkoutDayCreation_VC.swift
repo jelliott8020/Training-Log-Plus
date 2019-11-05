@@ -23,6 +23,7 @@ protocol Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate {
 class WorkoutDayCreation_VC: UIViewController {
     
     var delegate: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate?
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var passedInWorkoutObj: WorkoutDay?
     var accExerciseList: [Exercise] = []
     var mainExerciseList: [Exercise] = []
@@ -47,7 +48,7 @@ class WorkoutDayCreation_VC: UIViewController {
     }
     
     @IBAction func addMoreAccButton(_ sender: UIButton) {
-        let newExercise = Exercise()
+        let newExercise = Exercise(entity: Exercise.entity(), insertInto: context)
         newExercise.name = "Tap to edit"
         passedInWorkoutObj?.addAccExercise(newExercise)
         accExerciseList.append(newExercise)
@@ -55,7 +56,7 @@ class WorkoutDayCreation_VC: UIViewController {
     }
     
     @IBAction func addMoreMainButton(_ sender: UIButton) {
-        let newExercise = Exercise()
+        let newExercise = Exercise(entity: Exercise.entity(), insertInto: context)
         newExercise.name = "Tap to edit"
         passedInWorkoutObj?.addMainExercise(newExercise)
         mainExerciseList.append(newExercise)

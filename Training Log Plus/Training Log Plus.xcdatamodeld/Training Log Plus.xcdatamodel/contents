@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Exercise" representedClassName=".Exercise" syncable="YES">
-        <attribute name="name" attributeType="String"/>
+    <entity name="Attempt" representedClassName=".Attempt" syncable="YES">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="reps" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName=".[Int]"/>
+        <attribute name="sets" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="titleForTest" attributeType="String"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Template" representedClassName=".Template" syncable="YES">
+    <entity name="Exercise" representedClassName=".Exercise" syncable="YES">
+        <attribute name="attemptList" attributeType="Transformable" valueTransformerName="" customClassName=".[Attempt]"/>
+        <attribute name="bodyPart" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="progression" attributeType="String"/>
+        <attribute name="startingWeight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="138.60546875" positionY="-24.76171875" width="128" height="58"/>
-        <element name="Template" positionX="-115.73828125" positionY="-168.59765625" width="128" height="58"/>
+        <element name="Exercise" positionX="138.60546875" positionY="-24.76171875" width="128" height="118"/>
+        <element name="Attempt" positionX="135" positionY="9" width="128" height="118"/>
     </elements>
 </model>

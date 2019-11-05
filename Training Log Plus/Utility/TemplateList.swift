@@ -6,7 +6,8 @@
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import CoreData
 
 /**
  *  Class to keep the list of template items
@@ -14,10 +15,11 @@ import Foundation
 class TemplateList {
     
     var templates: [Template] = []
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
     init() {
-        
-        
         
         // Create Template
         let temp1 = getNewTemplate("Template Title 1")
@@ -97,13 +99,17 @@ class TemplateList {
     // Helper Functions //
     /********************/
     func getNewAttempt(_ name: String) -> Attempt {
-        let item = Attempt()
+        let item = Attempt(entity: Attempt.entity(), insertInto: context)
         item.titleForTest = name
+        item.date = Date()
+        item.reps = [1,2,3]
+        item.sets = 3
+        item.weight = 22.0
         return item
     }
     
     func getNewExercise(_ name: String) -> Exercise {
-        let item = Exercise()
+        let item = Exercise(entity: Exercise.entity(), insertInto: context)
         item.name = name
         return item
     }

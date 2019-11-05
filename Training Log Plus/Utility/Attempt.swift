@@ -6,14 +6,14 @@
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 
-import Foundation
-
-class Attempt: NSObject {
-    
-    var titleForTest: String?
-    var date: Date?
-    var reps: [Int] = []
-    var sets: Int?
-    var weight: Double?
-    
-}
+//import Foundation
+//
+//public class Attempt: NSObject {
+//
+//    var titleForTest: String?
+//    var date: Date?
+//    var reps: [Int] = []
+//    var sets: Int?
+//    var weight: Double?
+//
+//}

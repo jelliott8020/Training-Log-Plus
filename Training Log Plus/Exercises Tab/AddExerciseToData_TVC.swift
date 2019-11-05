@@ -21,6 +21,9 @@ class AddExerciseToData_TVC: UITableViewController {
     var bodyPartPicker = UIPickerView()
     var wendlerPicker = UIPickerView()
     
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
     @IBOutlet weak var bodyPartTextField: UITextField!
     @IBOutlet weak var exerciseTextField: UITextField!
@@ -48,9 +51,6 @@ class AddExerciseToData_TVC: UITableViewController {
         
         createPickers()
         createToolbarDoneButton()
-
-        // Edit button
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     
@@ -71,13 +71,24 @@ class AddExerciseToData_TVC: UITableViewController {
             if (check) {
                 return
             }
+            
+            let item = Exercise(entity: Exercise.entity(), insertInto: context)
+            item.bodyPart = bodyPartTextField.text!
+            item.name = exerciseTextField.text!
+            item.progression = ""
+            item.startingWeight = 0
+            item.attemptList = []
+            
+            appDelegate.saveContext()
         }
         
         selectedBodyPart = bodyPartTextField.text
         selectedExercise = exerciseTextField.text
+        selectedWendler = wendlerTextField.text
         
-        // Add to database here
-        // Also add with toolbar done button below
+        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+
     }
     
     
@@ -129,7 +140,8 @@ class AddExerciseToData_TVC: UITableViewController {
             exerciseTextField.resignFirstResponder()
             wendlerTextField.becomeFirstResponder()
         } else if wendlerTextField.isEditing {
-            // Add to DB here
+            wendlerTextField.resignFirstResponder()
+            addButtonFunction()
             self.view.endEditing(true)
         }
     }
