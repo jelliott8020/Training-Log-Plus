@@ -18,7 +18,6 @@ extension Attempt {
     }
 
     @NSManaged public var date: Date?
-    @NSManaged public var reps: Int32
     @NSManaged public var sets: Int32
     @NSManaged public var titleForTest: String?
     @NSManaged public var weight: Double

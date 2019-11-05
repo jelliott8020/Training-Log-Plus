@@ -165,7 +165,7 @@ class TemplateList {
         let item = Attempt(entity: Attempt.entity(), insertInto: context)
         item.titleForTest = name
         item.date = Date()
-        item.reps = 1
+        //item.reps = 1
         item.sets = 3
         item.weight = 22.0
         return item
