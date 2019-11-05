@@ -2,7 +2,7 @@
 //  Attempt+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/4/19.
+//  Created by Josh Elliott on 11/5/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -17,10 +17,11 @@ extension Attempt {
         return NSFetchRequest<Attempt>(entityName: "Attempt")
     }
 
-    @NSManaged public var titleForTest: String?
     @NSManaged public var date: Date?
-    @NSManaged public var reps: [Int]?
+    @NSManaged public var reps: Int32
     @NSManaged public var sets: Int32
+    @NSManaged public var titleForTest: String?
     @NSManaged public var weight: Double
+    @NSManaged public var exercise: Exercise?
 
 }

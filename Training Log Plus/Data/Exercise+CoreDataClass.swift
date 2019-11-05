@@ -14,13 +14,13 @@ import CoreData
 public class Exercise: NSManagedObject {
 
     
-        func addAttempt(_ obj: Attempt) {
-            attemptList.append(obj)
-        }
-    
-        func addBlankAttempt() {
-            let item = Attempt()
-            attemptList.append(item)
-        }
+//        func addAttempt(_ obj: Attempt) {
+//            attemptList.append(obj)
+//        }
+//    
+//        func addBlankAttempt() {
+//            let item = Attempt()
+//            attemptList.append(item)
+//        }
     
 }

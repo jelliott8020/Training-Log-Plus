@@ -43,9 +43,9 @@ class TemplateList {
         let ex1Att1 = getNewAttempt("ex1Att1")
         let ex1Att2 = getNewAttempt("ex1Att2")
         let ex1Att3 = getNewAttempt("ex1Att3")
-        ex1.addAttempt(ex1Att1)
-        ex1.addAttempt(ex1Att2)
-        ex1.addAttempt(ex1Att3)
+        ex1.addToAttemptList(ex1Att1)
+        ex1.addToAttemptList(ex1Att2)
+        ex1.addToAttemptList(ex1Att3)
         
         
         let ex2 = getNewExercise("Squatter")
@@ -54,9 +54,9 @@ class TemplateList {
         let ex2Att1 = getNewAttempt("ex2Att1")
         let ex2Att2 = getNewAttempt("ex2Att2")
         let ex2Att3 = getNewAttempt("ex2Att3")
-        ex2.addAttempt(ex2Att1)
-        ex2.addAttempt(ex2Att2)
-        ex2.addAttempt(ex2Att3)
+        ex2.addToAttemptList(ex2Att1)
+        ex2.addToAttemptList(ex2Att2)
+        ex2.addToAttemptList(ex2Att3)
         
         
         let ex3 = getNewExercise("Dead")
@@ -65,9 +65,9 @@ class TemplateList {
         let ex3Att1 = getNewAttempt("ex3Att1")
         let ex3Att2 = getNewAttempt("ex3Att2")
         let ex3Att3 = getNewAttempt("ex3Att3")
-        ex3.addAttempt(ex3Att1)
-        ex3.addAttempt(ex3Att2)
-        ex3.addAttempt(ex3Att3)
+        ex3.addToAttemptList(ex3Att1)
+        ex3.addToAttemptList(ex3Att2)
+        ex3.addToAttemptList(ex3Att3)
         
         //
         let ex4 = getNewExercise("DB Bench")
@@ -76,9 +76,9 @@ class TemplateList {
         let ex4Att1 = getNewAttempt("ex1Att1")
         let ex4Att2 = getNewAttempt("ex1Att2")
         let ex4Att3 = getNewAttempt("ex1Att3")
-        ex4.addAttempt(ex4Att1)
-        ex4.addAttempt(ex4Att2)
-        ex4.addAttempt(ex4Att3)
+        ex4.addToAttemptList(ex4Att1)
+        ex4.addToAttemptList(ex4Att2)
+        ex4.addToAttemptList(ex4Att3)
         
         let ex5 = getNewExercise("Incline Bench")
         ex5.bodyPart = "Chest"
@@ -86,9 +86,9 @@ class TemplateList {
         let ex5Att1 = getNewAttempt("ex1Att1")
         let ex5Att2 = getNewAttempt("ex1Att2")
         let ex5Att3 = getNewAttempt("ex1Att3")
-        ex5.addAttempt(ex5Att1)
-        ex5.addAttempt(ex5Att2)
-        ex5.addAttempt(ex5Att3)
+        ex5.addToAttemptList(ex5Att1)
+        ex5.addToAttemptList(ex5Att2)
+        ex5.addToAttemptList(ex5Att3)
         
         let ex6 = getNewExercise("Pullup")
         ex6.bodyPart = "Back"
@@ -96,9 +96,9 @@ class TemplateList {
         let ex6Att1 = getNewAttempt("ex1Att1")
         let ex6Att2 = getNewAttempt("ex1Att2")
         let ex6Att3 = getNewAttempt("ex1Att3")
-        ex6.addAttempt(ex6Att1)
-        ex6.addAttempt(ex6Att2)
-        ex6.addAttempt(ex6Att3)
+        ex6.addToAttemptList(ex6Att1)
+        ex6.addToAttemptList(ex6Att2)
+        ex6.addToAttemptList(ex6Att3)
         
         let ex7 = getNewExercise("Row")
         ex7.bodyPart = "Back"
@@ -106,9 +106,9 @@ class TemplateList {
         let ex7Att1 = getNewAttempt("ex1Att1")
         let ex7Att2 = getNewAttempt("ex1Att2")
         let ex7Att3 = getNewAttempt("ex1Att3")
-        ex7.addAttempt(ex7Att1)
-        ex7.addAttempt(ex7Att2)
-        ex7.addAttempt(ex7Att3)
+        ex7.addToAttemptList(ex7Att1)
+        ex7.addToAttemptList(ex7Att2)
+        ex7.addToAttemptList(ex7Att3)
         
         let ex8 = getNewExercise("Mil Press")
         ex8.bodyPart = "Shoulders"
@@ -116,9 +116,9 @@ class TemplateList {
         let ex8Att1 = getNewAttempt("ex1Att1")
         let ex8Att2 = getNewAttempt("ex1Att2")
         let ex8Att3 = getNewAttempt("ex1Att3")
-        ex8.addAttempt(ex8Att1)
-        ex8.addAttempt(ex8Att2)
-        ex8.addAttempt(ex8Att3)
+        ex8.addToAttemptList(ex8Att1)
+        ex8.addToAttemptList(ex8Att2)
+        ex8.addToAttemptList(ex8Att3)
         //
         
         
@@ -128,9 +128,9 @@ class TemplateList {
         let mainAtt1 = getNewAttempt("MainAttemp1")
         let mainAtt2 = getNewAttempt("MainAttempt2")
         let mainAtt3 = getNewAttempt("MainAttempt3")
-        mainEx.addAttempt(mainAtt1)
-        mainEx.addAttempt(mainAtt2)
-        mainEx.addAttempt(mainAtt3)
+        mainEx.addToAttemptList(mainAtt1)
+        mainEx.addToAttemptList(mainAtt2)
+        mainEx.addToAttemptList(mainAtt3)
         
         
         
@@ -165,7 +165,7 @@ class TemplateList {
         let item = Attempt(entity: Attempt.entity(), insertInto: context)
         item.titleForTest = name
         item.date = Date()
-        item.reps = [1,2,3]
+        item.reps = 1
         item.sets = 3
         item.weight = 22.0
         return item

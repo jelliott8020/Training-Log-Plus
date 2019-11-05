@@ -74,7 +74,7 @@ class AddEdit_MainExercise_VC: UIViewController {
         
         pastTrainingMaxTable.tableFooterView = UIView(frame: CGRect.zero)
         
-        pastAttemptsList = passedInExerciseObj!.attemptList
+        pastAttemptsList = passedInExerciseObj!.attemptList?.array as! [Attempt]
         self.title = passedInExerciseObj?.name
         bodyPartTextField.text = passedInExerciseObj!.bodyPart
         exerciseTextField.text = passedInExerciseObj!.name
