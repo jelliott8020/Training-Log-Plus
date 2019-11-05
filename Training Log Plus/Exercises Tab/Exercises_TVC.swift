@@ -41,6 +41,8 @@ class Exercises_TVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Test VDL")
+        
         bodyPartData = Util.getGenericBodyPartData()
         
         // Will have to figure how to fill this AFTER bodypart picker is selected
@@ -151,6 +153,22 @@ class Exercises_TVC: UITableViewController {
             exerciseTextField.resignFirstResponder()
         }
     }
+    
+    
+    func refreshExerciseList(bp: String) {
+        
+        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
+        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
+        
+        do {
+            exerciseData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
+        }
+        
+        exercisePicker.reloadAllComponents()
+    }
+    
 }
 
 
@@ -192,6 +210,7 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
+            refreshExerciseList(bp: selectedBodyPart!)
         } else if pickerView == exercisePicker {
             selectedExercise = exerciseData[row].name
             exerciseTextField.text = selectedExercise

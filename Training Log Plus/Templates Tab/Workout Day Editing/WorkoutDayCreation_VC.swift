@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 protocol Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate {

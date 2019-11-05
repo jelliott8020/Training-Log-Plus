@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol Pass_MainExerciseObject_BackTo_WorkoutDayCreation_Delegate {
     //func passWorkoutObjBack(workoutObj: WorkoutDay)

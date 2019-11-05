@@ -32,6 +32,7 @@ class TemplateParent_VC: UITableViewController {
      */
     required init?(coder aDecoder: NSCoder) {
         templateList = TemplateList()
+        
         super.init(coder: aDecoder)
     }
     

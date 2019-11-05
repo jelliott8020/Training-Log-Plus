@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try context.save()
             } catch {
                 let error = error as NSError
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                fatalError("Fatal Save Error: Unresolved error \(error), \(error.userInfo)")
             }
         }
     }

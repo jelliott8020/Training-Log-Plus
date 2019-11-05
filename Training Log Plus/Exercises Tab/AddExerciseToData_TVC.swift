@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddExerciseToData_TVC: UITableViewController {
 
@@ -78,6 +79,8 @@ class AddExerciseToData_TVC: UITableViewController {
             item.progression = ""
             item.startingWeight = 0
             item.attemptList = []
+            
+            print(item)
             
             appDelegate.saveContext()
         }
