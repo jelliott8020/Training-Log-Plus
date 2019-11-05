@@ -142,7 +142,6 @@
 		03477ED8231DD7A200E967DE /* Training Log Plus */ = {
 			isa = PBXGroup;
 			children = (
-				03929C6C23710BD20066B15E /* Data */,
 				03477EDD231DD7A200E967DE /* Main.storyboard */,
 				030DABD52322D10C00FDC505 /* ViewController.swift */,
 				03477ED9231DD7A200E967DE /* AppDelegate.swift */,
@@ -156,6 +155,7 @@
 				05CBE50B2357738600E766F8 /* Settings Tab */,
 				03B984DE233BE02300656CFA /* Utility */,
 				05B9CA1E236F98C80027B363 /* Training Log Plus.xcdatamodeld */,
+				03929C6C23710BD20066B15E /* Data */,
 			);
 			path = "Training Log Plus";
 			sourceTree = "<group>";

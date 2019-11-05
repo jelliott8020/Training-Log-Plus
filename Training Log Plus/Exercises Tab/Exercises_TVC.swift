@@ -28,7 +28,9 @@ class Exercises_TVC: UITableViewController {
     @IBOutlet weak var exerciseTextField: UITextField!
     
     @IBAction func createButton(_ sender: UIBarButtonItem) {
+        clearButtonFunction()
         createButtonFunc()
+        print("first spot")
     }
     @IBAction func clearButton(_ sender: UIBarButtonItem) {
         clearButtonFunction()
@@ -46,13 +48,13 @@ class Exercises_TVC: UITableViewController {
         bodyPartData = Util.getGenericBodyPartData()
         
         // Will have to figure how to fill this AFTER bodypart picker is selected
-        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        
-        do {
-            exerciseData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
+//        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
+//
+//        do {
+//            exerciseData = try context.fetch(request)
+//        } catch let error as NSError {
+//            print("Could not fetch. \(error), \(error.userInfo)")
+//        }
         
         //exerciseData = Util.getGenericExerciseData()
         
@@ -88,8 +90,12 @@ class Exercises_TVC: UITableViewController {
      */
     func createButtonFunc() {
         // Add item to data here
+        print("2 spot")
         selectedBodyPart = bodyPartTextField.text
+        bodyPartTextField.text = ""
         selectedExercise = exerciseTextField.text
+        exerciseTextField.text = ""
+        print("3 spot")
     }
     
     

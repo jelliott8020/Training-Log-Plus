@@ -29,13 +29,16 @@ class AddEdit_MainExercise_VC: UIViewController {
     var pastAttemptsList: [Attempt] = []
     var passedInExerciseObj: Exercise?
     
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
     var bodyPartPicker = UIPickerView()
     var exercisePicker = UIPickerView()
     var progressionPicker = UIPickerView()
     
     var bodyPartData: [String] = []
-    var exerciseData: [String] = []
+    var exerciseData: [Exercise] = []
     var progressionSchemeData: [String] = []
     
     var selectedBodyPart: String?
@@ -77,11 +80,14 @@ class AddEdit_MainExercise_VC: UIViewController {
         pastAttemptsList = passedInExerciseObj!.attemptList?.array as! [Attempt]
         self.title = passedInExerciseObj?.name
         bodyPartTextField.text = passedInExerciseObj!.bodyPart
+        selectedBodyPart = passedInExerciseObj!.bodyPart
         exerciseTextField.text = passedInExerciseObj!.name
+        selectedExercise = passedInExerciseObj!.name
         progressionSchemeTextField.text = passedInExerciseObj!.progression
+        selectedProgressionScheme = passedInExerciseObj!.progression
         
         bodyPartData = Util.getGenericBodyPartData()
-        exerciseData = Util.getGenericExerciseData()
+        //exerciseData = Util.getGenericExerciseData()
         progressionSchemeData = Util.getGenericProgressionData()
         
         createPickers()
@@ -169,6 +175,20 @@ class AddEdit_MainExercise_VC: UIViewController {
             addButtonAction()
         }
     }
+    
+    func refreshExerciseList(bp: String) {
+        
+        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
+        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
+        
+        do {
+            exerciseData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
+        }
+        
+        exercisePicker.reloadAllComponents()
+    }
 
 }
 
@@ -219,7 +239,7 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
         if pickerView == bodyPartPicker {
             returnStr = bodyPartData[row]
         } else if pickerView == exercisePicker {
-            returnStr = exerciseData[row]
+            returnStr = exerciseData[row].name
         } else if pickerView == progressionPicker {
             returnStr = progressionSchemeData[row]
         }
@@ -231,8 +251,9 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
+            refreshExerciseList(bp: selectedBodyPart!)
         } else if pickerView == exercisePicker {
-            selectedExercise = exerciseData[row]
+            selectedExercise = exerciseData[row].name
             exerciseTextField.text = selectedExercise
         } else if pickerView == progressionPicker {
             selectedProgressionScheme = progressionSchemeData[row]

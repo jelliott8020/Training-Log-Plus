@@ -85,6 +85,8 @@ class AddExerciseToData_TVC: UITableViewController {
             appDelegate.saveContext()
         }
         
+        
+        
         selectedBodyPart = bodyPartTextField.text
         selectedExercise = exerciseTextField.text
         selectedWendler = wendlerTextField.text
