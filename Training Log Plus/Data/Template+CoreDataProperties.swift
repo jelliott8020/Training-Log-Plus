@@ -17,7 +17,7 @@ extension Template {
         return NSFetchRequest<Template>(entityName: "Template")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var dateStarted: Date?
     @NSManaged public var currentDayIndex: Int32
     @NSManaged public var numDaysPerWeek: Int32

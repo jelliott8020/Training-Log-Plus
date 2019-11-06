@@ -13,4 +13,11 @@ import CoreData
 
 public class Attempt: NSManagedObject {
 
+    var numSets : Int {
+        get { return Int(sets) }
+        set { sets = Int32(newValue) }
+     }
+    
+
+    
 }

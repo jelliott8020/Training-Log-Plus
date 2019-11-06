@@ -54,7 +54,7 @@ class SelectProgressExercises_VC: UITableViewController {
         
         bodyPartData = Util.getGenericBodyPartData()
         // Maybe check for bodypart selection before filling in exercise data
-        let bodyPart: String = ""
+        //let bodyPart: String = ""
         // Will need to check data for bodypart before filling this in
         exerciseData = Util.getGenericExerciseData()
         

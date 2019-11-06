@@ -17,8 +17,8 @@ extension Exercise {
         return NSFetchRequest<Exercise>(entityName: "Exercise")
     }
 
-    @NSManaged public var bodyPart: String?
-    @NSManaged public var name: String?
+    @NSManaged public var bodyPart: String
+    @NSManaged public var name: String
     @NSManaged public var progression: String?
     @NSManaged public var startingWeight: Int32
     @NSManaged public var attemptList: NSOrderedSet?

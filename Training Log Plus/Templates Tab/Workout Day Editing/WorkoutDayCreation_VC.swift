@@ -25,6 +25,7 @@ class WorkoutDayCreation_VC: UIViewController {
     
     var delegate: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate?
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var passedInWorkoutObj: WorkoutDay?
     var accExerciseList: [Exercise] = []
     var mainExerciseList: [Exercise] = []
@@ -51,7 +52,9 @@ class WorkoutDayCreation_VC: UIViewController {
     @IBAction func addMoreAccButton(_ sender: UIButton) {
         let newExercise = Exercise(entity: Exercise.entity(), insertInto: context)
         newExercise.name = "Tap to edit"
-        passedInWorkoutObj?.addAccExercise(newExercise)
+        newExercise.bodyPart = ""
+        newExercise.progression = ""
+        passedInWorkoutObj?.addToAccExerciseList(newExercise)
         accExerciseList.append(newExercise)
         exerciseTable.reloadData()
     }
@@ -59,7 +62,9 @@ class WorkoutDayCreation_VC: UIViewController {
     @IBAction func addMoreMainButton(_ sender: UIButton) {
         let newExercise = Exercise(entity: Exercise.entity(), insertInto: context)
         newExercise.name = "Tap to edit"
-        passedInWorkoutObj?.addMainExercise(newExercise)
+        newExercise.bodyPart = ""
+        newExercise.progression = ""
+        passedInWorkoutObj?.addToMainExerciseList(newExercise)
         mainExerciseList.append(newExercise)
         exerciseTable.reloadData()
     }
@@ -75,10 +80,10 @@ class WorkoutDayCreation_VC: UIViewController {
         
         exerciseTable.tableFooterView = UIView(frame: CGRect.zero)
         
-        accExerciseList = passedInWorkoutObj!.accExerciseList
-        mainExerciseList = passedInWorkoutObj!.mainExerciseList
+        accExerciseList = passedInWorkoutObj!.accExerciseList?.array as! [Exercise]
+        mainExerciseList = passedInWorkoutObj!.mainExerciseList?.array as! [Exercise]
         //workoutObj?.title = passedTitle
-        self.title = passedInWorkoutObj?.title
+        self.title = passedInWorkoutObj?.name
     }
     
     
@@ -98,6 +103,8 @@ class WorkoutDayCreation_VC: UIViewController {
         //        }
         
         delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishEditing: passedInWorkoutObj!)
+        
+        appDelegate.saveContext()
         
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
@@ -121,7 +128,7 @@ class WorkoutDayCreation_VC: UIViewController {
             }
             
             self.title = workoutNameTextField.text
-            passedInWorkoutObj?.title = workoutNameTextField.text!
+            passedInWorkoutObj?.name = workoutNameTextField.text!
         }
     }
     
@@ -174,12 +181,12 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
         let dummyCell = UITableViewCell()
         
         if indexPath.section == 0 {
-            let weightForCell = mainExerciseList[indexPath.row].name
+            let weightForCell = mainExerciseList[indexPath.row].returnDisplayString()
             let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! DayMainExercise_TVCell
             cell.mainExerLabel.text = weightForCell
             return cell
         } else if indexPath.section == 1 {
-            let weightForCell = accExerciseList[indexPath.row].name
+            let weightForCell = accExerciseList[indexPath.row].returnDisplayString()
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccessoryExercise") as! DayAccExercise_TVCell
             cell.accExerLabel.text = weightForCell
             return cell

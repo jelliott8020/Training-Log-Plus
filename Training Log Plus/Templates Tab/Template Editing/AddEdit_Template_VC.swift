@@ -28,9 +28,13 @@ class AddEdit_Template_VC: UIViewController {
     // In order to use the protocol above, need a delegate
     // Any viewController that implements this protocol can be a delegate of the AddItemTableViewController
     weak var delegate: Pass_AddEditTemplate_BackTo_TemplateParent_Delegate?
-    weak var templateList: TemplateList?
+    //weak var templateList: TemplateList?
+    var templateList: [Template] = []
     weak var itemToEdit: Template?
-    weak var globalTemplateItem: Template?
+    var globalTemplateItem: Template?
+    
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var passedTitle: String?
     var passedDays: Int?
@@ -89,27 +93,29 @@ class AddEdit_Template_VC: UIViewController {
         if let item = itemToEdit {
             self.title = item.name
             
-            setLabels(title: item.name, days: String(item.numDaysOfWeek), wen: item.wendlerYesNo, weeks: String(item.numOfWeeks))
+            setLabels(title: item.name, days: String(item.numDays), wen: item.wendlerYesNo, weeks: String(item.numOfWeeks))
             
-            workoutDaysList = item.workoutList
+            workoutDaysList = item.workoutList?.array as! [WorkoutDay]
             
             doneButtonOutlet.isEnabled = true
         } else {
             
             if let title = passedTitle, let wen = passedWen, let weeks = passedWeeks, let days = passedDays {
-                globalTemplateItem = templateList?.newTemplate()
-                globalTemplateItem?.numOfWeeks = weeks
-                globalTemplateItem?.numDaysOfWeek = days
-                globalTemplateItem?.wendlerYesNo = wen
-                globalTemplateItem?.name = title
+                globalTemplateItem = Template(entity: Template.entity(), insertInto: context)
+                globalTemplateItem!.numWeeks = weeks
+                globalTemplateItem!.numDays = days
+                globalTemplateItem!.wendlerYesNo = wen
+                globalTemplateItem!.name = title
+                
+                templateList.append(globalTemplateItem!)
                 
                 self.title = title
                 
                 
                 for _ in 0...days-1 {
-                    let newWorkout = WorkoutDay()
-                    newWorkout.title = "Tap to edit"
-                    globalTemplateItem?.addWorkout(newWorkout)
+                    let newWorkout = WorkoutDay(entity: WorkoutDay.entity(), insertInto: context)
+                    newWorkout.name = "Tap to edit"
+                    globalTemplateItem?.addToWorkoutList(newWorkout)
                     workoutDaysList.append(newWorkout)
                 }
                 
@@ -265,6 +271,8 @@ class AddEdit_Template_VC: UIViewController {
                 
                 delegate?.itemDetailViewController(self, didFinishAdding: globalTemplateItem!)
             }
+        
+        appDelegate.saveContext()
         //}
     }
     
@@ -286,6 +294,7 @@ class AddEdit_Template_VC: UIViewController {
                     let item = workoutDaysList[indexPath.row]
                     workoutDayCreation_VC.passedInWorkoutObj = item
                     workoutDayCreation_VC.delegate = self
+                    appDelegate.saveContext()
                 }
             }
         }
@@ -296,7 +305,7 @@ class AddEdit_Template_VC: UIViewController {
      */
     func configureText(for cell: UITableViewCell, with item: WorkoutDay) {
         if let templateCell = cell as? workoutDaysInTemplate_TVCell {
-            templateCell.cellLabel.text = item.title
+            templateCell.cellLabel.text = item.name
         }
     }
 }
@@ -391,7 +400,7 @@ extension AddEdit_Template_VC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weightForCell = workoutDaysList[indexPath.row].title
+        let weightForCell = workoutDaysList[indexPath.row].name
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutDay") as! workoutDaysInTemplate_TVCell
         

@@ -10,6 +10,10 @@ import UIKit
 
 class Util {
     
+    private static let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    
     /*
      * Check for Good Input
      *

@@ -13,14 +13,15 @@ import CoreData
 
 public class Exercise: NSManagedObject {
 
+     var srtWeight : Int {
+        get { return Int(startingWeight) }
+        set { startingWeight = Int32(newValue) }
+     }
     
-//        func addAttempt(_ obj: Attempt) {
-//            attemptList.append(obj)
-//        }
-//    
-//        func addBlankAttempt() {
-//            let item = Attempt()
-//            attemptList.append(item)
-//        }
-    
+    func returnDisplayString() -> String {
+        if let prog = progression, !prog.isEmpty {
+            return name + " (\(prog))"
+        }
+        return name
+    }
 }

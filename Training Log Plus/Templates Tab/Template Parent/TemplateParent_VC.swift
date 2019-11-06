@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class TemplateParent_VC: UITableViewController {
     
     // Eventually this will become a [Template] where the init
     // queries Core Data and fills it
-    var templateList: TemplateList
+    //var templateList: TemplateList
+    var templateList: [Template] = []
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -35,11 +37,23 @@ class TemplateParent_VC: UITableViewController {
      * Initializer
      */
     required init?(coder aDecoder: NSCoder) {
-        templateList = TemplateList()
-        
+        //templateList = TemplateList()
         
         
         super.init(coder: aDecoder)
+    }
+    
+    func refreshTemplateData() {
+        
+        let request = Template.fetchRequest() as NSFetchRequest<Template>
+        
+        do {
+            templateList = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch templateData. \(error), \(error.userInfo)")
+        }
+        
+        tableView.reloadData()
     }
     
     
@@ -48,6 +62,7 @@ class TemplateParent_VC: UITableViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshTemplateData()
         //wendlerData = Util.getYesOrNoForPickerData()
         //self.wendlerPicker.delegate = self
     }
@@ -87,7 +102,7 @@ class TemplateParent_VC: UITableViewController {
             
             let noButton = UIAlertAction(title: "No", style: UIAlertAction.Style.destructive, handler: nil)
             let yesButton = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { (action) -> Void in
-                self.templateList.templates.remove(at: indexPath.row)
+                self.templateList.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
             } )
@@ -107,7 +122,7 @@ class TemplateParent_VC: UITableViewController {
      * Tell the table how many cells to display
      */
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return templateList.templates.count
+        return templateList.count
     }
     
     
@@ -119,7 +134,7 @@ class TemplateParent_VC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TemplateCell", for: indexPath)
         
         // Manipulating the data on the label in the cell
-        let item = templateList.templates[indexPath.row]
+        let item = templateList[indexPath.row]
         configureText(for: cell, with: item)
         
         //configureCheckmark(for: cell, with: item)
@@ -231,7 +246,7 @@ class TemplateParent_VC: UITableViewController {
         } else if segue.identifier == "EditItemSegue" {
             if let editTempVC = segue.destination as? AddEdit_Template_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
-                    let item = templateList.templates[indexPath.row]
+                    let item = templateList[indexPath.row]
                     editTempVC.itemToEdit = item
                     editTempVC.delegate = self
                 }
@@ -247,14 +262,6 @@ class TemplateParent_VC: UITableViewController {
         if let templateCell = cell as? Template_TVCell {
             templateCell.templateTextLabel.text = item.name
         }
-    }
-    
-    
-    /*
-     * Add a new template to the list
-     */
-    func addNewTemplate(temp: Template) {
-        templateList.addTemplate(temp)
     }
     
     
@@ -290,8 +297,8 @@ extension TemplateParent_VC: Pass_AddEditTemplate_BackTo_TemplateParent_Delegate
      */
     func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishAdding item: Template) {
         navigationController?.popViewController(animated: true)
-        //templateList.addTemplateObj(item)
-        let rowIndex = templateList.templates.count - 1
+        templateList.append(item)
+        let rowIndex = templateList.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)
         let indexPaths = [indexPath]
         tableView.insertRows(at: indexPaths, with: .automatic)
@@ -302,7 +309,7 @@ extension TemplateParent_VC: Pass_AddEditTemplate_BackTo_TemplateParent_Delegate
      * After editing, data is passed back
      */
     func itemDetailViewController(_ controller: AddEdit_Template_VC, didFinishEditing item: Template) {
-        if let index = templateList.templates.firstIndex(of: item) {
+        if let index = templateList.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             if let cell = tableView.cellForRow(at: indexPath) {
                 configureText(for: cell, with: item)
@@ -432,25 +439,26 @@ extension TemplateParent_VC {
         mainEx.addToAttemptList(mainAtt3)
         
         // Add Main Exercise to Workout
-        wo1.addMainExercise(mainEx)
+        wo1.addToMainExerciseList(mainEx)
         
         // Add Accessories to Workout
-        wo1.addAccExercise(ex1)
-        wo1.addAccExercise(ex2)
-        wo1.addAccExercise(ex3)
-        wo1.addAccExercise(ex4)
-        wo1.addAccExercise(ex5)
-        wo1.addAccExercise(ex6)
-        wo1.addAccExercise(ex7)
-        wo1.addAccExercise(ex8)
+        wo1.addToAccExerciseList(ex1)
+        wo1.addToAccExerciseList(ex2)
+        wo1.addToAccExerciseList(ex3)
+        wo1.addToAccExerciseList(ex4)
+        wo1.addToAccExerciseList(ex5)
+        wo1.addToAccExerciseList(ex6)
+        wo1.addToAccExerciseList(ex7)
+        wo1.addToAccExerciseList(ex8)
         
         // Add Workout to Template
-        temp1.addWorkout(wo1)
+        temp1.addToWorkoutList(wo1)
         
         // Add Template Characterists
-        temp1.numDaysOfWeek = temp1.workoutList.count
+        //temp1.numDaysPerWeek = temp1.workoutList?.count
+        temp1.numDays = temp1.workoutList?.count ?? 0
         temp1.numOfWeeks = 1
-        templateList.addTemplate(temp1)
+        templateList.append(temp1)
         
         tableView.reloadData()
     }
@@ -475,13 +483,13 @@ extension TemplateParent_VC {
     }
     
     func getNewWorkoutDay(_ name: String) -> WorkoutDay {
-        let item = WorkoutDay()
-        item.title = name
+        let item = WorkoutDay(entity: WorkoutDay.entity(), insertInto: context)
+        item.name = name
         return item
     }
     
     func getNewTemplate(_ name: String) -> Template {
-        let item = Template()
+        let item = Template(entity: Template.entity(), insertInto: context)
         item.name = name
         return item
     }

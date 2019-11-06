@@ -85,6 +85,7 @@ class AddEdit_MainExercise_VC: UIViewController {
         selectedExercise = passedInExerciseObj!.name
         progressionSchemeTextField.text = passedInExerciseObj!.progression
         selectedProgressionScheme = passedInExerciseObj!.progression
+        trainingMaxTextField.text = String(passedInExerciseObj!.srtWeight)
         
         bodyPartData = Util.getGenericBodyPartData()
         //exerciseData = Util.getGenericExerciseData()
@@ -103,7 +104,7 @@ class AddEdit_MainExercise_VC: UIViewController {
         passedInExerciseObj?.bodyPart = bodyPartTextField.text!
         passedInExerciseObj?.name = exerciseTextField.text!
         passedInExerciseObj?.progression = progressionSchemeTextField.text!
-        passedInExerciseObj?.startingWeight = Int32(trainingMaxTextField.text!) ?? 0
+        passedInExerciseObj?.srtWeight = Int(trainingMaxTextField.text!) ?? 0
         
         if (isItMain!) {
             delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
@@ -111,6 +112,7 @@ class AddEdit_MainExercise_VC: UIViewController {
             delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
         }
         
+        appDelegate.saveContext()
         
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
