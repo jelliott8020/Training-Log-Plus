@@ -10,8 +10,12 @@ import UIKit
 
 class TemplateParent_VC: UITableViewController {
     
-    
+    // Eventually this will become a [Template] where the init
+    // queries Core Data and fills it
     var templateList: TemplateList
+    
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var alertTitle: String?
     var alertDays: Int?
@@ -33,6 +37,8 @@ class TemplateParent_VC: UITableViewController {
     required init?(coder aDecoder: NSCoder) {
         templateList = TemplateList()
         
+        
+        
         super.init(coder: aDecoder)
     }
     
@@ -51,6 +57,9 @@ class TemplateParent_VC: UITableViewController {
         addButtonAlert()
     }
     
+    @IBAction func createTestData(_ sender: UIBarButtonItem) {
+        createTestData()
+    }
     
     /*
      * When user interacts with cell
@@ -256,6 +265,8 @@ class TemplateParent_VC: UITableViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    
 }
 
 
@@ -307,6 +318,181 @@ extension TemplateParent_VC: Pass_AddEditTemplate_BackTo_TemplateParent_Delegate
 extension TemplateParent_VC {
     
     
+    func createTestData() {
+        
+        // Create Template
+        let temp1 = getNewTemplate("Template Title 1")
+        
+        // Create WorkoutDay
+        let wo1 = getNewWorkoutDay("Tester1")
+        
+        //        "Chest",
+        //        "Back",
+        //        "Shoulders",
+        //        "Arms",
+        //        "Legs",
+        //        "Abs",
+        //        "Misc"
+        
+        
+        // Create Accessory Exercises
+        let ex1 = getNewExercise("Bench")
+        ex1.bodyPart = "Chest"
+        ex1.progression = "531"
+        let ex1Att1 = getNewAttempt("ex1Att1")
+        let ex1Att2 = getNewAttempt("ex1Att2")
+        let ex1Att3 = getNewAttempt("ex1Att3")
+        ex1.addToAttemptList(ex1Att1)
+        ex1.addToAttemptList(ex1Att2)
+        ex1.addToAttemptList(ex1Att3)
+        
+        
+        let ex2 = getNewExercise("Squatter")
+        ex2.bodyPart = "Legs"
+        ex2.progression = "Cube"
+        let ex2Att1 = getNewAttempt("ex2Att1")
+        let ex2Att2 = getNewAttempt("ex2Att2")
+        let ex2Att3 = getNewAttempt("ex2Att3")
+        ex2.addToAttemptList(ex2Att1)
+        ex2.addToAttemptList(ex2Att2)
+        ex2.addToAttemptList(ex2Att3)
+        
+        
+        let ex3 = getNewExercise("Dead")
+        ex3.bodyPart = "Back"
+        ex3.progression = "Starting Strength"
+        let ex3Att1 = getNewAttempt("ex3Att1")
+        let ex3Att2 = getNewAttempt("ex3Att2")
+        let ex3Att3 = getNewAttempt("ex3Att3")
+        ex3.addToAttemptList(ex3Att1)
+        ex3.addToAttemptList(ex3Att2)
+        ex3.addToAttemptList(ex3Att3)
+        
+        //
+        let ex4 = getNewExercise("DB Bench")
+        ex4.bodyPart = "Chest"
+        ex4.progression = "531"
+        let ex4Att1 = getNewAttempt("ex1Att1")
+        let ex4Att2 = getNewAttempt("ex1Att2")
+        let ex4Att3 = getNewAttempt("ex1Att3")
+        ex4.addToAttemptList(ex4Att1)
+        ex4.addToAttemptList(ex4Att2)
+        ex4.addToAttemptList(ex4Att3)
+        
+        let ex5 = getNewExercise("Incline Bench")
+        ex5.bodyPart = "Chest"
+        ex5.progression = "531"
+        let ex5Att1 = getNewAttempt("ex1Att1")
+        let ex5Att2 = getNewAttempt("ex1Att2")
+        let ex5Att3 = getNewAttempt("ex1Att3")
+        ex5.addToAttemptList(ex5Att1)
+        ex5.addToAttemptList(ex5Att2)
+        ex5.addToAttemptList(ex5Att3)
+        
+        let ex6 = getNewExercise("Pullup")
+        ex6.bodyPart = "Back"
+        ex6.progression = "531"
+        let ex6Att1 = getNewAttempt("ex1Att1")
+        let ex6Att2 = getNewAttempt("ex1Att2")
+        let ex6Att3 = getNewAttempt("ex1Att3")
+        ex6.addToAttemptList(ex6Att1)
+        ex6.addToAttemptList(ex6Att2)
+        ex6.addToAttemptList(ex6Att3)
+        
+        let ex7 = getNewExercise("Row")
+        ex7.bodyPart = "Back"
+        ex7.progression = "531"
+        let ex7Att1 = getNewAttempt("ex1Att1")
+        let ex7Att2 = getNewAttempt("ex1Att2")
+        let ex7Att3 = getNewAttempt("ex1Att3")
+        ex7.addToAttemptList(ex7Att1)
+        ex7.addToAttemptList(ex7Att2)
+        ex7.addToAttemptList(ex7Att3)
+        
+        let ex8 = getNewExercise("Mil Press")
+        ex8.bodyPart = "Shoulders"
+        ex8.progression = "531"
+        let ex8Att1 = getNewAttempt("ex1Att1")
+        let ex8Att2 = getNewAttempt("ex1Att2")
+        let ex8Att3 = getNewAttempt("ex1Att3")
+        ex8.addToAttemptList(ex8Att1)
+        ex8.addToAttemptList(ex8Att2)
+        ex8.addToAttemptList(ex8Att3)
+        //
+        
+        
+        let mainEx = getNewExercise("Main Ex")
+        mainEx.bodyPart = "Misc"
+        mainEx.progression = "531 BBB"
+        let mainAtt1 = getNewAttempt("MainAttemp1")
+        let mainAtt2 = getNewAttempt("MainAttempt2")
+        let mainAtt3 = getNewAttempt("MainAttempt3")
+        mainEx.addToAttemptList(mainAtt1)
+        mainEx.addToAttemptList(mainAtt2)
+        mainEx.addToAttemptList(mainAtt3)
+        
+        // Add Main Exercise to Workout
+        wo1.addMainExercise(mainEx)
+        
+        // Add Accessories to Workout
+        wo1.addAccExercise(ex1)
+        wo1.addAccExercise(ex2)
+        wo1.addAccExercise(ex3)
+        wo1.addAccExercise(ex4)
+        wo1.addAccExercise(ex5)
+        wo1.addAccExercise(ex6)
+        wo1.addAccExercise(ex7)
+        wo1.addAccExercise(ex8)
+        
+        // Add Workout to Template
+        temp1.addWorkout(wo1)
+        
+        // Add Template Characterists
+        temp1.numDaysOfWeek = temp1.workoutList.count
+        temp1.numOfWeeks = 1
+        templateList.addTemplate(temp1)
+        
+        tableView.reloadData()
+    }
+    
+    /********************/
+    // Helper Functions //
+    /********************/
+    func getNewAttempt(_ name: String) -> Attempt {
+        let item = Attempt(entity: Attempt.entity(), insertInto: context)
+        item.titleForTest = name
+        item.date = Date()
+        //item.reps = 1
+        item.sets = 3
+        item.weight = 22.0
+        return item
+    }
+    
+    func getNewExercise(_ name: String) -> Exercise {
+        let item = Exercise(entity: Exercise.entity(), insertInto: context)
+        item.name = name
+        return item
+    }
+    
+    func getNewWorkoutDay(_ name: String) -> WorkoutDay {
+        let item = WorkoutDay()
+        item.title = name
+        return item
+    }
+    
+    func getNewTemplate(_ name: String) -> Template {
+        let item = Template()
+        item.name = name
+        return item
+    }
+    
+    // END HELPER FUCNTIONS //
+    
+    
+    
+    
+    
+    
     /*
      * Create Tool Bar Done Button
      *
@@ -348,16 +534,16 @@ extension TemplateParent_VC {
         }
     }
     
-//    /*
-//     * Show keyboard automatically without tapping
-//     */
-//    override func viewWillAppear(_ animated: Bool) {
-//
-//        //        if itemToEdit != nil {
-//        //            return
-//        //        }
-//        templateTitleTextField.becomeFirstResponder()
-//    }
+    //    /*
+    //     * Show keyboard automatically without tapping
+    //     */
+    //    override func viewWillAppear(_ animated: Bool) {
+    //
+    //        //        if itemToEdit != nil {
+    //        //            return
+    //        //        }
+    //        templateTitleTextField.becomeFirstResponder()
+    //    }
 }
 
 ///*

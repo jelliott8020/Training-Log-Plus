@@ -13,8 +13,24 @@
         <attribute name="startingWeight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="attemptList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Attempt"/>
     </entity>
+    <entity name="Template" representedClassName=".Template" syncable="YES">
+        <attribute name="currentDayIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dateStarted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="numDaysPerWeek" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numOfWeeks" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wendlerYesNo" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="workoutList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="WorkoutDay"/>
+    </entity>
+    <entity name="WorkoutDay" representedClassName=".WorkoutDay" syncable="YES">
+        <attribute name="name" attributeType="String"/>
+        <relationship name="accExerciseList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Exercise"/>
+        <relationship name="mainExerciseList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Exercise"/>
+    </entity>
     <elements>
         <element name="Attempt" positionX="-40.1875" positionY="-131.1015625" width="128" height="103"/>
         <element name="Exercise" positionX="-278.37109375" positionY="-131.3828125" width="128" height="118"/>
+        <element name="WorkoutDay" positionX="-162" positionY="-90" width="128" height="88"/>
+        <element name="Template" positionX="-153" positionY="-81" width="128" height="148"/>
     </elements>
 </model>

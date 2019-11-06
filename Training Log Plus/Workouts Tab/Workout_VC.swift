@@ -62,4 +62,5 @@ class Workout_VC: UIViewController {
     func displayCurrentDay() {
         tempDayLabel.text = "Current day placeholder"
     }
+    
 }
