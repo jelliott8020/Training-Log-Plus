@@ -30,6 +30,20 @@ class WorkoutDayCreation_VC: UIViewController {
     var accExerciseList: [Exercise] = []
     var mainExerciseList: [Exercise] = []
     
+    var bodypartTextField: UITextField?
+    var exerciseTextField: UITextField?
+    
+    var bodypartPicker = UIPickerView()
+    var exercisePicker = UIPickerView()
+    
+    var bodyPartData: [String] = []
+    var exerciseData: [String] = []
+    
+    var alertBodypart: String?
+    var alertExercise: String?
+    
+    var selectedBodyPart: String?
+    var selectedExercise: String?
     
     @IBOutlet weak var workoutNameTextField: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -50,23 +64,72 @@ class WorkoutDayCreation_VC: UIViewController {
     }
     
     @IBAction func addMoreAccButton(_ sender: UIButton) {
-        let newExercise = Exercise(entity: Exercise.entity(), insertInto: context)
-        newExercise.name = "Tap to edit"
-        newExercise.bodyPart = ""
-        newExercise.progression = ""
-        passedInWorkoutObj?.addToAccExerciseList(newExercise)
-        accExerciseList.append(newExercise)
-        exerciseTable.reloadData()
+        addButtonAlert(table: 1)
     }
     
     @IBAction func addMoreMainButton(_ sender: UIButton) {
-        let newExercise = Exercise(entity: Exercise.entity(), insertInto: context)
-        newExercise.name = "Tap to edit"
-        newExercise.bodyPart = ""
-        newExercise.progression = ""
-        passedInWorkoutObj?.addToMainExerciseList(newExercise)
-        mainExerciseList.append(newExercise)
-        exerciseTable.reloadData()
+        addButtonAlert(table: 0)
+    }
+    
+    
+    func addButtonAlert(table: Int) {
+        let alert = UIAlertController(title: "Add Exercise", message: "Select exercise to add", preferredStyle: UIAlertController.Style.alert)
+        
+        let save = UIAlertAction(title: "Add", style: .default) {
+            (alertAction) in
+            
+            self.bodypartTextField = alert.textFields![0] as UITextField
+            self.exerciseTextField = alert.textFields![1] as UITextField
+            
+            if let bp = self.bodypartTextField?.text, let ex = self.exerciseTextField?.text {
+                
+                if (Util.checkForBlankInput(str: bp, txtField: self.bodypartTextField!)) {return}
+                if (Util.checkForBlankInput(str: ex, txtField: self.exerciseTextField!)) {return}
+                
+                
+                self.alertBodypart = bp
+                self.alertExercise = ex
+                
+                let newExercise = Exercise(entity: Exercise.entity(), insertInto: self.context)
+                newExercise.name = ex
+                newExercise.bodyPart = bp
+                newExercise.progression = ""
+                
+                if (table == 0) {
+                    self.passedInWorkoutObj?.addToMainExerciseList(newExercise)
+                    self.mainExerciseList.append(newExercise)
+                } else {
+                    self.passedInWorkoutObj?.addToAccExerciseList(newExercise)
+                    self.accExerciseList.append(newExercise)
+                }
+                
+                self.exerciseTable.reloadData()
+            }
+        }
+        
+        let toolBar = createToolbarDoneButton()
+        
+        alert.addTextField { (bodypartTextField) in
+            bodypartTextField.placeholder = "Bodypart"
+            bodypartTextField.delegate = self as? UITextFieldDelegate
+            bodypartTextField.inputView = self.bodypartPicker
+            bodypartTextField.inputAccessoryView = toolBar
+        }
+        
+        alert.addTextField { (exerciseTextField) in
+            exerciseTextField.placeholder = "Exercise Name"
+            exerciseTextField.delegate = self as? UITextFieldDelegate
+            exerciseTextField.inputView = self.bodypartPicker
+            exerciseTextField.inputAccessoryView = toolBar
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .default) {
+            (alertAction) in }
+        
+        alert.addAction(save)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -82,8 +145,58 @@ class WorkoutDayCreation_VC: UIViewController {
         
         accExerciseList = passedInWorkoutObj!.accExerciseList?.array as! [Exercise]
         mainExerciseList = passedInWorkoutObj!.mainExerciseList?.array as! [Exercise]
+        
+        bodyPartData = Util.getGenericBodyPartData()
+        exerciseData = Util.getGenericExerciseData()
+        
+        createPickers()
+        //createToolbarDoneButton()
         //workoutObj?.title = passedTitle
         self.title = passedInWorkoutObj?.name
+    }
+    
+    
+    func createPickers() {
+        exercisePicker.delegate = self
+        bodypartPicker.delegate = self
+        
+        exerciseTextField?.inputView = exercisePicker
+        bodypartTextField?.inputView = bodypartPicker
+    }
+    
+    /*
+     * Create Tool Bar Done Button
+     *
+     * Creates done buttons for toolbars
+     */
+    func createToolbarDoneButton() -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(toolbarDoneButtonAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        return toolBar
+    }
+    
+    
+    /*
+     * Done Button Action
+     *
+     * Tells the toolbar what to do when done button is selected
+     */
+    @objc func toolbarDoneButtonAction() {
+        if bodypartTextField!.isEditing {
+            bodypartTextField!.resignFirstResponder()
+            exerciseTextField!.becomeFirstResponder()
+        } else if exerciseTextField!.isEditing {
+            exerciseTextField!.resignFirstResponder()
+            //addButtonFunction()
+            self.view.endEditing(true)
+        }
     }
     
     
@@ -119,13 +232,8 @@ class WorkoutDayCreation_VC: UIViewController {
      */
     func updateNameFunction() {
         if let title = workoutNameTextField.text {
-            var check = false
             
-            check = Util.checkForBlankInput(str: title, txtField: workoutNameTextField)
-            
-            if (check) {
-                return
-            }
+            if (Util.checkForBlankInput(str: title, txtField: workoutNameTextField)) {return}
             
             self.title = workoutNameTextField.text
             passedInWorkoutObj?.name = workoutNameTextField.text!
@@ -267,6 +375,54 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+
+/*
+ * Picker
+ *
+ * Delegate and Data Source
+ */
+extension WorkoutDayCreation_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+        
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        var returnInt = 0
+        
+        if pickerView == bodypartPicker {
+            returnInt = bodyPartData.count
+        } else if pickerView == exercisePicker {
+            returnInt = exerciseData.count
+        }
+        
+        return returnInt
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        var returnStr = ""
+        
+        if pickerView == bodypartPicker {
+            returnStr = bodyPartData[row]
+        } else if pickerView == exercisePicker {
+            returnStr = exerciseData[row]
+        }
+        
+        return returnStr
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == bodypartPicker {
+            selectedBodyPart = bodyPartData[row]
+            bodypartTextField?.text = selectedBodyPart
+        } else if pickerView == exercisePicker {
+            selectedExercise = exerciseData[row]
+            exerciseTextField?.text = selectedExercise
+        }
+    }
 }
 
 

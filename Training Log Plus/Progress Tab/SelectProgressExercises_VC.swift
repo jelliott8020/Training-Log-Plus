@@ -72,16 +72,11 @@ class SelectProgressExercises_VC: UITableViewController {
     func doneAction() {
         if let body = bodyPartTextField.text, let exer = exerciseTextField.text, let start = startDateTextField.text, let end = endDateTextField.text {
             
-            var check = false
+            if (Util.checkForBlankInput(str: body, txtField: bodyPartTextField)) {return}
+            if (Util.checkForBlankInput(str: exer, txtField: exerciseTextField)) {return}
+            if (Util.checkForBlankInput(str: start, txtField: startDateTextField)) {return}
+            if (Util.checkForBlankInput(str: end, txtField: endDateTextField)) {return}
             
-            check = Util.checkForBlankInput(str: body, txtField: bodyPartTextField)
-            check = Util.checkForBlankInput(str: exer, txtField: exerciseTextField)
-            check = Util.checkForBlankInput(str: start, txtField: startDateTextField)
-            check = Util.checkForBlankInput(str: end, txtField: endDateTextField)
-            
-            if (check) {
-                return
-            }
             
             delegate?.passDataBack(bodyPart: selectedBodyPart!, exercise: selectedExercise!, start: selectedStartDate!, end: selectedEndDate!)
             dismiss(animated: true, completion: nil)

@@ -59,9 +59,10 @@ class Util {
      Changes the text field value back to default
      */
     static func returnToDefaultTextField(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5
+//        textField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+//        textField.layer.borderWidth = 1.0
+//        textField.layer.cornerRadius = 5
+        textField.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
     }
     
     /*

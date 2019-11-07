@@ -163,12 +163,12 @@
 				05CBE50B2357738600E766F8 /* Settings Tab */,
 				03B984DE233BE02300656CFA /* Utility */,
 				05B9CA1E236F98C80027B363 /* Training Log Plus.xcdatamodeld */,
-				03929C6C23710BD20066B15E /* Data */,
+				03929C6C23710BD20066B15E /* Data + Objects */,
 			);
 			path = "Training Log Plus";
 			sourceTree = "<group>";
 		};
-		03929C6C23710BD20066B15E /* Data */ = {
+		03929C6C23710BD20066B15E /* Data + Objects */ = {
 			isa = PBXGroup;
 			children = (
 				0395CB5F237272170058EC9B /* Template+CoreDataClass.swift */,
@@ -180,7 +180,7 @@
 				03929C7923710DB90066B15E /* Exercise+CoreDataClass.swift */,
 				03929C7A23710DB90066B15E /* Exercise+CoreDataProperties.swift */,
 			);
-			path = Data;
+			path = "Data + Objects";
 			sourceTree = "<group>";
 		};
 		03B2D7FF235BD22100005CC5 /* Custom Workout */ = {

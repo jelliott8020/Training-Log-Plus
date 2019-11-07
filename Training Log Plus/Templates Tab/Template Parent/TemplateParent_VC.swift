@@ -160,10 +160,10 @@ class TemplateParent_VC: UITableViewController {
             
             if let title = self.tempNameTxtField?.text, let days = self.numDaysTxtField?.text, let wen = self.wendlerYesNoTxtField?.text, let weeks = self.numWeeksTxtField?.text {
                 
-                var check = Util.checkForBlankInput(str: title, txtField: self.tempNameTxtField!)
-                check = Util.checkForBlankInput(str: days, txtField: self.numDaysTxtField!)
-                check = Util.checkForBlankInput(str: wen, txtField: self.wendlerYesNoTxtField!)
-                check = Util.checkForBlankInput(str: weeks, txtField: self.numWeeksTxtField!)
+                if (Util.checkForBlankInput(str: title, txtField: self.tempNameTxtField!)) {return}
+                if (Util.checkForBlankInput(str: days, txtField: self.numDaysTxtField!)) {return}
+                if (Util.checkForBlankInput(str: wen, txtField: self.wendlerYesNoTxtField!)) {return}
+                if (Util.checkForBlankInput(str: weeks, txtField: self.numWeeksTxtField!)) {return}
                 
                 if Int(days)! <= 1 {
                     let alert = UIAlertController(title: "Invalid entry", message: "Days less than 1", preferredStyle: UIAlertController.Style.alert)
@@ -181,10 +181,6 @@ class TemplateParent_VC: UITableViewController {
                     self.alertWen = true
                 } else {
                     self.alertWen = false
-                }
-                
-                if (check) {
-                    return
                 }
                 
                 self.performSegue(withIdentifier: "AddItemSegue", sender: self)

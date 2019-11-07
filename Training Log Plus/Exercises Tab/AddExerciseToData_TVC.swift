@@ -61,17 +61,13 @@ class AddExerciseToData_TVC: UITableViewController {
      * Adds the data to the database
      */
     func addButtonFunction() {
+        
         if let body = bodyPartTextField.text, let exer = exerciseTextField.text, let wen = wendlerTextField.text {
             
-            var check = false
+            if (Util.checkForBlankInput(str: body, txtField: bodyPartTextField)) {return}
+            if (Util.checkForBlankInput(str: exer, txtField: exerciseTextField)) {return}
+            if (Util.checkForBlankInput(str: wen, txtField: wendlerTextField)) {return}
             
-            check = Util.checkForBlankInput(str: body, txtField: bodyPartTextField)
-            check = Util.checkForBlankInput(str: exer, txtField: exerciseTextField)
-            check = Util.checkForBlankInput(str: wen, txtField: wendlerTextField)
-            
-            if (check) {
-                return
-            }
             
             let item = Exercise(entity: Exercise.entity(), insertInto: context)
             item.bodyPart = bodyPartTextField.text!
@@ -83,17 +79,14 @@ class AddExerciseToData_TVC: UITableViewController {
             print(item)
             
             appDelegate.saveContext()
+            
+            selectedBodyPart = bodyPartTextField.text
+            selectedExercise = exerciseTextField.text
+            selectedWendler = wendlerTextField.text
+            
+            dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }
-        
-        
-        
-        selectedBodyPart = bodyPartTextField.text
-        selectedExercise = exerciseTextField.text
-        selectedWendler = wendlerTextField.text
-        
-        dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
-
     }
     
     
