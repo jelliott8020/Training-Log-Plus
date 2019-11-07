@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="18G1012" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Attempt" representedClassName=".Attempt" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="sets" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -28,9 +28,9 @@
         <relationship name="mainExerciseList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Exercise"/>
     </entity>
     <elements>
-        <element name="Attempt" positionX="-40.1875" positionY="-131.1015625" width="128" height="103"/>
-        <element name="Exercise" positionX="-278.37109375" positionY="-131.3828125" width="128" height="118"/>
-        <element name="WorkoutDay" positionX="-162" positionY="-90" width="128" height="88"/>
-        <element name="Template" positionX="-153" positionY="-81" width="128" height="148"/>
+        <element name="Attempt" positionX="-215.36328125" positionY="-31.08203125" width="128" height="103"/>
+        <element name="Exercise" positionX="-426.17578125" positionY="-88.875" width="128" height="118"/>
+        <element name="Template" positionX="-426.68359375" positionY="-344.0390625" width="128" height="148"/>
+        <element name="WorkoutDay" positionX="-227.22265625" positionY="-248.37109375" width="128" height="88"/>
     </elements>
 </model>
