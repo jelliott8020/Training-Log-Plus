@@ -208,8 +208,8 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
             let weightForCell = Util.getTMDisplayString(trainingMax: att.trainingMax, weight: att.wenWeight, reps: Double(att.wenReps))
             cell.trainingMaxLabel.attributedText = weightForCell
         } else {
-            
-            let weightForCell = att.sets.
+            let sets = att.sets?.allObjects as! [Sets]
+            let weightForCell = String(sets[0].weight) + String(sets[0].reps)
             cell.trainingMaxLabel.text = weightForCell
         }
             
