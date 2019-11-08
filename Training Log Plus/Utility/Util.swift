@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class Util {
     
@@ -30,6 +31,7 @@ class Util {
                 return false
             }
     }
+    
     
     
     /*
