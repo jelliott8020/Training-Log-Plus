@@ -53,144 +53,14 @@ class WorkoutDayCreation_VC: UIViewController {
     @IBAction func updateNameButton(_ sender: UIButton) {
         updateNameFunction()
     }
-    
     @IBAction func doneButton(_ sender: UIBarButtonItem) {
         doneButtonAction()
     }
-    
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
-        
-    }
-    
-    @IBAction func addMoreAccButton(_ sender: UIButton) {
-        addButtonAlert(table: 1)
-    }
-    
-    @IBAction func addMoreMainButton(_ sender: UIButton) {
-        addButtonAlert(table: 0)
     }
     
     
-    func addButtonAlert(table: Int) {
-        let alert = UIAlertController(title: "Add Exercise", message: "\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertController.Style.alert)
-        
-        alert.isModalInPopover = true
-        
-        let save = UIAlertAction(title: "Add", style: .default) {
-            (alertAction) in
-            
-            
-            
-            //            if let _ = self.selectedBodyPart, let ex = self.selectedExercise {
-            //                if (table == 0) {
-            //                    self.passedInWorkoutObj?.addToMainExerciseList(ex)
-            //                    self.mainExerciseList.append(ex)
-            //                } else {
-            //                    self.passedInWorkoutObj?.addToAccExerciseList(ex)
-            //                    self.accExerciseList.append(ex)
-            //                }
-            //
-            //                self.exerciseTable.reloadData()
-            //            }
-            
-            
-            self.bodypartTextField = alert.textFields![0] as UITextField
-            self.exerciseTextField = alert.textFields![1] as UITextField
-            
-            if let bp = self.bodypartTextField?.text, let ex = self.exerciseTextField?.text {
-                
-                if (Util.checkForBlankInput(str: bp, txtField: self.bodypartTextField!)) {return}
-                if (Util.checkForBlankInput(str: ex, txtField: self.exerciseTextField!)) {return}
-                
-                self.alertBodypart = bp
-                self.alertExercise = ex
-                
-                let newExercise = Exercise(entity: Exercise.entity(), insertInto: self.context)
-                newExercise.name = ex
-                newExercise.bodyPart = bp
-                newExercise.progression = ""
-                
-                if (table == 0) {
-                    self.passedInWorkoutObj?.addToMainExerciseList(newExercise)
-                    self.mainExerciseList.append(newExercise)
-                } else {
-                    self.passedInWorkoutObj?.addToAccExerciseList(newExercise)
-                    self.accExerciseList.append(newExercise)
-                }
-                
-                self.exerciseTable.reloadData()
-            }
-        }
-        
-        //        bodypartPicker = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
-        //        exercisePicker = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
-        //
-        //        alert.view.addSubview(self.bodypartPicker)
-        //        alert.view.addSubview(self.exercisePicker)
-        //
-        //        bodypartPicker.delegate = self
-        //        bodypartPicker.dataSource = self
-        //        exercisePicker.delegate = self
-        //        exercisePicker.dataSource = self
-        
-        // query with BP
-        
-        //let toolBar = createToolbarDoneButton()
-        
-        alert.addTextField { (bodypartTextField) in
-            bodypartTextField.placeholder = "Bodypart"
-            bodypartTextField.delegate = self as? UITextFieldDelegate
-            bodypartTextField.inputView = self.bodypartPicker
-            //bodypartTextField.inputAccessoryView = toolBar
-        }
-        
-        alert.addTextField { (exerciseTextField) in
-            exerciseTextField.placeholder = "Exercise Name"
-            exerciseTextField.delegate = self as? UITextFieldDelegate
-            exerciseTextField.inputView = self.exercisePicker
-            //exerciseTextField.inputAccessoryView = toolBar
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .default) {
-            (alertAction) in }
-        
-        alert.addAction(save)
-        alert.addAction(cancel)
-        
-        //        let height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.80)
-        //        alert.view.addConstraint(height)
-        
-        self.present(alert, animated: true, completion: nil)
-        
-        
-    }
-    
-    
-    func refreshExerciseList(bp: String) {
-        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
-        
-        do {
-            exerciseData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
-        }
-        
-        exercisePicker.reloadAllComponents()
-    }
-    
-    func refreshExerciseData() {
-        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        
-        do {
-            exerciseData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
-        }
-        
-        //tableView.reloadData()
-    }
     
     /*
      * View Did Load
@@ -213,6 +83,42 @@ class WorkoutDayCreation_VC: UIViewController {
     }
     
     
+    /*
+     * Refresh Exercise List w/ BodyPart String
+     */
+    func refreshExerciseList(bp: String) {
+        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
+        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
+        
+        do {
+            exerciseData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
+        }
+        
+        exercisePicker.reloadAllComponents()
+    }
+    
+    /*
+     * Refresh Exercise List
+     */
+    func refreshExerciseData() {
+        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
+        
+        do {
+            exerciseData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
+        }
+        
+        //tableView.reloadData()
+    }
+    
+
+    
+    /*
+     * Create Pickers
+     */
     func createPickers() {
         exercisePicker.delegate = self
         bodypartPicker.delegate = self
@@ -221,10 +127,9 @@ class WorkoutDayCreation_VC: UIViewController {
         bodypartTextField?.inputView = bodypartPicker
     }
     
+    
     /*
      * Create Tool Bar Done Button
-     *
-     * Creates done buttons for toolbars
      */
     func createToolbarDoneButton() -> UIToolbar {
         let toolBar = UIToolbar()
@@ -241,9 +146,7 @@ class WorkoutDayCreation_VC: UIViewController {
     
     
     /*
-     * Done Button Action
-     *
-     * Tells the toolbar what to do when done button is selected
+     * Toolbar Done Button Action
      */
     @objc func toolbarDoneButtonAction() {
         if bodypartTextField!.isEditing {
@@ -297,6 +200,10 @@ class WorkoutDayCreation_VC: UIViewController {
         }
     }
     
+    
+    /*
+     * Prepare for Segue
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "MainExSegue" {
@@ -322,6 +229,16 @@ class WorkoutDayCreation_VC: UIViewController {
                 
             }
         }
+        
+//        if (table == 0) {
+//            self.passedInWorkoutObj?.addToMainExerciseList(newExercise)
+//            self.mainExerciseList.append(newExercise)
+//        } else {
+//            self.passedInWorkoutObj?.addToAccExerciseList(newExercise)
+//            self.accExerciseList.append(newExercise)
+//        }
+//
+//        self.exerciseTable.reloadData()
     }
 }
 

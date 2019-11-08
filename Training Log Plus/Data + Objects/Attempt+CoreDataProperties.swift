@@ -2,7 +2,7 @@
 //  Attempt+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/7/19.
+//  Created by Josh Elliott on 11/8/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -18,10 +18,6 @@ extension Attempt {
     }
 
     @NSManaged public var date: Date?
-    @NSManaged public var trainingMax: Double
-    @NSManaged public var isWendler: Bool
-    @NSManaged public var wenWeight: Double
-    @NSManaged public var wenReps: Int32
     @NSManaged public var sets: NSSet?
 
 }

@@ -2,7 +2,7 @@
 //  Template+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/7/19.
+//  Created by Josh Elliott on 11/8/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -19,7 +19,7 @@ extension Template {
 
     @NSManaged public var currentDayIndex: Int32
     @NSManaged public var dateStarted: Date?
-    @NSManaged public var name: String
+    @NSManaged public var name: String?
     @NSManaged public var numDaysPerWeek: Int32
     @NSManaged public var numOfWeeks: Int32
     @NSManaged public var wendlerYesNo: Bool

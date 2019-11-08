@@ -329,104 +329,125 @@ extension TemplateParent_VC {
         // Create WorkoutDay
         let wo1 = getNewWorkoutDay("Tester1")
         
-        // Create Accessory Exercises
-        let ex1 = getNewExercise("Bench")
+        
+        // WENDLER EXERCISES
+        let ex1 = getNewWenExercise("Bench")
         ex1.bodyPart = "Chest"
         ex1.progression = "531"
-        let ex1Att1 = getNewWendlerAttempt()
-        let ex1Att2 = getNewWendlerAttempt()
-        let ex1Att3 = getNewWendlerAttempt()
-        ex1.addToAttemptList(ex1Att1)
-        ex1.addToAttemptList(ex1Att2)
-        ex1.addToAttemptList(ex1Att3)
+        let ex1TM1 = getNewWendlerTM()
+        let ex1PR1 = getNewWendlerPR()
+        let ex1TM2 = getNewWendlerTM()
+        let ex1PR2 = getNewWendlerPR()
+        ex1.addToPersonalRecords(ex1PR1)
+        ex1.addToPersonalRecords(ex1PR2)
+        ex1.addToTrainingMaxes(ex1TM1)
+        ex1.addToTrainingMaxes(ex1TM2)
         
-        
-        let ex2 = getNewExercise("Squatter")
+        let ex2 = getNewWenExercise("Squatter")
         ex2.bodyPart = "Legs"
-        ex2.progression = "Cube"
-        let ex2Att1 = getNewWendlerAttempt()
-        let ex2Att2 = getNewWendlerAttempt()
-        let ex2Att3 = getNewWendlerAttempt()
-        ex2.addToAttemptList(ex2Att1)
-        ex2.addToAttemptList(ex2Att2)
-        ex2.addToAttemptList(ex2Att3)
+        ex2.progression = "531"
+        let ex2TM1 = getNewWendlerTM()
+        let ex2PR1 = getNewWendlerPR()
+        let ex2TM2 = getNewWendlerTM()
+        let ex2PR2 = getNewWendlerPR()
+        ex2.addToPersonalRecords(ex2PR1)
+        ex2.addToPersonalRecords(ex2PR2)
+        ex2.addToTrainingMaxes(ex2TM1)
+        ex2.addToTrainingMaxes(ex2TM2)
         
-        
-        let ex3 = getNewExercise("Dead")
+        let ex3 = getNewWenExercise("Dead")
         ex3.bodyPart = "Back"
         ex3.progression = "Starting Strength"
-        let ex3Att1 = getNewWendlerAttempt()
-        let ex3Att2 = getNewWendlerAttempt()
-        let ex3Att3 = getNewWendlerAttempt()
-        ex3.addToAttemptList(ex3Att1)
-        ex3.addToAttemptList(ex3Att2)
-        ex3.addToAttemptList(ex3Att3)
-        
-        //
-        let ex4 = getNewExercise("DB Bench")
+        let ex3TM1 = getNewWendlerTM()
+        let ex3PR1 = getNewWendlerPR()
+        let ex3TM2 = getNewWendlerTM()
+        let ex3PR2 = getNewWendlerPR()
+        ex3.addToPersonalRecords(ex3PR1)
+        ex3.addToPersonalRecords(ex3PR2)
+        ex3.addToTrainingMaxes(ex3TM1)
+        ex3.addToTrainingMaxes(ex3TM2)
+  
+        let ex4 = getNewWenExercise("DB Bench")
         ex4.bodyPart = "Chest"
         ex4.progression = "531"
-        let ex4Att1 = getNewWendlerAttempt()
-        let ex4Att2 = getNewWendlerAttempt()
-        let ex4Att3 = getNewWendlerAttempt()
-        ex4.addToAttemptList(ex4Att1)
-        ex4.addToAttemptList(ex4Att2)
-        ex4.addToAttemptList(ex4Att3)
+        let ex4TM1 = getNewWendlerTM()
+        let ex4PR1 = getNewWendlerPR()
+        let ex4TM2 = getNewWendlerTM()
+        let ex4PR2 = getNewWendlerPR()
+        ex4.addToPersonalRecords(ex4PR1)
+        ex4.addToPersonalRecords(ex4PR2)
+        ex4.addToTrainingMaxes(ex4TM1)
+        ex4.addToTrainingMaxes(ex4TM2)
         
-        let ex5 = getNewExercise("Incline Bench")
+        
+        // BB EXERCISES
+        let ex5 = getNewBBExercise("Incline Bench")
         ex5.bodyPart = "Chest"
         ex5.progression = "531"
-        let ex5Att1 = getNewWendlerAttempt()
-        let ex5Att2 = getNewWendlerAttempt()
-        let ex5Att3 = getNewWendlerAttempt()
+        let ex5Att1 = getNewBBAttempt()
+        let ex5Att2 = getNewBBAttempt()
+        let ex5Att3 = getNewBBAttempt()
         ex5.addToAttemptList(ex5Att1)
         ex5.addToAttemptList(ex5Att2)
         ex5.addToAttemptList(ex5Att3)
         
-        let ex6 = getNewExercise("Pullup")
+        let ex6 = getNewBBExercise("Pullup")
         ex6.bodyPart = "Back"
         ex6.progression = "531"
-        let ex6Att1 = getNewWendlerAttempt()
-        let ex6Att2 = getNewWendlerAttempt()
-        let ex6Att3 = getNewWendlerAttempt()
+        let ex6Att1 = getNewBBAttempt()
+        let ex6Att2 = getNewBBAttempt()
+        let ex6Att3 = getNewBBAttempt()
         ex6.addToAttemptList(ex6Att1)
         ex6.addToAttemptList(ex6Att2)
         ex6.addToAttemptList(ex6Att3)
         
-        let ex7 = getNewExercise("Row")
+        let ex7 = getNewBBExercise("Row")
         ex7.bodyPart = "Back"
         ex7.progression = "531"
-        let ex7Att1 = getNewWendlerAttempt()
-        let ex7Att2 = getNewWendlerAttempt()
-        let ex7Att3 = getNewWendlerAttempt()
+        let ex7Att1 = getNewBBAttempt()
+        let ex7Att2 = getNewBBAttempt()
+        let ex7Att3 = getNewBBAttempt()
         ex7.addToAttemptList(ex7Att1)
         ex7.addToAttemptList(ex7Att2)
         ex7.addToAttemptList(ex7Att3)
         
-        let ex8 = getNewExercise("Mil Press")
+        let ex8 = getNewBBExercise("Mil Press")
         ex8.bodyPart = "Shoulders"
         ex8.progression = "531"
-        let ex8Att1 = getNewWendlerAttempt()
-        let ex8Att2 = getNewWendlerAttempt()
-        let ex8Att3 = getNewWendlerAttempt()
+        let ex8Att1 = getNewBBAttempt()
+        let ex8Att2 = getNewBBAttempt()
+        let ex8Att3 = getNewBBAttempt()
         ex8.addToAttemptList(ex8Att1)
         ex8.addToAttemptList(ex8Att2)
         ex8.addToAttemptList(ex8Att3)
-        //
         
         
-        let mainEx = getNewExercise("Main Ex - BB")
-        mainEx.bodyPart = "Misc"
-        mainEx.progression = "3x10"
+        // MAIN EXERCISE
+        let mainBB = getNewBBExercise("Main Ex - BB")
+        mainBB.bodyPart = "Misc"
+        mainBB.progression = "3x10"
         let mainAtt1 = getNewBBAttempt()
         let mainAtt2 = getNewBBAttempt()
         let mainAtt3 = getNewBBAttempt()
-        mainEx.addToAttemptList(mainAtt1)
-        mainEx.addToAttemptList(mainAtt2)
-        mainEx.addToAttemptList(mainAtt3)
+        mainBB.addToAttemptList(mainAtt1)
+        mainBB.addToAttemptList(mainAtt2)
+        mainBB.addToAttemptList(mainAtt3)
+        
+        let mainWen = getNewWenExercise("OHP")
+        mainWen.bodyPart = "Shoulders"
+        mainWen.progression = "531"
+        let mainWenTM1 = getNewWendlerTM()
+        let mainWenPR1 = getNewWendlerPR()
+        let mainWenTM2 = getNewWendlerTM()
+        let mainWenPR2 = getNewWendlerPR()
+        mainWen.addToPersonalRecords(mainWenPR1)
+        mainWen.addToPersonalRecords(mainWenPR2)
+        mainWen.addToTrainingMaxes(mainWenTM1)
+        mainWen.addToTrainingMaxes(mainWenTM2)
         
         // Add Main Exercise to Workout
-        wo1.addToMainExerciseList(mainEx)
+        wo1.addToMainExerciseList(mainBB)
+        wo1.addToMainExerciseList(mainWen)
         
         // Add Accessories to Workout
         wo1.addToAccExerciseList(ex1)
@@ -453,18 +474,24 @@ extension TemplateParent_VC {
     /********************/
     // Helper Functions //
     /********************/
-    func getNewWendlerAttempt() -> Attempt {
-        let item = Attempt(entity: Attempt.entity(), insertInto: context)
+    func getNewWendlerTM() -> TrainingMax {
+        let item = TrainingMax(entity: TrainingMax.entity(), insertInto: context)
         item.date = Date.init()
-        item.isWendler = true
-        item.trainingMax = 22.0
+        item.trainingMax = 335.0
+        return item
+    }
+    
+    func getNewWendlerPR() -> PersonalRecord {
+        let item = PersonalRecord(entity: PersonalRecord.entity(), insertInto: context)
+        item.date = Date.init()
+        item.weight = 225.0
+        item.reps = 12.0
         return item
     }
     
     func getNewBBAttempt() -> Attempt {
         let item = Attempt(entity: Attempt.entity(), insertInto: context)
         item.date = Date.init()
-        item.isWendler = false
         
         for _ in 0...3 {
             let set = Sets(entity: Sets.entity(), insertInto: context)
@@ -476,8 +503,14 @@ extension TemplateParent_VC {
         return item
     }
     
-    func getNewExercise(_ name: String) -> Exercise {
-        let item = Exercise(entity: Exercise.entity(), insertInto: context)
+    func getNewWenExercise(_ name: String) -> Wen_Exercise {
+        let item = Wen_Exercise(entity: Wen_Exercise.entity(), insertInto: context)
+        item.name = name
+        return item
+    }
+    
+    func getNewBBExercise(_ name: String) -> BB_Exercise {
+        let item = BB_Exercise(entity: BB_Exercise.entity(), insertInto: context)
         item.name = name
         return item
     }
