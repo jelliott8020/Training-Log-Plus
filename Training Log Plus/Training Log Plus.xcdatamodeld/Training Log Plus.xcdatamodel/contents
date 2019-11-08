@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="18G1012" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="18G1012" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Attempt" representedClassName=".Attempt" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="sets" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="titleForTest" attributeType="String"/>
-        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isWendler" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="trainingMax" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="wenReps" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wenWeight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets"/>
     </entity>
     <entity name="Exercise" representedClassName=".Exercise" syncable="YES">
         <attribute name="bodyPart" attributeType="String"/>
@@ -12,6 +14,10 @@
         <attribute name="progression" attributeType="String"/>
         <attribute name="startingWeight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="attemptList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Attempt"/>
+    </entity>
+    <entity name="Sets" representedClassName=".Sets" syncable="YES">
+        <attribute name="reps" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Template" representedClassName=".Template" syncable="YES">
         <attribute name="currentDayIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -28,9 +34,10 @@
         <relationship name="mainExerciseList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Exercise"/>
     </entity>
     <elements>
-        <element name="Attempt" positionX="-215.36328125" positionY="-31.08203125" width="128" height="103"/>
+        <element name="Attempt" positionX="-215.36328125" positionY="-31.08203125" width="128" height="133"/>
         <element name="Exercise" positionX="-426.17578125" positionY="-88.875" width="128" height="118"/>
         <element name="Template" positionX="-426.68359375" positionY="-344.0390625" width="128" height="148"/>
         <element name="WorkoutDay" positionX="-227.22265625" positionY="-248.37109375" width="128" height="88"/>
+        <element name="Sets" positionX="-315" positionY="-180" width="128" height="73"/>
     </elements>
 </model>

@@ -12,7 +12,6 @@ import CoreData
 class Exercises_TVC: UITableViewController {
 
     var bodyPartData: [String] = []
-    //var exerciseData: [String] = []
     var exerciseData: [Exercise] = []
     
     var selectedBodyPart: String?
@@ -159,22 +158,6 @@ class Exercises_TVC: UITableViewController {
             exerciseTextField.resignFirstResponder()
         }
     }
-    
-    
-    func refreshExerciseList(bp: String) {
-        
-        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
-        
-        do {
-            exerciseData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
-        }
-        
-        exercisePicker.reloadAllComponents()
-    }
-    
 }
 
 
@@ -216,7 +199,8 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
-            refreshExerciseList(bp: selectedBodyPart!)
+            Util.refreshExerciseList(bp: selectedBodyPart!, exData: &exerciseData)
+            exercisePicker.reloadAllComponents()
         } else if pickerView == exercisePicker {
             selectedExercise = exerciseData[row].name
             exerciseTextField.text = selectedExercise

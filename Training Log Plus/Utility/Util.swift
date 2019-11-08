@@ -33,6 +33,47 @@ class Util {
     }
     
     
+    /*
+     * Get Display String
+     *
+     * Gets the formatted display string for the cell
+     */
+    static func getTMDisplayString(trainingMax: Double, weight: Double, reps: Double) -> NSMutableAttributedString {
+        
+        let tmString = " TM: " + String(format: "%.0f", trainingMax)
+        let weightStr = "Weight: " + String(format: "%.0f", weight)
+        let repsStr = "  |  Reps: " + String(format: "%.0f", reps) + "  | "
+        
+        let totalString = weightStr + repsStr + tmString
+        
+        let strNumber: NSString = totalString as NSString
+        let range = (strNumber).range(of: tmString)
+        let attribute = NSMutableAttributedString.init(string: strNumber as String)
+        attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: range)
+        attribute.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 17.0), range: range)
+        
+        return attribute
+    }
+    
+    
+    /*
+     * Refresh Exercise List
+     *
+     * Takes a bodypart text string and querys the DB for exercises
+     * that match
+     */
+    static func refreshExerciseList(bp: String, exData: inout [Exercise]) {
+        
+        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
+        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
+        
+        do {
+            exData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
+        }
+    }
+
     
     /*
      * Clear Text Field
@@ -43,9 +84,9 @@ class Util {
     
     
     /*
-     Shake And Red Text Field
-     
-     Turns the given text field's border red and shakes it
+     * Shake And Red Text Field
+     *
+     * Turns the given text field's border red and shakes it
      */
     static func shakeAndRedTextField(_ textField: UITextField) {
         textField.shake()
@@ -56,9 +97,9 @@ class Util {
     
     
     /*
-     Return to Default Text Field
-     
-     Changes the text field value back to default
+     * Return to Default Text Field
+     *
+     * Changes the text field value back to default
      */
     static func returnToDefaultTextField(_ textField: UITextField) {
 //        textField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
@@ -66,6 +107,7 @@ class Util {
 //        textField.layer.cornerRadius = 5
         textField.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
     }
+    
     
     /*
      * Get BodyPart Data
@@ -82,6 +124,7 @@ class Util {
             "Abs",
             "Misc"]
     }
+    
     
     /*
      * Get Progression Scheme Data

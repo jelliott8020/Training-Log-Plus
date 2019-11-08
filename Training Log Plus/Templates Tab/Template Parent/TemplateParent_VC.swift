@@ -329,22 +329,13 @@ extension TemplateParent_VC {
         // Create WorkoutDay
         let wo1 = getNewWorkoutDay("Tester1")
         
-        //        "Chest",
-        //        "Back",
-        //        "Shoulders",
-        //        "Arms",
-        //        "Legs",
-        //        "Abs",
-        //        "Misc"
-        
-        
         // Create Accessory Exercises
         let ex1 = getNewExercise("Bench")
         ex1.bodyPart = "Chest"
         ex1.progression = "531"
-        let ex1Att1 = getNewAttempt("ex1Att1")
-        let ex1Att2 = getNewAttempt("ex1Att2")
-        let ex1Att3 = getNewAttempt("ex1Att3")
+        let ex1Att1 = getNewWendlerAttempt()
+        let ex1Att2 = getNewWendlerAttempt()
+        let ex1Att3 = getNewWendlerAttempt()
         ex1.addToAttemptList(ex1Att1)
         ex1.addToAttemptList(ex1Att2)
         ex1.addToAttemptList(ex1Att3)
@@ -353,9 +344,9 @@ extension TemplateParent_VC {
         let ex2 = getNewExercise("Squatter")
         ex2.bodyPart = "Legs"
         ex2.progression = "Cube"
-        let ex2Att1 = getNewAttempt("ex2Att1")
-        let ex2Att2 = getNewAttempt("ex2Att2")
-        let ex2Att3 = getNewAttempt("ex2Att3")
+        let ex2Att1 = getNewWendlerAttempt()
+        let ex2Att2 = getNewWendlerAttempt()
+        let ex2Att3 = getNewWendlerAttempt()
         ex2.addToAttemptList(ex2Att1)
         ex2.addToAttemptList(ex2Att2)
         ex2.addToAttemptList(ex2Att3)
@@ -364,9 +355,9 @@ extension TemplateParent_VC {
         let ex3 = getNewExercise("Dead")
         ex3.bodyPart = "Back"
         ex3.progression = "Starting Strength"
-        let ex3Att1 = getNewAttempt("ex3Att1")
-        let ex3Att2 = getNewAttempt("ex3Att2")
-        let ex3Att3 = getNewAttempt("ex3Att3")
+        let ex3Att1 = getNewWendlerAttempt()
+        let ex3Att2 = getNewWendlerAttempt()
+        let ex3Att3 = getNewWendlerAttempt()
         ex3.addToAttemptList(ex3Att1)
         ex3.addToAttemptList(ex3Att2)
         ex3.addToAttemptList(ex3Att3)
@@ -375,9 +366,9 @@ extension TemplateParent_VC {
         let ex4 = getNewExercise("DB Bench")
         ex4.bodyPart = "Chest"
         ex4.progression = "531"
-        let ex4Att1 = getNewAttempt("ex1Att1")
-        let ex4Att2 = getNewAttempt("ex1Att2")
-        let ex4Att3 = getNewAttempt("ex1Att3")
+        let ex4Att1 = getNewWendlerAttempt()
+        let ex4Att2 = getNewWendlerAttempt()
+        let ex4Att3 = getNewWendlerAttempt()
         ex4.addToAttemptList(ex4Att1)
         ex4.addToAttemptList(ex4Att2)
         ex4.addToAttemptList(ex4Att3)
@@ -385,9 +376,9 @@ extension TemplateParent_VC {
         let ex5 = getNewExercise("Incline Bench")
         ex5.bodyPart = "Chest"
         ex5.progression = "531"
-        let ex5Att1 = getNewAttempt("ex1Att1")
-        let ex5Att2 = getNewAttempt("ex1Att2")
-        let ex5Att3 = getNewAttempt("ex1Att3")
+        let ex5Att1 = getNewWendlerAttempt()
+        let ex5Att2 = getNewWendlerAttempt()
+        let ex5Att3 = getNewWendlerAttempt()
         ex5.addToAttemptList(ex5Att1)
         ex5.addToAttemptList(ex5Att2)
         ex5.addToAttemptList(ex5Att3)
@@ -395,9 +386,9 @@ extension TemplateParent_VC {
         let ex6 = getNewExercise("Pullup")
         ex6.bodyPart = "Back"
         ex6.progression = "531"
-        let ex6Att1 = getNewAttempt("ex1Att1")
-        let ex6Att2 = getNewAttempt("ex1Att2")
-        let ex6Att3 = getNewAttempt("ex1Att3")
+        let ex6Att1 = getNewWendlerAttempt()
+        let ex6Att2 = getNewWendlerAttempt()
+        let ex6Att3 = getNewWendlerAttempt()
         ex6.addToAttemptList(ex6Att1)
         ex6.addToAttemptList(ex6Att2)
         ex6.addToAttemptList(ex6Att3)
@@ -405,9 +396,9 @@ extension TemplateParent_VC {
         let ex7 = getNewExercise("Row")
         ex7.bodyPart = "Back"
         ex7.progression = "531"
-        let ex7Att1 = getNewAttempt("ex1Att1")
-        let ex7Att2 = getNewAttempt("ex1Att2")
-        let ex7Att3 = getNewAttempt("ex1Att3")
+        let ex7Att1 = getNewWendlerAttempt()
+        let ex7Att2 = getNewWendlerAttempt()
+        let ex7Att3 = getNewWendlerAttempt()
         ex7.addToAttemptList(ex7Att1)
         ex7.addToAttemptList(ex7Att2)
         ex7.addToAttemptList(ex7Att3)
@@ -415,21 +406,21 @@ extension TemplateParent_VC {
         let ex8 = getNewExercise("Mil Press")
         ex8.bodyPart = "Shoulders"
         ex8.progression = "531"
-        let ex8Att1 = getNewAttempt("ex1Att1")
-        let ex8Att2 = getNewAttempt("ex1Att2")
-        let ex8Att3 = getNewAttempt("ex1Att3")
+        let ex8Att1 = getNewWendlerAttempt()
+        let ex8Att2 = getNewWendlerAttempt()
+        let ex8Att3 = getNewWendlerAttempt()
         ex8.addToAttemptList(ex8Att1)
         ex8.addToAttemptList(ex8Att2)
         ex8.addToAttemptList(ex8Att3)
         //
         
         
-        let mainEx = getNewExercise("Main Ex")
+        let mainEx = getNewExercise("Main Ex - BB")
         mainEx.bodyPart = "Misc"
-        mainEx.progression = "531 BBB"
-        let mainAtt1 = getNewAttempt("MainAttemp1")
-        let mainAtt2 = getNewAttempt("MainAttempt2")
-        let mainAtt3 = getNewAttempt("MainAttempt3")
+        mainEx.progression = "3x10"
+        let mainAtt1 = getNewBBAttempt()
+        let mainAtt2 = getNewBBAttempt()
+        let mainAtt3 = getNewBBAttempt()
         mainEx.addToAttemptList(mainAtt1)
         mainEx.addToAttemptList(mainAtt2)
         mainEx.addToAttemptList(mainAtt3)
@@ -462,13 +453,26 @@ extension TemplateParent_VC {
     /********************/
     // Helper Functions //
     /********************/
-    func getNewAttempt(_ name: String) -> Attempt {
+    func getNewWendlerAttempt() -> Attempt {
         let item = Attempt(entity: Attempt.entity(), insertInto: context)
-        item.titleForTest = name
-        item.date = Date()
-        //item.reps = 1
-        item.sets = 3
-        item.weight = 22.0
+        item.date = Date.init()
+        item.isWendler = true
+        item.trainingMax = 22.0
+        return item
+    }
+    
+    func getNewBBAttempt() -> Attempt {
+        let item = Attempt(entity: Attempt.entity(), insertInto: context)
+        item.date = Date.init()
+        item.isWendler = false
+        
+        for _ in 0...3 {
+            let set = Sets(entity: Sets.entity(), insertInto: context)
+            set.reps = Int32.random(in: 1...12)
+            set.weight = Double.random(in: 40...240)
+            item.addToSets(set)
+        }
+        
         return item
     }
     

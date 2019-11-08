@@ -2,7 +2,7 @@
 //  Attempt+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/5/19.
+//  Created by Josh Elliott on 11/7/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -18,8 +18,27 @@ extension Attempt {
     }
 
     @NSManaged public var date: Date?
-    @NSManaged public var sets: Int32
-    @NSManaged public var titleForTest: String?
-    @NSManaged public var weight: Double
+    @NSManaged public var trainingMax: Double
+    @NSManaged public var isWendler: Bool
+    @NSManaged public var wenWeight: Double
+    @NSManaged public var wenReps: Int32
+    @NSManaged public var sets: NSSet?
+
+}
+
+// MARK: Generated accessors for sets
+extension Attempt {
+
+    @objc(addSetsObject:)
+    @NSManaged public func addToSets(_ value: Sets)
+
+    @objc(removeSetsObject:)
+    @NSManaged public func removeFromSets(_ value: Sets)
+
+    @objc(addSets:)
+    @NSManaged public func addToSets(_ values: NSSet)
+
+    @objc(removeSets:)
+    @NSManaged public func removeFromSets(_ values: NSSet)
 
 }

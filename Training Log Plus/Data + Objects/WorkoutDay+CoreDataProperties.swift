@@ -2,7 +2,7 @@
 //  WorkoutDay+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/5/19.
+//  Created by Josh Elliott on 11/7/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -18,43 +18,8 @@ extension WorkoutDay {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var mainExerciseList: NSOrderedSet?
     @NSManaged public var accExerciseList: NSOrderedSet?
-
-}
-
-// MARK: Generated accessors for mainExerciseList
-extension WorkoutDay {
-
-    @objc(insertObject:inMainExerciseListAtIndex:)
-    @NSManaged public func insertIntoMainExerciseList(_ value: Exercise, at idx: Int)
-
-    @objc(removeObjectFromMainExerciseListAtIndex:)
-    @NSManaged public func removeFromMainExerciseList(at idx: Int)
-
-    @objc(insertMainExerciseList:atIndexes:)
-    @NSManaged public func insertIntoMainExerciseList(_ values: [Exercise], at indexes: NSIndexSet)
-
-    @objc(removeMainExerciseListAtIndexes:)
-    @NSManaged public func removeFromMainExerciseList(at indexes: NSIndexSet)
-
-    @objc(replaceObjectInMainExerciseListAtIndex:withObject:)
-    @NSManaged public func replaceMainExerciseList(at idx: Int, with value: Exercise)
-
-    @objc(replaceMainExerciseListAtIndexes:withMainExerciseList:)
-    @NSManaged public func replaceMainExerciseList(at indexes: NSIndexSet, with values: [Exercise])
-
-    @objc(addMainExerciseListObject:)
-    @NSManaged public func addToMainExerciseList(_ value: Exercise)
-
-    @objc(removeMainExerciseListObject:)
-    @NSManaged public func removeFromMainExerciseList(_ value: Exercise)
-
-    @objc(addMainExerciseList:)
-    @NSManaged public func addToMainExerciseList(_ values: NSOrderedSet)
-
-    @objc(removeMainExerciseList:)
-    @NSManaged public func removeFromMainExerciseList(_ values: NSOrderedSet)
+    @NSManaged public var mainExerciseList: NSOrderedSet?
 
 }
 
@@ -90,5 +55,40 @@ extension WorkoutDay {
 
     @objc(removeAccExerciseList:)
     @NSManaged public func removeFromAccExerciseList(_ values: NSOrderedSet)
+
+}
+
+// MARK: Generated accessors for mainExerciseList
+extension WorkoutDay {
+
+    @objc(insertObject:inMainExerciseListAtIndex:)
+    @NSManaged public func insertIntoMainExerciseList(_ value: Exercise, at idx: Int)
+
+    @objc(removeObjectFromMainExerciseListAtIndex:)
+    @NSManaged public func removeFromMainExerciseList(at idx: Int)
+
+    @objc(insertMainExerciseList:atIndexes:)
+    @NSManaged public func insertIntoMainExerciseList(_ values: [Exercise], at indexes: NSIndexSet)
+
+    @objc(removeMainExerciseListAtIndexes:)
+    @NSManaged public func removeFromMainExerciseList(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInMainExerciseListAtIndex:withObject:)
+    @NSManaged public func replaceMainExerciseList(at idx: Int, with value: Exercise)
+
+    @objc(replaceMainExerciseListAtIndexes:withMainExerciseList:)
+    @NSManaged public func replaceMainExerciseList(at indexes: NSIndexSet, with values: [Exercise])
+
+    @objc(addMainExerciseListObject:)
+    @NSManaged public func addToMainExerciseList(_ value: Exercise)
+
+    @objc(removeMainExerciseListObject:)
+    @NSManaged public func removeFromMainExerciseList(_ value: Exercise)
+
+    @objc(addMainExerciseList:)
+    @NSManaged public func addToMainExerciseList(_ values: NSOrderedSet)
+
+    @objc(removeMainExerciseList:)
+    @NSManaged public func removeFromMainExerciseList(_ values: NSOrderedSet)
 
 }

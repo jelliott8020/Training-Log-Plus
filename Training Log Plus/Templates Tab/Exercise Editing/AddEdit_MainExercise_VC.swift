@@ -201,10 +201,20 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-            let weightForCell = pastAttemptsList[indexPath.row].titleForTest
-            let cell = tableView.dequeueReusableCell(withIdentifier: "calcedTrainingMaxes") as! MainExercise_TVCell
+        let att = pastAttemptsList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "calcedTrainingMaxes") as! MainExercise_TVCell
+        
+        if (att.isWendler) {
+            let weightForCell = Util.getTMDisplayString(trainingMax: att.trainingMax, weight: att.wenWeight, reps: Double(att.wenReps))
+            cell.trainingMaxLabel.attributedText = weightForCell
+        } else {
             
+            let weightForCell = att.sets.
             cell.trainingMaxLabel.text = weightForCell
+        }
+            
+            
+            
             
             return cell
     }

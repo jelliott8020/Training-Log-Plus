@@ -7,8 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
+    
+    var exerciseData: [Exercise] = []
+    var bodypartData: [String] = []
+    var calcedArrayObj: [TMCell] = []
+    
+    var selectedWeight: Int?
+    var selectedReps: Int?
+    var selectedExercise: Exercise?
+    var selectedTmToAdd: Int?
+    var selectedBodyPart: String?
+    
+    var exercisePicker = UIPickerView()
+    var bodypartPicker = UIPickerView()
+    
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
     @IBOutlet weak var calcedTable: UITableView!
     
@@ -16,31 +34,48 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var exerciseTextField: UITextField!
     @IBOutlet weak var selectTmToAddTextField: UITextField!
+    @IBOutlet weak var bodypartTextField: UITextField!
     
-    var exerciseData: [String] = []
-    var calcedArrayObj: [TMCell] = []
-    
-    var selectedWeight: Int?
-    var selectedReps: Int?
-    var selectedExercise: String?
-    var selectedTmToAdd: Int?
-    
-    var exercisePicker = UIPickerView()
+    @IBAction func calculateButton(_ sender: UIButton) {
+        calculateButtonFunction()
+    }
+    @IBAction func addTmToExerciseButton(_ sender: UIButton) {
+        addTmToExerciseFunction()
+    }
+    @IBAction func clearData(_ sender: UIBarButtonItem) {
+        clearDataFunction()
+    }
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
     
     
     /*
-     * Calculate Button
-     *
-     * Calculate the training max and add to table
+     * View Did Load
      */
-    @IBAction func calculateButton(_ sender: UIButton) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        calcedTable.tableFooterView = UIView(frame: CGRect.zero)
+
+        bodypartData = Util.getGenericBodyPartData()
+        
+        createPickers()
+        createToolbarDoneButton()
+        
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+    }
+    
+    
+    /*
+    * Calculate Button
+    *
+    * Calculate the training max and add to table
+    */
+    func calculateButtonFunction() {
         if let weight = weightTextField.text, let reps = repsTextField.text {
-            if (checkForGoodCalcButtonInput(weight, reps)) {
-                return
-            }
             
-            returnToDefaultTextField(weightTextField)
-            returnToDefaultTextField(repsTextField)
+            if (Util.checkForBlankInput(str: weight, txtField: weightTextField)) {return}
+            if (Util.checkForBlankInput(str: reps, txtField: repsTextField)) {return}
             
             insertNewCalc()
         }
@@ -48,53 +83,42 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     
     
     /*
-     * Add TM Button
-     *
-     * Adds the TM and Exercise selected to the database with the current date
-     */
-    @IBAction func addTmToExerciseButton(_ sender: UIButton) {
-        
+    * Add TM Button
+    *
+    * Adds the TM and Exercise selected to the database with the
+    * current date
+    */
+    func addTmToExerciseFunction() {
         if let tmWeight = selectTmToAddTextField.text, let exerName = exerciseTextField.text {
-            if (checkForGoodAddToTmInput(tmWeight, exerName)) {
-                return
-            }
             
-            returnToDefaultTextField(selectTmToAddTextField)
-            returnToDefaultTextField(exerciseTextField)
+            if (Util.checkForBlankInput(str: tmWeight, txtField: selectTmToAddTextField)) {return}
+            if (Util.checkForBlankInput(str: exerName, txtField: exerciseTextField)) {return}
             
-            // Add TM and current date to exercise data
-            // Also go done and have done button from exercise call the method
-            // Make sure to add current date to Exercise Object
+            let attempt = Attempt(entity: Attempt.entity(), insertInto: context)
+            attempt.date = Date.init()
+            attempt.isWendler = true
+            attempt.trainingMax = Double(tmWeight)!
+            selectedExercise?.addToAttemptList(attempt)
+            appDelegate.saveContext()
         }
     }
     
     
     /*
-     * Clear Data Button
-     *
-     * Clears data from all the text fields
-     */
-    @IBAction func clearData(_ sender: UIBarButtonItem) {
+    * Clear Data Button
+    *
+    * Clears data from all the text fields
+    */
+    func clearDataFunction() {
         //calcedWeightsArray.removeAll()
         calcedArrayObj.removeAll()
         calcedTable.reloadData()
         exerciseTextField.text = ""
-        selectedExercise = ""
+        selectedExercise = nil
+        selectedBodyPart = ""
         weightTextField.text = ""
         repsTextField.text = ""
         selectTmToAddTextField.text = ""
-        
-    }
-    
-    
-    /*
-     * Cancel Button
-     *
-     * Cancels the view, pops the controller
-     */
-    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
-        
-        navigationController?.popViewController(animated: true)
     }
     
     
@@ -141,22 +165,6 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     
     
     /*
-     * View Did Load
-     */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        calcedTable.tableFooterView = UIView(frame: CGRect.zero)
-
-        exerciseData = getExerciseData()
-        
-        createPickers()
-        createToolbarDoneButton()
-        
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
-    }
-    
-    
-    /*
      * Create Pickers Function
      *
      * Creates the pickers for the view
@@ -164,6 +172,9 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     func createPickers() {
         exercisePicker.delegate = self
         exerciseTextField.inputView = exercisePicker
+        
+        bodypartPicker.delegate = self
+        bodypartTextField.inputView = bodypartPicker
     }
     
     
@@ -199,28 +210,21 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
         if weightTextField.isEditing {
             weightTextField.resignFirstResponder()
             repsTextField.becomeFirstResponder()
-        } else if selectTmToAddTextField.isEditing {
-            selectTmToAddTextField.resignFirstResponder()
-            exerciseTextField.becomeFirstResponder()
-        } else if exerciseTextField.isEditing {
-            // insert to database here
-            self.view.endEditing(true)
         } else if repsTextField.isEditing {
+            repsTextField.resignFirstResponder()
             insertNewCalc()
             self.view.endEditing(true)
+        } else if bodypartTextField.isEditing {
+            bodypartTextField.resignFirstResponder()
+            exerciseTextField.becomeFirstResponder()
+        }else if exerciseTextField.isEditing {
+            exerciseTextField.resignFirstResponder()
+            selectTmToAddTextField.becomeFirstResponder()
+        } else if selectTmToAddTextField.isEditing {
+            selectTmToAddTextField.resignFirstResponder()
+            addTmToExerciseFunction()
+            self.view.endEditing(true)
         }
-    }
-    
-    
-    /*
-     * Get Exercise Data
-     *
-     * Populates the exercise data
-     */
-    func getExerciseData() -> [String] {
-        // Get data from database here
-        
-        return ["Squat", "Deadlift", "Bench"]
     }
     
     
@@ -236,87 +240,8 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    
-    
-    /*
-     * Check For Good Calc Button Input
-     *
-     * Checks for the input before executing the calc button
-     * Bad input will cause the textfields to turn red and shake
-     */
-    func checkForGoodCalcButtonInput(_ weight: String, _ reps: String) -> Bool {
-        if (weight == "" || reps == "") {
-            
-            if (weight == "") {
-                shakeAndRedTextField(weightTextField)
-            } else {
-                returnToDefaultTextField(weightTextField)
-            }
-            
-            if (reps == "") {
-                shakeAndRedTextField(repsTextField)
-            } else {
-                returnToDefaultTextField(repsTextField)
-            }
-            
-            return true
-        }
-        return false
-    }
-    
-    
-    /*
-     * Check For Good Add to TM Input
-     *
-     * Checks for the input before executing the add to tm button
-     * Bad input will cause the textfields to turn red and shake
-     */
-    func checkForGoodAddToTmInput(_ tmWeight: String, _ exerName: String) -> Bool {
-        if (tmWeight == "" || exerName == "") {
-            
-            if (tmWeight == "") {
-                shakeAndRedTextField(selectTmToAddTextField)
-            } else {
-                returnToDefaultTextField(selectTmToAddTextField)
-            }
-            
-            if (exerName == "") {
-                shakeAndRedTextField(exerciseTextField)
-            } else {
-                returnToDefaultTextField(exerciseTextField)
-            }
-            
-            return true
-        }
-        return false
-    }
-    
-    
-    /*
-     * Shake and Red Text Field
-     *
-     * If called, will turn the textfield border red and shake
-     */
-    func shakeAndRedTextField(_ textField: UITextField) {
-        let redColor = UIColor.red
-        textField.shake()
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5
-        textField.layer.borderColor = redColor.cgColor
-    }
-    
-    
-    /*
-     * Return to Default Text Field
-     *
-     * If called, will turn the textfield border back to default
-     */
-    func returnToDefaultTextField(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 5
-    }
 }
+
 
 /*
  * Picker Delegate and Data Source
@@ -332,6 +257,8 @@ extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
         
         if pickerView == exercisePicker {
             returnInt = exerciseData.count
+        } else if pickerView == bodypartPicker {
+            returnInt = bodypartData.count
         }
         
         return returnInt
@@ -342,7 +269,9 @@ extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
         var returnStr = ""
         
         if pickerView == exercisePicker {
-            returnStr = String(exerciseData[row])
+            returnStr = exerciseData[row].name
+        } else if pickerView == bodypartPicker {
+            returnStr = bodypartData[row]
         }
         
         return returnStr
@@ -351,7 +280,12 @@ extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == exercisePicker {
             selectedExercise = exerciseData[row]
-            exerciseTextField.text = selectedExercise
+            exerciseTextField.text = selectedExercise?.name
+        } else if pickerView == bodypartPicker {
+            selectedBodyPart = bodypartData[row]
+            bodypartTextField.text = selectedBodyPart
+            Util.refreshExerciseList(bp: selectedBodyPart!, exData: &exerciseData)
+            exercisePicker.reloadAllComponents()
         }
     }
 }

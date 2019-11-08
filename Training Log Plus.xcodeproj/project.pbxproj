@@ -10,6 +10,8 @@
 		030DABD42322CA0000FDC505 /* TemplateParent_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DABD32322CA0000FDC505 /* TemplateParent_VC.swift */; };
 		030DABD62322D10C00FDC505 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030DABD52322D10C00FDC505 /* ViewController.swift */; };
 		03188E08232803E6007302F7 /* Progress_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03188E07232803E6007302F7 /* Progress_VC.swift */; };
+		0330FBE023751C930080519D /* Sets+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330FBDE23751C930080519D /* Sets+CoreDataClass.swift */; };
+		0330FBE123751C930080519D /* Sets+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330FBDF23751C930080519D /* Sets+CoreDataProperties.swift */; };
 		033C28262346872800A73B69 /* WorkoutDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C28252346872800A73B69 /* WorkoutDay.swift */; };
 		033C282A2346893000A73B69 /* ItemDetailWorkout_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C28292346893000A73B69 /* ItemDetailWorkout_VC.swift */; };
 		03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03477ED9231DD7A200E967DE /* AppDelegate.swift */; };
@@ -66,6 +68,8 @@
 		030DABD32322CA0000FDC505 /* TemplateParent_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateParent_VC.swift; sourceTree = "<group>"; };
 		030DABD52322D10C00FDC505 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		03188E07232803E6007302F7 /* Progress_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress_VC.swift; sourceTree = "<group>"; };
+		0330FBDE23751C930080519D /* Sets+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0330FBDF23751C930080519D /* Sets+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		033C28252346872800A73B69 /* WorkoutDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDay.swift; sourceTree = "<group>"; };
 		033C28292346893000A73B69 /* ItemDetailWorkout_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailWorkout_VC.swift; sourceTree = "<group>"; };
 		03477ED6231DD7A200E967DE /* Training Log Plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Log Plus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +175,8 @@
 		03929C6C23710BD20066B15E /* Data + Objects */ = {
 			isa = PBXGroup;
 			children = (
+				0330FBDE23751C930080519D /* Sets+CoreDataClass.swift */,
+				0330FBDF23751C930080519D /* Sets+CoreDataProperties.swift */,
 				0395CB5F237272170058EC9B /* Template+CoreDataClass.swift */,
 				0395CB60237272180058EC9B /* Template+CoreDataProperties.swift */,
 				0395CB63237272180058EC9B /* WorkoutDay+CoreDataClass.swift */,
@@ -453,6 +459,7 @@
 				03B2D80F235BD6DB00005CC5 /* ExerciseBB_TableViewCell.swift in Sources */,
 				03929C80237125860066B15E /* Attempt+CoreDataProperties.swift in Sources */,
 				03F1D0772329701700B63042 /* SelectProgressExercises_VC.swift in Sources */,
+				0330FBE123751C930080519D /* Sets+CoreDataProperties.swift in Sources */,
 				05C19541236887000014D212 /* DayAccExercise_TVCell.swift in Sources */,
 				030DABD42322CA0000FDC505 /* TemplateParent_VC.swift in Sources */,
 				052D409F2359153100667D2E /* Exercises_TVC.swift in Sources */,
@@ -492,6 +499,7 @@
 				05CBE50F23577EA400E766F8 /* CurrentWorkout_VC.swift in Sources */,
 				03929C7C23710DB90066B15E /* Exercise+CoreDataProperties.swift in Sources */,
 				030DABD62322D10C00FDC505 /* ViewController.swift in Sources */,
+				0330FBE023751C930080519D /* Sets+CoreDataClass.swift in Sources */,
 				05CBE51123577EC300E766F8 /* ChangeTemplate_VC.swift in Sources */,
 				033C28262346872800A73B69 /* WorkoutDay.swift in Sources */,
 				03477EDA231DD7A200E967DE /* AppDelegate.swift in Sources */,

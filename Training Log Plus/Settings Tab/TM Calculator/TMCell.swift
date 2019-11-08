@@ -13,7 +13,7 @@ class TMCell {
     let reps: Double!
     let weight: Double!
     var trainingMax: Double = 0
-    var displayString: NSMutableAttributedString?
+    //var displayString: NSMutableAttributedString?
 
     /*
      * Initializer
@@ -22,7 +22,7 @@ class TMCell {
         self.reps = reps
         self.weight = weight
         trainingMax = getTM()
-        displayString = getDisplayString()
+        //displayString = getDisplayString()
     }
     
     
@@ -36,27 +36,27 @@ class TMCell {
     }
     
     
-    /*
-     * Get Display String
-     *
-     * Gets the formatted display string for the cell
-     */
-    func getDisplayString() -> NSMutableAttributedString {
-        
-        let tmString = " TM: " + String(format: "%.0f", trainingMax)
-        let weightStr = "Weight: " + String(format: "%.0f", weight!)
-        let repsStr = "  |  Reps: " + String(format: "%.0f", reps!) + "  | "
-        
-        let totalString = weightStr + repsStr + tmString
-        
-        let strNumber: NSString = totalString as NSString
-        let range = (strNumber).range(of: tmString)
-        let attribute = NSMutableAttributedString.init(string: strNumber as String)
-        attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: range)
-        attribute.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 17.0), range: range)
-        
-        return attribute
-    }
+//    /*
+//     * Get Display String
+//     *
+//     * Gets the formatted display string for the cell
+//     */
+//    func getDisplayString() -> NSMutableAttributedString {
+//
+//        let tmString = " TM: " + String(format: "%.0f", trainingMax)
+//        let weightStr = "Weight: " + String(format: "%.0f", weight!)
+//        let repsStr = "  |  Reps: " + String(format: "%.0f", reps!) + "  | "
+//
+//        let totalString = weightStr + repsStr + tmString
+//
+//        let strNumber: NSString = totalString as NSString
+//        let range = (strNumber).range(of: tmString)
+//        let attribute = NSMutableAttributedString.init(string: strNumber as String)
+//        attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: range)
+//        attribute.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 17.0), range: range)
+//
+//        return attribute
+//    }
     
     
     /*
