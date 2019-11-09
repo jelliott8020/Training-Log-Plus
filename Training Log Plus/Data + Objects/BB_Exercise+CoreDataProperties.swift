@@ -17,8 +17,6 @@ extension BB_Exercise {
         return NSFetchRequest<BB_Exercise>(entityName: "BB_Exercise")
     }
 
-    @NSManaged public var bodyPart: String?
-    @NSManaged public var progression: String?
     @NSManaged public var startingWeight: Int32
     @NSManaged public var attemptList: NSOrderedSet?
 

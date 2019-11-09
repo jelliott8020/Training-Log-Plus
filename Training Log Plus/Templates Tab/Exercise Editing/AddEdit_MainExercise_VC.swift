@@ -87,9 +87,9 @@ class AddEdit_MainExercise_VC: UIViewController {
         selectedProgressionScheme = passedInExerciseObj!.progression
         trainingMaxTextField.text = String(passedInExerciseObj!.srtWeight)
         
-        bodyPartData = Util.getGenericBodyPartData()
+        bodyPartData = Util.getBodyPartData()
         //exerciseData = Util.getGenericExerciseData()
-        progressionSchemeData = Util.getGenericProgressionData()
+        progressionSchemeData = Util.getBodybuildingProgressionData()
         
         createPickers()
         createToolbarDoneButton()

@@ -18,8 +18,6 @@ extension Wen_Exercise {
     }
 
     @NSManaged public var currentTM: Double
-    @NSManaged public var progression: String?
-    @NSManaged public var bodyPart: String?
     @NSManaged public var trainingMaxes: NSSet?
     @NSManaged public var personalRecords: NSSet?
 

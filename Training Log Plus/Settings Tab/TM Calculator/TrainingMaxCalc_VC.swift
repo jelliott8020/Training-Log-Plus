@@ -11,13 +11,13 @@ import CoreData
 
 class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     
-    var exerciseData: [Exercise] = []
+    var exerciseData: [Wen_Exercise] = []
     var bodypartData: [String] = []
     var calcedArrayObj: [TMCell] = []
     
     var selectedWeight: Int?
     var selectedReps: Int?
-    var selectedExercise: Exercise?
+    var selectedExercise: Wen_Exercise?
     var selectedTmToAdd: Int?
     var selectedBodyPart: String?
     
@@ -57,7 +57,7 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         calcedTable.tableFooterView = UIView(frame: CGRect.zero)
 
-        bodypartData = Util.getGenericBodyPartData()
+        bodypartData = Util.getBodyPartData()
         
         createPickers()
         createToolbarDoneButton()
@@ -94,11 +94,10 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
             if (Util.checkForBlankInput(str: tmWeight, txtField: selectTmToAddTextField)) {return}
             if (Util.checkForBlankInput(str: exerName, txtField: exerciseTextField)) {return}
             
-            let attempt = Attempt(entity: Attempt.entity(), insertInto: context)
-            attempt.date = Date.init()
-            attempt.isWendler = true
-            attempt.trainingMax = Double(tmWeight)!
-            selectedExercise?.addToAttemptList(attempt)
+            let tm = TrainingMax(entity: TrainingMax.entity(), insertInto: context)
+            tm.date = Date.init()
+            tm.trainingMax = Double(tmWeight)!
+            selectedExercise?.addToTrainingMaxes(tm)
             appDelegate.saveContext()
         }
     }
@@ -284,7 +283,7 @@ extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
         } else if pickerView == bodypartPicker {
             selectedBodyPart = bodypartData[row]
             bodypartTextField.text = selectedBodyPart
-            Util.refreshExerciseList(bp: selectedBodyPart!, exData: &exerciseData)
+            DataManager.getWenExercise(exStr: selectedBodyPart!, exData: &exerciseData)
             exercisePicker.reloadAllComponents()
         }
     }

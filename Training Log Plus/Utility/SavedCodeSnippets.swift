@@ -27,6 +27,14 @@ class SavedCodeSnippets {
     
     
     
+    // Sorting after querying
+    
+    // let sort = NSSortDescriptor(keyPath: \Friend.name, ascending: true)
+    // let sort = NSSortDescriptor(key: #keyPath(Friend.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+    // request.sortDescriptors = [sort]
+    
+    
+    
     // ********************* //
     //   Toggle check marks  //
     // ********************* //

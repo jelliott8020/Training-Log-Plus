@@ -44,42 +44,12 @@ class Exercises_TVC: UITableViewController {
         
         print("Test VDL")
         
-        bodyPartData = Util.getGenericBodyPartData()
+        bodyPartData = Util.getBodyPartData()
         
-        // Will have to figure how to fill this AFTER bodypart picker is selected
-//        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-//
-//        do {
-//            exerciseData = try context.fetch(request)
-//        } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//        }
-        
-        //exerciseData = Util.getGenericExerciseData()
         
         createPickers()
         createToolbarDoneButton()
     }
-    
-//    private func refresh() {
-//
-//        let request = Friend.fetchRequest() as NSFetchRequest<Friend>
-//
-//        if !query.isEmpty {
-//            request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", query)
-//        }
-//
-//        //let sort = NSSortDescriptor(keyPath: \Friend.name, ascending: true)
-//        let sort = NSSortDescriptor(key: #keyPath(Friend.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
-//        request.sortDescriptors = [sort]
-//
-//
-//        do {
-//            friends = try context.fetch(request)
-//        } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//        }
-//    }
     
 
     /*
@@ -88,13 +58,10 @@ class Exercises_TVC: UITableViewController {
      * Adds data to database
      */
     func createButtonFunc() {
-        // Add item to data here
-        print("2 spot")
         selectedBodyPart = bodyPartTextField.text
         bodyPartTextField.text = ""
         selectedExercise = exerciseTextField.text
         exerciseTextField.text = ""
-        print("3 spot")
     }
     
     

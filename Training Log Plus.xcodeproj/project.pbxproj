@@ -18,6 +18,9 @@
 		032042612375F4070006361A /* BB_Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032042592375F4070006361A /* BB_Exercise+CoreDataProperties.swift */; };
 		032042622375F4070006361A /* TrainingMax+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0320425A2375F4070006361A /* TrainingMax+CoreDataClass.swift */; };
 		032042632375F4070006361A /* TrainingMax+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0320425B2375F4070006361A /* TrainingMax+CoreDataProperties.swift */; };
+		032042652376338D0006361A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032042642376338D0006361A /* DataManager.swift */; };
+		032042682376410F0006361A /* Progression+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032042662376410F0006361A /* Progression+CoreDataClass.swift */; };
+		032042692376410F0006361A /* Progression+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032042672376410F0006361A /* Progression+CoreDataProperties.swift */; };
 		0330FBE023751C930080519D /* Sets+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330FBDE23751C930080519D /* Sets+CoreDataClass.swift */; };
 		0330FBE123751C930080519D /* Sets+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330FBDF23751C930080519D /* Sets+CoreDataProperties.swift */; };
 		033C28262346872800A73B69 /* WorkoutDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C28252346872800A73B69 /* WorkoutDay.swift */; };
@@ -84,6 +87,9 @@
 		032042592375F4070006361A /* BB_Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BB_Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0320425A2375F4070006361A /* TrainingMax+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrainingMax+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0320425B2375F4070006361A /* TrainingMax+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrainingMax+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		032042642376338D0006361A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		032042662376410F0006361A /* Progression+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Progression+CoreDataClass.swift"; sourceTree = "<group>"; };
+		032042672376410F0006361A /* Progression+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Progression+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0330FBDE23751C930080519D /* Sets+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0330FBDF23751C930080519D /* Sets+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sets+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		033C28252346872800A73B69 /* WorkoutDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDay.swift; sourceTree = "<group>"; };
@@ -209,6 +215,8 @@
 				032042552375F4070006361A /* PersonalRecord+CoreDataProperties.swift */,
 				0320425A2375F4070006361A /* TrainingMax+CoreDataClass.swift */,
 				0320425B2375F4070006361A /* TrainingMax+CoreDataProperties.swift */,
+				032042662376410F0006361A /* Progression+CoreDataClass.swift */,
+				032042672376410F0006361A /* Progression+CoreDataProperties.swift */,
 			);
 			path = "Data + Objects";
 			sourceTree = "<group>";
@@ -252,6 +260,7 @@
 				03B984DF233BE03F00656CFA /* Attempt.swift */,
 				05E323F4236B2A1D00FAAF04 /* SavedCodeSnippets.swift */,
 				05739D142368C5AA00B70A4E /* Util.swift */,
+				032042642376338D0006361A /* DataManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -492,6 +501,7 @@
 				052D409F2359153100667D2E /* Exercises_TVC.swift in Sources */,
 				032042602375F4070006361A /* BB_Exercise+CoreDataClass.swift in Sources */,
 				05C3B40B23623E120087BAC4 /* AccessoryExercise_TVCell.swift in Sources */,
+				032042682376410F0006361A /* Progression+CoreDataClass.swift in Sources */,
 				03B2D817235BDC6C00005CC5 /* AddExerciseToData_TVC.swift in Sources */,
 				0377F5FF2357E6AE0015AEDB /* TrainingMaxCalc_VC.swift in Sources */,
 				0395CB6B237272180058EC9B /* WorkoutDay+CoreDataClass.swift in Sources */,
@@ -517,6 +527,7 @@
 				0377F6052358087B0015AEDB /* TMCell.swift in Sources */,
 				03B2D807235BD58200005CC5 /* AmrapPerformance_TVCell.swift in Sources */,
 				03FB9EAB2322FA4E00F9D410 /* Template.swift in Sources */,
+				032042692376410F0006361A /* Progression+CoreDataProperties.swift in Sources */,
 				03B984E0233BE03F00656CFA /* Attempt.swift in Sources */,
 				05C1953F236886ED0014D212 /* DayMainExercise_TVCell.swift in Sources */,
 				03929C7B23710DB90066B15E /* Exercise+CoreDataClass.swift in Sources */,
@@ -525,6 +536,7 @@
 				05739D152368C5AA00B70A4E /* Util.swift in Sources */,
 				0395CB6C237272180058EC9B /* WorkoutDay+CoreDataProperties.swift in Sources */,
 				0395CB67237272180058EC9B /* Template+CoreDataClass.swift in Sources */,
+				032042652376338D0006361A /* DataManager.swift in Sources */,
 				03B2D813235BD7E700005CC5 /* ChangeTemplate_TVCell.swift in Sources */,
 				05C3B400236236C10087BAC4 /* workoutDaysInTemplate_TVCell.swift in Sources */,
 				05CBE50D2357796D00E766F8 /* Workout_VC.swift in Sources */,

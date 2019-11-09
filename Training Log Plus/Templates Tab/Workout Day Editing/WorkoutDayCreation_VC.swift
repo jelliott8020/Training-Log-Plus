@@ -73,7 +73,7 @@ class WorkoutDayCreation_VC: UIViewController {
         accExerciseList = passedInWorkoutObj!.accExerciseList?.array as! [Exercise]
         mainExerciseList = passedInWorkoutObj!.mainExerciseList?.array as! [Exercise]
         
-        bodyPartData = Util.getGenericBodyPartData()
+        bodyPartData = Util.getBodyPartData()
         refreshExerciseData()
         
         createPickers()

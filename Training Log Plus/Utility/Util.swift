@@ -7,12 +7,8 @@
 //
 
 import UIKit
-import CoreData
 
 class Util {
-    
-    private static let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
     /*
@@ -57,25 +53,6 @@ class Util {
     
     
     /*
-     * Refresh Exercise List
-     *
-     * Takes a bodypart text string and querys the DB for exercises
-     * that match
-     */
-    static func refreshExerciseList(bp: String, exData: inout [Exercise]) {
-        
-        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
-        
-        do {
-            exData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
-        }
-    }
-
-    
-    /*
      * Clear Text Field
      */
     static func clearTextField(_ textField: UITextField) {
@@ -114,7 +91,7 @@ class Util {
      *
      * Gets the body part data for the picker
      */
-    static func getGenericBodyPartData() -> [String] {
+    static func getBodyPartData() -> [String] {
         return [
             "Chest",
             "Back",
@@ -131,7 +108,7 @@ class Util {
      *
      * Gets the progression scheme data for the picker
      */
-    static func getGenericProgressionData() -> [String] {
+    static func getBodybuildingProgressionData() -> [String] {
         return [
             "3x5 Rep Goal",
             "3x5 + 2x12 @ 70%",
@@ -171,21 +148,6 @@ class Util {
             "531 Pyramid + 1 Joker",
             "531 Pyramid + 2 Joker",
             "531 Pyramid + 3 Joker",
-        ]
-    }
-    
-    
-    /*
-     * Get Exercise Data
-     *
-     * Gets the exercise data for the picker
-     */
-    static func getGenericExerciseData() -> [String] {
-        // Fill this from database after bodypart picker is selected
-        return [
-            "Squat",
-            "Deadlift",
-            "Bench"
         ]
     }
     

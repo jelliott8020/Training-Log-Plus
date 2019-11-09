@@ -52,7 +52,7 @@ class SelectProgressExercises_VC: UITableViewController {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         
-        bodyPartData = Util.getGenericBodyPartData()
+        bodyPartData = Util.getBodyPartData()
         // Maybe check for bodypart selection before filling in exercise data
         //let bodyPart: String = ""
         // Will need to check data for bodypart before filling this in

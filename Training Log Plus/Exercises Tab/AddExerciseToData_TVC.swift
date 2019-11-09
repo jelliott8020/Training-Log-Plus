@@ -12,7 +12,6 @@ import CoreData
 class AddExerciseToData_TVC: UITableViewController {
 
     var bodyPartData: [String] = []
-    var exerciseData: [String] = []
     var wendlerData: [String] = []
     
     var selectedBodyPart: String?
@@ -47,7 +46,7 @@ class AddExerciseToData_TVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bodyPartData = Util.getGenericBodyPartData()
+        bodyPartData = Util.getBodyPartData()
         wendlerData = Util.getYesOrNoForPickerData()
         
         createPickers()
@@ -68,108 +67,35 @@ class AddExerciseToData_TVC: UITableViewController {
             if (Util.checkForBlankInput(str: exer, txtField: exerciseTextField)) {return}
             if (Util.checkForBlankInput(str: wen, txtField: wendlerTextField)) {return}
             
+            let item: Exercise?
             
-            let item = Exercise(entity: Exercise.entity(), insertInto: context)
+            if (wen.lowercased() == "yes") {
+                item = Wen_Exercise(entity: Wen_Exercise.entity(), insertInto: context)
+                item.currentTM = 0.0
+            } else {
+                item = BB_Exercise(entity: BB_Exercise.entity(), insertInto: context)
+                item.startingWeight = 0
+            }
+            
             item.bodyPart = bodyPartTextField.text!
             item.name = exerciseTextField.text!
-            item.progression = ""
             item.startingWeight = 0
-            //item.attemptList = []
-            
-            print(item)
             
             appDelegate.saveContext()
             
-            selectedBodyPart = bodyPartTextField.text
-            selectedExercise = exerciseTextField.text
-            selectedWendler = wendlerTextField.text
+//            selectedBodyPart = bodyPartTextField.text
+//            selectedExercise = exerciseTextField.text
+//            selectedWendler = wendlerTextField.text
             
             dismiss(animated: true, completion: nil)
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
-    
-    /*
-     * Create Pickers
-     *
-     * Creates the pickers for the view
-     */
-    func createPickers() {
-        bodyPartPicker.delegate = self
-        wendlerPicker.delegate = self
-        
-        bodyPartTextField.inputView = bodyPartPicker
-        wendlerTextField.inputView = wendlerPicker
-    }
-    
-    
-    /*
-     * Create Tool Bar Done Button
-     *
-     * Creates done buttons for toolbars
-     */
-    func createToolbarDoneButton() {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        
-        toolBar.setItems([spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
-        bodyPartTextField.inputAccessoryView = toolBar
-        exerciseTextField.inputAccessoryView = toolBar
-        wendlerTextField.inputAccessoryView = toolBar
-    }
-    
-    
-    /*
-     * Done Button Action
-     *
-     * Tells the toolbar what to do when done button is selected
-     */
-    @objc func doneButtonAction() {
-        if bodyPartTextField.isEditing {
-            bodyPartTextField.resignFirstResponder()
-            exerciseTextField.becomeFirstResponder()
-        } else if exerciseTextField.isEditing {
-            exerciseTextField.resignFirstResponder()
-            wendlerTextField.becomeFirstResponder()
-        } else if wendlerTextField.isEditing {
-            wendlerTextField.resignFirstResponder()
-            addButtonFunction()
-            self.view.endEditing(true)
-        }
-    }
 }
 
 
 /*
- * Utility Functions
- */
-extension AddExerciseToData_TVC {
-    
-    
-    /*
-     * Clear Button Function
-     *
-     * Clears data from the textfields
-     */
-    func clearButtonFunction() {
-        Util.clearTextField(bodyPartTextField)
-        Util.clearTextField(exerciseTextField)
-        Util.clearTextField(wendlerTextField)
-        selectedWendler = "Yes"
-    }
-}
-
-
-/*
- * Picker
- *
- * Delegate and Data Source
+ * Picker Delegate and Data Source
  */
 extension AddExerciseToData_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -210,5 +136,69 @@ extension AddExerciseToData_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
             selectedWendler = wendlerData[row]
             wendlerTextField.text = selectedWendler
         }
+    }
+}
+
+
+
+/*
+ * Utility Functions
+ */
+extension AddExerciseToData_TVC {
+    
+    /*
+     * Toolbar Done Button
+     */
+    func createToolbarDoneButton() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        bodyPartTextField.inputAccessoryView = toolBar
+        exerciseTextField.inputAccessoryView = toolBar
+        wendlerTextField.inputAccessoryView = toolBar
+    }
+    
+    /*
+     * Toolbar Done Button Action
+     */
+    @objc func doneButtonAction() {
+        if bodyPartTextField.isEditing {
+            bodyPartTextField.resignFirstResponder()
+            exerciseTextField.becomeFirstResponder()
+        } else if exerciseTextField.isEditing {
+            exerciseTextField.resignFirstResponder()
+            wendlerTextField.becomeFirstResponder()
+        } else if wendlerTextField.isEditing {
+            wendlerTextField.resignFirstResponder()
+            addButtonFunction()
+            self.view.endEditing(true)
+        }
+    }
+    
+    /*
+     * Clear Button Function
+     */
+    func clearButtonFunction() {
+        Util.clearTextField(bodyPartTextField)
+        Util.clearTextField(exerciseTextField)
+        Util.clearTextField(wendlerTextField)
+        selectedWendler = "Yes"
+    }
+    
+    /*
+     * Create Pickers
+     */
+    func createPickers() {
+        bodyPartPicker.delegate = self
+        wendlerPicker.delegate = self
+        
+        bodyPartTextField.inputView = bodyPartPicker
+        wendlerTextField.inputView = wendlerPicker
     }
 }
