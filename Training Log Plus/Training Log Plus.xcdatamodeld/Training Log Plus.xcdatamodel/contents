@@ -18,7 +18,10 @@
         <attribute name="reps" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Progression" representedClassName="Progression" syncable="YES" codeGenerationType="class"/>
+    <entity name="Progression" representedClassName=".Progression" syncable="YES">
+        <attribute name="name" attributeType="String"/>
+        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets"/>
+    </entity>
     <entity name="Sets" representedClassName=".Sets" syncable="YES">
         <attribute name="reps" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -49,13 +52,13 @@
     <elements>
         <element name="Attempt" positionX="-181.40625" positionY="-247.02734375" width="128" height="73"/>
         <element name="BB_Exercise" positionX="-370.3515625" positionY="-304.90234375" width="128" height="73"/>
+        <element name="Exercise" positionX="-373.26171875" positionY="-114.85546875" width="128" height="88"/>
+        <element name="PersonalRecord" positionX="-181.15625" positionY="-69.0546875" width="128" height="88"/>
+        <element name="Progression" positionX="-252" positionY="-126" width="128" height="73"/>
         <element name="Sets" positionX="21.703125" positionY="-219.8046875" width="128" height="73"/>
         <element name="Template" positionX="-573.7265625" positionY="-421.51953125" width="128" height="148"/>
-        <element name="WorkoutDay" positionX="-577.39453125" positionY="-165.640625" width="128" height="88"/>
-        <element name="Wen_Exercise" positionX="-370.61328125" positionY="-8.03125" width="128" height="88"/>
         <element name="TrainingMax" positionX="-104.16796875" positionY="64.6484375" width="128" height="73"/>
-        <element name="PersonalRecord" positionX="-181.15625" positionY="-69.0546875" width="128" height="88"/>
-        <element name="Exercise" positionX="-373.26171875" positionY="-114.85546875" width="128" height="88"/>
-        <element name="Progression" positionX="-252" positionY="-126" width="128" height="43"/>
+        <element name="Wen_Exercise" positionX="-370.61328125" positionY="-8.03125" width="128" height="88"/>
+        <element name="WorkoutDay" positionX="-577.39453125" positionY="-165.640625" width="128" height="88"/>
     </elements>
 </model>

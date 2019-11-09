@@ -17,8 +17,8 @@ extension PersonalRecord {
         return NSFetchRequest<PersonalRecord>(entityName: "PersonalRecord")
     }
 
-    @NSManaged public var weight: Double
-    @NSManaged public var reps: Double
     @NSManaged public var date: Date?
+    @NSManaged public var reps: Double
+    @NSManaged public var weight: Double
 
 }

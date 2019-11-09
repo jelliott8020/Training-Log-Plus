@@ -18,25 +18,8 @@ extension Wen_Exercise {
     }
 
     @NSManaged public var currentTM: Double
-    @NSManaged public var trainingMaxes: NSSet?
     @NSManaged public var personalRecords: NSSet?
-
-}
-
-// MARK: Generated accessors for trainingMaxes
-extension Wen_Exercise {
-
-    @objc(addTrainingMaxesObject:)
-    @NSManaged public func addToTrainingMaxes(_ value: TrainingMax)
-
-    @objc(removeTrainingMaxesObject:)
-    @NSManaged public func removeFromTrainingMaxes(_ value: TrainingMax)
-
-    @objc(addTrainingMaxes:)
-    @NSManaged public func addToTrainingMaxes(_ values: NSSet)
-
-    @objc(removeTrainingMaxes:)
-    @NSManaged public func removeFromTrainingMaxes(_ values: NSSet)
+    @NSManaged public var trainingMaxes: NSSet?
 
 }
 
@@ -54,5 +37,22 @@ extension Wen_Exercise {
 
     @objc(removePersonalRecords:)
     @NSManaged public func removeFromPersonalRecords(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for trainingMaxes
+extension Wen_Exercise {
+
+    @objc(addTrainingMaxesObject:)
+    @NSManaged public func addToTrainingMaxes(_ value: TrainingMax)
+
+    @objc(removeTrainingMaxesObject:)
+    @NSManaged public func removeFromTrainingMaxes(_ value: TrainingMax)
+
+    @objc(addTrainingMaxes:)
+    @NSManaged public func addToTrainingMaxes(_ values: NSSet)
+
+    @objc(removeTrainingMaxes:)
+    @NSManaged public func removeFromTrainingMaxes(_ values: NSSet)
 
 }

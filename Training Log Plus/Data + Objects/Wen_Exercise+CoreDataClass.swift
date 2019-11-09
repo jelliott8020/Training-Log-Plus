@@ -13,15 +13,16 @@ import CoreData
 
 public class Wen_Exercise: Exercise {
     
-//     var currTM : Int {
-//        get { return Int(currentTM) }
-//        set { currentTM = Int32(newValue) }
-//     }
+    //     var currTM : Int {
+    //        get { return Int(currentTM) }
+    //        set { currentTM = Int32(newValue) }
+    //     }
 
-    func returnDisplayString() -> String {
-        if let prog = progression, !prog.isEmpty {
-            return name + " (\(prog))"
-        }
-        return name
-    }
+//        func returnDisplayString() -> String {
+//            if let prog = progression, !prog.isEmpty {
+//                return name + " (\(prog))"
+//            }
+//            return name
+//        }
+
 }

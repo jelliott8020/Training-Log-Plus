@@ -18,11 +18,11 @@ public class BB_Exercise: Exercise {
         set { startingWeight = Int32(newValue) }
      }
 
-    func returnDisplayString() -> String {
-        if let prog = progression, !prog.isEmpty {
-            return name + " (\(prog))"
-        }
-        return name
-    }
+//    func returnDisplayString() -> String {
+//        if let prog = progression, !prog.isEmpty {
+//            return name + " (\(prog))"
+//        }
+//        return name
+//    }
 
 }

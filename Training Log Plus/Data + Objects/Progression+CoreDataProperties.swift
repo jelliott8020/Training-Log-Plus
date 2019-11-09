@@ -17,5 +17,24 @@ extension Progression {
         return NSFetchRequest<Progression>(entityName: "Progression")
     }
 
+    @NSManaged public var name: String
+    @NSManaged public var sets: NSSet?
+
+}
+
+// MARK: Generated accessors for sets
+extension Progression {
+
+    @objc(addSetsObject:)
+    @NSManaged public func addToSets(_ value: Sets)
+
+    @objc(removeSetsObject:)
+    @NSManaged public func removeFromSets(_ value: Sets)
+
+    @objc(addSets:)
+    @NSManaged public func addToSets(_ values: NSSet)
+
+    @objc(removeSets:)
+    @NSManaged public func removeFromSets(_ values: NSSet)
 
 }

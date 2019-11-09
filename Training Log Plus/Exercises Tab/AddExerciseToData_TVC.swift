@@ -71,15 +71,14 @@ class AddExerciseToData_TVC: UITableViewController {
             
             if (wen.lowercased() == "yes") {
                 item = Wen_Exercise(entity: Wen_Exercise.entity(), insertInto: context)
-                item.currentTM = 0.0
+                //item.currentTM = 0.0
             } else {
                 item = BB_Exercise(entity: BB_Exercise.entity(), insertInto: context)
-                item.startingWeight = 0
+                //item.startingWeight = 0
             }
             
-            item.bodyPart = bodyPartTextField.text!
-            item.name = exerciseTextField.text!
-            item.startingWeight = 0
+            item?.bodypart = bodyPartTextField.text!
+            item?.name = exerciseTextField.text!
             
             appDelegate.saveContext()
             

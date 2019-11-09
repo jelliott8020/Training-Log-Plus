@@ -332,8 +332,9 @@ extension TemplateParent_VC {
         
         // WENDLER EXERCISES
         let ex1 = getNewWenExercise("Bench")
-        ex1.bodyPart = "Chest"
-        ex1.progression = "531"
+        let prog1 = getNewProgression("531")
+        ex1.progression = prog1
+        ex1.bodypart = "Chest"
         let ex1TM1 = getNewWendlerTM()
         let ex1PR1 = getNewWendlerPR()
         let ex1TM2 = getNewWendlerTM()
@@ -344,8 +345,9 @@ extension TemplateParent_VC {
         ex1.addToTrainingMaxes(ex1TM2)
         
         let ex2 = getNewWenExercise("Squatter")
-        ex2.bodyPart = "Legs"
-        ex2.progression = "531"
+        let prog2 = getNewProgression("531")
+        ex2.progression = prog2
+        ex2.bodypart = "Legs"
         let ex2TM1 = getNewWendlerTM()
         let ex2PR1 = getNewWendlerPR()
         let ex2TM2 = getNewWendlerTM()
@@ -356,8 +358,9 @@ extension TemplateParent_VC {
         ex2.addToTrainingMaxes(ex2TM2)
         
         let ex3 = getNewWenExercise("Dead")
-        ex3.bodyPart = "Back"
-        ex3.progression = "Starting Strength"
+        let prog3 = getNewProgression("Starting Strength")
+        ex3.progression = prog3
+        ex3.bodypart = "Back"
         let ex3TM1 = getNewWendlerTM()
         let ex3PR1 = getNewWendlerPR()
         let ex3TM2 = getNewWendlerTM()
@@ -368,8 +371,9 @@ extension TemplateParent_VC {
         ex3.addToTrainingMaxes(ex3TM2)
   
         let ex4 = getNewWenExercise("DB Bench")
-        ex4.bodyPart = "Chest"
-        ex4.progression = "531"
+        let prog4 = getNewProgression("531")
+        ex4.progression = prog4
+        ex4.bodypart = "Chest"
         let ex4TM1 = getNewWendlerTM()
         let ex4PR1 = getNewWendlerPR()
         let ex4TM2 = getNewWendlerTM()
@@ -382,8 +386,9 @@ extension TemplateParent_VC {
         
         // BB EXERCISES
         let ex5 = getNewBBExercise("Incline Bench")
-        ex5.bodyPart = "Chest"
-        ex5.progression = "531"
+        let prog5 = getNewProgression("531")
+        ex5.progression = prog5
+        ex5.bodypart = "Chest"
         let ex5Att1 = getNewBBAttempt()
         let ex5Att2 = getNewBBAttempt()
         let ex5Att3 = getNewBBAttempt()
@@ -392,8 +397,9 @@ extension TemplateParent_VC {
         ex5.addToAttemptList(ex5Att3)
         
         let ex6 = getNewBBExercise("Pullup")
-        ex6.bodyPart = "Back"
-        ex6.progression = "531"
+        let prog6 = getNewProgression("531")
+        ex6.progression = prog6
+        ex6.bodypart = "Back"
         let ex6Att1 = getNewBBAttempt()
         let ex6Att2 = getNewBBAttempt()
         let ex6Att3 = getNewBBAttempt()
@@ -402,8 +408,9 @@ extension TemplateParent_VC {
         ex6.addToAttemptList(ex6Att3)
         
         let ex7 = getNewBBExercise("Row")
-        ex7.bodyPart = "Back"
-        ex7.progression = "531"
+        let prog7 = getNewProgression("531")
+        ex7.progression = prog7
+        ex7.bodypart = "Back"
         let ex7Att1 = getNewBBAttempt()
         let ex7Att2 = getNewBBAttempt()
         let ex7Att3 = getNewBBAttempt()
@@ -412,8 +419,9 @@ extension TemplateParent_VC {
         ex7.addToAttemptList(ex7Att3)
         
         let ex8 = getNewBBExercise("Mil Press")
-        ex8.bodyPart = "Shoulders"
-        ex8.progression = "531"
+        let prog8 = getNewProgression("531")
+        ex8.progression = prog8
+        ex8.bodypart = "Shoulders"
         let ex8Att1 = getNewBBAttempt()
         let ex8Att2 = getNewBBAttempt()
         let ex8Att3 = getNewBBAttempt()
@@ -424,8 +432,9 @@ extension TemplateParent_VC {
         
         // MAIN EXERCISE
         let mainBB = getNewBBExercise("Main Ex - BB")
-        mainBB.bodyPart = "Misc"
-        mainBB.progression = "3x10"
+        let progMainBB = getNewProgression("531")
+        mainBB.progression = progMainBB
+        mainBB.bodypart = "Misc"
         let mainAtt1 = getNewBBAttempt()
         let mainAtt2 = getNewBBAttempt()
         let mainAtt3 = getNewBBAttempt()
@@ -434,8 +443,9 @@ extension TemplateParent_VC {
         mainBB.addToAttemptList(mainAtt3)
         
         let mainWen = getNewWenExercise("OHP")
-        mainWen.bodyPart = "Shoulders"
-        mainWen.progression = "531"
+        let progMainWen = getNewProgression("531")
+        mainWen.progression = progMainWen
+        mainWen.bodypart = "Shoulders"
         let mainWenTM1 = getNewWendlerTM()
         let mainWenPR1 = getNewWendlerPR()
         let mainWenTM2 = getNewWendlerTM()
@@ -527,11 +537,13 @@ extension TemplateParent_VC {
         return item
     }
     
+    func getNewProgression(_ name: String) -> Progression {
+        let item = Progression(entity: Progression.entity(), insertInto: context)
+        item.name = name
+        return item
+    }
+    
     // END HELPER FUCNTIONS //
-    
-    
-    
-    
     
     
     /*
@@ -574,53 +586,4 @@ extension TemplateParent_VC {
             self.performSegue(withIdentifier: "AddItemSegue", sender: self)
         }
     }
-    
-    //    /*
-    //     * Show keyboard automatically without tapping
-    //     */
-    //    override func viewWillAppear(_ animated: Bool) {
-    //
-    //        //        if itemToEdit != nil {
-    //        //            return
-    //        //        }
-    //        templateTitleTextField.becomeFirstResponder()
-    //    }
 }
-
-///*
-// * Picker
-// */
-//extension TemplateParent_VC: UIPickerViewDataSource, UIPickerViewDelegate {
-//
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        var returnInt = 0
-//
-//        if pickerView == wendlerPicker {
-//            returnInt = wendlerData.count
-//        }
-//
-//        return returnInt
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//
-//        var returnStr = ""
-//
-//        if pickerView == wendlerPicker {
-//            returnStr = wendlerData[row]
-//        }
-//
-//        return returnStr
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if pickerView == wendlerPicker {
-//            selectedWendler = wendlerData[row]
-//            wendlerYesNoTxtField?.text = selectedWendler
-//        }
-//    }
-//}

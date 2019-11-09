@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Progression)
+
 public class Progression: NSManagedObject {
 
 }

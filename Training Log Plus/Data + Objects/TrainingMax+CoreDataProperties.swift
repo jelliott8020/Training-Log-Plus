@@ -17,7 +17,7 @@ extension TrainingMax {
         return NSFetchRequest<TrainingMax>(entityName: "TrainingMax")
     }
 
-    @NSManaged public var trainingMax: Double
     @NSManaged public var date: Date?
+    @NSManaged public var trainingMax: Double
 
 }

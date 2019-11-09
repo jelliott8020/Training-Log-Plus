@@ -26,6 +26,18 @@ class SavedCodeSnippets {
     //        }
     
     
+    //    /*
+    //     * Show keyboard automatically without tapping
+    //     */
+    //    override func viewWillAppear(_ animated: Bool) {
+    //
+    //        //        if itemToEdit != nil {
+    //        //            return
+    //        //        }
+    //        templateTitleTextField.becomeFirstResponder()
+    //    }
+    
+    
     
     // Sorting after querying
     
