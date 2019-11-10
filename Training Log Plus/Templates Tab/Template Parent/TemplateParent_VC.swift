@@ -11,9 +11,7 @@ import CoreData
 
 class TemplateParent_VC: UITableViewController {
     
-    // Eventually this will become a [Template] where the init
-    // queries Core Data and fills it
-    //var templateList: TemplateList
+
     var templateList: [Template] = []
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -24,8 +22,6 @@ class TemplateParent_VC: UITableViewController {
     var alertWen: Bool?
     var alertWeeks: Int?
     
-    //var wendlerPicker = UIPickerView()
-    //var wendlerData: [String] = []
     var selectedWendler: String?
     
     var tempNameTxtField: UITextField?
@@ -75,6 +71,7 @@ class TemplateParent_VC: UITableViewController {
     @IBAction func createTestData(_ sender: UIBarButtonItem) {
         createTestData()
     }
+    
     
     /*
      * When user interacts with cell
@@ -146,9 +143,6 @@ class TemplateParent_VC: UITableViewController {
     func addButtonAlert() {
         //Step : 1
         let alert = UIAlertController(title: "Create Template", message: "Table Information", preferredStyle: UIAlertController.Style.alert )
-        
-        
-        
         
         //Step : 2
         let save = UIAlertAction(title: "Create", style: .default) { (alertAction) in

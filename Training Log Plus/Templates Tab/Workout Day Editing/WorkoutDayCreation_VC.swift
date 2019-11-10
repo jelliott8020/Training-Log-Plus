@@ -70,8 +70,8 @@ class WorkoutDayCreation_VC: UIViewController {
         
         exerciseTable.tableFooterView = UIView(frame: CGRect.zero)
         
-        accExerciseList = passedInWorkoutObj!.accExerciseList?.array as! [Exercise]
-        mainExerciseList = passedInWorkoutObj!.mainExerciseList?.array as! [Exercise]
+        accExerciseList = passedInWorkoutObj!.accExerciseList?.allObjects as! [Exercise]
+        mainExerciseList = passedInWorkoutObj!.mainExerciseList?.allObjects as! [Exercise]
         
         bodyPartData = Util.getBodyPartData()
         refreshExerciseData()
