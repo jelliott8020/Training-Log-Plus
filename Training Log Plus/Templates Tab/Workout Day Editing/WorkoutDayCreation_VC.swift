@@ -74,44 +74,11 @@ class WorkoutDayCreation_VC: UIViewController {
         mainExerciseList = passedInWorkoutObj!.mainExerciseList?.allObjects as! [Exercise]
         
         bodyPartData = Util.getBodyPartData()
-        refreshExerciseData()
         
         createPickers()
         //createToolbarDoneButton()
         //workoutObj?.title = passedTitle
         self.title = passedInWorkoutObj?.name
-    }
-    
-    
-    /*
-     * Refresh Exercise List w/ BodyPart String
-     */
-    func refreshExerciseList(bp: String) {
-        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
-        
-        do {
-            exerciseData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
-        }
-        
-        exercisePicker.reloadAllComponents()
-    }
-    
-    /*
-     * Refresh Exercise List
-     */
-    func refreshExerciseData() {
-        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        
-        do {
-            exerciseData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
-        }
-        
-        //tableView.reloadData()
     }
     
 
@@ -392,7 +359,7 @@ extension WorkoutDayCreation_VC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodypartPicker {
             selectedBodyPart = bodyPartData[row]
             //bodypartTextField!.text = selectedBodyPart
-            refreshExerciseList(bp: selectedBodyPart ?? "")
+            DataManager.getExercises(bp: selectedBodyPart!, exData: &exerciseData)
         } else if pickerView == exercisePicker {
             selectedExercise = exerciseData[row]
             //exerciseTextField?.text = selectedExercise

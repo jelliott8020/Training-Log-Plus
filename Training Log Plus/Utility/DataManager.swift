@@ -19,14 +19,16 @@ class DataManager {
     //request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", query)
     
     
-    
     /*
-     * Exercise w/ Bodypart
+     * Exercise
      */
     static func getExercises(bp: String, exData: inout [Exercise]) {
         
         let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
+        
+        if bp != "" {
+            request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
+        }
         
         do {
             exData = try context.fetch(request)
@@ -35,33 +37,6 @@ class DataManager {
         }
     }
     
-    /*
-     * Exercise w/o Bodypart
-     */
-    static func getExercises(exData: inout [Exercise]) {
-        
-        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        
-        do {
-            exData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could no fetch ExerciseData. \(error), \(error.userInfo)")
-        }
-    }
-    
-    /*
-     * Wendler Exercises
-     */
-    static func getWenExercises(exData: inout [Wen_Exercise]) {
-        
-        let request = Wen_Exercise.fetchRequest() as NSFetchRequest<Wen_Exercise>
-        
-        do {
-            exData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could no fetch Wen_ExerciseData. \(error), \(error.userInfo)")
-        }
-    }
     
     /*
      * Wendler Exercises
@@ -69,7 +44,11 @@ class DataManager {
     static func getWenExercise(exStr: String, exData: inout [Wen_Exercise]) {
         
         let request = Wen_Exercise.fetchRequest() as NSFetchRequest<Wen_Exercise>
-        request.predicate = NSPredicate(format: "name == '\(exStr)'")
+        
+        if exStr != "" {
+            request.predicate = NSPredicate(format: "bodyPart == '\(exStr)'")
+            print("entered conditional")
+        }
         
         do {
             exData = try context.fetch(request)
@@ -78,12 +57,18 @@ class DataManager {
         }
     }
     
+    
     /*
      * Bodybuilding Exercises
      */
-    static func getBBExercises(exData: inout [BB_Exercise]) {
+    static func getBBExercise(exStr: String, exData: inout [BB_Exercise]) {
         
         let request = BB_Exercise.fetchRequest() as NSFetchRequest<BB_Exercise>
+        
+        if exStr != "" {
+            request.predicate = NSPredicate(format: "bodyPart == '\(exStr)'")
+        }
+
         
         do {
             exData = try context.fetch(request)
@@ -92,18 +77,20 @@ class DataManager {
         }
     }
     
+    
     /*
-     * Bodybuilding Exercises
+     * Progression
      */
-    static func getBBExercise(exStr: String, exData: inout [BB_Exercise]) {
+    static func getProgression(exData: inout [Progression]) {
         
-        let request = BB_Exercise.fetchRequest() as NSFetchRequest<BB_Exercise>
-        request.predicate = NSPredicate(format: "name == '\(exStr)'")
+        let request = Progression.fetchRequest() as NSFetchRequest<Progression>
         
         do {
             exData = try context.fetch(request)
         } catch let error as NSError {
-            print("Could no fetch BB_ExerciseData. \(error), \(error.userInfo)")
+            print("Could no fetch ProgressionData. \(error), \(error.userInfo)")
         }
     }
+    
+    
 }

@@ -194,6 +194,7 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
         toolBar.isUserInteractionEnabled = true
         
         weightTextField.inputAccessoryView = toolBar
+        bodypartTextField.inputAccessoryView = toolBar
         repsTextField.inputAccessoryView = toolBar
         selectTmToAddTextField.inputAccessoryView = toolBar
         exerciseTextField.inputAccessoryView = toolBar
@@ -284,6 +285,8 @@ extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
             selectedBodyPart = bodypartData[row]
             bodypartTextField.text = selectedBodyPart
             DataManager.getWenExercise(exStr: selectedBodyPart!, exData: &exerciseData)
+            print(selectedBodyPart as Any)
+            print(exerciseData)
             exercisePicker.reloadAllComponents()
         }
     }

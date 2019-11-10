@@ -19,7 +19,7 @@ extension Template {
 
     @NSManaged public var currentDayIndex: Int32
     @NSManaged public var dateStarted: Date?
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var numDaysPerWeek: Int32
     @NSManaged public var numOfWeeks: Int32
     @NSManaged public var wendlerYesNo: Bool

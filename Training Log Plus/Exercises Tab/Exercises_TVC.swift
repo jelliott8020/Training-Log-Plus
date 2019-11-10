@@ -156,7 +156,7 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodyPartPicker {
             returnStr = bodyPartData[row]
         } else if pickerView == exercisePicker {
-            returnStr = exerciseData[row].name
+            returnStr = exerciseData[row].name ?? ""
         }
         
         return returnStr

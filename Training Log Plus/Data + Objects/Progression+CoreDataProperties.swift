@@ -17,7 +17,7 @@ extension Progression {
         return NSFetchRequest<Progression>(entityName: "Progression")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var sets: NSSet?
 
 }

@@ -472,6 +472,8 @@ extension TemplateParent_VC {
         temp1.numOfWeeks = 1
         templateList.append(temp1)
         
+        appDelegate.saveContext()
+        
         tableView.reloadData()
     }
     

@@ -17,7 +17,7 @@ extension WorkoutDay {
         return NSFetchRequest<WorkoutDay>(entityName: "WorkoutDay")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var accExerciseList: NSSet?
     @NSManaged public var mainExerciseList: NSSet?
 

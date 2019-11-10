@@ -30,6 +30,9 @@ class AddEdit_MainExercise_VC: UIViewController {
     var trainingMaxes: [TrainingMax] = []
     var passedInExerciseObj: Exercise?
     
+    var wendlerExercise: Wen_Exercise?
+    var bbExercise: BB_Exercise?
+    
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -40,7 +43,7 @@ class AddEdit_MainExercise_VC: UIViewController {
     
     var bodyPartData: [String] = []
     var exerciseData: [Exercise] = []
-    var progressionSchemeData: [String] = []
+    var progressionSchemeData: [Progression] = []
     
     var selectedBodyPart: String?
     var selectedExercise: Exercise?
@@ -78,43 +81,60 @@ class AddEdit_MainExercise_VC: UIViewController {
         
         pastTrainingMaxTable.tableFooterView = UIView(frame: CGRect.zero)
         
+        
         if (passedInExerciseObj!.isKind(of: Wen_Exercise.self)) {
             
+            wendlerExercise = passedInExerciseObj as? Wen_Exercise
+            bbExercise = nil
             
+            if let tm = wendlerExercise?.currentTM {
+                trainingMaxTextField.text = String(tm)
+            } else {
+                trainingMaxTextField.text = ""
+            }
+            
+            self.title = wendlerExercise?.name
+            bodyPartTextField.text = wendlerExercise?.bodypart
+            
+            selectedBodyPart = wendlerExercise?.bodypart
+            exerciseTextField.text = wendlerExercise?.name
+            selectedExercise = wendlerExercise
+            progressionSchemeTextField.text = wendlerExercise?.progression?.name
+            selectedProgressionScheme = wendlerExercise?.progression
+
             
         } else if (passedInExerciseObj!.isKind(of: BB_Exercise.self)) {
-            //pastAttemptsList = passedInExerciseObj!.attemptList.allObjects as! [Attempt]
-            let newObj: BB_Exercise = passedInExerciseObj as! BB_Exercise
-            pastAttemptsList = newObj.attemptList?.allObjects as! [Attempt]
-            self.title = newObj.name
-            bodyPartTextField.text = newObj.bodypart
-            selectedBodyPart = newObj.bodypart
-            exerciseTextField.text = newObj.name
-            selectedExercise = newObj
-            progressionSchemeTextField.text = newObj.progression?.name
-            selectedProgressionScheme = newObj.progression
+
+            
+            bbExercise = passedInExerciseObj as? BB_Exercise
+            wendlerExercise = nil
+            
+            if let sw = bbExercise?.startingWeight {
+                trainingMaxTextField.text = String(sw)
+            } else {
+                trainingMaxTextField.text = ""
+            }
+            
+            pastAttemptsList = bbExercise?.attemptList?.allObjects as! [Attempt]
+            
+            self.title = bbExercise?.name
+            bodyPartTextField.text = bbExercise?.bodypart
+            
+            selectedBodyPart = bbExercise?.bodypart
+            exerciseTextField.text = bbExercise?.name
+            selectedExercise = bbExercise
+            progressionSchemeTextField.text = bbExercise?.progression?.name
+            selectedProgressionScheme = bbExercise?.progression
+
+            
         }
         
         
-        
-        
-        //pastAttemptsList = passedInExerciseObj!.attemptList.allObjects as! [Attempt]
-        
-        //bodyPartTextField.text = passedInExerciseObj!.bodyPart
-        //selectedBodyPart = passedInExerciseObj!.bodyPart
-        //exerciseTextField.text = passedInExerciseObj!.name
-        //selectedExercise = passedInExerciseObj!.name
-        //progressionSchemeTextField.text = passedInExerciseObj!.progression
-        //selectedProgressionScheme = passedInExerciseObj!.progression
-        trainingMaxTextField.text = String(passedInExerciseObj!.srtWeight)
-        
         bodyPartData = Util.getBodyPartData()
-        //exerciseData = Util.getGenericExerciseData()
-        progressionSchemeData = Util.getBodybuildingProgressionData()
+        DataManager.getProgression(exData: &progressionSchemeData)
         
         createPickers()
         createToolbarDoneButton()
-        // Do any additional setup after loading the view.
     }
     
     
@@ -122,15 +142,30 @@ class AddEdit_MainExercise_VC: UIViewController {
     
     func addButtonAction() {
         
-        passedInExerciseObj?.bodyPart = bodyPartTextField.text!
-        passedInExerciseObj?.name = exerciseTextField.text!
-        passedInExerciseObj?.progression = progressionSchemeTextField.text!
-        passedInExerciseObj?.srtWeight = Int(trainingMaxTextField.text!) ?? 0
         
-        if (isItMain!) {
-            delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
-        } else {
-            delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passedInExerciseObj!)
+        if (wendlerExercise != nil) {
+            wendlerExercise?.bodypart = bodyPartTextField.text!
+            wendlerExercise?.name = exerciseTextField.text!
+            wendlerExercise?.progression = selectedProgressionScheme
+            wendlerExercise?.currentTM = Double(trainingMaxTextField.text!)!
+            
+            if (isItMain!) {
+                delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: wendlerExercise!)
+            } else {
+                delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: wendlerExercise!)
+            }
+            
+        } else if (bbExercise != nil) {
+            bbExercise?.bodypart = bodyPartTextField.text!
+            bbExercise?.name = exerciseTextField.text!
+            bbExercise?.progression = selectedProgressionScheme
+            bbExercise?.startingWeight = Int32(trainingMaxTextField.text!)!
+            
+            if (isItMain!) {
+                delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: bbExercise!)
+            } else {
+                delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: bbExercise!)
+            }
         }
         
         appDelegate.saveContext()
@@ -198,46 +233,38 @@ class AddEdit_MainExercise_VC: UIViewController {
             addButtonAction()
         }
     }
-    
-    func refreshExerciseList(bp: String) {
-        
-        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
-        request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
-        
-        do {
-            exerciseData = try context.fetch(request)
-        } catch let error as NSError {
-            print("Could no fetch exerciseData. \(error), \(error.userInfo)")
-        }
-        
-        exercisePicker.reloadAllComponents()
-    }
-
 }
 
 extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pastAttemptsList.count
+        if (wendlerExercise != nil) {
+            return trainingMaxes.count
+        } else {
+            return pastAttemptsList.count
+        }
+        
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let att = pastAttemptsList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "calcedTrainingMaxes") as! MainExercise_TVCell
         
-        if (att.isWendler) {
-            let weightForCell = Util.getTMDisplayString(trainingMax: att.trainingMax, weight: att.wenWeight, reps: Double(att.wenReps))
-            cell.trainingMaxLabel.attributedText = weightForCell
+        if (wendlerExercise != nil) {
+            let tm = trainingMaxes[indexPath.row]
+            let weightForCell = tm.trainingMax
+            cell.trainingMaxLabel.text = String(weightForCell)
+            
         } else {
+            let att = pastAttemptsList[indexPath.row]
             let sets = att.sets?.allObjects as! [Sets]
             let weightForCell = String(sets[0].weight) + String(sets[0].reps)
             cell.trainingMaxLabel.text = weightForCell
+            
+            
         }
-            
-            
-            
-            
-            return cell
+        
+        return cell
     }
 }
 
@@ -274,7 +301,7 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
         } else if pickerView == exercisePicker {
             returnStr = exerciseData[row].name
         } else if pickerView == progressionPicker {
-            returnStr = progressionSchemeData[row]
+            returnStr = progressionSchemeData[row].name
         }
         
         return returnStr
@@ -284,13 +311,13 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
-            refreshExerciseList(bp: selectedBodyPart!)
+            DataManager.getExercises(bp: selectedBodyPart!, exData: &exerciseData)
         } else if pickerView == exercisePicker {
-            selectedExercise = exerciseData[row].name
-            exerciseTextField.text = selectedExercise
+            selectedExercise = exerciseData[row]
+            exerciseTextField.text = selectedExercise?.name
         } else if pickerView == progressionPicker {
             selectedProgressionScheme = progressionSchemeData[row]
-            progressionSchemeTextField.text = selectedProgressionScheme
+            progressionSchemeTextField.text = selectedProgressionScheme?.name
         }
     }
 }
