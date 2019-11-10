@@ -2,7 +2,7 @@
 //  Progression+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/8/19.
+//  Created by Josh Elliott on 11/10/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -17,7 +17,7 @@ extension Progression {
         return NSFetchRequest<Progression>(entityName: "Progression")
     }
 
-    @NSManaged public var name: String
+    @NSManaged public var name: String?
     @NSManaged public var sets: NSSet?
 
 }

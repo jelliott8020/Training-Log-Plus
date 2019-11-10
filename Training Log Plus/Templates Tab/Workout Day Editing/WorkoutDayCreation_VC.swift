@@ -263,12 +263,12 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
         let dummyCell = UITableViewCell()
         
         if indexPath.section == 0 {
-            let weightForCell = mainExerciseList[indexPath.row].returnDisplayString()
+            let weightForCell = mainExerciseList[indexPath.row].name
             let cell = tableView.dequeueReusableCell(withIdentifier: "MainExercise") as! DayMainExercise_TVCell
             cell.mainExerLabel.text = weightForCell
             return cell
         } else if indexPath.section == 1 {
-            let weightForCell = accExerciseList[indexPath.row].returnDisplayString()
+            let weightForCell = accExerciseList[indexPath.row].name
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccessoryExercise") as! DayAccExercise_TVCell
             cell.accExerLabel.text = weightForCell
             return cell

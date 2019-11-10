@@ -6,7 +6,7 @@
     </entity>
     <entity name="BB_Exercise" representedClassName=".BB_Exercise" parentEntity="Exercise" syncable="YES">
         <attribute name="startingWeight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="attemptList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Attempt"/>
+        <relationship name="attemptList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attempt"/>
     </entity>
     <entity name="Exercise" representedClassName=".Exercise" isAbstract="YES" syncable="YES">
         <attribute name="bodypart" attributeType="String"/>
@@ -33,7 +33,7 @@
         <attribute name="numDaysPerWeek" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="numOfWeeks" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wendlerYesNo" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="workoutList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="WorkoutDay"/>
+        <relationship name="workoutList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutDay"/>
     </entity>
     <entity name="TrainingMax" representedClassName=".TrainingMax" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

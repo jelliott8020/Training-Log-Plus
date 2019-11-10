@@ -27,6 +27,7 @@ class AddEdit_MainExercise_VC: UIViewController {
 
     var delegate: Pass_MainExerciseObject_BackTo_WorkoutDayCreation_Delegate?
     var pastAttemptsList: [Attempt] = []
+    var trainingMaxes: [TrainingMax] = []
     var passedInExerciseObj: Exercise?
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -42,8 +43,8 @@ class AddEdit_MainExercise_VC: UIViewController {
     var progressionSchemeData: [String] = []
     
     var selectedBodyPart: String?
-    var selectedExercise: String?
-    var selectedProgressionScheme: String?
+    var selectedExercise: Exercise?
+    var selectedProgressionScheme: Progression?
     var selectedTrainingMax: String?
     
     var isItMain: Bool?
@@ -77,14 +78,34 @@ class AddEdit_MainExercise_VC: UIViewController {
         
         pastTrainingMaxTable.tableFooterView = UIView(frame: CGRect.zero)
         
-        pastAttemptsList = passedInExerciseObj!.attemptList?.allObjects as! [Attempt]
-        self.title = passedInExerciseObj?.name
-        bodyPartTextField.text = passedInExerciseObj!.bodyPart
-        selectedBodyPart = passedInExerciseObj!.bodyPart
-        exerciseTextField.text = passedInExerciseObj!.name
-        selectedExercise = passedInExerciseObj!.name
-        progressionSchemeTextField.text = passedInExerciseObj!.progression
-        selectedProgressionScheme = passedInExerciseObj!.progression
+        if (passedInExerciseObj!.isKind(of: Wen_Exercise.self)) {
+            
+            
+            
+        } else if (passedInExerciseObj!.isKind(of: BB_Exercise.self)) {
+            //pastAttemptsList = passedInExerciseObj!.attemptList.allObjects as! [Attempt]
+            let newObj: BB_Exercise = passedInExerciseObj as! BB_Exercise
+            pastAttemptsList = newObj.attemptList?.allObjects as! [Attempt]
+            self.title = newObj.name
+            bodyPartTextField.text = newObj.bodypart
+            selectedBodyPart = newObj.bodypart
+            exerciseTextField.text = newObj.name
+            selectedExercise = newObj
+            progressionSchemeTextField.text = newObj.progression?.name
+            selectedProgressionScheme = newObj.progression
+        }
+        
+        
+        
+        
+        //pastAttemptsList = passedInExerciseObj!.attemptList.allObjects as! [Attempt]
+        
+        //bodyPartTextField.text = passedInExerciseObj!.bodyPart
+        //selectedBodyPart = passedInExerciseObj!.bodyPart
+        //exerciseTextField.text = passedInExerciseObj!.name
+        //selectedExercise = passedInExerciseObj!.name
+        //progressionSchemeTextField.text = passedInExerciseObj!.progression
+        //selectedProgressionScheme = passedInExerciseObj!.progression
         trainingMaxTextField.text = String(passedInExerciseObj!.srtWeight)
         
         bodyPartData = Util.getBodyPartData()

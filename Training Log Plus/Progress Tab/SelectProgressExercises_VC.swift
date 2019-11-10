@@ -18,7 +18,7 @@ class SelectProgressExercises_VC: UITableViewController {
     var delegate: PassDataBackProtocol?
     
     var bodyPartData: [String] = []
-    var exerciseData: [String] = []
+    var exerciseData: [Exercise] = []
     var startDateData: [String] = []
     var endDateData: [String] = []
     
@@ -56,7 +56,7 @@ class SelectProgressExercises_VC: UITableViewController {
         // Maybe check for bodypart selection before filling in exercise data
         //let bodyPart: String = ""
         // Will need to check data for bodypart before filling this in
-        exerciseData = Util.getGenericExerciseData()
+        //exerciseData = Util.getGenericExerciseData()
         
         createPickers()
         createToolbarDoneButton()
@@ -216,7 +216,7 @@ extension SelectProgressExercises_VC: UIPickerViewDataSource, UIPickerViewDelega
         if pickerView == bodyPartPicker {
             returnStr = bodyPartData[row]
         } else if pickerView == exercisePicker {
-            returnStr = exerciseData[row]
+            returnStr = exerciseData[row].name
         }
 
         return returnStr
@@ -226,8 +226,9 @@ extension SelectProgressExercises_VC: UIPickerViewDataSource, UIPickerViewDelega
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
+            DataManager.getExercises(bp: selectedBodyPart!, exData: &exerciseData)
         } else if pickerView == exercisePicker {
-            selectedExercise = exerciseData[row]
+            selectedExercise = exerciseData[row].name
             exerciseTextField.text = selectedExercise
         }
     }
