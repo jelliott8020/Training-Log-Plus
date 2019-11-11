@@ -202,7 +202,7 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
         } else {
             let att = pastAttemptsList[indexPath.row]
             let sets = att.sets?.allObjects as! [Sets]
-            let weightForCell = String(format: "%.2f", sets[0].weight) + String(sets[0].reps)
+            let weightForCell = "Weight: " + String(format: "%.2f", sets[0].weight) + " | Reps: " + String(sets[0].reps)
             cell.trainingMaxLabel.text = weightForCell
         }
         
