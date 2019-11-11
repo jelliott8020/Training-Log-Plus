@@ -42,10 +42,7 @@ class Exercises_TVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Test VDL")
-        
         bodyPartData = Util.getBodyPartData()
-        
         
         createPickers()
         createToolbarDoneButton()
@@ -74,8 +71,13 @@ class Exercises_TVC: UITableViewController {
         Util.clearTextField(bodyPartTextField)
         Util.clearTextField(exerciseTextField)
     }
-    
-    
+}
+
+
+/**
+ * UTILITY FUNCTIONS
+ */
+extension Exercises_TVC {
     /*
      * Create Pickers
      *
@@ -127,9 +129,8 @@ class Exercises_TVC: UITableViewController {
     }
 }
 
-
-/*
- * Picker
+/**
+ * PICKER
  */
 extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -156,7 +157,7 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodyPartPicker {
             returnStr = bodyPartData[row]
         } else if pickerView == exercisePicker {
-            returnStr = exerciseData[row].name ?? ""
+            returnStr = exerciseData[row].name
         }
         
         return returnStr

@@ -85,6 +85,14 @@ class SelectProgressExercises_VC: UITableViewController {
     }
     
     
+
+}
+
+/**
+ * UTILITY FUNCTIONS
+ */
+extension SelectProgressExercises_VC {
+    
     /*
      * Show Data Picker
      *
@@ -191,6 +199,10 @@ class SelectProgressExercises_VC: UITableViewController {
     }
 }
 
+
+/**
+ * PICKERVIEW
+ */
 extension SelectProgressExercises_VC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

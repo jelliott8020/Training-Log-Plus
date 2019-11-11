@@ -61,7 +61,6 @@ class WorkoutDayCreation_VC: UIViewController {
     }
     
     
-    
     /*
      * View Did Load
      */
@@ -80,52 +79,6 @@ class WorkoutDayCreation_VC: UIViewController {
         //workoutObj?.title = passedTitle
         self.title = passedInWorkoutObj?.name
     }
-    
-
-    
-    /*
-     * Create Pickers
-     */
-    func createPickers() {
-        exercisePicker.delegate = self
-        bodypartPicker.delegate = self
-        
-        exerciseTextField?.inputView = exercisePicker
-        bodypartTextField?.inputView = bodypartPicker
-    }
-    
-    
-    /*
-     * Create Tool Bar Done Button
-     */
-    func createToolbarDoneButton() -> UIToolbar {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(toolbarDoneButtonAction))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        
-        toolBar.setItems([spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
-        return toolBar
-    }
-    
-    
-    /*
-     * Toolbar Done Button Action
-     */
-    @objc func toolbarDoneButtonAction() {
-        if bodypartTextField!.isEditing {
-            bodypartTextField!.resignFirstResponder()
-            exerciseTextField!.becomeFirstResponder()
-        } else if exerciseTextField!.isEditing {
-            exerciseTextField!.resignFirstResponder()
-            //addButtonFunction()
-            self.view.endEditing(true)
-        }
-    }
-    
     
     /*
      * Done Button Action
@@ -210,8 +163,8 @@ class WorkoutDayCreation_VC: UIViewController {
 }
 
 
-/*
- * TableView Delegate and Data Source
+/**
+ * TABLE VIEW
  */
 extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -314,15 +267,11 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
-    
 }
 
 
-/*
- * Picker
- *
- * Delegate and Data Source
+/**
+ * PICKER
  */
 extension WorkoutDayCreation_VC: UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -368,10 +317,8 @@ extension WorkoutDayCreation_VC: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 
-/*
- * Delegate
- *
- * Implements the functions that allow the New or Edited Template to be passed back
+/**
+ * PASSBACK DELEGATE
  */
 extension WorkoutDayCreation_VC: Pass_MainExerciseObject_BackTo_WorkoutDayCreation_Delegate {
     
@@ -445,7 +392,60 @@ extension WorkoutDayCreation_VC: Pass_MainExerciseObject_BackTo_WorkoutDayCreati
     }
 }
 
+/**
+ * UTILITY FUNCTIONS
+ */
+extension WorkoutDayCreation_VC {
+    
+    /*
+     * Create Pickers
+     */
+    func createPickers() {
+        exercisePicker.delegate = self
+        bodypartPicker.delegate = self
+        
+        exerciseTextField?.inputView = exercisePicker
+        bodypartTextField?.inputView = bodypartPicker
+    }
+    
+    
+    /*
+     * Create Tool Bar Done Button
+     */
+    func createToolbarDoneButton() -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(toolbarDoneButtonAction))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        return toolBar
+    }
+    
+    
+    /*
+     * Toolbar Done Button Action
+     */
+    @objc func toolbarDoneButtonAction() {
+        if bodypartTextField!.isEditing {
+            bodypartTextField!.resignFirstResponder()
+            exerciseTextField!.becomeFirstResponder()
+        } else if exerciseTextField!.isEditing {
+            exerciseTextField!.resignFirstResponder()
+            //addButtonFunction()
+            self.view.endEditing(true)
+        }
+    }
+    
+}
 
+
+/**
+ * UICOLOR
+ */
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")

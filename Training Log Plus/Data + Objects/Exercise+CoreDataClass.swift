@@ -12,5 +12,10 @@ import CoreData
 
 
 public class Exercise: NSManagedObject {
-
+    
+    func getList() -> NSSet {
+        assert(false, "Must be overridden")
+        return NSSet.init()
+    }
+    
 }

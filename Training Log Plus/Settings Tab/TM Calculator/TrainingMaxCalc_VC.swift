@@ -151,6 +151,111 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
         }
     }
     
+
+    /*
+     * Text Field Should Return
+     *
+     * When hitting return, resigns current keyboard and opens up next
+     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == weightTextField {
+            textField.resignFirstResponder()
+            repsTextField.becomeFirstResponder()
+        }
+        return true
+    }
+}
+
+
+/**
+ * PICKER
+ */
+extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+        
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        var returnInt = 0
+        
+        if pickerView == exercisePicker {
+            returnInt = exerciseData.count
+        } else if pickerView == bodypartPicker {
+            returnInt = bodypartData.count
+        }
+        
+        return returnInt
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        var returnStr = ""
+        
+        if pickerView == exercisePicker {
+            returnStr = exerciseData[row].name
+        } else if pickerView == bodypartPicker {
+            returnStr = bodypartData[row]
+        }
+        
+        return returnStr
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == exercisePicker {
+            selectedExercise = exerciseData[row]
+            exerciseTextField.text = selectedExercise?.name
+        } else if pickerView == bodypartPicker {
+            selectedBodyPart = bodypartData[row]
+            bodypartTextField.text = selectedBodyPart
+            DataManager.getWenExercise(exStr: selectedBodyPart!, exData: &exerciseData)
+            print(selectedBodyPart as Any)
+            print(exerciseData)
+            exercisePicker.reloadAllComponents()
+        }
+    }
+}
+
+
+
+/**
+ * TABLEVIEW
+ */
+extension TrainingMaxCalc_VC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return calcedArrayObj.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let weightForCell = calcedArrayObj[indexPath.row].displayString
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CalcedCell") as! Calced_TVCell
+        cell.calcedLabel.attributedText = weightForCell
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            calcedArrayObj.remove(at: indexPath.row)
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+}
+
+/**
+ * UTILITY FUNCTIONS
+ */
+extension TrainingMaxCalc_VC {
     
     /*
      * Filter List Function
@@ -224,106 +329,6 @@ class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
             selectTmToAddTextField.resignFirstResponder()
             addTmToExerciseFunction()
             self.view.endEditing(true)
-        }
-    }
-    
-    
-    /*
-     * Text Field Should Return
-     *
-     * When hitting return, resigns current keyboard and opens up next
-     */
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == weightTextField {
-            textField.resignFirstResponder()
-            repsTextField.becomeFirstResponder()
-        }
-        return true
-    }
-}
-
-
-/*
- * Picker Delegate and Data Source
- */
-extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-        
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        var returnInt = 0
-        
-        if pickerView == exercisePicker {
-            returnInt = exerciseData.count
-        } else if pickerView == bodypartPicker {
-            returnInt = bodypartData.count
-        }
-        
-        return returnInt
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        var returnStr = ""
-        
-        if pickerView == exercisePicker {
-            returnStr = exerciseData[row].name
-        } else if pickerView == bodypartPicker {
-            returnStr = bodypartData[row]
-        }
-        
-        return returnStr
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == exercisePicker {
-            selectedExercise = exerciseData[row]
-            exerciseTextField.text = selectedExercise?.name
-        } else if pickerView == bodypartPicker {
-            selectedBodyPart = bodypartData[row]
-            bodypartTextField.text = selectedBodyPart
-            DataManager.getWenExercise(exStr: selectedBodyPart!, exData: &exerciseData)
-            print(selectedBodyPart as Any)
-            print(exerciseData)
-            exercisePicker.reloadAllComponents()
-        }
-    }
-}
-
-
-
-/*
- * TableView Delegate and Data Source
- */
-extension TrainingMaxCalc_VC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return calcedArrayObj.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weightForCell = calcedArrayObj[indexPath.row].displayString
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CalcedCell") as! Calced_TVCell
-        cell.calcedLabel.attributedText = weightForCell
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            calcedArrayObj.remove(at: indexPath.row)
-            
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
         }
     }
 }

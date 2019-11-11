@@ -25,13 +25,11 @@ protocol Pass_AddEditTemplate_BackTo_TemplateParent_Delegate: class {
 class AddEdit_Template_VC: UIViewController {
     
     
-    // In order to use the protocol above, need a delegate
-    // Any viewController that implements this protocol can be a delegate of the AddItemTableViewController
     weak var delegate: Pass_AddEditTemplate_BackTo_TemplateParent_Delegate?
-    //weak var templateList: TemplateList?
     var templateList: [Template] = []
     weak var itemToEdit: Template?
     var globalTemplateItem: Template?
+    var workoutDaysList: [WorkoutDay] = []
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -47,8 +45,7 @@ class AddEdit_Template_VC: UIViewController {
     
     var alertName: String?
     
-    var workoutDaysList: [WorkoutDay] = []
-    
+
     @IBOutlet weak var doneButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var workoutDaysTable: UITableView!
     @IBOutlet weak var templateNameLabel: UILabel!
@@ -60,7 +57,6 @@ class AddEdit_Template_VC: UIViewController {
         delegate?.itemDetailViewControllerDidCancel(self)
     }
     @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
-        // Account for editing
         doneButtonActionFunc()
     }
     
@@ -127,22 +123,7 @@ class AddEdit_Template_VC: UIViewController {
     }
     
     
-    /*
-     * Set Text Fields
-     *
-     * Sets the text field's values with the object passed
-     */
-    func setLabels(title: String, days: String, wen: Bool, weeks: String) {
-        templateNameLabel.text = title
-        numDaysLabel.text = days
-        numWeeksLabel.text = weeks
-        
-        if wen {
-            wendlerLabel.text = "Yes"
-        } else {
-            wendlerLabel.text = "No"
-        }
-    }
+
     
     
     func addButtonAlert() {
@@ -300,20 +281,12 @@ class AddEdit_Template_VC: UIViewController {
         }
     }
     
-    /*
-     * Configure the text for each row item.
-     */
-    func configureText(for cell: UITableViewCell, with item: WorkoutDay) {
-        if let templateCell = cell as? workoutDaysInTemplate_TVCell {
-            templateCell.cellLabel.text = item.name
-        }
-    }
+
 }
 
-/*
- * Delegate
- *
- * Implements the functions that allow the New or Edited Template to be passed back
+
+/**
+ * PASSBACK DELEGATE
  */
 extension AddEdit_Template_VC: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Delegate {
     
@@ -352,11 +325,8 @@ extension AddEdit_Template_VC: Pass_WorkoutDayObject_BackTo_AddEditTemplate_Dele
 }
 
 
-
-
-
-/*
- * TextField
+/**
+ * TEXTFIELD
  */
 extension AddEdit_Template_VC: UITextFieldDelegate {
     
@@ -388,11 +358,8 @@ extension AddEdit_Template_VC: UITextFieldDelegate {
 }
 
 
-
-
-
-/*
- * TableView
+/**
+ * TABLE VIEW
  */
 extension AddEdit_Template_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -448,6 +415,40 @@ extension AddEdit_Template_VC: UITableViewDelegate, UITableViewDataSource {
 //            tableView.endUpdates()
 //        }
 //    }
+}
+
+
+/**
+ * UTILITY FUNCTIONS
+ */
+extension AddEdit_Template_VC {
+    
+    /*
+     * Configure the text for each row item.
+     */
+    func configureText(for cell: UITableViewCell, with item: WorkoutDay) {
+        if let templateCell = cell as? workoutDaysInTemplate_TVCell {
+            templateCell.cellLabel.text = item.name
+        }
+    }
+    
+    
+    /*
+     * Set Text Fields
+     *
+     * Sets the text field's values with the object passed
+     */
+    func setLabels(title: String, days: String, wen: Bool, weeks: String) {
+        templateNameLabel.text = title
+        numDaysLabel.text = days
+        numWeeksLabel.text = weeks
+        
+        if wen {
+            wendlerLabel.text = "Yes"
+        } else {
+            wendlerLabel.text = "No"
+        }
+    }
 }
 
 

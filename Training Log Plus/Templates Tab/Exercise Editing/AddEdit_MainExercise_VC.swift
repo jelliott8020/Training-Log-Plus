@@ -71,7 +71,6 @@ class AddEdit_MainExercise_VC: UIViewController {
     
     
     required init?(coder aDecoder: NSCoder) {
-        //pastAttemptsList = AttemptList()
         super.init(coder: aDecoder)
     }
     
@@ -84,8 +83,9 @@ class AddEdit_MainExercise_VC: UIViewController {
         
         if (passedInExerciseObj!.isKind(of: Wen_Exercise.self)) {
             
-            wendlerExercise = passedInExerciseObj as? Wen_Exercise
-            bbExercise = nil
+            selectedExercise = passedInExerciseObj as? Wen_Exercise
+            //wendlerExercise = passedInExerciseObj as? Wen_Exercise
+            //bbExercise = nil
             
             if let tm = wendlerExercise?.currentTM {
                 trainingMaxTextField.text = String(tm)
@@ -105,9 +105,9 @@ class AddEdit_MainExercise_VC: UIViewController {
             
         } else if (passedInExerciseObj!.isKind(of: BB_Exercise.self)) {
 
-            
-            bbExercise = passedInExerciseObj as? BB_Exercise
-            wendlerExercise = nil
+            selectedExercise = passedInExerciseObj
+            //bbExercise = passedInExerciseObj as? BB_Exercise
+            //wendlerExercise = nil
             
             if let sw = bbExercise?.startingWeight {
                 trainingMaxTextField.text = String(sw)
@@ -125,8 +125,6 @@ class AddEdit_MainExercise_VC: UIViewController {
             selectedExercise = bbExercise
             progressionSchemeTextField.text = bbExercise?.progression?.name
             selectedProgressionScheme = bbExercise?.progression
-
-            
         }
         
         
@@ -137,11 +135,10 @@ class AddEdit_MainExercise_VC: UIViewController {
         createToolbarDoneButton()
     }
     
-    
-
-    
+    /*
+     * Add Button Action
+     */
     func addButtonAction() {
-        
         
         if (wendlerExercise != nil) {
             wendlerExercise?.bodypart = bodyPartTextField.text!
@@ -173,68 +170,12 @@ class AddEdit_MainExercise_VC: UIViewController {
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
     }
-    
-    /*
-     * Create Pickers
-     *
-     * Creates the pickers for the text fields
-     */
-    func createPickers() {
-        
-        bodyPartPicker.delegate = self
-        exercisePicker.delegate = self
-        progressionPicker.delegate = self
-        
-        bodyPartTextField.inputView = bodyPartPicker
-        exerciseTextField.inputView = exercisePicker
-        progressionSchemeTextField.inputView = progressionPicker
-    }
-    
-    /*
-     * Create Tool Bar Done Button
-     *
-     * Creates done buttons for the toolbars
-     */
-    func createToolbarDoneButton() {
-        
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        
-        toolBar.setItems([spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
-        bodyPartTextField.inputAccessoryView = toolBar
-        exerciseTextField.inputAccessoryView = toolBar
-        progressionSchemeTextField.inputAccessoryView = toolBar
-        trainingMaxTextField.inputAccessoryView = toolBar
-    }
-    
-    
-    /*
-     * Done Button Action
-     *
-     * Tells the toolbar what to do when done is tapped
-     */
-    @objc func doneButtonAction() {
-        if bodyPartTextField.isEditing {
-            bodyPartTextField.resignFirstResponder()
-            exerciseTextField.becomeFirstResponder()
-        } else if exerciseTextField.isEditing {
-            exerciseTextField.resignFirstResponder()
-            progressionSchemeTextField.becomeFirstResponder()
-        } else if progressionSchemeTextField.isEditing {
-            progressionSchemeTextField.resignFirstResponder()
-            trainingMaxTextField.becomeFirstResponder()
-        } else if trainingMaxTextField.isEditing {
-            trainingMaxTextField.resignFirstResponder()
-            addButtonAction()
-        }
-    }
 }
 
+
+/**
+ * TABLEVIEW
+ */
 extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (wendlerExercise != nil) {
@@ -254,14 +195,14 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
             let tm = trainingMaxes[indexPath.row]
             let weightForCell = tm.trainingMax
             cell.trainingMaxLabel.text = String(weightForCell)
+            print("TM")
             
         } else {
             let att = pastAttemptsList[indexPath.row]
             let sets = att.sets?.allObjects as! [Sets]
             let weightForCell = String(sets[0].weight) + String(sets[0].reps)
             cell.trainingMaxLabel.text = weightForCell
-            
-            
+            print("BB")
         }
         
         return cell
@@ -269,55 +210,122 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-/*
- * Picker
+///**
+// * PICKER
+// */
+//extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+//
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        var returnInt = 0
+//
+//        if pickerView == bodyPartPicker {
+//            returnInt = bodyPartData.count
+//        } else if pickerView == exercisePicker {
+//            returnInt = exerciseData.count
+//        } else if pickerView == progressionPicker {
+//            returnInt = progressionSchemeData.count
+//        }
+//
+//        return returnInt
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//
+//        var returnStr = ""
+//
+//        if pickerView == bodyPartPicker {
+//            returnStr = bodyPartData[row]
+//        } else if pickerView == exercisePicker {
+//            returnStr = exerciseData[row].name
+//        } else if pickerView == progressionPicker {
+//            returnStr = progressionSchemeData[row].name
+//        }
+//
+//        return returnStr
+//    }
+//
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        if pickerView == bodyPartPicker {
+//            selectedBodyPart = bodyPartData[row]
+//            bodyPartTextField.text = selectedBodyPart
+//            DataManager.getExercises(bp: selectedBodyPart!, exData: &exerciseData)
+//        } else if pickerView == exercisePicker {
+//            selectedExercise = exerciseData[row]
+//            exerciseTextField.text = selectedExercise?.name
+//        } else if pickerView == progressionPicker {
+//            selectedProgressionScheme = progressionSchemeData[row]
+//            progressionSchemeTextField.text = selectedProgressionScheme?.name
+//        }
+//    }
+//}
+
+
+/**
+ * UTILITY FUNCTIONS
  */
-extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate {
+extension AddEdit_MainExercise_VC {
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-        
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        var returnInt = 0
-        
-        if pickerView == bodyPartPicker {
-            returnInt = bodyPartData.count
-        } else if pickerView == exercisePicker {
-            returnInt = exerciseData.count
-        } else if pickerView == progressionPicker {
-            returnInt = progressionSchemeData.count
-        }
-        
-        return returnInt
-    }
+//    /*
+//     * Create Pickers
+//     *
+//     * Creates the pickers for the text fields
+//     */
+//    func createPickers() {
+//
+//        bodyPartPicker.delegate = self
+//        exercisePicker.delegate = self
+//        progressionPicker.delegate = self
+//
+//        bodyPartTextField.inputView = bodyPartPicker
+//        exerciseTextField.inputView = exercisePicker
+//        progressionSchemeTextField.inputView = progressionPicker
+//    }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        var returnStr = ""
-        
-        if pickerView == bodyPartPicker {
-            returnStr = bodyPartData[row]
-        } else if pickerView == exercisePicker {
-            returnStr = exerciseData[row].name
-        } else if pickerView == progressionPicker {
-            returnStr = progressionSchemeData[row].name
-        }
-        
-        return returnStr
-    }
+//    /*
+//     * Create Tool Bar Done Button
+//     *
+//     * Creates done buttons for the toolbars
+//     */
+//    func createToolbarDoneButton() {
+//
+//        let toolBar = UIToolbar()
+//        toolBar.sizeToFit()
+//
+//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonAction))
+//        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+//
+//        toolBar.setItems([spaceButton, doneButton], animated: false)
+//        toolBar.isUserInteractionEnabled = true
+//
+//        bodyPartTextField.inputAccessoryView = toolBar
+//        exerciseTextField.inputAccessoryView = toolBar
+//        progressionSchemeTextField.inputAccessoryView = toolBar
+//        trainingMaxTextField.inputAccessoryView = toolBar
+//    }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == bodyPartPicker {
-            selectedBodyPart = bodyPartData[row]
-            bodyPartTextField.text = selectedBodyPart
-            DataManager.getExercises(bp: selectedBodyPart!, exData: &exerciseData)
-        } else if pickerView == exercisePicker {
-            selectedExercise = exerciseData[row]
-            exerciseTextField.text = selectedExercise?.name
-        } else if pickerView == progressionPicker {
-            selectedProgressionScheme = progressionSchemeData[row]
-            progressionSchemeTextField.text = selectedProgressionScheme?.name
-        }
-    }
+    
+//    /*
+//     * Done Button Action
+//     *
+//     * Tells the toolbar what to do when done is tapped
+//     */
+//    @objc func doneButtonAction() {
+//        if bodyPartTextField.isEditing {
+//            bodyPartTextField.resignFirstResponder()
+//            exerciseTextField.becomeFirstResponder()
+//        } else if exerciseTextField.isEditing {
+//            exerciseTextField.resignFirstResponder()
+//            progressionSchemeTextField.becomeFirstResponder()
+//        } else if progressionSchemeTextField.isEditing {
+//            progressionSchemeTextField.resignFirstResponder()
+//            trainingMaxTextField.becomeFirstResponder()
+//        } else if trainingMaxTextField.isEditing {
+//            trainingMaxTextField.resignFirstResponder()
+//            addButtonAction()
+//        }
+//    }
 }

@@ -24,5 +24,13 @@ public class Wen_Exercise: Exercise {
 //            }
 //            return name
 //        }
+    
+    override func getList() -> NSSet {
+        if let tm = trainingMaxes {
+            return tm
+        }
+        print("training maxes empty")
+        return NSSet.init()
+    }
 
 }

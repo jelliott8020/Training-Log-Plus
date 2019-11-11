@@ -27,7 +27,7 @@ class DataManager {
         let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
         
         if bp != "" {
-            request.predicate = NSPredicate(format: "bodyPart == '\(bp)'")
+            request.predicate = NSPredicate(format: "bodypart == '\(bp)'")
         }
         
         do {
@@ -46,7 +46,7 @@ class DataManager {
         let request = Wen_Exercise.fetchRequest() as NSFetchRequest<Wen_Exercise>
         
         if exStr != "" {
-            request.predicate = NSPredicate(format: "bodyPart == '\(exStr)'")
+            request.predicate = NSPredicate(format: "bodypart == '\(exStr)'")
             print("entered conditional")
         }
         
@@ -66,7 +66,7 @@ class DataManager {
         let request = BB_Exercise.fetchRequest() as NSFetchRequest<BB_Exercise>
         
         if exStr != "" {
-            request.predicate = NSPredicate(format: "bodyPart == '\(exStr)'")
+            request.predicate = NSPredicate(format: "bodypart == '\(exStr)'")
         }
 
         
@@ -90,6 +90,21 @@ class DataManager {
         } catch let error as NSError {
             print("Could no fetch ProgressionData. \(error), \(error.userInfo)")
         }
+    }
+    
+    /*
+     * Template
+     */
+    static func getTemplate(tempData: inout [Template]) {
+        
+        let request = Template.fetchRequest() as NSFetchRequest<Template>
+        
+        do {
+            tempData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch templateData. \(error), \(error.userInfo)")
+        }
+
     }
     
     
