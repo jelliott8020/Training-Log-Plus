@@ -1,64 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="18G1012" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="18G1012" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Attempt" representedClassName=".Attempt" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets"/>
+        <relationship name="bb_exer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BB_Exercise" inverseName="attemptList" inverseEntity="BB_Exercise"/>
+        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets" inverseName="attempt" inverseEntity="Sets"/>
     </entity>
     <entity name="BB_Exercise" representedClassName=".BB_Exercise" parentEntity="Exercise" syncable="YES">
         <attribute name="startingWeight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="attemptList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attempt"/>
+        <relationship name="attemptList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attempt" inverseName="bb_exer" inverseEntity="Attempt"/>
     </entity>
     <entity name="Exercise" representedClassName=".Exercise" isAbstract="YES" syncable="YES">
         <attribute name="bodypart" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
-        <relationship name="progression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progression"/>
+        <relationship name="accList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutDay" inverseName="accExerciseList" inverseEntity="WorkoutDay"/>
+        <relationship name="mainList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutDay" inverseName="mainExerciseList" inverseEntity="WorkoutDay"/>
+        <relationship name="progression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progression" inverseName="exer" inverseEntity="Progression"/>
     </entity>
     <entity name="PersonalRecord" representedClassName=".PersonalRecord" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="reps" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="wen_Exer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wen_Exercise" inverseName="personalRecords" inverseEntity="Wen_Exercise"/>
     </entity>
     <entity name="Progression" representedClassName=".Progression" syncable="YES">
         <attribute name="name" attributeType="String"/>
-        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets"/>
+        <relationship name="exer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="progression" inverseEntity="Exercise"/>
+        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets" inverseName="progression" inverseEntity="Sets"/>
     </entity>
     <entity name="Sets" representedClassName=".Sets" syncable="YES">
         <attribute name="reps" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="attempt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attempt" inverseName="sets" inverseEntity="Attempt"/>
+        <relationship name="progression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progression" inverseName="sets" inverseEntity="Progression"/>
     </entity>
     <entity name="Template" representedClassName=".Template" syncable="YES">
         <attribute name="currentDayIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="currentTemplate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="dateStarted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="numDaysPerWeek" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="numOfWeeks" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wendlerYesNo" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="workoutList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutDay"/>
+        <relationship name="workoutList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutDay" inverseName="template" inverseEntity="WorkoutDay"/>
     </entity>
     <entity name="TrainingMax" representedClassName=".TrainingMax" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="reps" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="trainingMax" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="wen_Exer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wen_Exercise" inverseName="trainingMaxes" inverseEntity="Wen_Exercise"/>
     </entity>
     <entity name="Wen_Exercise" representedClassName=".Wen_Exercise" parentEntity="Exercise" syncable="YES">
         <attribute name="currentTM" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="personalRecords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonalRecord"/>
-        <relationship name="trainingMaxes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrainingMax"/>
+        <relationship name="personalRecords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonalRecord" inverseName="wen_Exer" inverseEntity="PersonalRecord"/>
+        <relationship name="trainingMaxes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrainingMax" inverseName="wen_Exer" inverseEntity="TrainingMax"/>
     </entity>
     <entity name="WorkoutDay" representedClassName=".WorkoutDay" syncable="YES">
         <attribute name="name" attributeType="String"/>
-        <relationship name="accExerciseList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise"/>
-        <relationship name="mainExerciseList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise"/>
+        <relationship name="accExerciseList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="accList" inverseEntity="Exercise"/>
+        <relationship name="mainExerciseList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="mainList" inverseEntity="Exercise"/>
+        <relationship name="template" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Template" inverseName="workoutList" inverseEntity="Template"/>
     </entity>
     <elements>
-        <element name="Attempt" positionX="-181.40625" positionY="-247.02734375" width="128" height="73"/>
+        <element name="Attempt" positionX="-167.86328125" positionY="-306.19140625" width="128" height="88"/>
         <element name="BB_Exercise" positionX="-370.3515625" positionY="-304.90234375" width="128" height="73"/>
-        <element name="Exercise" positionX="-373.26171875" positionY="-114.85546875" width="128" height="88"/>
-        <element name="PersonalRecord" positionX="-181.15625" positionY="-69.0546875" width="128" height="88"/>
-        <element name="Progression" positionX="-252" positionY="-126" width="128" height="73"/>
-        <element name="Sets" positionX="21.703125" positionY="-219.8046875" width="128" height="73"/>
-        <element name="Template" positionX="-573.7265625" positionY="-421.51953125" width="128" height="148"/>
-        <element name="TrainingMax" positionX="-104.16796875" positionY="64.6484375" width="128" height="73"/>
-        <element name="Wen_Exercise" positionX="-370.61328125" positionY="-8.03125" width="128" height="88"/>
-        <element name="WorkoutDay" positionX="-577.39453125" positionY="-165.640625" width="128" height="88"/>
+        <element name="Exercise" positionX="-389.2421875" positionY="-159.7421875" width="128" height="118"/>
+        <element name="PersonalRecord" positionX="17.7578125" positionY="-53.765625" width="128" height="103"/>
+        <element name="Progression" positionX="-216.859375" positionY="-151.109375" width="128" height="88"/>
+        <element name="Sets" positionX="37.84765625" positionY="-283.7421875" width="128" height="103"/>
+        <element name="Template" positionX="-573.7265625" positionY="-421.51953125" width="128" height="163"/>
+        <element name="TrainingMax" positionX="-98.71875" positionY="164.7109375" width="128" height="118"/>
+        <element name="Wen_Exercise" positionX="-385.25390625" positionY="13.65234375" width="128" height="88"/>
+        <element name="WorkoutDay" positionX="-577.39453125" positionY="-165.640625" width="128" height="103"/>
     </elements>
 </model>

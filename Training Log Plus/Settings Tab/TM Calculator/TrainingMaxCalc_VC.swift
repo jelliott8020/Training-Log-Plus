@@ -227,7 +227,10 @@ extension TrainingMaxCalc_VC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let weightForCell = calcedArrayObj[indexPath.row].displayString
+        //let weightForCell = calcedArrayObj[indexPath.row].displayString
+        
+        let item = calcedArrayObj[indexPath.row]
+        let weightForCell = Util.getTMDisplayString(trainingMax: item.trainingMax, weight: item.weight, reps: item.reps)
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CalcedCell") as! Calced_TVCell
         cell.calcedLabel.attributedText = weightForCell

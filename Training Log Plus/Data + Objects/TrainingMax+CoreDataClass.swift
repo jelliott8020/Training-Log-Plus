@@ -12,5 +12,9 @@ import CoreData
 
 
 public class TrainingMax: NSManagedObject {
+    
+    func getEstTM() -> Double {
+        return Util.rounder(weight * reps * 0.0333 + weight, toNearest: 5)
+    }
 
 }

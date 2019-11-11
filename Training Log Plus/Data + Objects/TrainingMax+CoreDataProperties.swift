@@ -19,5 +19,7 @@ extension TrainingMax {
 
     @NSManaged public var date: Date?
     @NSManaged public var trainingMax: Double
+    @NSManaged public var weight: Double
+    @NSManaged public var reps: Double
 
 }

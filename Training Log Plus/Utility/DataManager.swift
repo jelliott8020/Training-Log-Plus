@@ -107,5 +107,20 @@ class DataManager {
 
     }
     
+    /*
+     * Current Template
+     */
+    static func getTemplateCurrent(temp: inout [Template]) {
+        
+        let request = Template.fetchRequest() as NSFetchRequest<Template>
+        request.predicate = NSPredicate(format: "currentTemplate == true")
+        
+        do {
+            temp = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch templateData. \(error), \(error.userInfo)")
+        }
+    }
+    
     
 }

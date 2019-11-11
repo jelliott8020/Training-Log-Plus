@@ -84,8 +84,6 @@ class AddEdit_MainExercise_VC: UIViewController {
         if (passedInExerciseObj!.isKind(of: Wen_Exercise.self)) {
             
             selectedExercise = passedInExerciseObj as! Wen_Exercise
-            //wendlerExercise = passedInExerciseObj as? Wen_Exercise
-            //bbExercise = nil
             
             if let tm = selectedExercise?.currentTM {
                 trainingMaxTextField.text = String(tm)
@@ -100,7 +98,6 @@ class AddEdit_MainExercise_VC: UIViewController {
             
             selectedBodyPart = selectedExercise?.bodypart
             exerciseTextField.text = selectedExercise?.name
-            //selectedExercise = selectedExercise
             progressionSchemeTextField.text = selectedExercise?.progression?.name
             selectedProgressionScheme = selectedExercise?.progression
             
@@ -108,8 +105,6 @@ class AddEdit_MainExercise_VC: UIViewController {
         } else if (passedInExerciseObj!.isKind(of: BB_Exercise.self)) {
             
             selectedExercise = passedInExerciseObj as! BB_Exercise
-            //bbExercise = passedInExerciseObj as? BB_Exercise
-            //wendlerExercise = nil
             
             if let sw = selectedExercise?.startingWeight {
                 trainingMaxTextField.text = String(sw)
@@ -124,7 +119,6 @@ class AddEdit_MainExercise_VC: UIViewController {
             
             selectedBodyPart = selectedExercise?.bodypart
             exerciseTextField.text = selectedExercise?.name
-            //selectedExercise = bbExercise
             progressionSchemeTextField.text = selectedExercise?.progression?.name
             selectedProgressionScheme = selectedExercise?.progression
         }
@@ -132,6 +126,8 @@ class AddEdit_MainExercise_VC: UIViewController {
         
         bodyPartData = Util.getBodyPartData()
         DataManager.getProgression(exData: &progressionSchemeData)
+        createPickers()
+        createToolbarDoneButton()
     }
     
     /*
@@ -196,8 +192,9 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
         
         if (selectedExercise as? Wen_Exercise) != nil {
             let tm = trainingMaxes[indexPath.row]
-            let weightForCell = tm.trainingMax
-            cell.trainingMaxLabel.text = String(weightForCell)
+            let weightForCell = Util.getTMDisplayString(trainingMax: tm.getEstTM(), weight: tm.weight, reps: tm.reps)
+            //let weightForCell = tm.trainingMax
+            cell.trainingMaxLabel.attributedText = weightForCell
             
         } else {
             let att = pastAttemptsList[indexPath.row]

@@ -355,21 +355,42 @@ extension TemplateParent_VC {
         let temp1 = getNewTemplate("Template Title 1")
         
         // Create WorkoutDay
-        let wo1 = getNewWorkoutDay("Tester1")
+        let wo1 = getWorkout()
+        let wo2 = getWorkout()
+        let wo3 = getWorkout()
+        let wo4 = getWorkout()
+          
+        // Add Workout to Template
+        temp1.addToWorkoutList(wo1)
+        temp1.addToWorkoutList(wo2)
+        temp1.addToWorkoutList(wo3)
+        temp1.addToWorkoutList(wo4)
+        
+        // Add Template Characterists
+        //temp1.numDaysPerWeek = temp1.workoutList?.count
+        temp1.numDays = temp1.workoutList?.count ?? 0
+        temp1.numOfWeeks = 5
+        templateList.append(temp1)
+        
+        appDelegate.saveContext()
+        
+        tableView.reloadData()
+    }
+    
+    func getWorkout() -> WorkoutDay {
+        let wo1 = WorkoutDay(entity: WorkoutDay.entity(), insertInto: context)
+        wo1.name = getRandomWorkoutName()
         
         
-        // WENDLER EXERCISES
-        let ex1 = getWendlerTestData()
-        let ex2 = getWendlerTestData()
-        let ex3 = getWendlerTestData()
-        let ex4 = getWendlerTestData()
+        for _ in 0...4 {
+            let ex1 = getWendlerTestData()
+            wo1.addToAccExerciseList(ex1)
+        }
         
-        
-        // BB EXERCISES
-        let ex5 = getBBTestData()
-        let ex6 = getBBTestData()
-        let ex7 = getBBTestData()
-        let ex8 = getBBTestData()
+        for _ in 0...4 {
+            let ex1 = getBBTestData()
+            wo1.addToAccExerciseList(ex1)
+        }
         
         
         // MAIN EXERCISE
@@ -380,28 +401,7 @@ extension TemplateParent_VC {
         wo1.addToMainExerciseList(mainBB)
         wo1.addToMainExerciseList(mainWen)
         
-        // Add Accessories to Workout
-        wo1.addToAccExerciseList(ex1)
-        wo1.addToAccExerciseList(ex2)
-        wo1.addToAccExerciseList(ex3)
-        wo1.addToAccExerciseList(ex4)
-        wo1.addToAccExerciseList(ex5)
-        wo1.addToAccExerciseList(ex6)
-        wo1.addToAccExerciseList(ex7)
-        wo1.addToAccExerciseList(ex8)
-        
-        // Add Workout to Template
-        temp1.addToWorkoutList(wo1)
-        
-        // Add Template Characterists
-        //temp1.numDaysPerWeek = temp1.workoutList?.count
-        temp1.numDays = temp1.workoutList?.count ?? 0
-        temp1.numOfWeeks = 1
-        templateList.append(temp1)
-        
-        appDelegate.saveContext()
-        
-        tableView.reloadData()
+        return wo1
     }
     
     func getBBTestData() -> BB_Exercise {
@@ -411,6 +411,10 @@ extension TemplateParent_VC {
         item.progression = progMainBB
         item.bodypart = getRandomBodyPart()
         item.startingWeight = 57
+        
+        for _ in 0...3 {
+            
+        }
         
         let mainAtt1 = getNewBBAttempt()
         let mainAtt2 = getNewBBAttempt()
@@ -442,13 +446,12 @@ extension TemplateParent_VC {
         return item
     }
     
-
-    
-    
     func getNewWendlerTM() -> TrainingMax {
         let item = TrainingMax(entity: TrainingMax.entity(), insertInto: context)
         item.date = Date.init()
-        item.trainingMax = 335.0
+        item.weight = 235.0
+        item.reps = 5.0
+        //item.trainingMax = 335.0
         return item
     }
     
@@ -474,15 +477,10 @@ extension TemplateParent_VC {
         return item
     }
     
-    func getNewWorkoutDay(_ name: String) -> WorkoutDay {
-        let item = WorkoutDay(entity: WorkoutDay.entity(), insertInto: context)
-        item.name = name
-        return item
-    }
-    
     func getNewTemplate(_ name: String) -> Template {
         let item = Template(entity: Template.entity(), insertInto: context)
         item.name = name
+        item.currentTemplate = true
         return item
     }
     
@@ -504,6 +502,11 @@ extension TemplateParent_VC {
     
     func getRandomBBEx() -> String {
         let arg = ["Incline DB", "Bench", "Leg Press", "RDL", "Hammer Inc", "Hammer Dec"]
+        return arg[Int.random(in: 0...arg.count-1)]
+    }
+    
+    func getRandomWorkoutName() -> String {
+        let arg = ["Push", "Pull", "Legs", "Chest/Back", "Shoulders/Arms"]
         return arg[Int.random(in: 0...arg.count-1)]
     }
 }

@@ -30,9 +30,17 @@ class Util {
     
     
     /*
-     * Get Display String
+     * Rounder Function
      *
-     * Gets the formatted display string for the cell
+     * Rounds the given double to the nearest value
+     */
+    static func rounder(_ value: Double, toNearest: Double) -> Double {
+        return round(value / toNearest) * toNearest
+    }
+    
+    
+    /*
+     * Get Training Max Display String
      */
     static func getTMDisplayString(trainingMax: Double, weight: Double, reps: Double) -> NSMutableAttributedString {
         

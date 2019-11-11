@@ -10,11 +10,13 @@ import UIKit
 
 class Workout_VC: UIViewController {
 
+    var currentTemplate: [Template] = []
     
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var templateLabel: UILabel!
     @IBOutlet weak var tempDayLabel: UILabel!
+    
     
     
 
@@ -30,13 +32,11 @@ class Workout_VC: UIViewController {
 //    @IBAction func skipDayButton(_ sender: UIButton) {
 //        print("skip")
 //    }
-//    
-//    @IBAction func customWorkoutButton(_ sender: UIButton) {
-//        print("custom")
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DataManager.getTemplateCurrent(temp: &currentTemplate)
         
         displayDate()
         displayTemplate()
@@ -56,7 +56,13 @@ class Workout_VC: UIViewController {
     }
     
     func displayTemplate() {
-        templateLabel.text = "Template placeholder"
+        if !currentTemplate.isEmpty {
+            templateLabel.text = currentTemplate[0].name
+        } else {
+            templateLabel.text = "No current template selected"
+        }
+        
+        
     }
     
     func displayCurrentDay() {
