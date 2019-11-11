@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let container = NSPersistentContainer(name: "Training Log Plus")
         container.loadPersistentStores(completionHandler: {
             (storeDescription, error) in
-                print(storeDescription)
+                //print(storeDescription)
+                print("Good container")
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
