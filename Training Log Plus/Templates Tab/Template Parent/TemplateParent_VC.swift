@@ -348,36 +348,48 @@ extension TemplateParent_VC {
  */
 extension TemplateParent_VC {
     
-    
+    /*
+     * TEST DATA DRIVER
+     */
     func createTestData() {
         
-        // Create Template
-        let temp1 = getNewTemplate("Template Title 1")
-        
-        // Create WorkoutDay
-        let wo1 = getWorkout()
-        let wo2 = getWorkout()
-        let wo3 = getWorkout()
-        let wo4 = getWorkout()
-          
-        // Add Workout to Template
-        temp1.addToWorkoutList(wo1)
-        temp1.addToWorkoutList(wo2)
-        temp1.addToWorkoutList(wo3)
-        temp1.addToWorkoutList(wo4)
-        
-        // Add Template Characterists
-        //temp1.numDaysPerWeek = temp1.workoutList?.count
-        temp1.numDays = temp1.workoutList?.count ?? 0
-        temp1.numOfWeeks = 5
-        temp1.currentDayIndex = 3
-        templateList.append(temp1)
-        
+        templateList.removeAll()
         appDelegate.saveContext()
         
+        for _ in 0...5 {
+            let temp1 = getTemplate()
+            templateList.append(temp1)
+        }
+        
+        appDelegate.saveContext()
         tableView.reloadData()
     }
     
+    
+    /*
+     * GET TEMPLATE
+     */
+    func getTemplate() -> Template {
+        let item = Template(entity: Template.entity(), insertInto: context)
+        
+        item.name = getRandomTemplateName()
+        item.numDays = item.workoutList?.count ?? 0
+        item.numOfWeeks = 5
+        item.currentDayIndex = 3
+        item.currentTemplate = false
+        
+        for _ in 0...4 {
+            let wo = getWorkout()
+            item.addToWorkoutList(wo)
+        }
+        
+        return item
+    }
+    
+    
+    /*
+     * GET WORKOUT
+     */
     func getWorkout() -> WorkoutDay {
         let wo1 = WorkoutDay(entity: WorkoutDay.entity(), insertInto: context)
         wo1.name = getRandomWorkoutName()
@@ -405,6 +417,10 @@ extension TemplateParent_VC {
         return wo1
     }
     
+    
+    /*
+     * GET BB_EXERCISE
+     */
     func getBBTestData() -> BB_Exercise {
         let item = BB_Exercise(entity: BB_Exercise.entity(), insertInto: context)
         item.name = getRandomBBEx()
@@ -414,19 +430,17 @@ extension TemplateParent_VC {
         item.startingWeight = 57
         
         for _ in 0...3 {
-            
+            let att = getNewBBAttempt()
+            item.addToAttemptList(att)
         }
-        
-        let mainAtt1 = getNewBBAttempt()
-        let mainAtt2 = getNewBBAttempt()
-        let mainAtt3 = getNewBBAttempt()
-        item.addToAttemptList(mainAtt1)
-        item.addToAttemptList(mainAtt2)
-        item.addToAttemptList(mainAtt3)
         
         return item
     }
     
+    
+    /*
+     * GET WEN_EXERCISE
+     */
     func getWendlerTestData() -> Wen_Exercise {
         let item = Wen_Exercise(entity: Wen_Exercise.entity(), insertInto: context)
         item.name = getRandomWendlerEx()
@@ -435,27 +449,36 @@ extension TemplateParent_VC {
         item.bodypart = getRandomBodyPart()
         item.currentTM = 235.0
         
-        let TM1 = getNewWendlerTM()
-        let PR1 = getNewWendlerPR()
-        let TM2 = getNewWendlerTM()
-        let PR2 = getNewWendlerPR()
-        item.addToPersonalRecords(PR1)
-        item.addToPersonalRecords(PR2)
-        item.addToTrainingMaxes(TM1)
-        item.addToTrainingMaxes(TM2)
+        
+        for _ in 0...4 {
+            let tm = getNewWendlerTM()
+            item.addToTrainingMaxes(tm)
+        }
+        
+        for _ in 0...4 {
+            let pr = getNewWendlerPR()
+            item.addToPersonalRecords(pr)
+        }
         
         return item
     }
     
+    
+    /*
+     * GET WENDLER TM
+     */
     func getNewWendlerTM() -> TrainingMax {
         let item = TrainingMax(entity: TrainingMax.entity(), insertInto: context)
         item.date = Date.init()
         item.weight = 235.0
         item.reps = 5.0
-        //item.trainingMax = 335.0
         return item
     }
     
+    
+    /*
+     * GET WENDLER PR
+     */
     func getNewWendlerPR() -> PersonalRecord {
         let item = PersonalRecord(entity: PersonalRecord.entity(), insertInto: context)
         item.date = Date.init()
@@ -464,6 +487,10 @@ extension TemplateParent_VC {
         return item
     }
     
+    
+    /*
+     * GET BB ATTEMPT
+     */
     func getNewBBAttempt() -> Attempt {
         let item = Attempt(entity: Attempt.entity(), insertInto: context)
         item.date = Date.init()
@@ -478,19 +505,20 @@ extension TemplateParent_VC {
         return item
     }
     
-    func getNewTemplate(_ name: String) -> Template {
-        let item = Template(entity: Template.entity(), insertInto: context)
-        item.name = name
-        item.currentTemplate = true
-        return item
-    }
     
+    /*
+     * GET PROGRESSION
+     */
     func getNewProgression(_ name: String) -> Progression {
         let item = Progression(entity: Progression.entity(), insertInto: context)
         item.name = name
         return item
     }
     
+    
+    /*
+     * RANDOM GENERATORS
+     */
     func getRandomBodyPart() -> String {
         let arg = Util.getBodyPartData()
         return arg[Int.random(in: 0...arg.count-1)]
@@ -508,6 +536,11 @@ extension TemplateParent_VC {
     
     func getRandomWorkoutName() -> String {
         let arg = ["Push", "Pull", "Legs", "Chest/Back", "Shoulders/Arms"]
+        return arg[Int.random(in: 0...arg.count-1)]
+    }
+    
+    func getRandomTemplateName() -> String {
+        let arg = ["PPL", "Arnold Split", "Bro Split", "Upper Lower"]
         return arg[Int.random(in: 0...arg.count-1)]
     }
 }

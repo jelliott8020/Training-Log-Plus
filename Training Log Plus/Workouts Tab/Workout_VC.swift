@@ -7,19 +7,24 @@
 //
 
 import UIKit
+import CoreData
 
 class Workout_VC: UIViewController {
 
     var currentTemplate: [Template] = []
     var workouts: [WorkoutDay] = []
     
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var templateLabel: UILabel!
     @IBOutlet weak var tempDayLabel: UILabel!
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        displayCurrentDay()
+        displayTemplate()
+    }
 
     
 //    @IBAction func beginWorkoutButton(_ sender: UIButton) {
@@ -74,8 +79,35 @@ class Workout_VC: UIViewController {
         } else {
             tempDayLabel.text = "No current workout"
         }
-        
-        
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "changeTemplateSegue" {
+            if let vc = segue.destination as? ChangeTemplate_VC {
+                vc.delegate = self
+                print("Segue")
+            }
+        }
+    }
+}
+
+extension Workout_VC: Pass_SelectedTemplate_BackTo_Workout_Delegate {
+    
+    func passTemplateBack(_ controller: ChangeTemplate_VC, didSelect item: Template) {
+        
+        print("What")
+        
+        for temps in currentTemplate {
+            temps.currentTemplate = false
+        }
+        
+        currentTemplate.removeAll()
+        currentTemplate.append(item)
+        print("Back")
+        print(item)
+        currentTemplate[0].currentTemplate = true
+        displayTemplate()
+        displayCurrentDay()
+        appDelegate.saveContext()
+    }
 }
