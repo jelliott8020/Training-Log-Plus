@@ -11,7 +11,7 @@ import CoreData
 
 class TrainingMaxCalc_VC: UIViewController, UITextFieldDelegate {
     
-    var exerciseData: [Wen_Exercise] = []
+    var exerciseData: [Exercise] = []
     var bodypartData: [String] = []
     var calcedArrayObj: [TMCell] = []
     
@@ -203,7 +203,7 @@ extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == exercisePicker {
-            selectedExercise = exerciseData[row]
+            selectedExercise = exerciseData[row] as? Wen_Exercise
             exerciseTextField.text = selectedExercise?.name
         } else if pickerView == bodypartPicker {
             selectedBodyPart = bodypartData[row]

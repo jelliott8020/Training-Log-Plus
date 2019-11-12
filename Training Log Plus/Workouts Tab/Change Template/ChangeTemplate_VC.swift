@@ -52,8 +52,6 @@ extension ChangeTemplate_VC {
         tableView.deselectRow(at: indexPath, animated: true)
         delegate?.passTemplateBack(self, didSelect: templateList[indexPath.row])
         dismiss(animated: true, completion: nil)
-        print("What is going on")
-        //print(templateList[indexPath.row])
     }
     
     /*

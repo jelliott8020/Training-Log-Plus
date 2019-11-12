@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.loadPersistentStores(completionHandler: {
             (storeDescription, error) in
                 //print(storeDescription)
-                print("Good container")
+                print("Load Data Successful")
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }

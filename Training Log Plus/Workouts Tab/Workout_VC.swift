@@ -79,7 +79,6 @@ class Workout_VC: UIViewController {
         if segue.identifier == "changeTemplateSegue" {
             if let vc = segue.destination as? ChangeTemplate_VC {
                 vc.delegate = self
-                print("Segue")
             }
         }
     }

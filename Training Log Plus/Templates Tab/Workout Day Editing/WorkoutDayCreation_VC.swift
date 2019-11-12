@@ -126,7 +126,7 @@ class WorkoutDayCreation_VC: UIViewController {
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "MainExSegue" {
+        if segue.identifier == "mainExEditSegue" {
             if let mainEx_VC = segue.destination as? AddEdit_MainExercise_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = exerciseTable.indexPath(for: cell) {
                     
@@ -137,7 +137,7 @@ class WorkoutDayCreation_VC: UIViewController {
                 }
                 
             }
-        } else if segue.identifier == "AccExSegue" {
+        } else if segue.identifier == "accExEditSegue" {
             if let mainEx_VC = segue.destination as? AddEdit_MainExercise_VC {
                 if let cell = sender as? UITableViewCell, let indexPath = exerciseTable.indexPath(for: cell) {
                     
@@ -148,7 +148,24 @@ class WorkoutDayCreation_VC: UIViewController {
                 }
                 
             }
+        } else if segue.identifier == "mainExAddSegue" {
+            if let mainEx_VC = segue.destination as? AddEdit_MainExercise_VC {
+                    mainEx_VC.isItMain = true
+                    mainEx_VC.delegate = self
+            }
+        } else if segue.identifier == "accExAddSegue" {
+            if let mainEx_VC = segue.destination as? AddEdit_MainExercise_VC {
+                    mainEx_VC.isItMain = false
+                    mainEx_VC.delegate = self
+            }
         }
+        
+        
+        
+        
+        
+        //mainExAddSegue
+        //accExAddSegue
         
 //        if (table == 0) {
 //            self.passedInWorkoutObj?.addToMainExerciseList(newExercise)

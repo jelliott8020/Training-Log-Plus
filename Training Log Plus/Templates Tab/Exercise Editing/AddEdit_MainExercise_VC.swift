@@ -40,15 +40,18 @@ class AddEdit_MainExercise_VC: UIViewController {
     var bodyPartPicker = UIPickerView()
     var exercisePicker = UIPickerView()
     var progressionPicker = UIPickerView()
+    var isWendlerPicker = UIPickerView()
     
     var bodyPartData: [String] = []
     var exerciseData: [Exercise] = []
     var progressionSchemeData: [Progression] = []
+    var wendlerData: [String] = []
     
     var selectedBodyPart: String?
     var selectedExercise: AnyObject?
     var selectedProgressionScheme: Progression?
     var selectedTrainingMax: String?
+    var selectedWendler: String?
     
     var isItMain: Bool?
     
@@ -56,6 +59,7 @@ class AddEdit_MainExercise_VC: UIViewController {
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    @IBOutlet weak var isWendlerTextField: UITextField!
     @IBOutlet weak var bodyPartTextField: UITextField!
     @IBOutlet weak var exerciseTextField: UITextField!
     @IBOutlet weak var progressionSchemeTextField: UITextField!
@@ -81,7 +85,7 @@ class AddEdit_MainExercise_VC: UIViewController {
         pastTrainingMaxTable.tableFooterView = UIView(frame: CGRect.zero)
         
         
-        if (passedInExerciseObj!.isKind(of: Wen_Exercise.self)) {
+        if (passedInExerciseObj?.isKind(of: Wen_Exercise.self) ?? false) {
             
             selectedExercise = passedInExerciseObj as! Wen_Exercise
             
@@ -100,9 +104,10 @@ class AddEdit_MainExercise_VC: UIViewController {
             exerciseTextField.text = selectedExercise?.name
             progressionSchemeTextField.text = selectedExercise?.progression?.name
             selectedProgressionScheme = selectedExercise?.progression
+            isWendlerTextField.text = "Yes"
             
             
-        } else if (passedInExerciseObj!.isKind(of: BB_Exercise.self)) {
+        } else if (passedInExerciseObj?.isKind(of: BB_Exercise.self) ?? false) {
             
             selectedExercise = passedInExerciseObj as! BB_Exercise
             
@@ -121,11 +126,17 @@ class AddEdit_MainExercise_VC: UIViewController {
             exerciseTextField.text = selectedExercise?.name
             progressionSchemeTextField.text = selectedExercise?.progression?.name
             selectedProgressionScheme = selectedExercise?.progression
+            isWendlerTextField.text = "No"
+            
+            
+        } else {
+            self.title = "Choose Exercise"
         }
         
         
         bodyPartData = Util.getBodyPartData()
         DataManager.getProgression(exData: &progressionSchemeData)
+        wendlerData = Util.getYesOrNoForPickerData()
         createPickers()
         createToolbarDoneButton()
     }
@@ -136,7 +147,8 @@ class AddEdit_MainExercise_VC: UIViewController {
     func addButtonAction() {
         
         if (selectedExercise as? Wen_Exercise) != nil {
-            let passObj: Wen_Exercise = selectedExercise as! Wen_Exercise
+            //let passObj: Wen_Exercise = selectedExercise as! Wen_Exercise
+            let passObj = selectedExercise as! Wen_Exercise
             
             passObj.bodypart = bodyPartTextField.text!
             passObj.name = exerciseTextField.text!
@@ -144,13 +156,21 @@ class AddEdit_MainExercise_VC: UIViewController {
             passObj.currentTM = Double(trainingMaxTextField.text!)!
             
             if (isItMain!) {
-                delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passObj)
+                if (passedInExerciseObj == nil) {
+                    delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishAdding: passObj)
+                } else {
+                    delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passObj)
+                }
             } else {
-                delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passObj)
+                if (passedInExerciseObj == nil) {
+                    delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishAdding: passObj)
+                } else {
+                    delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passObj)
+                }
             }
             
         } else if (selectedExercise as? BB_Exercise) != nil {
-            let passObj: BB_Exercise = selectedExercise as! BB_Exercise
+            let passObj = selectedExercise as! BB_Exercise
             
             passObj.bodypart = bodyPartTextField.text!
             passObj.name = exerciseTextField.text!
@@ -158,11 +178,20 @@ class AddEdit_MainExercise_VC: UIViewController {
             passObj.startingWeight = Int32(trainingMaxTextField.text!)!
             
             if (isItMain!) {
-                delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passObj)
+                if (passedInExerciseObj == nil) {
+                    delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishAdding: passObj)
+                } else {
+                    delegate?.addEditMainExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passObj)
+                }
             } else {
-                delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passObj)
+                if (passedInExerciseObj == nil) {
+                    delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishAdding: passObj)
+                } else {
+                    delegate?.addEditAccExercise_PassTo_workoutDayObjectCreation(self, didFinishEditing: passObj)
+                }
             }
         }
+        
         
         appDelegate.saveContext()
         
@@ -226,6 +255,8 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
             returnInt = exerciseData.count
         } else if pickerView == progressionPicker {
             returnInt = progressionSchemeData.count
+        } else if pickerView == isWendlerPicker {
+            returnInt = wendlerData.count
         }
         
         return returnInt
@@ -241,6 +272,8 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
             returnStr = exerciseData[row].name
         } else if pickerView == progressionPicker {
             returnStr = progressionSchemeData[row].name
+        } else if pickerView == isWendlerPicker {
+            returnStr = wendlerData[row]
         }
         
         return returnStr
@@ -250,14 +283,26 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
-            DataManager.getExercises(bp: selectedBodyPart!, exData: &exerciseData)
+            
+
         } else if pickerView == exercisePicker {
             selectedExercise = exerciseData[row]
             exerciseTextField.text = selectedExercise?.name
+            
             // Query for progression and fill in progression data
         } else if pickerView == progressionPicker {
             selectedProgressionScheme = progressionSchemeData[row]
             progressionSchemeTextField.text = selectedProgressionScheme?.name
+        } else if pickerView == isWendlerPicker {
+            selectedWendler = wendlerData[row]
+            isWendlerTextField.text = selectedWendler
+            
+            if selectedWendler?.lowercased() == "yes" {
+                DataManager.getWenExercise(exStr: selectedBodyPart!, exData: &exerciseData)
+            } else {
+                DataManager.getBBExercise(exStr: selectedBodyPart!, exData: &exerciseData)
+            }
+            
         }
     }
 }
@@ -276,10 +321,13 @@ extension AddEdit_MainExercise_VC {
         bodyPartPicker.delegate = self
         exercisePicker.delegate = self
         progressionPicker.delegate = self
+        isWendlerPicker.delegate = self
+        
         
         bodyPartTextField.inputView = bodyPartPicker
         exerciseTextField.inputView = exercisePicker
         progressionSchemeTextField.inputView = progressionPicker
+        isWendlerTextField.inputView = isWendlerPicker
     }
     
     /*
@@ -300,6 +348,7 @@ extension AddEdit_MainExercise_VC {
         exerciseTextField.inputAccessoryView = toolBar
         progressionSchemeTextField.inputAccessoryView = toolBar
         trainingMaxTextField.inputAccessoryView = toolBar
+        isWendlerTextField.inputAccessoryView = toolBar
     }
     
     
@@ -309,6 +358,9 @@ extension AddEdit_MainExercise_VC {
     @objc func doneButtonAction() {
         if bodyPartTextField.isEditing {
             bodyPartTextField.resignFirstResponder()
+            isWendlerTextField.becomeFirstResponder()
+        } else if isWendlerTextField.isEditing {
+            isWendlerTextField.resignFirstResponder()
             exerciseTextField.becomeFirstResponder()
         } else if exerciseTextField.isEditing {
             exerciseTextField.resignFirstResponder()

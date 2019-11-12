@@ -41,7 +41,7 @@ class DataManager {
     /*
      * Wendler Exercises
      */
-    static func getWenExercise(exStr: String, exData: inout [Wen_Exercise]) {
+    static func getWenExercise(exStr: String, exData: inout [Exercise]) {
         
         let request = Wen_Exercise.fetchRequest() as NSFetchRequest<Wen_Exercise>
         
@@ -61,7 +61,7 @@ class DataManager {
     /*
      * Bodybuilding Exercises
      */
-    static func getBBExercise(exStr: String, exData: inout [BB_Exercise]) {
+    static func getBBExercise(exStr: String, exData: inout [Exercise]) {
         
         let request = BB_Exercise.fetchRequest() as NSFetchRequest<BB_Exercise>
         
