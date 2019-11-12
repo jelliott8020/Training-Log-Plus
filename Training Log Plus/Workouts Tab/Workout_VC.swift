@@ -19,12 +19,6 @@ class Workout_VC: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var templateLabel: UILabel!
     @IBOutlet weak var tempDayLabel: UILabel!
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        displayCurrentDay()
-        displayTemplate()
-    }
 
     
 //    @IBAction func beginWorkoutButton(_ sender: UIButton) {
@@ -95,7 +89,7 @@ extension Workout_VC: Pass_SelectedTemplate_BackTo_Workout_Delegate {
     
     func passTemplateBack(_ controller: ChangeTemplate_VC, didSelect item: Template) {
         
-        print("What")
+        navigationController?.popViewController(animated: true)
         
         for temps in currentTemplate {
             temps.currentTemplate = false
@@ -103,9 +97,8 @@ extension Workout_VC: Pass_SelectedTemplate_BackTo_Workout_Delegate {
         
         currentTemplate.removeAll()
         currentTemplate.append(item)
-        print("Back")
-        print(item)
         currentTemplate[0].currentTemplate = true
+        workouts = currentTemplate[0].workoutList?.allObjects as! [WorkoutDay]
         displayTemplate()
         displayCurrentDay()
         appDelegate.saveContext()

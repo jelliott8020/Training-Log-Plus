@@ -67,24 +67,21 @@ class AddExerciseToData_TVC: UITableViewController {
             if (Util.checkForBlankInput(str: exer, txtField: exerciseTextField)) {return}
             if (Util.checkForBlankInput(str: wen, txtField: wendlerTextField)) {return}
             
-            let item: Exercise?
+            var item: AnyObject?
             
             if (wen.lowercased() == "yes") {
                 item = Wen_Exercise(entity: Wen_Exercise.entity(), insertInto: context)
+                (item as! Wen_Exercise).bodypart = bodyPartTextField.text!
+                (item as! Wen_Exercise).name = exerciseTextField.text!
                 //item.currentTM = 0.0
             } else {
                 item = BB_Exercise(entity: BB_Exercise.entity(), insertInto: context)
+                (item as! BB_Exercise).bodypart = bodyPartTextField.text!
+                (item as! BB_Exercise).name = exerciseTextField.text!
                 //item.startingWeight = 0
             }
             
-            item?.bodypart = bodyPartTextField.text!
-            item?.name = exerciseTextField.text!
-            
             appDelegate.saveContext()
-            
-//            selectedBodyPart = bodyPartTextField.text
-//            selectedExercise = exerciseTextField.text
-//            selectedWendler = wendlerTextField.text
             
             dismiss(animated: true, completion: nil)
             self.navigationController?.popViewController(animated: true)

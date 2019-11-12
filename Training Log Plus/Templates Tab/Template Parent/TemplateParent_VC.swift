@@ -375,7 +375,7 @@ extension TemplateParent_VC {
         item.name = getRandomTemplateName()
         item.numDays = item.workoutList?.count ?? 0
         item.numOfWeeks = 5
-        item.currentDayIndex = 3
+        item.currentDayIndex = 0
         item.currentTemplate = false
         
         for _ in 0...4 {
