@@ -370,6 +370,7 @@ extension TemplateParent_VC {
         //temp1.numDaysPerWeek = temp1.workoutList?.count
         temp1.numDays = temp1.workoutList?.count ?? 0
         temp1.numOfWeeks = 5
+        temp1.currentDayIndex = 3
         templateList.append(temp1)
         
         appDelegate.saveContext()

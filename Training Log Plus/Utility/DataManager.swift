@@ -123,4 +123,20 @@ class DataManager {
     }
     
     
+    /*
+     * Workouts
+     */
+    static func getWorkouts(tempName: String, workouts: inout [WorkoutDay]) {
+        
+        let request = WorkoutDay.fetchRequest() as NSFetchRequest<WorkoutDay>
+        request.predicate = NSPredicate(format: "currentTemplate == true")
+        
+        do {
+            workouts = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch templateData. \(error), \(error.userInfo)")
+        }
+    }
+    
+    
 }

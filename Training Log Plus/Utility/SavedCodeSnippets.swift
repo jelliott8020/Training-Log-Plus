@@ -11,6 +11,31 @@ import Foundation
 class SavedCodeSnippets {
     
     
+    
+//    /*
+//     Move Template: Moves template to a different index in array
+//     */
+//    func move(item: Template, to index: Int) {
+//        guard let currentIndex = templates.firstIndex(of: item) else {
+//            return
+//        }
+//        templates.remove(at: currentIndex)
+//        templates.insert(item, at: index)
+//    }
+//
+//
+//    /*
+//     Remove Template: Removes a template from the array
+//     */
+//    func remove(items: [Template]) {
+//        for item in items {
+//            if let index = templates.firstIndex(of: item) {
+//                templates.remove(at: index)
+//            }
+//        }
+//    }
+    
+    
     // In tableview didSelectRowAt
     
     // ********************* //

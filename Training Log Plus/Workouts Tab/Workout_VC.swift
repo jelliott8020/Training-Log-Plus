@@ -11,6 +11,7 @@ import UIKit
 class Workout_VC: UIViewController {
 
     var currentTemplate: [Template] = []
+    var workouts: [WorkoutDay] = []
     
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -38,6 +39,10 @@ class Workout_VC: UIViewController {
         
         DataManager.getTemplateCurrent(temp: &currentTemplate)
         
+        if !currentTemplate.isEmpty {
+            workouts = currentTemplate[0].workoutList?.allObjects as! [WorkoutDay]
+        }
+        
         displayDate()
         displayTemplate()
         displayCurrentDay()
@@ -61,12 +66,16 @@ class Workout_VC: UIViewController {
         } else {
             templateLabel.text = "No current template selected"
         }
-        
-        
     }
     
     func displayCurrentDay() {
-        tempDayLabel.text = "Current day placeholder"
+        if !currentTemplate.isEmpty {
+            tempDayLabel.text = workouts[currentTemplate[0].currDay].name
+        } else {
+            tempDayLabel.text = "No current workout"
+        }
+        
+        
     }
     
 }
