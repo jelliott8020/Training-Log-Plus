@@ -86,14 +86,6 @@ class WorkoutDayCreation_VC: UIViewController {
      * Updates title of WorkoutDay Object, passes it back to parent VC
      */
     func doneButtonAction() {
-        //        if let name = workoutNameTextField.text {
-        //
-        //            workoutObj?.title = name
-        //
-        //            //delegate?.passWorkoutObjBack(workoutObj: workoutObj!)
-        //
-        //
-        //        }
         
         delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishEditing: passedInWorkoutObj!)
         
@@ -106,9 +98,6 @@ class WorkoutDayCreation_VC: UIViewController {
     
     /*
      * Update Name Function
-     *
-     * Updates the name from the textfield
-     * Updates the object's title as well
      */
     func updateNameFunction() {
         if let title = workoutNameTextField.text {
@@ -159,23 +148,6 @@ class WorkoutDayCreation_VC: UIViewController {
                     mainEx_VC.delegate = self
             }
         }
-        
-        
-        
-        
-        
-        //mainExAddSegue
-        //accExAddSegue
-        
-//        if (table == 0) {
-//            self.passedInWorkoutObj?.addToMainExerciseList(newExercise)
-//            self.mainExerciseList.append(newExercise)
-//        } else {
-//            self.passedInWorkoutObj?.addToAccExerciseList(newExercise)
-//            self.accExerciseList.append(newExercise)
-//        }
-//
-//        self.exerciseTable.reloadData()
     }
 }
 
@@ -250,8 +222,7 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
         if tableView.isEditing {
             return
         }
-        
-        // Animation to show they interacted
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -267,7 +238,13 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
             
             let noButton = UIAlertAction(title: "No", style: UIAlertAction.Style.destructive, handler: nil)
             let yesButton = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { (action) -> Void in
-                self.accExerciseList.remove(at: indexPath.row)
+                
+                if indexPath.section == 0 {
+                    self.mainExerciseList.remove(at: indexPath.row)
+                } else if indexPath.section == 1 {
+                    self.accExerciseList.remove(at: indexPath.row)
+                }
+                
                 
                 tableView.beginUpdates()
                 tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -279,9 +256,6 @@ extension WorkoutDayCreation_VC: UITableViewDelegate, UITableViewDataSource {
             alert.addAction(noButton)
             
             present(alert, animated: true, completion: nil)
-            
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
 }
@@ -325,7 +299,7 @@ extension WorkoutDayCreation_VC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodypartPicker {
             selectedBodyPart = bodyPartData[row]
             //bodypartTextField!.text = selectedBodyPart
-            DataManager.getExercises(bp: selectedBodyPart!, exData: &exerciseData)
+            DataManager.getExercises(bodypart: selectedBodyPart!, exData: &exerciseData)
         } else if pickerView == exercisePicker {
             selectedExercise = exerciseData[row]
             //exerciseTextField?.text = selectedExercise

@@ -36,7 +36,7 @@ class Workout_VC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DataManager.getTemplateCurrent(temp: &currentTemplate)
+        DataManager.getTemplate(current: true, temp: &currentTemplate)
         
         if !currentTemplate.isEmpty {
             workouts = currentTemplate[0].workoutList?.allObjects as! [WorkoutDay]

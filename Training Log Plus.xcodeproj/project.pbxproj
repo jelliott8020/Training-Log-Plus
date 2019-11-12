@@ -161,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				03477ED8231DD7A200E967DE /* Training Log Plus */,
+				0379B67A237B322200E26CE6 /* Old Objects */,
 				03477ED7231DD7A200E967DE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -192,6 +193,18 @@
 				03929C6C23710BD20066B15E /* Data + Objects */,
 			);
 			path = "Training Log Plus";
+			sourceTree = "<group>";
+		};
+		0379B67A237B322200E26CE6 /* Old Objects */ = {
+			isa = PBXGroup;
+			children = (
+				03BB32C92325903300C712D1 /* TemplateList.swift */,
+				03FB9EAA2322FA4E00F9D410 /* Template.swift */,
+				033C28252346872800A73B69 /* WorkoutDay.swift */,
+				058666E8236FA1FD0056E950 /* Exercise.swift */,
+				03B984DF233BE03F00656CFA /* Attempt.swift */,
+			);
+			path = "Old Objects";
 			sourceTree = "<group>";
 		};
 		03929C6C23710BD20066B15E /* Data + Objects */ = {
@@ -253,11 +266,6 @@
 		03B984DE233BE02300656CFA /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				03BB32C92325903300C712D1 /* TemplateList.swift */,
-				03FB9EAA2322FA4E00F9D410 /* Template.swift */,
-				033C28252346872800A73B69 /* WorkoutDay.swift */,
-				058666E8236FA1FD0056E950 /* Exercise.swift */,
-				03B984DF233BE03F00656CFA /* Attempt.swift */,
 				05E323F4236B2A1D00FAAF04 /* SavedCodeSnippets.swift */,
 				05739D142368C5AA00B70A4E /* Util.swift */,
 				032042642376338D0006361A /* DataManager.swift */,

@@ -11,8 +11,8 @@
 //
 //class WorkoutDay: NSObject {
 //    
-////    var mainExerciseList: ExerciseList?
-////    var accExerciseList: ExerciseList?
+//    var mainExerciseList: ExerciseList?
+//    var accExerciseList: ExerciseList?
 //
 //    var mainExerciseList: [Exercise] = []
 //    var accExerciseList: [Exercise] = []

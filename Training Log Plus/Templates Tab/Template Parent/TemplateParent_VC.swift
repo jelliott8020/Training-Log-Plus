@@ -284,8 +284,6 @@ extension TemplateParent_VC {
 extension TemplateParent_VC {
     /*
      * Create Tool Bar Done Button
-     *
-     * Creates done buttons for the toolbars
      */
     func createToolbarDoneButton() -> UIToolbar {
         
@@ -304,8 +302,6 @@ extension TemplateParent_VC {
     
     /*
      * Done Button Action
-     *
-     * Tells the toolbar what to do when done is tapped
      */
     @objc func doneButtonAction() {
         if tempNameTxtField!.isEditing {
@@ -356,9 +352,19 @@ extension TemplateParent_VC {
         templateList.removeAll()
         appDelegate.saveContext()
         
-        for _ in 0...5 {
+        for _ in 0...3 {
             let temp1 = getTemplate()
             templateList.append(temp1)
+        }
+        
+        var count = 0
+        while (count < 4) {
+            let temp1 = getTemplate()
+            
+            if temp1 != nil {
+                count += 1
+                templateList.append(temp1)
+            }
         }
         
         appDelegate.saveContext()
@@ -370,20 +376,35 @@ extension TemplateParent_VC {
      * GET TEMPLATE
      */
     func getTemplate() -> Template {
-        let item = Template(entity: Template.entity(), insertInto: context)
         
-        item.name = getRandomTemplateName()
-        item.numDays = item.workoutList?.count ?? 0
-        item.numOfWeeks = 5
-        item.currentDayIndex = 0
-        item.currentTemplate = false
+        let nameString = getRandomTemplateName()
+        var tempArg: [Template] = []
+        DataManager.getTemplate(name: nameString, temp: &tempArg)
         
-        for _ in 0...4 {
-            let wo = getWorkout()
-            item.addToWorkoutList(wo)
+        if (tempArg.count == 1) {
+            return
+        } else if (!tempArg.isEmpty) {
+            print("\n\n\nmultiples\n\n\n")
+            return
+        } else {
+            let item = Template(entity: Template.entity(), insertInto: context)
+            
+            item.name = nameString
+            item.numDays = 4
+            item.numOfWeeks = 5
+            item.currentDayIndex = 0
+            item.currentTemplate = false
+            
+            for _ in 0...3 {
+                let wo = getWorkout()
+                item.addToWorkoutList(wo)
+            }
+            
+            return item
         }
         
-        return item
+        
+        
     }
     
     
@@ -395,12 +416,12 @@ extension TemplateParent_VC {
         wo1.name = getRandomWorkoutName()
         
         
-        for _ in 0...4 {
+        for _ in 0...3 {
             let ex1 = getWendlerTestData()
             wo1.addToAccExerciseList(ex1)
         }
         
-        for _ in 0...4 {
+        for _ in 0...3 {
             let ex1 = getBBTestData()
             wo1.addToAccExerciseList(ex1)
         }
@@ -450,12 +471,12 @@ extension TemplateParent_VC {
         item.currentTM = 235.0
         
         
-        for _ in 0...4 {
+        for _ in 0...3 {
             let tm = getNewWendlerTM()
             item.addToTrainingMaxes(tm)
         }
         
-        for _ in 0...4 {
+        for _ in 0...3 {
             let pr = getNewWendlerPR()
             item.addToPersonalRecords(pr)
         }
@@ -530,12 +551,12 @@ extension TemplateParent_VC {
     }
     
     func getRandomBBEx() -> String {
-        let arg = ["Incline DB", "Bench", "Leg Press", "RDL", "Hammer Inc", "Hammer Dec"]
+        let arg = ["Incline DB", "Bench", "Leg Press", "RDL"]
         return arg[Int.random(in: 0...arg.count-1)]
     }
     
     func getRandomWorkoutName() -> String {
-        let arg = ["Push", "Pull", "Legs", "Chest/Back", "Shoulders/Arms"]
+        let arg = ["Push", "Pull", "Legs", "Chest/Back"]
         return arg[Int.random(in: 0...arg.count-1)]
     }
     

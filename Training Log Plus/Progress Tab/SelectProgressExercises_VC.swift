@@ -238,7 +238,7 @@ extension SelectProgressExercises_VC: UIPickerViewDataSource, UIPickerViewDelega
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
-            DataManager.getExercises(bp: selectedBodyPart!, exData: &exerciseData)
+            DataManager.getExercises(bodypart: selectedBodyPart!, exData: &exerciseData)
         } else if pickerView == exercisePicker {
             selectedExercise = exerciseData[row].name
             exerciseTextField.text = selectedExercise

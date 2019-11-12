@@ -167,7 +167,7 @@ extension Exercises_TVC: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView == bodyPartPicker {
             selectedBodyPart = bodyPartData[row]
             bodyPartTextField.text = selectedBodyPart
-            DataManager.getExercises(bp: selectedBodyPart!, exData: &exerciseData)
+            DataManager.getExercises(bodypart: selectedBodyPart!, exData: &exerciseData)
             exercisePicker.reloadAllComponents()
         } else if pickerView == exercisePicker {
             selectedExercise = exerciseData[row].name

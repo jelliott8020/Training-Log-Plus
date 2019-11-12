@@ -19,15 +19,31 @@ class DataManager {
     //request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", query)
     
     
+    
     /*
-     * Exercise
+     * Exercise - All
      */
-    static func getExercises(bp: String, exData: inout [Exercise]) {
+    static func getExercises(exData: inout [Exercise]) {
         
         let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
         
-        if bp != "" {
-            request.predicate = NSPredicate(format: "bodypart == '\(bp)'")
+        do {
+            exData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch ExerciseData. \(error), \(error.userInfo)")
+        }
+    }
+    
+    
+    /*
+     * Exercise - Bodypart
+     */
+    static func getExercises(bodypart: String, exData: inout [Exercise]) {
+        
+        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
+        
+        if bodypart != "" {
+            request.predicate = NSPredicate(format: "bodypart == '\(bodypart)'")
         }
         
         do {
@@ -36,6 +52,24 @@ class DataManager {
             print("Could no fetch ExerciseData. \(error), \(error.userInfo)")
         }
     }
+    
+    
+    /*
+     * Exercise - Name
+     */
+    static func getExercises(name: String, exData: inout [Exercise]) {
+        
+        let request = Exercise.fetchRequest() as NSFetchRequest<Exercise>
+        request.predicate = NSPredicate(format: "name == '\(name)'")
+        
+        do {
+            exData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch ExerciseData. \(error), \(error.userInfo)")
+        }
+    }
+    
+    
     
     
     /*
@@ -107,13 +141,36 @@ class DataManager {
 
     }
     
+    
     /*
      * Current Template
      */
-    static func getTemplateCurrent(temp: inout [Template]) {
+    static func getTemplate(current: Bool, temp: inout [Template]) {
         
         let request = Template.fetchRequest() as NSFetchRequest<Template>
-        request.predicate = NSPredicate(format: "currentTemplate == true")
+        
+        if (current) {
+            request.predicate = NSPredicate(format: "currentTemplate == 'true'")
+        } else {
+            temp.removeAll()
+            return
+        }
+        
+        do {
+            temp = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch templateData. \(error), \(error.userInfo)")
+        }
+    }
+    
+    
+    /*
+     * Current Template
+     */
+    static func getTemplate(name: String, temp: inout [Template]) {
+        
+        let request = Template.fetchRequest() as NSFetchRequest<Template>
+        request.predicate = NSPredicate(format: "name == '\(name)'")
         
         do {
             temp = try context.fetch(request)
@@ -129,7 +186,7 @@ class DataManager {
     static func getWorkouts(tempName: String, workouts: inout [WorkoutDay]) {
         
         let request = WorkoutDay.fetchRequest() as NSFetchRequest<WorkoutDay>
-        request.predicate = NSPredicate(format: "currentTemplate == true")
+        request.predicate = NSPredicate(format: "currentTemplate == 'true'")
         
         do {
             workouts = try context.fetch(request)
