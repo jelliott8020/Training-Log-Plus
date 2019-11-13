@@ -350,20 +350,27 @@ extension TemplateParent_VC {
     func createTestData() {
         
         templateList.removeAll()
-        appDelegate.saveContext()
         
-        for _ in 0...3 {
-            let temp1 = getTemplate()
-            templateList.append(temp1)
-        }
+        var tempNameArg: [String] = []
+        
+//        for _ in 0...3 {
+//            let temp1 = getTemplate()
+//            templateList.append(temp1)
+//        }
+        
         
         var count = 0
         while (count < 4) {
             let temp1 = getTemplate()
+            print("Name: " + temp1.name)
             
-            if temp1 != nil {
+            if !tempNameArg.contains(temp1.name) {
+                print("List:")
+                print(templateList)
+                print("EndList:\n")
                 count += 1
                 templateList.append(temp1)
+                tempNameArg.append(temp1.name)
             }
         }
         
@@ -382,10 +389,10 @@ extension TemplateParent_VC {
         DataManager.getTemplate(name: nameString, temp: &tempArg)
         
         if (tempArg.count == 1) {
-            return
+            return tempArg[0]
         } else if (!tempArg.isEmpty) {
             print("\n\n\nmultiples\n\n\n")
-            return
+            return tempArg[0]
         } else {
             let item = Template(entity: Template.entity(), insertInto: context)
             
@@ -402,9 +409,6 @@ extension TemplateParent_VC {
             
             return item
         }
-        
-        
-        
     }
     
     
