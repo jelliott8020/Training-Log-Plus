@@ -7,8 +7,21 @@
 //
 
 import UIKit
+import CoreData
+
+protocol Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate {
+    func currentExercise_DidCancel(_ controller: CurrentWorkout_Exercise_TVC)
+    func completeWithMainExercise(_ controller: CurrentWorkout_Exercise_TVC, didFinish item: Exercise)
+    func completeWithAccExercise(_ controller: CurrentWorkout_Exercise_TVC, didFinish item: Exercise)
+}
+
 
 class CurrentWorkout_Exercise_TVC: UITableViewController {
+    
+    weak var passedInExerciseObj: Exercise?
+    var isItMain: Bool?
+    var delegate: Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

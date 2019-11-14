@@ -36,12 +36,37 @@ class CurrentWorkout_VC: UITableViewController {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func complete(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    
     // Prepare for Segue
     //MainExerSegue
     //AccExerSegue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "MainExerSegue" {
+            if let mainEx_VC = segue.destination as? CurrentWorkout_Exercise_TVC {
+                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                    
+                    let item = mainExerciseList[indexPath.row]
+                    mainEx_VC.passedInExerciseObj = item
+                    mainEx_VC.isItMain = true
+                    mainEx_VC.delegate = self
+                }
+            }
+        } else if segue.identifier == "AccExerSegue" {
+            if let accEx_VC = segue.destination as? CurrentWorkout_Exercise_TVC {
+                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                    
+                    let item = accExerciseList[indexPath.row]
+                    accEx_VC.passedInExerciseObj = item
+                    accEx_VC.isItMain = false
+                    accEx_VC.delegate = self
+                }
+            }
+        }
     }
 
 }
@@ -112,8 +137,33 @@ extension CurrentWorkout_VC {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
+}
+
+extension CurrentWorkout_VC: Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate {
+    func currentExercise_DidCancel(_ controller: CurrentWorkout_Exercise_TVC) {
+        navigationController?.popViewController(animated: true)
+    }
     
+    func completeWithMainExercise(_ controller: CurrentWorkout_Exercise_TVC, didFinish item: Exercise) {
+        if let index = mainExerciseList.firstIndex(of: item) {
+            let indexPath = IndexPath(row: index, section: 0)
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.textLabel?.text = item.name
+            }
+        }
+        tableView.reloadData()
+    }
     
+    func completeWithAccExercise(_ controller: CurrentWorkout_Exercise_TVC, didFinish item: Exercise) {
+        if let index = accExerciseList.firstIndex(of: item) {
+            let indexPath = IndexPath(row: index, section: 1)
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.textLabel?.text = item.name
+            }
+        }
+        tableView.reloadData()
+        
+    }
     
     
 }

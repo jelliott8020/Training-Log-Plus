@@ -81,10 +81,18 @@ class Workout_VC: UIViewController {
             if let vc = segue.destination as? ChangeTemplate_VC {
                 vc.delegate = self
             }
+        } else if segue.identifier == "BeginWorkoutSegue" {
+            if let vc = segue.destination as? CurrentWorkout_VC {
+                //vc.delegate = self
+            }
         }
     }
 }
 
+
+/**
+ * PASSBACK DELEGATE
+ */
 extension Workout_VC: Pass_SelectedTemplate_BackTo_Workout_Delegate {
     
     func passTemplateBack(_ controller: ChangeTemplate_VC, didSelect item: Template) {
