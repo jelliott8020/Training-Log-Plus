@@ -2,7 +2,7 @@
 //  Wen_Exercise+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/10/19.
+//  Created by Elliott, Josh on 11/14/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -18,13 +18,10 @@ extension Wen_Exercise {
     }
 
     @NSManaged public var currentTM: Double
-//    @NSManaged public var personalRecords: NSSet?
-//    @NSManaged public var trainingMaxes: NSSet?
-    
+    @NSManaged public var dayOfWeek: Int32
     @NSManaged public var personalRecords: Set<PersonalRecord>
     @NSManaged public var trainingMaxes: Set<TrainingMax>
-    @NSManaged public var dayOfWeek: Int32
-    @NSManaged public var progression: Progression?
+    @NSManaged public var progression: Wen_Progression?
 
 }
 

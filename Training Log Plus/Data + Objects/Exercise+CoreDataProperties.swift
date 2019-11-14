@@ -2,7 +2,7 @@
 //  Exercise+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Elliott, Josh on 11/10/19.
+//  Created by Elliott, Josh on 11/14/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -19,6 +19,7 @@ extension Exercise {
 
     @NSManaged public var bodypart: String
     @NSManaged public var name: String
-    
+    @NSManaged public var accList: WorkoutDay?
+    @NSManaged public var mainList: WorkoutDay?
 
 }

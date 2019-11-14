@@ -44,12 +44,14 @@ class AddEdit_MainExercise_VC: UIViewController {
     
     var bodyPartData: [String] = []
     var exerciseData: [Exercise] = []
-    var progressionSchemeData: [Progression] = []
+    var bb_progression: [BB_Progression] = []
+    var wen_progression: [Wen_Progression] = []
     var wendlerData: [String] = []
     
     var selectedBodyPart: String?
     var selectedExercise: AnyObject?
-    var selectedProgressionScheme: Progression?
+    var selectedWenProgression: Wen_Progression?
+    var selectedBbProgression: BB_Progression?
     var selectedTrainingMax: String?
     var selectedWendler: String?
     
@@ -104,8 +106,7 @@ class AddEdit_MainExercise_VC: UIViewController {
             
             selectedBodyPart = selectedExercise?.bodypart
             exerciseTextField.text = selectedExercise?.name
-            progressionSchemeTextField.text = selectedExercise?.progression?.name
-            selectedProgressionScheme = selectedExercise?.progression
+            progressionSchemeTextField.text = (selectedExercise as! Wen_Exercise).progression?.name
             isWendlerTextField.text = "Yes"
             
             
@@ -128,8 +129,8 @@ class AddEdit_MainExercise_VC: UIViewController {
             
             selectedBodyPart = selectedExercise?.bodypart
             exerciseTextField.text = selectedExercise?.name
-            progressionSchemeTextField.text = selectedExercise?.progression?.name
-            selectedProgressionScheme = selectedExercise?.progression
+            progressionSchemeTextField.text = (selectedExercise as! BB_Exercise).progression?.name
+            selectedBbProgression = selectedExercise?.progression
             isWendlerTextField.text = "No"
             
             
@@ -137,9 +138,11 @@ class AddEdit_MainExercise_VC: UIViewController {
             self.title = "Choose Exercise"
         }
         
+        DataManager.getProgression(exData: &bb_progression)
+        DataManager.getProgression(exData: &wen_progression)
+        
         
         bodyPartData = Util.getBodyPartData()
-        DataManager.getProgression(exData: &progressionSchemeData)
         wendlerData = Util.getYesOrNoForPickerData()
         createPickers()
         createToolbarDoneButton()
@@ -156,7 +159,7 @@ class AddEdit_MainExercise_VC: UIViewController {
             
             passObj.bodypart = bodyPartTextField.text!
             passObj.name = exerciseTextField.text!
-            passObj.progression = selectedProgressionScheme
+            passObj.progression = selectedWenProgression
             passObj.currentTM = Double(trainingMaxTextField.text!)!
             
             if (isItMain!) {
@@ -178,7 +181,7 @@ class AddEdit_MainExercise_VC: UIViewController {
             
             passObj.bodypart = bodyPartTextField.text!
             passObj.name = exerciseTextField.text!
-            passObj.progression = selectedProgressionScheme
+            passObj.progression = selectedBbProgression
             passObj.startingWeight = Double(trainingMaxTextField.text!)!
             
             if (isItMain!) {
@@ -259,7 +262,7 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
         } else if pickerView == exercisePicker {
             returnInt = exerciseData.count
         } else if pickerView == progressionPicker {
-            returnInt = progressionSchemeData.count
+            returnInt = wen_progression.count
         } else if pickerView == isWendlerPicker {
             returnInt = wendlerData.count
         }
@@ -276,7 +279,7 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
         } else if pickerView == exercisePicker {
             returnStr = exerciseData[row].name
         } else if pickerView == progressionPicker {
-            returnStr = progressionSchemeData[row].name
+            returnStr = wen_progression[row].name
         } else if pickerView == isWendlerPicker {
             returnStr = wendlerData[row]
         }
@@ -296,8 +299,8 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
             
             // Query for progression and fill in progression data
         } else if pickerView == progressionPicker {
-            selectedProgressionScheme = progressionSchemeData[row]
-            progressionSchemeTextField.text = selectedProgressionScheme?.name
+            selectedWenProgression = wen_progression[row]
+            progressionSchemeTextField.text = selectedWenProgression?.name
         } else if pickerView == isWendlerPicker {
             selectedWendler = wendlerData[row]
             isWendlerTextField.text = selectedWendler

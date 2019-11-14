@@ -115,14 +115,28 @@ class DataManager {
     /*
      * Progression
      */
-    static func getProgression(exData: inout [Progression]) {
+    static func getProgression(exData: inout [Wen_Progression]) {
         
-        let request = Progression.fetchRequest() as NSFetchRequest<Progression>
+        let request = Wen_Progression.fetchRequest() as NSFetchRequest<Wen_Progression>
         
         do {
             exData = try context.fetch(request)
         } catch let error as NSError {
-            print("Could no fetch ProgressionData. \(error), \(error.userInfo)")
+            print("Could no fetch Wen_ProgressionData. \(error), \(error.userInfo)")
+        }
+    }
+    
+    /*
+     * Progression
+     */
+    static func getProgression(exData: inout [BB_Progression]) {
+        
+        let request = BB_Progression.fetchRequest() as NSFetchRequest<BB_Progression>
+        
+        do {
+            exData = try context.fetch(request)
+        } catch let error as NSError {
+            print("Could no fetch BB_ProgressionData. \(error), \(error.userInfo)")
         }
     }
     

@@ -2,7 +2,7 @@
 //  Sets+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/10/19.
+//  Created by Elliott, Josh on 11/14/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -19,5 +19,8 @@ extension Sets {
 
     @NSManaged public var reps: Int32
     @NSManaged public var weight: Double
+    @NSManaged public var attempt: Attempt?
+    @NSManaged public var wenProgression: Wen_Progression?
+    @NSManaged public var bbProgression: BB_Progression?
 
 }

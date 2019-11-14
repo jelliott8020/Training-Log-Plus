@@ -449,7 +449,7 @@ extension TemplateParent_VC {
     func getBBTestData() -> BB_Exercise {
         let item = BB_Exercise(entity: BB_Exercise.entity(), insertInto: context)
         item.name = getRandomBBEx()
-        let progMainBB = getNewProgression("3x10")
+        let progMainBB = getBBProgression("3x10")
         item.progression = progMainBB
         item.bodypart = getRandomBodyPart()
         item.startingWeight = 57
@@ -469,7 +469,7 @@ extension TemplateParent_VC {
     func getWendlerTestData() -> Wen_Exercise {
         let item = Wen_Exercise(entity: Wen_Exercise.entity(), insertInto: context)
         item.name = getRandomWendlerEx()
-        let progMainWen = getNewProgression("531")
+        let progMainWen = getWenProgression("531")
         item.progression = progMainWen
         item.bodypart = getRandomBodyPart()
         item.currentTM = 235.0
@@ -532,10 +532,19 @@ extension TemplateParent_VC {
     
     
     /*
-     * GET PROGRESSION
+     * GET WEN PROGRESSION
      */
-    func getNewProgression(_ name: String) -> Progression {
-        let item = Progression(entity: Progression.entity(), insertInto: context)
+    func getWenProgression(_ name: String) -> Wen_Progression {
+        let item = Wen_Progression(entity: Wen_Progression.entity(), insertInto: context)
+        item.name = name
+        return item
+    }
+    
+    /*
+     * GET BB PROGRESSION
+     */
+    func getBBProgression(_ name: String) -> BB_Progression {
+        let item = BB_Progression(entity: BB_Progression.entity(), insertInto: context)
         item.name = name
         return item
     }

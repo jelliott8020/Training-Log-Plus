@@ -2,7 +2,7 @@
 //  TrainingMax+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/10/19.
+//  Created by Elliott, Josh on 11/14/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -18,8 +18,9 @@ extension TrainingMax {
     }
 
     @NSManaged public var date: Date?
+    @NSManaged public var reps: Double
     @NSManaged public var trainingMax: Double
     @NSManaged public var weight: Double
-    @NSManaged public var reps: Double
+    @NSManaged public var wen_Exer: Wen_Exercise?
 
 }

@@ -1,5 +1,5 @@
 //
-//  Attempt+CoreDataProperties.swift
+//  BB_Progression+CoreDataProperties.swift
 //  Training Log Plus
 //
 //  Created by Elliott, Josh on 11/14/19.
@@ -11,20 +11,20 @@ import Foundation
 import CoreData
 
 
-extension Attempt {
+extension BB_Progression {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Attempt> {
-        return NSFetchRequest<Attempt>(entityName: "Attempt")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<BB_Progression> {
+        return NSFetchRequest<BB_Progression>(entityName: "BB_Progression")
     }
 
-    @NSManaged public var date: Date?
-    @NSManaged public var bb_exer: BB_Exercise?
+    @NSManaged public var name: String
     @NSManaged public var sets: Set<Sets>
+    @NSManaged public var exercise: BB_Exercise?
 
 }
 
 // MARK: Generated accessors for sets
-extension Attempt {
+extension BB_Progression {
 
     @objc(addSetsObject:)
     @NSManaged public func addToSets(_ value: Sets)

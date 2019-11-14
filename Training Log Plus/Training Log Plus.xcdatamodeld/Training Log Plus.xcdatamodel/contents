@@ -8,9 +8,11 @@
     <entity name="BB_Exercise" representedClassName=".BB_Exercise" parentEntity="Exercise" syncable="YES">
         <attribute name="startingWeight" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="attemptList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attempt" inverseName="bb_exer" inverseEntity="Attempt"/>
+        <relationship name="progression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BB_Progression" inverseName="exercise" inverseEntity="BB_Progression"/>
     </entity>
-    <entity name="BBProgression" representedClassName=".BBProgression" syncable="YES">
-        <attribute name="name" optional="YES"/>
+    <entity name="BB_Progression" representedClassName=".BB_Progression" syncable="YES">
+        <attribute name="name" attributeType="String"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BB_Exercise" inverseName="progression" inverseEntity="BB_Exercise"/>
         <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets" inverseName="bbProgression" inverseEntity="Sets"/>
     </entity>
     <entity name="Exercise" representedClassName=".Exercise" isAbstract="YES" syncable="YES">
@@ -18,7 +20,6 @@
         <attribute name="name" attributeType="String"/>
         <relationship name="accList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutDay" inverseName="accExerciseList" inverseEntity="WorkoutDay"/>
         <relationship name="mainList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutDay" inverseName="mainExerciseList" inverseEntity="WorkoutDay"/>
-        <relationship name="progression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progression" inverseName="exer" inverseEntity="Progression"/>
     </entity>
     <entity name="PersonalRecord" representedClassName=".PersonalRecord" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -26,18 +27,12 @@
         <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="wen_Exer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wen_Exercise" inverseName="personalRecords" inverseEntity="Wen_Exercise"/>
     </entity>
-    <entity name="Progression" representedClassName=".Progression" syncable="YES">
-        <attribute name="name" attributeType="String"/>
-        <relationship name="exer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="progression" inverseEntity="Exercise"/>
-        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets" inverseName="progression" inverseEntity="Sets"/>
-    </entity>
     <entity name="Sets" representedClassName=".Sets" syncable="YES">
         <attribute name="reps" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="attempt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attempt" inverseName="sets" inverseEntity="Attempt"/>
-        <relationship name="bbProgression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BBProgression" inverseName="sets" inverseEntity="BBProgression"/>
-        <relationship name="progression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progression" inverseName="sets" inverseEntity="Progression"/>
-        <relationship name="wenProgression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WendlerProgression" inverseName="sets" inverseEntity="WendlerProgression"/>
+        <relationship name="bbProgression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BB_Progression" inverseName="sets" inverseEntity="BB_Progression"/>
+        <relationship name="wenProgression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wen_Progression" inverseName="sets" inverseEntity="Wen_Progression"/>
     </entity>
     <entity name="Template" representedClassName=".Template" syncable="YES">
         <attribute name="currentDayIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -60,11 +55,13 @@
         <attribute name="currentTM" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="dayOfWeek" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="personalRecords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonalRecord" inverseName="wen_Exer" inverseEntity="PersonalRecord"/>
+        <relationship name="progression" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wen_Progression" inverseName="exercise" inverseEntity="Wen_Progression"/>
         <relationship name="trainingMaxes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrainingMax" inverseName="wen_Exer" inverseEntity="TrainingMax"/>
     </entity>
-    <entity name="WendlerProgression" representedClassName=".WendlerProgression" syncable="YES">
+    <entity name="Wen_Progression" representedClassName=".Wen_Progression" syncable="YES">
         <attribute name="dayOfWeek" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wen_Exercise" inverseName="progression" inverseEntity="Wen_Exercise"/>
         <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets" inverseName="wenProgression" inverseEntity="Sets"/>
     </entity>
     <entity name="WorkoutDay" representedClassName=".WorkoutDay" syncable="YES">
@@ -75,16 +72,15 @@
     </entity>
     <elements>
         <element name="Attempt" positionX="-167.86328125" positionY="-306.19140625" width="128" height="88"/>
-        <element name="BB_Exercise" positionX="-370.3515625" positionY="-304.90234375" width="128" height="73"/>
-        <element name="Exercise" positionX="-389.2421875" positionY="-159.7421875" width="128" height="118"/>
-        <element name="PersonalRecord" positionX="17.7578125" positionY="-53.765625" width="128" height="103"/>
-        <element name="Progression" positionX="-216.859375" positionY="-151.109375" width="128" height="88"/>
-        <element name="Sets" positionX="37.84765625" positionY="-283.7421875" width="128" height="133"/>
-        <element name="Template" positionX="-573.7265625" positionY="-421.51953125" width="128" height="163"/>
-        <element name="TrainingMax" positionX="-98.71875" positionY="164.7109375" width="128" height="118"/>
-        <element name="Wen_Exercise" positionX="-385.25390625" positionY="13.65234375" width="128" height="103"/>
-        <element name="WorkoutDay" positionX="-577.39453125" positionY="-165.640625" width="128" height="103"/>
-        <element name="WendlerProgression" positionX="-396" positionY="-279" width="128" height="88"/>
-        <element name="BBProgression" positionX="-387" positionY="-270" width="128" height="73"/>
+        <element name="BB_Exercise" positionX="-437.0234375" positionY="-454.796875" width="128" height="88"/>
+        <element name="Exercise" positionX="-438.37109375" positionY="-292.6328125" width="128" height="103"/>
+        <element name="PersonalRecord" positionX="-253.25" positionY="82.44921875" width="128" height="103"/>
+        <element name="Sets" positionX="153.1640625" positionY="-259.78125" width="128" height="118"/>
+        <element name="Template" positionX="-657.55859375" positionY="-501.8671875" width="128" height="163"/>
+        <element name="TrainingMax" positionX="-439.55859375" positionY="191.85546875" width="128" height="118"/>
+        <element name="Wen_Exercise" positionX="-437.3359375" positionY="-107.60546875" width="128" height="118"/>
+        <element name="WorkoutDay" positionX="-647.20703125" positionY="-277.359375" width="128" height="103"/>
+        <element name="Wen_Progression" positionX="-210.8984375" positionY="-93.01171875" width="128" height="103"/>
+        <element name="BB_Progression" positionX="-208.01171875" positionY="-439.421875" width="128" height="88"/>
     </elements>
 </model>

@@ -2,7 +2,7 @@
 //  Template+CoreDataProperties.swift
 //  Training Log Plus
 //
-//  Created by Josh Elliott on 11/10/19.
+//  Created by Elliott, Josh on 11/14/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 //
@@ -18,14 +18,13 @@ extension Template {
     }
 
     @NSManaged public var currentDayIndex: Int32
+    @NSManaged public var currentTemplate: Bool
     @NSManaged public var dateStarted: Date?
     @NSManaged public var name: String
     @NSManaged public var numDaysPerWeek: Int32
     @NSManaged public var numOfWeeks: Int32
     @NSManaged public var wendlerYesNo: Bool
     @NSManaged public var workoutList: Set<WorkoutDay>
-    //@NSManaged public var workoutList: NSSet?
-    @NSManaged public var currentTemplate: Bool
 
 }
 
