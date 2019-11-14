@@ -19,6 +19,6 @@ extension Exercise {
 
     @NSManaged public var bodypart: String
     @NSManaged public var name: String
-    @NSManaged public var progression: Progression?
+    
 
 }

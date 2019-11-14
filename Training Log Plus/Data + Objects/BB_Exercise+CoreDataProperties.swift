@@ -21,6 +21,7 @@ extension BB_Exercise {
 //    @NSManaged public var attemptList: NSSet?
     
     @NSManaged public var attemptList: Set<Attempt>
+    @NSManaged public var progression: Progression?
 
 }
 

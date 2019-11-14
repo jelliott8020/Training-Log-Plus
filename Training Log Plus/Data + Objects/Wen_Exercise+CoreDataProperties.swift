@@ -23,6 +23,8 @@ extension Wen_Exercise {
     
     @NSManaged public var personalRecords: Set<PersonalRecord>
     @NSManaged public var trainingMaxes: Set<TrainingMax>
+    @NSManaged public var dayOfWeek: Int32
+    @NSManaged public var progression: Progression?
 
 }
 
