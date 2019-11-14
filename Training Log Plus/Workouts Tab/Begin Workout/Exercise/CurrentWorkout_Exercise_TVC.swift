@@ -55,16 +55,16 @@ class CurrentWorkout_Exercise_TVC: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "amrapPerformance" {
-            if let amrap_VC = segue.destination as? AmrapPerformance_VC {
-                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
-                    let item =
-                }
-            }
-            
-        } else if segue.identifier == "bbPerformance" {
-            
-        }
+//        if segue.identifier == "amrapPerformance" {
+//            if let amrap_VC = segue.destination as? AmrapPerformance_VC {
+//                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+//                    //let item =
+//                }
+//            }
+//
+//        } else if segue.identifier == "bbPerformance" {
+//
+//        }
     }
 
 }

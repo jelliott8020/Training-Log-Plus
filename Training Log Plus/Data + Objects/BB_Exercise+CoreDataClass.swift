@@ -13,10 +13,10 @@ import CoreData
 
 public class BB_Exercise: Exercise {
     
-     var srtWeight : Int {
-        get { return Int(startingWeight) }
-        set { startingWeight = Int32(newValue) }
-     }
+//     var srtWeight : Int {
+//        get { return Int(startingWeight) }
+//        set { startingWeight = Double(newValue) }
+//     }
 
 //    func returnDisplayString() -> String {
 //        if let prog = progression, !prog.isEmpty {

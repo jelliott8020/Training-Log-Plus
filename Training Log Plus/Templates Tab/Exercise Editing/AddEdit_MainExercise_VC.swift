@@ -179,7 +179,7 @@ class AddEdit_MainExercise_VC: UIViewController {
             passObj.bodypart = bodyPartTextField.text!
             passObj.name = exerciseTextField.text!
             passObj.progression = selectedProgressionScheme
-            passObj.startingWeight = Int32(trainingMaxTextField.text!)!
+            passObj.startingWeight = Double(trainingMaxTextField.text!)!
             
             if (isItMain!) {
                 if (passedInExerciseObj == nil) {
