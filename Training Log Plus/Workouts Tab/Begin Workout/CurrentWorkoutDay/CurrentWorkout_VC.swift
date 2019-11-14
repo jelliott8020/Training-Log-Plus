@@ -9,8 +9,15 @@
 import UIKit
 import CoreData
 
+protocol Pass_CurrentWorkout_BackTo_WorkoutParent {
+    func currentWorkout_DidCancel(_ controller: CurrentWorkout_VC)
+    func workoutComplete(_ controller: CurrentWorkout_VC, didFinish item: WorkoutDay)
+}
+
 
 class CurrentWorkout_VC: UITableViewController {
+    
+    var delegate: Pass_CurrentWorkout_BackTo_WorkoutParent?
     
     weak var passedInTemplate: Template?
     var passedInDayIndex: Int?
@@ -139,6 +146,9 @@ extension CurrentWorkout_VC {
     }
 }
 
+/**
+* PASSBACK DELEGATE
+*/
 extension CurrentWorkout_VC: Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate {
     func currentExercise_DidCancel(_ controller: CurrentWorkout_Exercise_TVC) {
         navigationController?.popViewController(animated: true)
@@ -164,6 +174,4 @@ extension CurrentWorkout_VC: Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate 
         tableView.reloadData()
         
     }
-    
-    
 }

@@ -18,32 +18,54 @@ protocol Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate {
 
 class CurrentWorkout_Exercise_TVC: UITableViewController {
     
-    weak var passedInExerciseObj: Exercise?
+    weak var passedInExerciseObj: AnyObject?
+    var selectedExercise: AnyObject?
+    
+    var attemptList: [Attempt] = []
+    var personalRecordsList: [PersonalRecord] = []
+    
+    var exerciseSets: [Sets] = []
+    
     var isItMain: Bool?
     var delegate: Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if (passedInExerciseObj?.isKind(of: Wen_Exercise.self) ?? false) {
+            
+            selectedExercise = passedInExerciseObj as! Wen_Exercise
+            
+            self.title = selectedExercise?.name
+            personalRecordsList = Array(selectedExercise?.personalRecords ?? [])
+            //exerciseSets = Array(selectedExercise?.progression??.getSets())
+            
+        } else if (passedInExerciseObj?.isKind(of: BB_Exercise.self) ?? false) {
+            
+            selectedExercise = passedInExerciseObj as! BB_Exercise
+            
+            self.title = selectedExercise?.name
+            attemptList = Array(selectedExercise?.attemptList ?? [])
+        }
+        
 
     }
 
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "amrapPerformance" {
+            if let amrap_VC = segue.destination as? AmrapPerformance_VC {
+                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                    let item =
+                }
+            }
+            
+        } else if segue.identifier == "bbPerformance" {
+            
+        }
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
 }
 

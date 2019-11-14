@@ -83,7 +83,7 @@ class Workout_VC: UIViewController {
             }
         } else if segue.identifier == "BeginWorkoutSegue" {
             if let vc = segue.destination as? CurrentWorkout_VC {
-                //vc.delegate = self
+                vc.delegate = self
             }
         }
     }
@@ -91,7 +91,22 @@ class Workout_VC: UIViewController {
 
 
 /**
- * PASSBACK DELEGATE
+ * PASSBACK DELEGATE PERFORM WORKOUT
+ */
+extension Workout_VC: Pass_CurrentWorkout_BackTo_WorkoutParent {
+    func currentWorkout_DidCancel(_ controller: CurrentWorkout_VC) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func workoutComplete(_ controller: CurrentWorkout_VC, didFinish item: WorkoutDay) {
+        //stuff
+    }
+    
+    
+}
+
+/**
+ * PASSBACK DELEGATE TEMPLATE EDIT
  */
 extension Workout_VC: Pass_SelectedTemplate_BackTo_Workout_Delegate {
     

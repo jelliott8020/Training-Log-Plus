@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="18G1012" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="18G1012" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Attempt" representedClassName=".Attempt" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="bb_exer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BB_Exercise" inverseName="attemptList" inverseEntity="BB_Exercise"/>
         <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sets" inverseName="attempt" inverseEntity="Sets"/>
     </entity>
     <entity name="BB_Exercise" representedClassName=".BB_Exercise" parentEntity="Exercise" syncable="YES">
-        <attribute name="startingWeight" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startingWeight" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="attemptList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attempt" inverseName="bb_exer" inverseEntity="Attempt"/>
     </entity>
     <entity name="Exercise" representedClassName=".Exercise" isAbstract="YES" syncable="YES">

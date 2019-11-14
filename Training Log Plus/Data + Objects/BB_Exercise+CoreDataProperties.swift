@@ -17,7 +17,7 @@ extension BB_Exercise {
         return NSFetchRequest<BB_Exercise>(entityName: "BB_Exercise")
     }
 
-    @NSManaged public var startingWeight: Int32
+    @NSManaged public var startingWeight: Double
 //    @NSManaged public var attemptList: NSSet?
     
     @NSManaged public var attemptList: Set<Attempt>
