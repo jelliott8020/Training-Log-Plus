@@ -95,7 +95,9 @@ class AddEdit_MainExercise_VC: UIViewController {
                 trainingMaxTextField.text = ""
             }
             
-            trainingMaxes = selectedExercise?.trainingMaxes??.allObjects as! [TrainingMax]
+            //trainingMaxes = selectedExercise?.trainingMaxes??.allObjects as! [TrainingMax]
+            trainingMaxes = Array(selectedExercise?.trainingMaxes ?? [])
+            
             
             self.title = selectedExercise?.name
             bodyPartTextField.text = selectedExercise?.bodypart
@@ -117,7 +119,9 @@ class AddEdit_MainExercise_VC: UIViewController {
                 trainingMaxTextField.text = ""
             }
             
-            pastAttemptsList = selectedExercise?.attemptList?.allObjects as! [Attempt]
+            //pastAttemptsList = selectedExercise?.attemptList?.allObjects as! [Attempt]
+            
+            pastAttemptsList = Array(selectedExercise?.attemptList ?? [])
             
             self.title = selectedExercise?.name
             bodyPartTextField.text = selectedExercise?.bodypart
@@ -227,7 +231,8 @@ extension AddEdit_MainExercise_VC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             let att = pastAttemptsList[indexPath.row]
-            let sets = att.sets?.allObjects as! [Sets]
+            //let sets = att.sets?.allObjects as! [Sets]
+            let sets = Array(att.sets)
             let weightForCell = "Weight: " + String(format: "%.2f", sets[0].weight) + " | Reps: " + String(sets[0].reps)
             cell.trainingMaxLabel.text = weightForCell
         }

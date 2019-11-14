@@ -91,7 +91,9 @@ class AddEdit_Template_VC: UIViewController {
             
             setLabels(title: item.name, days: String(item.numDays), wen: item.wendlerYesNo, weeks: String(item.numOfWeeks))
             
-            workoutDaysList = item.workoutList?.allObjects as! [WorkoutDay]
+            //workoutDaysList = item.workoutList?.allObjects as! [WorkoutDay]
+            workoutDaysList = Array(item.workoutList)
+            
             
             doneButtonOutlet.isEnabled = true
         } else {

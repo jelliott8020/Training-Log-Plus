@@ -1,24 +1,27 @@
 //
-//  WorkoutListTableViewCell.swift
+//  CurrentWorkout_MainExer_TVCell.swift
 //  Training Log Plus
 //
-//  Created by Elliott, Josh on 10/1/19.
+//  Created by Elliott, Josh on 11/14/19.
 //  Copyright © 2019 JoshElliott. All rights reserved.
 //
 
 import UIKit
 
-class WorkoutList_TVCell: UITableViewCell {
+class CurrentWorkout_MainExer_TVCell: UITableViewCell {
     
-    @IBOutlet weak var workoutListTextLabel: UILabel!
+    @IBOutlet weak var cellLabel: UILabel!
     
+
     override func awakeFromNib() {
         super.awakeFromNib()
+        // Initialization code
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
     }
-    
-    
+
 }

@@ -25,12 +25,12 @@ public class BB_Exercise: Exercise {
 //        return name
 //    }
     
-    override func getList() -> NSSet {
-        if let att = attemptList {
-            return att
-        }
-        print("attemp list empty")
-        return NSSet.init()
-    }
+//    override func getList() -> NSSet {
+//        if let att = attemptList {
+//            return att
+//        }
+//        print("attemp list empty")
+//        return NSSet.init()
+//    }
 
 }

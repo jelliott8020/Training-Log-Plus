@@ -18,7 +18,8 @@ extension Progression {
     }
 
     @NSManaged public var name: String
-    @NSManaged public var sets: NSSet?
+//    @NSManaged public var sets: NSSet?
+    @NSManaged public var sets: Set<Sets>
 
 }
 

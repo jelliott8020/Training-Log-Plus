@@ -23,7 +23,8 @@ extension Template {
     @NSManaged public var numDaysPerWeek: Int32
     @NSManaged public var numOfWeeks: Int32
     @NSManaged public var wendlerYesNo: Bool
-    @NSManaged public var workoutList: NSSet?
+    @NSManaged public var workoutList: Set<WorkoutDay>
+    //@NSManaged public var workoutList: NSSet?
     @NSManaged public var currentTemplate: Bool
 
 }

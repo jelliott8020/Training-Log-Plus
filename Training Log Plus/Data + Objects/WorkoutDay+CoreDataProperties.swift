@@ -18,8 +18,11 @@ extension WorkoutDay {
     }
 
     @NSManaged public var name: String
-    @NSManaged public var accExerciseList: NSSet?
-    @NSManaged public var mainExerciseList: NSSet?
+    //@NSManaged public var accExerciseList: NSSet?
+    //@NSManaged public var mainExerciseList: NSSet?
+    
+    @NSManaged public var accExerciseList: Set<Exercise>
+    @NSManaged public var mainExerciseList: Set<Exercise>
 
 }
 

@@ -18,8 +18,11 @@ extension Wen_Exercise {
     }
 
     @NSManaged public var currentTM: Double
-    @NSManaged public var personalRecords: NSSet?
-    @NSManaged public var trainingMaxes: NSSet?
+//    @NSManaged public var personalRecords: NSSet?
+//    @NSManaged public var trainingMaxes: NSSet?
+    
+    @NSManaged public var personalRecords: Set<PersonalRecord>
+    @NSManaged public var trainingMaxes: Set<TrainingMax>
 
 }
 

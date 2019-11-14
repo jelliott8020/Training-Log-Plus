@@ -39,7 +39,8 @@ class Workout_VC: UIViewController {
         DataManager.getTemplate(current: true, temp: &currentTemplate)
         
         if !currentTemplate.isEmpty {
-            workouts = currentTemplate[0].workoutList?.allObjects as! [WorkoutDay]
+            //workouts = currentTemplate[0].workoutList?.allObjects as! [WorkoutDay]
+            workouts = Array(currentTemplate[0].workoutList)
         }
         
         displayDate()
@@ -97,7 +98,8 @@ extension Workout_VC: Pass_SelectedTemplate_BackTo_Workout_Delegate {
         currentTemplate.removeAll()
         currentTemplate.append(item)
         currentTemplate[0].currentTemplate = true
-        workouts = currentTemplate[0].workoutList?.allObjects as! [WorkoutDay]
+        //workouts = currentTemplate[0].workoutList?.allObjects as! [WorkoutDay]
+        workouts = Array(currentTemplate[0].workoutList)
         displayTemplate()
         displayCurrentDay()
         appDelegate.saveContext()

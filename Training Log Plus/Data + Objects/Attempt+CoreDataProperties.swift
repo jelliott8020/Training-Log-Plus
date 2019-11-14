@@ -18,7 +18,9 @@ extension Attempt {
     }
 
     @NSManaged public var date: Date?
-    @NSManaged public var sets: NSSet?
+    //@NSManaged public var sets: NSSet?
+    
+    @NSManaged public var sets: Set<Sets>
 
 }
 
