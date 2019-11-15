@@ -18,7 +18,7 @@ extension Wen_Progression {
     }
 
     @NSManaged public var name: String
-    @NSManaged public var dayOfWeek: Int32
+    @NSManaged public var week: Int32
     @NSManaged public var sets: Set<Sets>
     @NSManaged public var exercise: Wen_Exercise?
 

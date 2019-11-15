@@ -20,7 +20,6 @@ class CurrentWorkout_VC: UITableViewController {
     var delegate: Pass_CurrentWorkout_BackTo_WorkoutParent?
     
     weak var passedInTemplate: Template?
-    var passedInDayIndex: Int?
     
     var workoutDays: [WorkoutDay] = []
     var currentDay: WorkoutDay?
@@ -31,26 +30,21 @@ class CurrentWorkout_VC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = passedInTemplate?.name
-        workoutDays = Array(passedInTemplate?.workoutList ?? [])
-        currentDay = workoutDays[passedInDayIndex ?? 0]
+        workoutDays = Array(passedInTemplate!.workoutList)
+        currentDay = workoutDays[passedInTemplate!.currDay]
+        self.title = currentDay?.name
         
-        accExerciseList = Array(currentDay?.accExerciseList ?? [])
-        mainExerciseList = Array(currentDay?.mainExerciseList ?? [])
+        accExerciseList = Array(currentDay!.accExerciseList)
+        mainExerciseList = Array(currentDay!.mainExerciseList)
     }
     
     @IBAction func cancel(_ sender: Any) {
-        presentingViewController?.dismiss(animated: true, completion: nil)
-    }
+        delegate?.currentWorkout_DidCancel(self)    }
     
     @IBAction func complete(_ sender: UIBarButtonItem) {
-        
+        delegate?.workoutComplete(self, didFinish: currentDay!)
     }
     
-    
-    // Prepare for Segue
-    //MainExerSegue
-    //AccExerSegue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MainExerSegue" {
@@ -99,11 +93,17 @@ extension CurrentWorkout_VC {
             let weightForCell = mainExerciseList[indexPath.row].name
             let cell = tableView.dequeueReusableCell(withIdentifier: "MainExerciseCell") as! CurrentWorkout_MainExer_TVCell
             cell.cellLabel.text = weightForCell
+            //cell.cellLabel.text = "Main"
+            return cell
         } else if indexPath.section == 1 {
             let weightForCell = accExerciseList[indexPath.row].name
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccExerciseCell") as! CurrentWorkout_AccExer_TVCell
             cell.cellLabel.text = weightForCell
+            //cell.cellLabel.text = "Acc"
+            return cell
         }
+        
+        dummyCell.textLabel?.text = "dummy"
         
         return dummyCell
     }

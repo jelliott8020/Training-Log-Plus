@@ -21,6 +21,8 @@ class CurrentWorkout_Exercise_TVC: UITableViewController {
     weak var passedInExerciseObj: AnyObject?
     var selectedExercise: AnyObject?
     
+    var selectedProgression: AnyObject?
+    
     var attemptList: [Attempt] = []
     var personalRecordsList: [PersonalRecord] = []
     
@@ -36,20 +38,23 @@ class CurrentWorkout_Exercise_TVC: UITableViewController {
         if (passedInExerciseObj?.isKind(of: Wen_Exercise.self) ?? false) {
             
             selectedExercise = passedInExerciseObj as! Wen_Exercise
+            selectedProgression = (passedInExerciseObj as! Wen_Exercise).progression
+            let trainingMax = (selectedExercise as! Wen_Exercise).currentTM
             
             self.title = selectedExercise?.name
-            personalRecordsList = Array(selectedExercise?.personalRecords ?? [])
-            //exerciseSets = Array(selectedExercise?.progression??.getSets())
+            personalRecordsList = Array(selectedExercise!.personalRecords ?? [])
+            exerciseSets = (selectedExercise as! Wen_Exercise).progression!.getSets(weight: trainingMax)
             
         } else if (passedInExerciseObj?.isKind(of: BB_Exercise.self) ?? false) {
             
             selectedExercise = passedInExerciseObj as! BB_Exercise
+            selectedProgression = (passedInExerciseObj as! BB_Exercise).progression
+            let weight = (selectedExercise as! BB_Exercise).startingWeight
             
             self.title = selectedExercise?.name
-            attemptList = Array(selectedExercise?.attemptList ?? [])
+            attemptList = Array(selectedExercise!.attemptList ?? [])
+            exerciseSets = (selectedExercise as! BB_Exercise).progression!.getSets(weight: weight)
         }
-        
-
     }
 
 
@@ -75,18 +80,35 @@ class CurrentWorkout_Exercise_TVC: UITableViewController {
  */
 extension CurrentWorkout_Exercise_TVC {
     override func numberOfSections(in tableView: UITableView) -> Int {
-
-        return 0
+        return 1
+        // Will want to change this with Wendler. Add Base + FSL + Joker. Option to add jokers.
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return exerciseSets.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        return cell
+        
+        let dummyCell = UITableViewCell()
+        let set = exerciseSets[indexPath.row]
+        let weightForCell = String(set.weight) + String(set.reps)
+        
+        if (selectedExercise as? Wen_Exercise) != nil {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "amrapCell", for: indexPath)
+            cell.textLabel?.text = weightForCell
+            return cell
+        } else if (selectedExercise as? BB_Exercise) != nil {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "bodybuildingCell", for: indexPath)
+            cell.textLabel?.text = weightForCell
+            return cell
+            
+        }
+        
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "repsAndDoneCell", for: indexPath)
+        
+        
+        return dummyCell
     }
 }
