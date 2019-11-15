@@ -295,9 +295,9 @@
 			isa = PBXGroup;
 			children = (
 				05CBE50C2357796D00E766F8 /* Workout_VC.swift */,
-				03B2D7FF235BD22100005CC5 /* Custom Workout */,
-				0583C40A235A4F70001AAFBA /* Change Template */,
 				0583C408235A4F64001AAFBA /* Begin Workout */,
+				0583C40A235A4F70001AAFBA /* Change Template */,
+				03B2D7FF235BD22100005CC5 /* Custom Workout */,
 			);
 			path = "Workouts Tab";
 			sourceTree = "<group>";

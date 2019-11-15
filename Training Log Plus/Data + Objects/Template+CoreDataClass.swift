@@ -18,14 +18,19 @@ public class Template: NSManagedObject {
         set { numDaysPerWeek = Int32(newValue) }
      }
     
+    var numWeeks: Int {
+        get { return Int(numOfWeeks) }
+        set { numOfWeeks = Int32(newValue) }
+    }
+    
     var currDay: Int {
         get { return Int(currentDayIndex) }
         set { currentDayIndex = Int32(newValue) }
     }
     
-    var numWeeks: Int {
-        get { return Int(numOfWeeks) }
-        set { numOfWeeks = Int32(newValue) }
+    var currWeek: Int {
+        get { return Int(currentWeekIndex) }
+        set { currentWeekIndex = Int32(newValue) }
     }
 
 }

@@ -164,7 +164,7 @@ class DataManager {
         let request = Template.fetchRequest() as NSFetchRequest<Template>
         
         if (current) {
-            request.predicate = NSPredicate(format: "currentTemplate == 'true'")
+            request.predicate = NSPredicate(format: "currentTemplate == %@", NSNumber(value: true))
         } else {
             temp.removeAll()
             return

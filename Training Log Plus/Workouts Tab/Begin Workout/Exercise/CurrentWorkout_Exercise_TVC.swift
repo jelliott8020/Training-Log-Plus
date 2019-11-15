@@ -31,7 +31,22 @@ class CurrentWorkout_Exercise_TVC: UITableViewController {
     var isItMain: Bool?
     var delegate: Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate?
     
-
+    
+    
+    
+    @IBAction func doneButton(_ sender: UIBarButtonItem) {
+        doneButtonAction()
+    }
+    
+    func doneButtonAction() {
+        if (isItMain!) {
+            delegate?.completeWithMainExercise(self, didFinish: selectedExercise as! Exercise)
+        } else {
+            delegate?.completeWithAccExercise(self, didFinish: selectedExercise as! Exercise)
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +59,9 @@ class CurrentWorkout_Exercise_TVC: UITableViewController {
             self.title = selectedExercise?.name
             personalRecordsList = Array(selectedExercise!.personalRecords ?? [])
             exerciseSets = (selectedExercise as! Wen_Exercise).progression!.getSets(weight: trainingMax)
+            print("WenExSets: ")
+            print(exerciseSets)
+            print(selectedProgression as Any)
             
         } else if (passedInExerciseObj?.isKind(of: BB_Exercise.self) ?? false) {
             
@@ -54,6 +72,10 @@ class CurrentWorkout_Exercise_TVC: UITableViewController {
             self.title = selectedExercise?.name
             attemptList = Array(selectedExercise!.attemptList ?? [])
             exerciseSets = (selectedExercise as! BB_Exercise).progression!.getSets(weight: weight)
+            
+            print("BBExSets: ")
+            print(exerciseSets)
+            print(selectedProgression as Any)
         }
     }
 
@@ -92,22 +114,22 @@ extension CurrentWorkout_Exercise_TVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let dummyCell = UITableViewCell()
+        dummyCell.textLabel!.text = "Dummy cell"
         let set = exerciseSets[indexPath.row]
         let weightForCell = String(set.weight) + String(set.reps)
         
         if (selectedExercise as? Wen_Exercise) != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "amrapCell", for: indexPath)
-            cell.textLabel?.text = weightForCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "amrapCell", for: indexPath) as! ExerciseAMRAP_TableViewCell
+            cell.cellLabel.text = weightForCell
             return cell
         } else if (selectedExercise as? BB_Exercise) != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "bodybuildingCell", for: indexPath)
-            cell.textLabel?.text = weightForCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "bodybuildingCell", for: indexPath) as! ExerciseBB_TableViewCell
+            cell.cellLabel.text = weightForCell
             return cell
-            
         }
         
         //let cell = tableView.dequeueReusableCell(withIdentifier: "repsAndDoneCell", for: indexPath)
-        
+        print("dummy")
         
         return dummyCell
     }

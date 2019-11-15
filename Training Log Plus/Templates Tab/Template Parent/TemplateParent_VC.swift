@@ -362,12 +362,8 @@ extension TemplateParent_VC {
         var count = 0
         while (count < 4) {
             let temp1 = getTemplate()
-            print("Name: " + temp1.name)
             
             if !tempNameArg.contains(temp1.name) {
-                print("List:")
-                print(templateList)
-                print("EndList:\n")
                 count += 1
                 templateList.append(temp1)
                 tempNameArg.append(temp1.name)
@@ -449,7 +445,7 @@ extension TemplateParent_VC {
     func getBBTestData() -> BB_Exercise {
         let item = BB_Exercise(entity: BB_Exercise.entity(), insertInto: context)
         item.name = getRandomBBEx()
-        let progMainBB = getBBProgression("3x10")
+        let progMainBB = getBBProgression("3x5 + 2x12 @ 70%")
         item.progression = progMainBB
         item.bodypart = getRandomBodyPart()
         item.startingWeight = 57
@@ -469,7 +465,7 @@ extension TemplateParent_VC {
     func getWendlerTestData() -> Wen_Exercise {
         let item = Wen_Exercise(entity: Wen_Exercise.entity(), insertInto: context)
         item.name = getRandomWendlerEx()
-        let progMainWen = getWenProgression("531")
+        let progMainWen = getWenProgression("531 + 2x10 FSL")
         item.progression = progMainWen
         item.bodypart = getRandomBodyPart()
         item.currentTM = 235.0

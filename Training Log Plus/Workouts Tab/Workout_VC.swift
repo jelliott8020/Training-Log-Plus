@@ -43,6 +43,24 @@ class Workout_VC: UIViewController {
         refreshDisplay()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        DataManager.getTemplate(current: true, temp: &templates)
+        
+        if templates.count == 0 {
+            print("Current Templates Empty")
+        } else if templates.count == 1 {
+            currentTemplate = templates[0]
+            workouts = Array(currentTemplate!.workoutList)
+        } else {
+            print("Multiple Current Templates Returned")
+        }
+        
+        //workouts = currentTemplate[0].workoutList?.allObjects as! [WorkoutDay]
+        
+        
+        refreshDisplay()
+    }
+    
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "changeTemplateSegue" {
@@ -73,8 +91,18 @@ extension Workout_VC: Pass_CurrentWorkout_BackTo_WorkoutParent {
         
         let curr = currentTemplate?.currDay
         
-        if curr == currentTemplate?.numDays {
+        if curr == currentTemplate!.numDays - 1 {
             currentTemplate?.currDay = 0
+            
+            let currWeek = currentTemplate?.currWeek
+            
+            if currWeek == currentTemplate!.numWeeks - 1 {
+                print("Finished cycle")
+                currentTemplate?.currWeek = 0
+            } else {
+                currentTemplate?.currWeek += 1
+            }
+            
         } else {
             currentTemplate?.currDay += 1
         }
@@ -100,6 +128,9 @@ extension Workout_VC: Pass_SelectedTemplate_BackTo_Workout_Delegate {
         for temps in templates {
             temps.currentTemplate = false
         }
+        
+        print("template returned")
+        
         
         templates.removeAll()
         templates.append(item)

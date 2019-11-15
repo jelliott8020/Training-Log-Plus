@@ -69,7 +69,6 @@ class CurrentWorkout_VC: UITableViewController {
             }
         }
     }
-
 }
 
 

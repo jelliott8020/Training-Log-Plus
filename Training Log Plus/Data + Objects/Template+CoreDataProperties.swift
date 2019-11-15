@@ -18,6 +18,7 @@ extension Template {
     }
 
     @NSManaged public var currentDayIndex: Int32
+    @NSManaged public var currentWeekIndex: Int32
     @NSManaged public var currentTemplate: Bool
     @NSManaged public var dateStarted: Date?
     @NSManaged public var name: String

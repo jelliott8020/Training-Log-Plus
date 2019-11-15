@@ -209,8 +209,6 @@ extension TrainingMaxCalc_VC: UIPickerViewDataSource, UIPickerViewDelegate {
             selectedBodyPart = bodypartData[row]
             bodypartTextField.text = selectedBodyPart
             DataManager.getWenExercise(exStr: selectedBodyPart!, exData: &exerciseData)
-            //print(selectedBodyPart as Any)
-            //print(exerciseData)
             exercisePicker.reloadAllComponents()
         }
     }
