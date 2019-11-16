@@ -7,10 +7,38 @@
 //
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 
 public class Attempt: NSManagedObject {
+    
+    /*
+     * Get Training Max Display String with Date
+     */
+    func getAttemptDisplayString() -> NSMutableAttributedString {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        let dateFormatted = formatter.string(from: date!)
+        
+        let setsArg = Array(sets)
+        
+        let dateStr = "Date: " + dateFormatted
+        let weightStr = "  | Weight: " + String(format: "%.0f", setsArg[0].weight)
+        let repsStr = "  |  Reps: " + String(format: "%.0f", setsArg[0].reps)
+        
+        let totalString = dateStr + weightStr + repsStr
+        
+        let strNumber: NSString = totalString as NSString
+        let dateRange = (strNumber).range(of: dateStr)
+        let repsRange = (strNumber).range(of: repsStr)
+        let attribute = NSMutableAttributedString.init(string: strNumber as String)
+        attribute.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 17.0), range: repsRange)
+        attribute.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 17.0), range: dateRange)
+        
+        return attribute
+    }
+    
 
 }

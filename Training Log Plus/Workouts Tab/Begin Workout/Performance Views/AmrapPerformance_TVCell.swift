@@ -10,9 +10,8 @@ import UIKit
 
 class AmrapPerformance_TVCell: UITableViewCell {
 
-    @IBOutlet weak var dateAndWeightLabel: UILabel!
     
-    @IBOutlet weak var repsAndTMLabel: UILabel!
+    @IBOutlet weak var cellLabel: UILabel!
     
     
     override func awakeFromNib() {
