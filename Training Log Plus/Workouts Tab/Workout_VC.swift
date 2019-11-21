@@ -21,7 +21,11 @@ class Workout_VC: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var templateLabel: UILabel!
     @IBOutlet weak var tempDayLabel: UILabel!
-
+    
+    @IBAction func skipDayButton(_ sender: UIButton) {
+        goToNextDay()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,26 +93,7 @@ extension Workout_VC: Pass_CurrentWorkout_BackTo_WorkoutParent {
     func workoutComplete(_ controller: CurrentWorkout_VC, didFinish item: WorkoutDay) {
         navigationController?.popViewController(animated: true)
         
-        let curr = currentTemplate?.currDay
-        
-        if curr == currentTemplate!.numDays - 1 {
-            currentTemplate?.currDay = 0
-            
-            let currWeek = currentTemplate?.currWeek
-            
-            if currWeek == currentTemplate!.numWeeks - 1 {
-                print("Finished cycle")
-                currentTemplate?.currWeek = 0
-            } else {
-                currentTemplate?.currWeek += 1
-            }
-            
-        } else {
-            currentTemplate?.currDay += 1
-        }
-        
-        refreshDisplay()
-        appDelegate.saveContext()
+        goToNextDay()
     }
     
     
@@ -154,6 +139,29 @@ extension Workout_VC {
         displayCurrentDay()
     }
     
+    func goToNextDay() {
+        let curr = currentTemplate?.currDay
+        
+        if curr == currentTemplate!.numDays - 1 {
+            currentTemplate?.currDay = 0
+            
+            let currWeek = currentTemplate?.currWeek
+            
+            if currWeek == currentTemplate!.numWeeks - 1 {
+                print("Finished cycle")
+                currentTemplate?.currWeek = 0
+            } else {
+                currentTemplate?.currWeek += 1
+            }
+            
+        } else {
+            currentTemplate?.currDay += 1
+        }
+        
+        refreshDisplay()
+        appDelegate.saveContext()
+    }
+    
     func displayDate() {
         let dateFormatter = DateFormatter()
         //dateFormatter.timeStyle = .medium
@@ -167,7 +175,7 @@ extension Workout_VC {
         if currentTemplate != nil {
             templateLabel.text = currentTemplate?.name
         } else {
-            templateLabel.text = "No current template selected"
+            templateLabel.text = "No current template"
         }
     }
     

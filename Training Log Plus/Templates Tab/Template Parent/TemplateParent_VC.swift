@@ -399,8 +399,8 @@ extension TemplateParent_VC {
             item.currentTemplate = false
             
             for _ in 0...3 {
-                let wo = getWorkout()
-                item.addToWorkoutList(wo)
+                //let wo =
+                item.addToWorkoutList(getWorkout())
             }
             
             return item
@@ -417,23 +417,23 @@ extension TemplateParent_VC {
         
         
         for _ in 0...3 {
-            let ex1 = getWendlerTestData()
-            wo1.addToAccExerciseList(ex1)
+            //let ex1 =
+            wo1.addToAccExerciseList(getWendlerTestData())
         }
         
         for _ in 0...3 {
-            let ex1 = getBBTestData()
-            wo1.addToAccExerciseList(ex1)
+            //let ex1 =
+            wo1.addToAccExerciseList(getBBTestData())
         }
         
         
         // MAIN EXERCISE
-        let mainBB = getBBTestData()
-        let mainWen = getWendlerTestData()
+        //let mainBB =
+        //let mainWen =
         
         // Add Main Exercise to Workout
-        wo1.addToMainExerciseList(mainBB)
-        wo1.addToMainExerciseList(mainWen)
+        wo1.addToMainExerciseList(getBBTestData())
+        wo1.addToMainExerciseList(getWendlerTestData())
         
         return wo1
     }
@@ -455,6 +455,7 @@ extension TemplateParent_VC {
             item.addToAttemptList(att)
         }
         
+        print(item.progression as Any)
         return item
     }
     
@@ -566,6 +567,7 @@ extension TemplateParent_VC {
     
     func getRandomWorkoutName() -> String {
         let arg = ["Push", "Pull", "Legs", "Chest/Back"]
+        //let arg = ["Boo", "Goo", "Foo"]
         return arg[Int.random(in: 0...arg.count-1)]
     }
     

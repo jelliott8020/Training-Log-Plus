@@ -160,6 +160,7 @@ extension CurrentWorkout_VC: Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate 
                 cell.textLabel?.text = item.name
             }
         }
+        navigationController?.popViewController(animated: true)
         tableView.reloadData()
     }
     
@@ -170,6 +171,7 @@ extension CurrentWorkout_VC: Pass_ExerciseObject_BackTo_CurrentWorkout_Delegate 
                 cell.textLabel?.text = item.name
             }
         }
+        navigationController?.popViewController(animated: true)
         tableView.reloadData()
         
     }

@@ -91,9 +91,9 @@ class WorkoutDayCreation_VC: UIViewController {
      */
     func doneButtonAction() {
         
-        delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishEditing: passedInWorkoutObj!)
-        
         appDelegate.saveContext()
+        
+        delegate?.workoutDayObjectCreation_PassTo_AddEditTemplate(self, didFinishEditing: passedInWorkoutObj!)
         
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
@@ -333,10 +333,12 @@ extension WorkoutDayCreation_VC: Pass_MainExerciseObject_BackTo_WorkoutDayCreati
     func addEditMainExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishAdding item: Exercise) {
         //navigationController?.popViewController(animated: true)
         mainExerciseList.append(item)
+        passedInWorkoutObj?.addToMainExerciseList(item)
         let rowIndex = mainExerciseList.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 0)
         exerciseTable.insertRows(at: [indexPath], with: .automatic)
         exerciseTable.reloadData()
+        appDelegate.saveContext()
     }
     
     /*
@@ -347,10 +349,12 @@ extension WorkoutDayCreation_VC: Pass_MainExerciseObject_BackTo_WorkoutDayCreati
     func addEditAccExercise_PassTo_workoutDayObjectCreation(_ controller: AddEdit_MainExercise_VC, didFinishAdding item: Exercise) {
         //navigationController?.popViewController(animated: true)
         accExerciseList.append(item)
+        passedInWorkoutObj?.addToAccExerciseList(item)
         let rowIndex = accExerciseList.count - 1
         let indexPath = IndexPath(row: rowIndex, section: 1)
         exerciseTable.insertRows(at: [indexPath], with: .automatic)
         exerciseTable.reloadData()
+        appDelegate.saveContext()
     }
     
     

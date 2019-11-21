@@ -52,30 +52,44 @@ class CurrentWorkout_Exercise_TVC: UITableViewController {
         
         if (passedInExerciseObj?.isKind(of: Wen_Exercise.self) ?? false) {
             
+            print("PassedInObj: \(String(describing: passedInExerciseObj as Any))")
+            print("PassedProgression: \(String(describing: (passedInExerciseObj as! Wen_Exercise).progression))")
+            
             selectedExercise = passedInExerciseObj as! Wen_Exercise
+            print("SelectedExercise: \(String(describing: selectedExercise as Any))")
+            
             selectedProgression = (passedInExerciseObj as! Wen_Exercise).progression
+            
             let trainingMax = (selectedExercise as! Wen_Exercise).currentTM
             
             self.title = selectedExercise?.name
             personalRecordsList = Array(selectedExercise!.personalRecords ?? [])
             exerciseSets = (selectedExercise as! Wen_Exercise).progression!.getSets(weight: trainingMax)
-            print("WenExSets: ")
-            print(exerciseSets)
-            print(selectedProgression as Any)
+            //exerciseSets = (selectedProgression as! Wen_Progression).getSets(weight: trainingMax)
+//            print("WenExSets: ")
+//            print(exerciseSets)
+//            print(selectedProgression as Any)
             
         } else if (passedInExerciseObj?.isKind(of: BB_Exercise.self) ?? false) {
             
+            print("PassedInObj: \(String(describing: passedInExerciseObj as Any))")
+            print("PassedProgression: \(String(describing: (passedInExerciseObj as! BB_Exercise).progression))")
+            
             selectedExercise = passedInExerciseObj as! BB_Exercise
+            print("SelectedExercise: \(String(describing: selectedExercise as Any))")
+            
             selectedProgression = (passedInExerciseObj as! BB_Exercise).progression
+            
             let weight = (selectedExercise as! BB_Exercise).startingWeight
             
             self.title = selectedExercise?.name
             attemptList = Array(selectedExercise!.attemptList ?? [])
             exerciseSets = (selectedExercise as! BB_Exercise).progression!.getSets(weight: weight)
+            //exerciseSets = (selectedProgression as! BB_Progression).getSets(weight: weight)
             
-            print("BBExSets: ")
-            print(exerciseSets)
-            print(selectedProgression as Any)
+//            print("BBExSets: ")
+//            print(exerciseSets)
+//            print(selectedProgression as Any)
         }
     }
 
@@ -131,7 +145,7 @@ extension CurrentWorkout_Exercise_TVC {
         let dummyCell = UITableViewCell()
         dummyCell.textLabel!.text = "Dummy cell"
         let set = exerciseSets[indexPath.row]
-        let weightForCell = String(set.weight) + String(set.reps)
+        let weightForCell = "Weight: \(String(set.weight)) " + " |  Reps: \(String(set.reps))"
         
         if (selectedExercise as? Wen_Exercise) != nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: "amrapCell", for: indexPath) as! ExerciseAMRAP_TableViewCell

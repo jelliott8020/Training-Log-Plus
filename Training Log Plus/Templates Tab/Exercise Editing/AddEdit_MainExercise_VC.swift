@@ -299,8 +299,13 @@ extension AddEdit_MainExercise_VC: UIPickerViewDataSource, UIPickerViewDelegate 
             
             // Query for progression and fill in progression data
         } else if pickerView == progressionPicker {
-            selectedWenProgression = wen_progression[row]
-            progressionSchemeTextField.text = selectedWenProgression?.name
+            if (selectedWendler?.lowercased() == "yes") {
+                selectedWenProgression = wen_progression[row]
+                progressionSchemeTextField.text = selectedWenProgression?.name
+            } else {
+                selectedBbProgression = bb_progression[row]
+                progressionSchemeTextField.text = selectedBbProgression?.name
+            }
         } else if pickerView == isWendlerPicker {
             selectedWendler = wendlerData[row]
             isWendlerTextField.text = selectedWendler

@@ -24,11 +24,11 @@ public class Attempt: NSManagedObject {
         
         let setsArg = Array(sets)
         
-        let dateStr = "Date: " + dateFormatted
-        let weightStr = "  | Weight: " + String(format: "%.0f", setsArg[0].weight)
-        let repsStr = "  |  Reps: " + String(format: "%.0f", setsArg[0].reps)
+        let dateStr = dateFormatted
+        let weightStr = "  @  " + String(format: "%.0f", setsArg[0].weight)
+        let repsStr = "  |  " + String(format: "%.0f", setsArg[0].reps)
         
-        let totalString = dateStr + weightStr + repsStr
+        let totalString = dateStr + repsStr + weightStr
         
         let strNumber: NSString = totalString as NSString
         let dateRange = (strNumber).range(of: dateStr)

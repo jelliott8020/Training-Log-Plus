@@ -48,6 +48,11 @@ class Exercises_TVC: UITableViewController {
         createToolbarDoneButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        bodyPartTextField.text = ""
+        exerciseTextField.text = ""
+    }
+    
 
     /*
      * Create Button Function

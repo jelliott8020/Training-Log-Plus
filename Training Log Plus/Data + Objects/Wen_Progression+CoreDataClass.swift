@@ -101,6 +101,10 @@ public class Wen_Progression: NSManagedObject {
             sets.append(getSet(rp: 5, wt: Util.rounder(wt * 0.7, toNearest: 5)))
             sets.append(getSet(rp: 3, wt: Util.rounder(wt * 0.8, toNearest: 5)))
             sets.append(getSet(rp: 1, wt: Util.rounder(wt * 0.9, toNearest: 5)))
+        } else {
+            sets.append(getSet(rp: 8, wt: Util.rounder(wt * 0.7, toNearest: 5)))
+            sets.append(getSet(rp: 8, wt: Util.rounder(wt * 0.8, toNearest: 5)))
+            sets.append(getSet(rp: 8, wt: Util.rounder(wt * 0.9, toNearest: 5)))
         }
         
         return sets
